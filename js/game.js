@@ -1,11 +1,10 @@
 
 
 let canvas;
-let ctx;
-let character = new MovableObject();
+let world;
+
 
 function init(){
     canvas = document.getElementById('gamecanvas');
-    ctx = canvas.getContext('2d');
-    console.log(character);
+    world = new World(canvas);
 }
