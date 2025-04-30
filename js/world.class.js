@@ -8,15 +8,15 @@ class World {
     new Minichicken(),
   ];
   skyObjects = [
-    new Clouds('../img/5_background/layers/4_clouds/1.png', 0.1),
-    new Clouds('../img/5_background/layers/4_clouds/2.png', 0.5)
+    new Clouds('./img/5_background/layers/4_clouds/1.png', 0.1),
+    new Clouds('./img/5_background/layers/4_clouds/2.png', 0.5)
   ];
 
   backgrounds = [
-    new BackgroundLayer("../img/5_background/layers/air.png"),
-    new BackgroundLayer("../img/5_background/layers/3_third_layer/1.png"),
-    new BackgroundLayer("../img/5_background/layers/2_second_layer/1.png"),
-    new BackgroundLayer("../img/5_background/layers/1_first_layer/1.png"),
+    new BackgroundLayer("./img/5_background/layers/air.png"),
+    new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png"),
+    new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png"),
+    new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png"),
   ];
 
   canvas;

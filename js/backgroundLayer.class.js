@@ -5,6 +5,7 @@ class BackgroundLayer extends MovableObject{
     height = this.canvasHeight;
 
     constructor(imagePath){
-        super().loadImage(imagePath);
+        super();
+        this.loadImage(imagePath);
     }
 }

@@ -4,7 +4,6 @@ let world;
 function init() {
   canvas = document.getElementById("gamecanvas");
   world = new World(canvas);
-  moveClouds();
 }
 
 
@@ -18,10 +17,5 @@ function move(event){
 }
 
 
-function moveClouds(){
-  world.skyObjects.forEach((element) => {
-      (element.autoMoveLeft())})
- 
-  requestAnimationFrame(moveClouds);
-}
+
 
