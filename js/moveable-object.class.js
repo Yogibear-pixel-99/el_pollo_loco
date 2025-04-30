@@ -1,8 +1,4 @@
 class MovableObject {
-  x;
-  y;
-  height;
-  width;
   floorHeight = 50;
   canvasHeight = 480;
   canvasWidth = 720;

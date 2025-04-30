@@ -11,5 +11,6 @@ body {
 }
 
 canvas {
-    background: linear-gradient(rgb(255, 190, 190), rgb(116, 193, 255));
+    background-color: black;
+    /* background: linear-gradient(rgb(255, 192, 119), rgb(106, 188, 255)); */
 }
