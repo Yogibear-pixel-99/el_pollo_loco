@@ -12,9 +12,15 @@ class MovableObject {
 
   loadImagesArray(array){
     array.forEach(path => {
-      this.img = new Image();
-      this.img.src = path;
-      this.animationImgArray[path] = path;
+      let img = new Image();
+      img.src = path;
+      this.animationImgArray[path] = img;
     });
   }
 }
+
+
+
+
+
+

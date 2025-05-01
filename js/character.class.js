@@ -3,28 +3,33 @@ class Character extends MovableObject {
   width = 95;
   height = 180;
   animationNr = 0;
-  IMAGES_WALKING = [
+  WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
     "./img/2_character_pepe/2_walk/W-23.png",
     "./img/2_character_pepe/2_walk/W-24.png",
     "./img/2_character_pepe/2_walk/W-25.png",
-    "./img/2_character_pepe/2_walk/W-26.png"
-  ]
+    "./img/2_character_pepe/2_walk/W-26.png"]
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
-    this.loadImagesArray(this.IMAGES_WALKING),
     this.y = this.canvasHeight - this.height - this.floorHeight;
+    this.loadImagesArray(this.WALKING_ANIMATION);
     this.animate();
   }
 
+
+
+
   animate(){
-    setInterval(() => {    this.loadImage(this.IMAGES_WALKING[this.animationNr]);
+    setInterval(() => {
+      let path = this.WALKING_ANIMATION[this.animationNr];
+      this.img = this.animationImgArray[path];
     if (this.animationNr === 5) {
       this.animationNr = 0;
-    }
-    this.animationNr++;}, 150);
+    } else {
+    this.animationNr++;}
+  }, 150);
   }
 
   moveRight() {
