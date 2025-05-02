@@ -7,6 +7,8 @@ class Minichicken extends MovableObject{
             './img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
             './img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
         ];
+        walkingSpeed = (Math.random() * (1.2 - 0.3) + 0.3);
+
     constructor(){
         super();
         this.loadImage('./img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
@@ -14,7 +16,7 @@ class Minichicken extends MovableObject{
         this.x = this.canvasWidth - Math.random() * 500 + 1;
         this.loadImagesArray(this.WALKING_ANIMATION);
         this.animate();
-        this.walkLeft();
+        this.moveLeft();
     }
 
     animate(){
@@ -26,10 +28,5 @@ class Minichicken extends MovableObject{
     }, 100);
 }
 
-walkLeft(){
-    let walkingSpeed = (Math.random() * (1.2 - 0.3) + 0.3);
-    setInterval(() => {
-        this.x = this.x - walkingSpeed;
-    }, 50)
-}
+
 }

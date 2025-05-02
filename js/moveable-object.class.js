@@ -18,6 +18,13 @@ class MovableObject {
       this.animatedImages[path] = img;
     });
   }
+
+  moveLeft(){
+    setInterval(() => {
+      this.x = this.x - this.walkingSpeed;
+    }, 50);
+  }
+
 }
 
 
