@@ -4,6 +4,7 @@ class MovableObject {
   canvasWidth = 720;
   img;
   animatedImages = {};
+  animationCount = 0;
 
   loadImage(path) {
     this.img = new Image();

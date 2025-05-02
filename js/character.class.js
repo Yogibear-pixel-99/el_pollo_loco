@@ -2,7 +2,7 @@ class Character extends MovableObject {
   x = 50;
   width = 95;
   height = 180;
-  animationCount = 0;
+  // animationCount = 0;
   WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
