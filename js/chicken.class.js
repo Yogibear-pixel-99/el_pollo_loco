@@ -31,7 +31,7 @@ walkLeft(){
   let walkingSpeed = (Math.random() * (1.5 - 0.6) + 0.6);
   setInterval(() => {
     this.x = this.x - walkingSpeed;
-  }, 60);
+  }, 50);
 }
 
 }
