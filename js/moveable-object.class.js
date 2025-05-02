@@ -3,7 +3,7 @@ class MovableObject {
   canvasHeight = 480;
   canvasWidth = 720;
   img;
-  animationImgArray = {};
+  animatedImages = {};
 
   loadImage(path) {
     this.img = new Image();
@@ -14,7 +14,7 @@ class MovableObject {
     array.forEach(path => {
       let img = new Image();
       img.src = path;
-      this.animationImgArray[path] = img;
+      this.animatedImages[path] = img;
     });
   }
 }
