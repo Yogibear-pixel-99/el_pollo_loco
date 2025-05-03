@@ -16,7 +16,7 @@ walkingSpeed = (Math.random() * (1.5 - 0.6) + 0.6);
     this.x = this.canvasWidth - Math.random() * 500 + 1;
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.animate();
-    this.moveLeft();
+    this.enemyWalkLeft();
   }
 
   animate(){
@@ -25,7 +25,7 @@ walkingSpeed = (Math.random() * (1.5 - 0.6) + 0.6);
     let path = this.WALKING_ANIMATION[this.animationCount];
     this.img = this.animatedImages[path];
     this.animationCount++;
-  }, 120);
+  }, this.animationCycle);
 }
 
 

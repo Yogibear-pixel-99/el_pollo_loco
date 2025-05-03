@@ -16,7 +16,7 @@ class Minichicken extends MovableObject{
         this.x = this.canvasWidth - Math.random() * 500 + 1;
         this.loadImagesArray(this.WALKING_ANIMATION);
         this.animate();
-        this.moveLeft();
+        this.enemyWalkLeft();
     }
 
     animate(){

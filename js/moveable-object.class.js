@@ -5,9 +5,10 @@ class MovableObject {
   img;
   animatedImages = {};
   animationCount = 0;
-  moveSpeed = 10;
-  animationCycle = 10;
-  moveCycle = 10;
+  walkingSpeed;
+  animationCycle = 120;
+  moveCycle = 50;
+  otherDirection = false;
 
   loadImage(path) {
     this.img = new Image();
@@ -22,10 +23,10 @@ class MovableObject {
     });
   }
 
-  moveLeft(){
+  enemyWalkLeft(){
     setInterval(() => {
       this.x = this.x - this.walkingSpeed;
-    }, 50);
+    }, this.moveCycle);
   }
 
 }
