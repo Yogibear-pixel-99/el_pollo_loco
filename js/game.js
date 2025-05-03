@@ -27,7 +27,7 @@ window.addEventListener("keydown", (event) => {
 
       break;
     case " ":
-      keyboard.KEY_SPACE = true;
+      keyboard.KEY_JUMP = true;
 
       break;
     case "Control":

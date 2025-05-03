@@ -1,10 +1,10 @@
 class Keyboard {
-    KEY_UP;
-    KEY_DOWN;
-    KEY_RIGHT;
-    KEY_LEFT;
-    KEY_SPACE;
-    KEY_SHOT;
+    KEY_UP = false;
+    KEY_DOWN = false;
+    KEY_RIGHT = false;
+    KEY_LEFT = false;
+    KEY_JUMP = false;
+    KEY_SHOT = false;
 
     constructor(){
         
