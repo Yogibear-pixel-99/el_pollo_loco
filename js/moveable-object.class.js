@@ -29,6 +29,13 @@ class MovableObject {
     }, this.moveCycle);
   }
 
+  playAnimation(arrayName){
+    let animationCount = this.animationCount % arrayName.length;
+    let path = arrayName[animationCount];
+    this.img = this.animatedImages[path];
+    this.animationCount++;
+  }
+
 }
 
 

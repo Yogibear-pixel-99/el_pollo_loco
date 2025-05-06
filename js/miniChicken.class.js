@@ -21,10 +21,7 @@ class Minichicken extends MovableObject{
 
     animate(){
         setInterval(() => {
-        this.animationCount = this.animationCount % this.WALKING_ANIMATION.length;
-        let path = this.WALKING_ANIMATION[this.animationCount];
-        this.img = this.animatedImages[path];
-        this.animationCount++;
+        this.playAnimation(this.WALKING_ANIMATION);
     }, 100);
 }
 

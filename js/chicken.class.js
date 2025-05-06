@@ -1,7 +1,6 @@
 class Chicken extends MovableObject {
 height = 40;
 width = 40;
-// animationCount = 0;
 WALKING_ANIMATION = [
   "./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
   "./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
@@ -21,10 +20,7 @@ walkingSpeed = (Math.random() * (1.5 - 0.6) + 0.6);
 
   animate(){
     setInterval(() => {
-    this.animationCount = this.animationCount % this.WALKING_ANIMATION.length;
-    let path = this.WALKING_ANIMATION[this.animationCount];
-    this.img = this.animatedImages[path];
-    this.animationCount++;
+    this.playAnimation(this.WALKING_ANIMATION);
   }, this.animationCycle);
 }
 

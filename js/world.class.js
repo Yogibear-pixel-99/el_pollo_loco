@@ -1,23 +1,6 @@
 class World {
   character = new Character();
-  enemies = [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new Minichicken(),
-    new Minichicken(),
-  ];
-  skyObjects = [
-    new Clouds('./img/5_background/layers/4_clouds/1.png', 0.1),
-    new Clouds('./img/5_background/layers/4_clouds/2.png', 0.2)
-  ];
-
-  backgrounds = [
-    new BackgroundLayer("./img/5_background/layers/air.png"),
-    new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 1.2),
-    new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 1.6),
-    new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 1),
-  ];
+  level = level1;
 
   canvas;
   ctx;
@@ -39,10 +22,10 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToCanvas(this.backgrounds);
+    this.addObjectsToCanvas(this.level.backgrounds);
+    this.addObjectsToCanvas(this.level.enemies);
+    this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjToCanvas(this.character);
-    this.addObjectsToCanvas(this.enemies);
-    this.addObjectsToCanvas(this.skyObjects);
     
     this.ctx.translate(-this.camera_x, 0);
     let self = this;

@@ -20,7 +20,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/3_jump/J-36.png",
     "./img/2_character_pepe/3_jump/J-37.png",
     "./img/2_character_pepe/3_jump/J-38.png",
-    "./img/2_character_pepe/3_jump/J-39.png"
+    "./img/2_character_pepe/3_jump/J-39.png",
   ];
   IDLE_ANIMATION = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -32,10 +32,9 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/idle/I-7.png",
     "./img/2_character_pepe/1_idle/idle/I-8.png",
     "./img/2_character_pepe/1_idle/idle/I-9.png",
-    "./img/2_character_pepe/1_idle/idle/I-10.png"
+    "./img/2_character_pepe/1_idle/idle/I-10.png",
   ];
   IDLE_LONG_ANIMATION = [
-    
     "./img/2_character_pepe/1_idle/long_idle/I-11.png",
     "./img/2_character_pepe/1_idle/long_idle/I-12.png",
     "./img/2_character_pepe/1_idle/long_idle/I-13.png",
@@ -45,13 +44,13 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-17.png",
     "./img/2_character_pepe/1_idle/long_idle/I-18.png",
     "./img/2_character_pepe/1_idle/long_idle/I-19.png",
-    "./img/2_character_pepe/1_idle/long_idle/I-20.png"
-  ]
+    "./img/2_character_pepe/1_idle/long_idle/I-20.png",
+  ];
   world;
-  walkingSpeed = 2.3;
-  animationCycle = 90;
+  walkingSpeed = 2.8;
+  animationCycle = 100;
   moveCycle = 15;
-  
+
   idleLoopCount = 0;
   idleInterval = 200;
 
@@ -71,12 +70,18 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      if (this.world.character.world.keyboard.KEY_RIGHT == false && this.world.character.world.keyboard.KEY_LEFT == false) {
+      if (
+        this.world.character.world.keyboard.KEY_RIGHT == false &&
+        this.world.character.world.keyboard.KEY_LEFT == false
+      ) {
         this.characterIdle = true;
         this.world.charMoveRight = false;
         this.world.charMoveLeft = false;
       }
-      if (this.world.character.world.keyboard.KEY_RIGHT == true || this.world.character.world.keyboard.KEY_LEFT == true) {
+      if (
+        this.world.character.world.keyboard.KEY_RIGHT == true ||
+        this.world.character.world.keyboard.KEY_LEFT == true
+      ) {
         this.characterIdle = false;
         this.idleLoopCount = 0;
         this.animateWalk();
@@ -84,9 +89,7 @@ class Character extends MovableObject {
       if (this.world.character.world.keyboard.KEY_SPACE == true) {
         this.animateJump();
       }
-      
     }, this.animationCycle);
-
 
     setInterval(() => {
       if (this.world.character.world.keyboard.KEY_RIGHT == true) {
@@ -105,8 +108,9 @@ class Character extends MovableObject {
   }
 
   moveRight() {
-      this.x = this.x + this.walkingSpeed;
-      this.world.camera_x = 80 - this.x;
+    if (this.x < this.world.level.level_end_x)
+    this.x = this.x + this.walkingSpeed;
+    this.world.camera_x = 80 - this.x;
   }
 
   animateWalk() {
@@ -117,36 +121,30 @@ class Character extends MovableObject {
   }
 
   moveLeft() {
-      this.x = this.x - this.walkingSpeed;
-      this.world.camera_x = 80 - this.x
+    if (this.x > -200)
+    this.x = this.x - this.walkingSpeed;
+    this.world.camera_x = 80 - this.x;
   }
 
   animateJump() {
-    
-
     this.animationCount = this.animationCount % this.JUMPING_ANIMATION.length;
     let path = this.JUMPING_ANIMATION[this.animationCount];
     this.img = this.animatedImages[path];
     this.animationCount++;
-
 
     // max jump height
   }
   throwBottle() {}
   jump() {}
 
-  animateIdle(){
-      setInterval(() => {
+  animateIdle() {
+    setInterval(() => {
       if (this.idleLoopCount < 21 && this.characterIdle == true) {
-      this.animationCount = this.animationCount % this.IDLE_ANIMATION.length;
-      let path = this.IDLE_ANIMATION[this.animationCount];
-      this.img = this.animatedImages[path];
-      this.animationCount++;
-      this.idleLoopCount++;
-    } else if (this.idleLoopCount >= 21 && this.characterIdle == true) {
-      this.animationCount = this.animationCount % this.IDLE_LONG_ANIMATION.length;
-      let path = this.IDLE_LONG_ANIMATION[this.animationCount];
-      this.img = this.animatedImages[path];
-      this.animationCount++;
-      }}, this.idleInterval);
-}}
+        this.playAnimation(this.IDLE_ANIMATION);
+        this.idleLoopCount++;
+      } else if (this.idleLoopCount >= 21 && this.characterIdle == true) {
+        this.playAnimation(this.IDLE_LONG_ANIMATION);
+      }
+    }, this.idleInterval);
+  }
+}
