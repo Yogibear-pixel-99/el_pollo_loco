@@ -11,7 +11,7 @@ walkingSpeed = (Math.random() * (1.5 - 0.6) + 0.6);
   constructor() {
     super();
     this.loadImage("./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
-    this.y = this.canvasHeight - this.height - this.floorHeight - (Math.random() * 8 - 1);
+    this.y = this.floorPosition() - (Math.random() * 8 - 1);
     this.x = this.canvasWidth - Math.random() * 500 + 1;
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.animate();

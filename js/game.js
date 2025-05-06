@@ -81,11 +81,3 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-function move(event) {
-  if (event.key === ArrowRight) {
-    world.character.moveRight();
-  }
-  if (event.keyCode === 37) {
-    world.character.moveLeft();
-  }
-}

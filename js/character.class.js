@@ -2,7 +2,6 @@ class Character extends MovableObject {
   x = 80;
   width = 95;
   height = 190;
-  // animationCount = 0;
   WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
@@ -59,48 +58,54 @@ class Character extends MovableObject {
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
-    this.y = this.canvasHeight - this.height - this.floorHeight;
+    this.y = this.floorPosition() - 150;
+    console.log(this.y);
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.loadImagesArray(this.JUMPING_ANIMATION);
     this.loadImagesArray(this.IDLE_ANIMATION);
     this.loadImagesArray(this.IDLE_LONG_ANIMATION);
     this.animate();
     this.animateIdle();
+    this.applyGravity();
   }
+
+ 
 
   animate() {
     setInterval(() => {
+      if (this.aboveGround()) {
+        this.animateJump();
+      } else {
+
+      if (this.aboveGround()) {
+        this.characterIdle = false;
+      }
+
       if (
-        this.world.character.world.keyboard.KEY_RIGHT == false &&
-        this.world.character.world.keyboard.KEY_LEFT == false
+        this.world.keyboard.KEY_RIGHT == false &&
+        this.world.keyboard.KEY_LEFT == false
       ) {
         this.characterIdle = true;
-        this.world.charMoveRight = false;
-        this.world.charMoveLeft = false;
       }
       if (
-        this.world.character.world.keyboard.KEY_RIGHT == true ||
-        this.world.character.world.keyboard.KEY_LEFT == true
+        this.world.keyboard.KEY_RIGHT == true ||
+        this.world.keyboard.KEY_LEFT == true
       ) {
         this.characterIdle = false;
         this.idleLoopCount = 0;
         this.animateWalk();
       }
-      if (this.world.character.world.keyboard.KEY_SPACE == true) {
-        this.animateJump();
+      if (this.world.keyboard.KEY_JUMP == true && !this.aboveGround()) {
+        this.jump();
       }
-    }, this.animationCycle);
+    }}, this.animationCycle);
 
     setInterval(() => {
-      if (this.world.character.world.keyboard.KEY_RIGHT == true) {
-        this.world.charMoveRight = true;
-        this.world.charMoveLeft = false;
+      if (this.world.keyboard.KEY_RIGHT == true) {
         this.moveRight();
         this.otherDirection = false;
       }
-      if (this.world.character.world.keyboard.KEY_LEFT == true) {
-        this.world.charMoveLeft = true;
-        this.world.charMoveRight = false;
+      if (this.world.keyboard.KEY_LEFT == true) {
         this.moveLeft();
         this.otherDirection = true;
       }
@@ -109,7 +114,7 @@ class Character extends MovableObject {
 
   moveRight() {
     if (this.x < this.world.level.level_end_x)
-    this.x = this.x + this.walkingSpeed;
+      this.x = this.x + this.walkingSpeed;
     this.world.camera_x = 80 - this.x;
   }
 
@@ -121,21 +126,19 @@ class Character extends MovableObject {
   }
 
   moveLeft() {
-    if (this.x > -200)
-    this.x = this.x - this.walkingSpeed;
+    if (this.x > -200) this.x = this.x - this.walkingSpeed;
     this.world.camera_x = 80 - this.x;
   }
 
   animateJump() {
-    this.animationCount = this.animationCount % this.JUMPING_ANIMATION.length;
-    let path = this.JUMPING_ANIMATION[this.animationCount];
-    this.img = this.animatedImages[path];
-    this.animationCount++;
-
-    // max jump height
+    this.playAnimation(this.JUMPING_ANIMATION);
   }
+
   throwBottle() {}
-  jump() {}
+
+  jump() {
+    this.speedY = 20;
+  }
 
   animateIdle() {
     setInterval(() => {
