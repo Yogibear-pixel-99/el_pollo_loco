@@ -15,7 +15,7 @@ class World {
     this.setWorld();
   }
 
-  setWorld(){
+  setWorld() {
     this.character.world = this;
   }
 
@@ -26,7 +26,7 @@ class World {
     this.addObjectsToCanvas(this.level.enemies);
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjToCanvas(this.character);
-    
+
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
     requestAnimationFrame(function () {
@@ -34,23 +34,29 @@ class World {
     });
   }
 
-  addObjToCanvas(obj){
+  addObjToCanvas(obj) {
     if (obj.otherDirection) {
-        this.ctx.save();
-        this.ctx.translate(obj.width, 0);
-        this.ctx.scale(-1, 1);
-        obj.x = obj.x * -1;
+      this.ctx.save();
+      this.ctx.translate(obj.width, 0);
+      this.ctx.scale(-1, 1);
+      obj.x = obj.x * -1;
     }
     this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+    this.ctx.beginPath();
+    this.ctx.lineWidth = "3";
+    this.ctx.strokeStyle = "blue";
+    this.ctx.rect(obj.x, obj.y, obj.width, obj.height);
+    this.ctx.stroke();
+
     if (obj.otherDirection) {
       obj.x = obj.x * -1;
       this.ctx.restore();
     }
   }
 
-  addObjectsToCanvas(array){
+  addObjectsToCanvas(array) {
     array.forEach((element) => {
       this.addObjToCanvas(element);
-    })
+    });
   }
 }

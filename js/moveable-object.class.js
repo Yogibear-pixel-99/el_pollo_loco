@@ -3,11 +3,14 @@ class MovableObject {
   canvasHeight = 480;
   canvasWidth = 720;
   img;
+  walkingSpeed;
   animatedImages = {};
   animationCount = 0;
-  walkingSpeed;
+
+  
   animationCycle = 120;
-  moveCycle = 50;
+  moveCycle = 1000 / 60;
+  
   otherDirection = false;
 
   speedY = 0;
@@ -30,7 +33,7 @@ class MovableObject {
   }
 
   aboveGround() {
-    return this.y < this.floorPosition;
+    return this.y < this.floorPosition();
   }
 
   loadImage(path) {
@@ -46,10 +49,14 @@ class MovableObject {
     });
   }
 
-  enemyWalkLeft() {
-    setInterval(() => {
+
+  moveLeft() {
       this.x = this.x - this.walkingSpeed;
-    }, this.moveCycle);
+    }
+
+
+  moveRight() {
+    this.x = this.x + this.walkingSpeed;
   }
 
   playAnimation(arrayName) {
