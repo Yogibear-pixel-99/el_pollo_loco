@@ -15,6 +15,9 @@ class MovableObject {
   speedY = 0;
   acceleration = 2;
 
+  
+  collided;
+
   applyGravity() {
     setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {
@@ -47,13 +50,14 @@ class MovableObject {
     return this.energy == 0;
   }
 
-  draw(ctx) {
+draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   drawFrame(ctx) {
     if (
       this instanceof Character ||
+      this instanceof Coin ||
       this instanceof Chicken ||
       this instanceof Minichicken ||
       this instanceof Endboss
@@ -65,9 +69,11 @@ class MovableObject {
       ctx.stroke();
     }
   }
+
   drawOffsetFrame(ctx) {
     if (
       this instanceof Character ||
+      this instanceof Coin ||
       this instanceof Chicken ||
       this instanceof Minichicken ||
       this instanceof Endboss

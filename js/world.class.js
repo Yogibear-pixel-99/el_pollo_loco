@@ -2,6 +2,7 @@ class World {
   character = new Character();
   level = level1;
 
+
   canvas;
   ctx;
   keyboard;
@@ -25,9 +26,13 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)){
           this.character.hit();
+          this.character.collided = true;
+          this.character.stopJumpAnimation = true;
+          setTimeout(() => {this.character.collided = false}, 200);
+          setTimeout(() => {this.character.stopJumpAnimation = false}, 2000);
           console.log(this.character.energy);
         } else {
-          // world.character.characterCollides = false;
+          
         }
       })
       // console.log(world.character.characterCollides);
@@ -40,6 +45,7 @@ class World {
     this.addObjectsToCanvas(this.level.backgrounds);
     this.addObjectsToCanvas(this.level.enemies);
     this.addObjectsToCanvas(this.level.skyObjects);
+    this.addObjectsToCanvas(this.level.coins);
     this.addObjToCanvas(this.character);
 
     this.ctx.translate(-this.camera_x, 0);
