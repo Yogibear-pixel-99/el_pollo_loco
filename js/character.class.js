@@ -184,7 +184,7 @@ class Character extends MovableObject {
   throwBottle() {}
 
   jump() {
-    this.speedY = 20;
+    this.speedY = 25;
   }
 
   deactivateKeyboard(){
