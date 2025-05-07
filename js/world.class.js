@@ -36,22 +36,27 @@ class World {
 
   addObjToCanvas(obj) {
     if (obj.otherDirection) {
-      this.ctx.save();
-      this.ctx.translate(obj.width, 0);
-      this.ctx.scale(-1, 1);
-      obj.x = obj.x * -1;
+      this.flipImage(obj);
     }
-    this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
-    this.ctx.beginPath();
-    this.ctx.lineWidth = "3";
-    this.ctx.strokeStyle = "blue";
-    this.ctx.rect(obj.x, obj.y, obj.width, obj.height);
-    this.ctx.stroke();
+
+    obj.draw(this.ctx);
+    obj.drawFrame(this.ctx);
 
     if (obj.otherDirection) {
-      obj.x = obj.x * -1;
-      this.ctx.restore();
+      this.flipImageBack(obj);
     }
+  }
+
+  flipImage(obj) {
+    this.ctx.save();
+    this.ctx.translate(obj.width, 0);
+    this.ctx.scale(-1, 1);
+    obj.x = obj.x * -1;
+  }
+
+  flipImageBack(obj) {
+    obj.x = obj.x * -1;
+    this.ctx.restore();
   }
 
   addObjectsToCanvas(array) {
