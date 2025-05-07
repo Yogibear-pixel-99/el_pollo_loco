@@ -7,6 +7,12 @@ WALKING_ANIMATION = [
   "./img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
 ];
 walkingSpeed = (Math.random() * (0.8 - 0.3) + 0.3);
+offset = {
+  top: 8,
+  right: 3,
+  bottom: 8,
+  left: 3
+}
 
   constructor() {
     super();
@@ -18,6 +24,7 @@ walkingSpeed = (Math.random() * (0.8 - 0.3) + 0.3);
     this.moveEnemies();
     this.moveLeft();
   }
+
 
   animate(){
     setInterval(() => {

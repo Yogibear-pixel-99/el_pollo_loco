@@ -8,7 +8,6 @@ function init() {
 }
 
 window.addEventListener("keydown", (event) => {
-  console.log(event.key);
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = true;
@@ -45,7 +44,6 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("keyup", (event) => {
-  console.log(event.key);
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = false;

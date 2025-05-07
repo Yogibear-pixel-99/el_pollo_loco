@@ -9,6 +9,13 @@ class Minichicken extends MovableObject {
   ];
   walkingSpeed = Math.random() * (0.5 - 0.1) + 0.1;
 
+  offset = {
+    top: 8,
+    right: 2,
+    bottom: 0,
+    left: 2
+  }
+
   constructor() {
     super();
     this.loadImage("./img/3_enemies_chicken/chicken_small/1_walk/1_w.png");

@@ -45,6 +45,16 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-19.png",
     "./img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
+DEAD_ANIMATION = [
+  "./img/2_character_pepe/5_dead/D-51.png",
+  "./img/2_character_pepe/5_dead/D-52.png",
+  "./img/2_character_pepe/5_dead/D-53.png",
+  "./img/2_character_pepe/5_dead/D-54.png",
+  "./img/2_character_pepe/5_dead/D-55.png",
+  "./img/2_character_pepe/5_dead/D-56.png",
+  "./img/2_character_pepe/5_dead/D-57.png",
+]
+
   world;
   walkingSpeed = 2.8;
   animationCycle = 100;
@@ -54,26 +64,44 @@ class Character extends MovableObject {
   idleInterval = 200;
 
   characterIdle = true;
+  characterCollides = false;
+
+  energy = 100;
+
+  offset = {
+    top: 90,
+    right: 30,
+    bottom: 10,
+    left: 20
+  }
 
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
     this.y = this.floorPosition() - 150;
-    console.log(this.y);
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.loadImagesArray(this.JUMPING_ANIMATION);
     this.loadImagesArray(this.IDLE_ANIMATION);
     this.loadImagesArray(this.IDLE_LONG_ANIMATION);
+    this.loadImagesArray(this.DEAD_ANIMATION);
     this.animate();
     this.moveDetection();
     this.animateIdle();
     this.applyGravity();
+    this.checkIfCollided();
+  }
+
+  checkIfCollided(){
+    setInterval(() => {
+    }, 50)
   }
 
   animate() {
     setInterval(() => {
       if (this.aboveGround()) {
         this.animateJump();
+      } else if (this.isDead()){
+        this.animateDead();
       } else {
         if (this.aboveGround()) {
           this.characterIdle = false;
@@ -120,6 +148,10 @@ class Character extends MovableObject {
 
   animateWalk() {
     this.playAnimation(this.WALKING_ANIMATION);
+  }
+
+  animateDead(){
+    this.playAnimation(this.DEAD_ANIMATION);
   }
 
   animateJump() {

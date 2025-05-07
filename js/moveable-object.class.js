@@ -7,10 +7,9 @@ class MovableObject {
   animatedImages = {};
   animationCount = 0;
 
-  
   animationCycle = 120;
   moveCycle = 1000 / 60;
-  
+
   otherDirection = false;
 
   speedY = 0;
@@ -28,21 +27,65 @@ class MovableObject {
     }, 1000 / 25);
   }
 
-  draw(ctx){
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  isColliding(obj) {
+    return (
+      this.x + this.width - this.offset.right > obj.x + obj.offset.left &&
+      this.y + this.height - this.offset.bottom > obj.y + obj.offset.top &&
+      this.x + this.offset.left < obj.x + obj.width - obj.offset.right &&
+      this.y + this.offset.top < obj.y + obj.height - obj.offset.bottom
+    );
   }
 
-  drawFrame(ctx){
-    if (this instanceof Character || this instanceof Chicken || this instanceof Minichicken){
-    ctx.beginPath();
-    ctx.lineWidth = "3";
-    ctx.strokeStyle = "blue";
-    ctx.rect(this.x, this.y, this.width, this.height);
-    ctx.stroke();
+  hit(){
+    this.energy -= 5;
+    if (this.energy <= 0) {
+      this.energy = 0;
     }
   }
 
-  floorPosition(){
+  isDead(){
+    return this.energy == 0;
+  }
+
+  draw(ctx) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  drawFrame(ctx) {
+    if (
+      this instanceof Character ||
+      this instanceof Chicken ||
+      this instanceof Minichicken ||
+      this instanceof Endboss
+    ) {
+      ctx.beginPath();
+      ctx.lineWidth = "3";
+      ctx.strokeStyle = "blue";
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
+    }
+  }
+  drawOffsetFrame(ctx) {
+    if (
+      this instanceof Character ||
+      this instanceof Chicken ||
+      this instanceof Minichicken ||
+      this instanceof Endboss
+    ) {
+      ctx.beginPath();
+      ctx.lineWidth = "3";
+      ctx.strokeStyle = "red";
+      ctx.rect(
+        this.x + this.offset.left,
+        this.y + this.offset.top,
+        this.width - this.offset.left - this.offset.right,
+        this.height - this.offset.bottom - this.offset.top
+      );
+      ctx.stroke();
+    }
+  }
+
+  floorPosition() {
     return this.canvasHeight - this.height - this.floorHeight;
   }
 
@@ -63,11 +106,9 @@ class MovableObject {
     });
   }
 
-
   moveLeft() {
-      this.x = this.x - this.walkingSpeed;
-    }
-
+    this.x = this.x - this.walkingSpeed;
+  }
 
   moveRight() {
     this.x = this.x + this.walkingSpeed;
