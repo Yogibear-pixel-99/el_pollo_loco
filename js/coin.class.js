@@ -25,6 +25,7 @@ class Coin extends DrawableObject {
         }
 
   collected(){
+    world.coinbar.updateCoinBar();
     console.log('Pepe collected this coin!')
   }
 

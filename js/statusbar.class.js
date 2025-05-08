@@ -43,9 +43,6 @@ constructor(x, y, img){
 
 
 updateHealthbar() {
-
-  if(world.character.isHurt()) {
-
   const energy = world.character.energy;
 
   if (energy === 100) {
@@ -62,10 +59,24 @@ updateHealthbar() {
     this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[0]];
   }
 }
-}
 
 updateCoinBar() {
+  const coins = world.character.coins;
+  console.group(world.character.coins);
 
+  if (coins == 10) {
+    this.img = this.animatedImages[this.COIN_BAR_IMAGES[5]];
+  } else if (coins >= 9) {
+    this.img = this.animatedImages[this.COIN_BAR_IMAGES[4]];
+  } else if (coins >= 6) {
+    this.img = this.animatedImages[this.COIN_BAR_IMAGES[3]];
+  } else if (coins >= 4) {
+    this.img = this.animatedImages[this.COIN_BAR_IMAGES[2]];
+  } else if (coins >= 2) {
+    this.img = this.animatedImages[this.COIN_BAR_IMAGES[1]];
+  } else if (coins == 0){
+    this.img = this.animatedImages[this.COIN_BAR_IMAGES[0]];
+  }
 }
 
 updateBottleBar() {

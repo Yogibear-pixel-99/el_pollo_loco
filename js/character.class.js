@@ -182,7 +182,7 @@ class Character extends MovableObject {
 
   collectCoin(){
     this.coins++;
-    console.log(this.coins);
+    this.world.coinbar.updateCoinBar();
   }
   // animateIdle() {
   //   setInterval(() => {
