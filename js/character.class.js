@@ -63,18 +63,10 @@ class Character extends MovableObject {
   world;
   walkingSpeed = 2.8;
   animationCycle = 100;
-  moveCycle = 15;
-
-  noKeyIntervall;
-
-  idleLoopCount = 0;
-  idleInterval = 200;
-
-  characterIdle = true;
-
-  stopJumpAnimation = false;
+  moveCycle = 1000 / 60;
 
   energy = 100;
+  idleLoopCount = 0;
 
   offset = {
     top: 90,
@@ -97,42 +89,25 @@ class Character extends MovableObject {
     this.moveDetection();
     this.animateIdle();
     this.applyGravity();
-    this.checkIfCollided();
   }
 
-  checkIfCollided() {
-    setInterval(() => {}, 50);
-  }
 
   animate() {
     setInterval(() => {
       if (this.isDead()) {
         this.animateDead();
-        this.deactivateKeyboard();
-        this.characterIdle = false;
       } else if (this.isHurt()) {
         this.animateHurt();
-        this.characterIdle = false;
-      } else if (this.aboveGround() && this.stopJumpAnimation == false) {
+      } else if (this.aboveGround()) {
         this.animateJump();
-        this.characterIdle = false;
+      } else if (this.characterIdle()) {
+        console.log('pepe is idle')
+        this.animateIdle();
       } else {
-        if (this.aboveGround()) {
-          this.characterIdle = false;
-        }
-
-        if (
-          this.world.keyboard.KEY_RIGHT == false &&
-          this.world.keyboard.KEY_LEFT == false
-        ) {
-          this.characterIdle = true;
-        }
         if (
           this.world.keyboard.KEY_RIGHT == true ||
           this.world.keyboard.KEY_LEFT == true
         ) {
-          this.characterIdle = false;
-          this.idleLoopCount = 0;
           this.animateWalk();
         }
         if (this.world.keyboard.KEY_JUMP == true && !this.aboveGround()) {
@@ -160,17 +135,30 @@ class Character extends MovableObject {
     }, this.moveCycle);
   }
 
+  characterIdle() {
+    return (
+      this.world.keyboard.KEY_RIGHT == false &&
+      this.world.keyboard.KEY_LEFT == false &&
+      this.world.keyboard.KEY_JUMP == false 
+    );
+  }
+
+  animateIdle(){
+    this.playAnimation(this.IDLE_ANIMATION);
+  }
+
   animateWalk() {
     this.playAnimation(this.WALKING_ANIMATION);
   }
 
-  isHurt() {
-    return this.collided;
-  }
+
 
   animateHurt() {
     this.playAnimation(this.HURT_ANIMATION);
     this.speedY = 6;
+    this.otherDirection ? this.x += 8 : this.x -= 8;
+    
+    this.world.camera_x = 80 - this.x;
   }
 
   animateDead() {
@@ -187,24 +175,16 @@ class Character extends MovableObject {
     this.speedY = 25;
   }
 
-  deactivateKeyboard(){
-    this.noKeyIntervall = setInterval(() => {
-      this.world.keyboard.KEY_LEFT = false;
-      this.world.keyboard.KEY_RIGHT = false;
-      this.world.keyboard.KEY_JUMP = false;
-      this.world.keyboard.KEY_SHOT = false;
 
-    }, 20);
-  }
 
-  animateIdle() {
-    setInterval(() => {
-      if (this.idleLoopCount < 21 && this.characterIdle == true) {
-        this.playAnimation(this.IDLE_ANIMATION);
-        this.idleLoopCount++;
-      } else if (this.idleLoopCount >= 21 && this.characterIdle == true) {
-        this.playAnimation(this.IDLE_LONG_ANIMATION);
-      }
-    }, this.idleInterval);
-  }
+  // animateIdle() {
+  //   setInterval(() => {
+  //     if (this.idleLoopCount < 21 && this.characterIdle == true) {
+  //       this.playAnimation(this.IDLE_ANIMATION);
+  //       this.idleLoopCount++;
+  //     } else if (this.idleLoopCount >= 21 && this.characterIdle == true) {
+  //       this.playAnimation(this.IDLE_LONG_ANIMATION);
+  //     }
+  //   }, this.idleInterval);
+  // }
 }

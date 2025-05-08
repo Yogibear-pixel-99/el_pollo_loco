@@ -1,6 +1,5 @@
 class World {
   character = new Character();
-  
   level = level1;
 
 
@@ -27,16 +26,8 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)){
           this.character.hit();
-          this.character.collided = true;
-          this.character.stopJumpAnimation = true;
-          setTimeout(() => {this.character.collided = false}, 200);
-          setTimeout(() => {this.character.stopJumpAnimation = false}, 2000);
-          console.log(this.character.energy);
-        } else {
-          
         }
       })
-      // console.log(world.character.characterCollides);
     }, 400);
   }
 

@@ -1,4 +1,4 @@
-class Coin extends MovableObject {
+class Coin extends DrawableObject {
     x = 200;
     y = 200;
     height = 100;
