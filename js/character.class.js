@@ -75,6 +75,8 @@ class Character extends MovableObject {
     left: 20,
   };
 
+  coins = 0;
+
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
@@ -178,8 +180,10 @@ class Character extends MovableObject {
     this.speedY = 22;
   }
 
-
-
+  collectCoin(){
+    this.coins++;
+    console.log(this.coins);
+  }
   // animateIdle() {
   //   setInterval(() => {
   //     if (this.idleLoopCount < 21 && this.characterIdle == true) {

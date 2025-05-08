@@ -1,12 +1,22 @@
 class World {
   character = new Character();
-  healthbar = new Statusbar(40, 20, 'health');
-  // coinbar = new Statusbar(40, 60, 'coins');
-  // bottlebar = new Statusbar(40, 100, 'bottles');
-  
+  healthbar = new Statusbar(
+    20,
+    10,
+    "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png"
+  );
+  coinbar = new Statusbar(
+    20,
+    50,
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png"
+  );
+  bottlebar = new Statusbar(
+    20,
+    90,
+    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png"
+  );
 
   level = level1;
-
 
   canvas;
   ctx;
@@ -20,19 +30,31 @@ class World {
     this.draw();
     this.setWorld();
     this.checkEnemyCollisions();
+    this.checkCoinCollision();
   }
 
   setWorld() {
     this.character.world = this;
   }
 
-  checkEnemyCollisions(){
-   this.collisionIntervall = setInterval(() => {
+  checkEnemyCollisions() {
+    setInterval(() => {
       this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)){
+        if (this.character.isColliding(enemy)) {
           this.character.hit();
         }
-      })
+      });
+    }, 400);
+  }
+
+  checkCoinCollision() {
+    setInterval(() => {
+      this.level.coins.forEach((coin) => {
+        if (this.character.isColliding(coin)) {
+          world.character.collectCoin();
+          coin.collected();
+        }
+      });
     }, 400);
   }
 
@@ -43,8 +65,14 @@ class World {
     this.addObjectsToCanvas(this.level.enemies);
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
-    this.addObjToCanvas(this.character);
+
+    this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
+    this.addObjToCanvas(this.coinbar);
+    this.addObjToCanvas(this.bottlebar);
+    this.ctx.translate(this.camera_x, 0);
+
+    this.addObjToCanvas(this.character);
 
     this.ctx.translate(-this.camera_x, 0);
     let self = this;

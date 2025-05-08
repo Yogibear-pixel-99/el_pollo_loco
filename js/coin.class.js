@@ -24,4 +24,8 @@ class Coin extends DrawableObject {
             // this.animate();
         }
 
+  collected(){
+    console.log('Pepe collected this coin!')
+  }
+
 }

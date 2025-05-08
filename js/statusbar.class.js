@@ -1,8 +1,7 @@
 class Statusbar extends DrawableObject {
 
-  width = 150;
+  width = 200;
   height = 50;
-  barType = '';
 
 HEALTH_BAR_IMAGES = [
   "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
@@ -31,16 +30,17 @@ COIN_BAR_IMAGES = [
   "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
 ]
 
-constructor(x, y, barType){
+constructor(x, y, img){
   super();
-  this.barType = barType;
   this.x = x;
   this.y = y;
+  this.img = img;
   this.loadImagesArray(this.HEALTH_BAR_IMAGES);
   this.loadImagesArray(this.COIN_BAR_IMAGES);
   this.loadImagesArray(this.BOTTLE_BAR_IMAGES);
-  this.loadImage("./img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png");
+  this.loadImage(img);
 }
+
 
 updateHealthbar() {
 
@@ -58,10 +58,18 @@ updateHealthbar() {
     this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[2]];
   } else if (energy >= 20) {
     this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[1]];
-  } else if (energy <= 0){
+  } else if (energy <= 5){
     this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[0]];
   }
 }
+}
+
+updateCoinBar() {
+
+}
+
+updateBottleBar() {
+
 }
 
 
