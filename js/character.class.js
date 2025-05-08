@@ -96,8 +96,10 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.animateDead();
+        this.world.healthbar.updateHealthbar();
       } else if (this.isHurt()) {
         this.animateHurt();
+        this.world.healthbar.updateHealthbar();
       } else if (this.aboveGround()) {
         this.animateJump();
         // console.log(this.y + this.offset.top);

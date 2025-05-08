@@ -1,5 +1,10 @@
 class World {
   character = new Character();
+  healthbar = new Statusbar(40, 20, 'health');
+  // coinbar = new Statusbar(40, 60, 'coins');
+  // bottlebar = new Statusbar(40, 100, 'bottles');
+  
+
   level = level1;
 
 
@@ -39,6 +44,7 @@ class World {
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
     this.addObjToCanvas(this.character);
+    this.addObjToCanvas(this.healthbar);
 
     this.ctx.translate(-this.camera_x, 0);
     let self = this;

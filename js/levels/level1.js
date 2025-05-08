@@ -1,4 +1,7 @@
 const level1 = new Level(
+
+
+
   [
     new Coin(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
     new Coin(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),

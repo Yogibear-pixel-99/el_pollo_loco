@@ -77,6 +77,7 @@ class DrawableObject {
         this.img = this.animatedImages[path];
         this.animationCount++;
       }
+      
       loadImage(path) {
         this.img = new Image();
         this.img.src = path;
