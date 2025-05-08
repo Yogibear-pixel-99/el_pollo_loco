@@ -1,14 +1,19 @@
 const level1 = new Level(
-
   [
-    new Coin(),
-    new Coin(),
-    new Coin(),
-    new Coin(),
-    new Coin()
+    new Coin(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
+
   ],
 
- [
+  [
     new Chicken(),
     new Chicken(),
     new Chicken(),
@@ -28,48 +33,42 @@ const level1 = new Level(
     new Clouds("./img/5_background/layers/4_clouds/2.png", 0.2, 719 * 2),
     new Clouds("./img/5_background/layers/4_clouds/1.png", 0.1, 719 * 3),
     new Clouds("./img/5_background/layers/4_clouds/2.png", 0.2, 719 * 3),
+    new Clouds("./img/5_background/layers/4_clouds/1.png", 0.1, 719 * 4),
+    new Clouds("./img/5_background/layers/4_clouds/2.png", 0.2, 719 * 4),
   ],
 
- 
   [
     new BackgroundLayer("./img/5_background/layers/air.png", -719),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", -719),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", -719),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", -719),
+
     new BackgroundLayer("./img/5_background/layers/air.png", 0),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 0),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 0),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 0),
+
     new BackgroundLayer("./img/5_background/layers/air.png", 719),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", 719),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", 719),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", 719),
+
     new BackgroundLayer("./img/5_background/layers/air.png", 719 * 2),
-    new BackgroundLayer(
-      "./img/5_background/layers/3_third_layer/1.png",
-      719 * 2
-    ),
-    new BackgroundLayer(
-      "./img/5_background/layers/2_second_layer/1.png",
-      719 * 2
-    ),
-    new BackgroundLayer(
-      "./img/5_background/layers/1_first_layer/1.png",
-      719 * 2
-    ),
+    new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 719 * 2),
+    new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 719 * 2),
+    new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 2),
+
     new BackgroundLayer("./img/5_background/layers/air.png", 719 * 3),
-    new BackgroundLayer(
-      "./img/5_background/layers/3_third_layer/2.png",
-      719 * 3
-    ),
-    new BackgroundLayer(
-      "./img/5_background/layers/2_second_layer/2.png",
-      719 * 3
-    ),
-    new BackgroundLayer(
-      "./img/5_background/layers/1_first_layer/2.png",
-      719 * 3
-    ),
+    new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", 719 * 3),
+    new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", 719 * 3),
+    new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", 719 * 3),
+
+    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 4),
+    new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 719 * 4),
+    new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 719 * 4),
+    new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 4),
   ],
-  719 * 3 + 50
+
+  719 * 4 + 50
+
 );

@@ -1,28 +1,26 @@
 class Coin extends DrawableObject {
-    x = 200;
-    y = 200;
     height = 100;
     width = 100;
 
     offset = {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
+        top: 35,
+        right: 35,
+        bottom: 35,
+        left: 35,
       };
 
 
     COIN_ANIMATION = [
         "./img/8_coin/coin_1.png",
-        "./img/8_coin/coin_2.png",
-    ]
+        "./img/8_coin/coin_2.png"
+    ];
 
-        constructor(){
+        constructor(x, y){
             super();
+            this.x = x;
+            this.y = y;
             this.loadImage("./img/8_coin/coin_1.png");
-            // this.x = 400;
-            // this.y = 200;
-            // this.loadImagesArray(this.COIN_ANIMATION);
+            this.loadImagesArray(this.COIN_ANIMATION);
             // this.animate();
         }
 

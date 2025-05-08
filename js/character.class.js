@@ -100,8 +100,9 @@ class Character extends MovableObject {
         this.animateHurt();
       } else if (this.aboveGround()) {
         this.animateJump();
+        // console.log(this.y + this.offset.top);
       } else if (this.characterIdle()) {
-        console.log('pepe is idle')
+        // console.log('pepe is idle')
         this.animateIdle();
       } else {
         if (
@@ -172,7 +173,7 @@ class Character extends MovableObject {
   throwBottle() {}
 
   jump() {
-    this.speedY = 25;
+    this.speedY = 22;
   }
 
 

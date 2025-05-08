@@ -5,7 +5,7 @@ class Minichicken extends MovableObject {
   WALKING_ANIMATION = [
     "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "./img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
-    "./img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+    "./img/3_enemies_chicken/chicken_small/1_walk/3_w.png"
   ];
   walkingSpeed = Math.random() * (0.5 - 0.1) + 0.1;
 
