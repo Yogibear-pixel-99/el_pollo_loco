@@ -187,7 +187,7 @@ class Character extends MovableObject {
   }
 
   collectBottle(){
-    if (this.bottles < 10)
+    if (this.bottles < 5)
     this.bottles++;
     console.log('Pepe collect bottles: ' + this.bottles);
   }

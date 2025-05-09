@@ -39,8 +39,8 @@ class Bottle extends DrawableObject {
     super();
     this.isFlipped();
 
-    //   this.x = this.calculateNewPosition();
-    this.x = Math.random() * this.canvasWidth;
+      this.x = this.calculateNewPosition();
+    // this.x = Math.random() * this.canvasWidth;
     this.y = this.floorPosition();
     this.loadImage("./img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
     //   this.loadImagesArray(this.COIN_ANIMATION);
@@ -54,11 +54,11 @@ class Bottle extends DrawableObject {
   }
 
   calculateNewPosition() {
-    return Math.random() * this.canvasWidth + world.character.x;
+    return Math.random() * this.canvasWidth * 3;
   }
 
   isCollected() {
-    if (world.character.bottles < 10)
+    if (world.character.bottles < 5)
     this.x = this.calculateNewPosition();
     console.log("Pepe collected this bottle!");
   }

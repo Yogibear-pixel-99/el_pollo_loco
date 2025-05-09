@@ -19,13 +19,13 @@ class Bottlebar extends Statusbar {
 
   updateBottleBar() {
     const bottles = world.character.bottles;
-    if (bottles == 10) {
+    if (bottles == 5) {
       this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[5]];
-    } else if (bottles >= 9) {
-      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[4]];
-    } else if (bottles >= 7) {
-      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[3]];
     } else if (bottles >= 4) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[4]];
+    } else if (bottles >= 3) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[3]];
+    } else if (bottles >= 2) {
       this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[2]];
     } else if (bottles >= 1) {
       this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[1]];
