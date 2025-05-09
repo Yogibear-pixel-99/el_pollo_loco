@@ -1,10 +1,8 @@
 class World {
-  
-
   character = new Character();
   healthbar = new Healthbar(20, 10);
   coinbar = new Coinbar(20, 50);
-  bottlebar = new Bottlebar(20, 90,);
+  bottlebar = new Bottlebar(20, 90);
 
   level = level1;
 
@@ -12,7 +10,6 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -23,6 +20,7 @@ class World {
     this.checkEnemyCollisions();
     this.checkCoinCollision();
     this.checkBottleCollision();
+    this.moveBackground();
   }
 
   setWorld() {
@@ -64,6 +62,23 @@ class World {
     }, 50);
   }
 
+
+  moveBackground() {
+    setInterval(() => {
+      this.level.backgrounds.forEach((bg) => {
+        if (world.keyboard.KEY_LEFT && this.character.x > -200) {
+          bg.x = bg.x + bg.xFactor;
+        }
+        if (world.keyboard.KEY_RIGHT &&
+          this.character.x < world.level.level_end_x) {
+          bg.x = bg.x - bg.xFactor;
+        }
+      });
+    }, 100);
+  }
+
+
+  
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -112,8 +127,9 @@ class World {
 
   addObjectsToCanvas(array) {
     if (array.length > 0) {
-    array.forEach((element) => {
-      this.addObjToCanvas(element);
-    });
+      array.forEach((element) => {
+        this.addObjToCanvas(element);
+      });
+    }
   }
-}}
+}

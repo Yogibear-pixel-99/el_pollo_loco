@@ -61,7 +61,7 @@ class Character extends MovableObject {
   ];
 
   world;
-  walkingSpeed = 2.8;
+
   animationCycle = 100;
   moveCycle = 1000 / 60;
 
@@ -157,8 +157,6 @@ class Character extends MovableObject {
     this.playAnimation(this.WALKING_ANIMATION);
   }
 
-
-
   animateHurt() {
     this.playAnimation(this.HURT_ANIMATION);
     this.speedY = 6;
@@ -191,4 +189,8 @@ class Character extends MovableObject {
     this.bottles++;
     console.log('Pepe collect bottles: ' + this.bottles);
   }
+
+  // throwBottle(){
+  //   this.world.
+  // }
 }

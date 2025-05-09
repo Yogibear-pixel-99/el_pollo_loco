@@ -4,6 +4,8 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 2;
   lastHit = 0;
+  xFactor = 1;
+  walkingSpeed = 2.8;
 
   applyGravity() {
     setInterval(() => {
@@ -40,10 +42,11 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    this.x = this.x - this.walkingSpeed;
+    // console.log(`Moving left: x=${this.x}, speed=${this.walkingSpeed}, xFactor=${this.xFactor}`);
+    this.x = this.x - this.walkingSpeed * this.xFactor;
   }
 
   moveRight() {
-    this.x = this.x + this.walkingSpeed;
+    this.x = this.x + this.walkingSpeed * this.xFactor;
   }
 }
