@@ -1,7 +1,8 @@
 class DrawableObject {
-  floorHeight = 58;
   canvasHeight = 480;
   canvasWidth = 720;
+  floorHeight = 58;
+
   img;
   x;
   y;
@@ -38,6 +39,7 @@ class DrawableObject {
     if (
       this instanceof Character ||
       this instanceof Coin ||
+      this instanceof Bottle ||
       this instanceof Chicken ||
       this instanceof Minichicken ||
       this instanceof Endboss
@@ -54,6 +56,7 @@ class DrawableObject {
     if (
       this instanceof Character ||
       this instanceof Coin ||
+      this instanceof Bottle ||
       this instanceof Chicken ||
       this instanceof Minichicken ||
       this instanceof Endboss

@@ -1,4 +1,6 @@
 class World {
+  
+
   character = new Character();
   healthbar = new Healthbar(20, 10);
   coinbar = new Coinbar(20, 50);
@@ -11,7 +13,8 @@ class World {
   keyboard;
   camera_x = 0;
 
-  constructor(canvas) {
+
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -55,16 +58,13 @@ class World {
     this.addObjectsToCanvas(this.level.enemies);
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
+    this.addObjToCanvas(this.character);
+    this.addObjectsToCanvas(this.level.bottles);
 
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
     this.addObjToCanvas(this.bottlebar);
-    this.ctx.translate(this.camera_x, 0);
-
-    this.addObjToCanvas(this.character);
-
-    this.ctx.translate(-this.camera_x, 0);
     let self = this;
     requestAnimationFrame(function () {
       self.draw();

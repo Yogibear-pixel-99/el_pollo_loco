@@ -12,7 +12,7 @@ class Bottlebar extends Statusbar {
     super();
     this.x = x;
     this.y = y;
-    this.loadImage(this.BOTTLE_BAR_IMAGES[5]);
+    this.loadImage(this.BOTTLE_BAR_IMAGES[0]);
     this.loadImagesArray(this.BOTTLE_BAR_IMAGES);
   }
 

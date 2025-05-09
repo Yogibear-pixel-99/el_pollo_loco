@@ -60,6 +60,5 @@ class Coin extends DrawableObject {
     setInterval(() => {
       this.y = this.y - 2;
     }, 20);
-    console.log("Pepe collected this coin!");
   }
 }
