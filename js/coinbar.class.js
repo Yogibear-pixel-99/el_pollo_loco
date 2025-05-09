@@ -1,24 +1,23 @@
 class Coinbar extends Statusbar {
   COIN_BAR_IMAGES = [
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/40.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/60.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/80.png",
+    "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png",
   ];
 
   constructor(x, y) {
     super();
     this.x = x;
     this.y = y;
-    this.loadImage(this.COIN_BAR_IMAGES[5]);
+    this.loadImage(this.COIN_BAR_IMAGES[0]);
     this.loadImagesArray(this.COIN_BAR_IMAGES);
   }
 
   updateCoinBar() {
     const coins = world.character.coins;
-    console.log(coins);
     if (coins == 10) {
       this.img = this.animatedImages[this.COIN_BAR_IMAGES[5]];
     } else if (coins >= 9) {

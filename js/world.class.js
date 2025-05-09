@@ -32,7 +32,7 @@ class World {
           this.character.hit();
         }
       });
-    }, 400);
+    }, 50);
   }
 
   checkCoinCollision() {
@@ -45,7 +45,7 @@ class World {
           this.coinbar.updateCoinBar();
         }
       });
-    }, 400);
+    }, 50);
   }
 
   draw() {

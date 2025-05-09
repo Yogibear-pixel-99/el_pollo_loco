@@ -6,6 +6,8 @@ class DrawableObject {
   x;
   y;
 
+  
+  animationCount = 0;
   animatedImages = {};
 
   offset = {
