@@ -22,6 +22,7 @@ class World {
     this.setWorld();
     this.checkEnemyCollisions();
     this.checkCoinCollision();
+    this.checkBottleCollision();
   }
 
   setWorld() {
@@ -46,6 +47,18 @@ class World {
           coin.isCollected();
           coin.collected = true;
           this.coinbar.updateCoinBar();
+        }
+      });
+    }, 50);
+  }
+
+  checkBottleCollision() {
+    setInterval(() => {
+      this.level.bottles.forEach((bottle) => {
+        if (this.character.isColliding(bottle)) {
+          bottle.isCollected();
+          this.character.collectBottle();
+          this.bottlebar.updateBottleBar();
         }
       });
     }, 50);

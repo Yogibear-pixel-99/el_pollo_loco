@@ -16,5 +16,22 @@ class Bottlebar extends Statusbar {
     this.loadImagesArray(this.BOTTLE_BAR_IMAGES);
   }
 
-  updateBottleBar() {}
+
+  updateBottleBar() {
+    const bottles = world.character.bottles;
+    if (bottles == 10) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[5]];
+    } else if (bottles >= 9) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[4]];
+    } else if (bottles >= 7) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[3]];
+    } else if (bottles >= 4) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[2]];
+    } else if (bottles >= 1) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[1]];
+    } else if (bottles == 0) {
+      this.img = this.animatedImages[this.BOTTLE_BAR_IMAGES[0]];
+    }
+  }
 }
+

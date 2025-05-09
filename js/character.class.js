@@ -76,6 +76,7 @@ class Character extends MovableObject {
   };
 
   coins = 0;
+  bottles = 0;
 
   constructor() {
     super();
@@ -182,16 +183,12 @@ class Character extends MovableObject {
 
   collectCoin(){
     this.coins++;
-    console.log(this.coins);
+    console.log('Pepe collect coins: ' + this.coins);
   }
-  // animateIdle() {
-  //   setInterval(() => {
-  //     if (this.idleLoopCount < 21 && this.characterIdle == true) {
-  //       this.playAnimation(this.IDLE_ANIMATION);
-  //       this.idleLoopCount++;
-  //     } else if (this.idleLoopCount >= 21 && this.characterIdle == true) {
-  //       this.playAnimation(this.IDLE_LONG_ANIMATION);
-  //     }
-  //   }, this.idleInterval);
-  // }
+
+  collectBottle(){
+    if (this.bottles < 10)
+    this.bottles++;
+    console.log('Pepe collect bottles: ' + this.bottles);
+  }
 }
