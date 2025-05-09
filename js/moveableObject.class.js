@@ -2,7 +2,6 @@ class MovableObject extends DrawableObject {
   walkingSpeed;
   animationCount = 0;
   moveCycle = 1000 / 60;
-  otherDirection = false;
   speedY = 0;
   acceleration = 2;
   lastHit = 0;

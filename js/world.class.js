@@ -1,20 +1,8 @@
 class World {
   character = new Character();
-  healthbar = new Statusbar(
-    20,
-    10,
-    "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png"
-  );
-  coinbar = new Statusbar(
-    20,
-    50,
-    "./img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png"
-  );
-  bottlebar = new Statusbar(
-    20,
-    90,
-    "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png"
-  );
+  healthbar = new Healthbar(20, 10);
+  coinbar = new Coinbar(20, 50);
+  bottlebar = new Bottlebar(20, 90,);
 
   level = level1;
 
@@ -50,9 +38,11 @@ class World {
   checkCoinCollision() {
     setInterval(() => {
       this.level.coins.forEach((coin) => {
-        if (this.character.isColliding(coin)) {
-          world.character.collectCoin();
-          coin.collected();
+        if (this.character.isColliding(coin) && coin.collected == false) {
+          this.character.collectCoin();
+          coin.isCollected();
+          coin.collected = true;
+          this.coinbar.updateCoinBar();
         }
       });
     }, 400);

@@ -1,6 +1,7 @@
 class Coin extends DrawableObject {
     height = 100;
     width = 100;
+    collected = false;
 
     offset = {
         top: 35,
@@ -24,8 +25,10 @@ class Coin extends DrawableObject {
             // this.animate();
         }
 
-  collected(){
-    world.coinbar.updateCoinBar();
+  isCollected(){
+    setInterval(() => {
+        this.y = this.y - 2;
+    }, 20);
     console.log('Pepe collected this coin!')
   }
 

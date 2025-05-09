@@ -144,7 +144,7 @@ class Character extends MovableObject {
     return (
       this.world.keyboard.KEY_RIGHT == false &&
       this.world.keyboard.KEY_LEFT == false &&
-      this.world.keyboard.KEY_JUMP == false 
+      this.world.keyboard.KEY_JUMP == false
     );
   }
 
@@ -182,7 +182,7 @@ class Character extends MovableObject {
 
   collectCoin(){
     this.coins++;
-    this.world.coinbar.updateCoinBar();
+    console.log(this.coins);
   }
   // animateIdle() {
   //   setInterval(() => {
