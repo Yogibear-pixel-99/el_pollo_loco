@@ -9,48 +9,25 @@ class Bottle extends DrawableObject {
     left: 20,
   };
 
-  // BOTTLE_ANIMATION = [
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_1.png",
-  //     "./img/8_coin/coin_3.png",
-  //     "./img/8_coin/coin_3.png",
-  //     "./img/8_coin/coin_3.png",
-  //     "./img/8_coin/coin_3.png",
-  //     "./img/8_coin/coin_3.png",
-  //     "./img/8_coin/coin_3.png",
-  //     "./img/8_coin/coin_3.png"
-  //   ];
-
-  // COLLECTED_COIN_ANIMATION = [
-  //   "./img/8_coin/collected/coin_collect_2.png",
-  //   "./img/8_coin/collected/coin_collect_3.png",
-  //   "./img/8_coin/collected/coin_collect_4.png",
-  //   "./img/8_coin/collected/coin_collect_5.png",
-  //   "./img/8_coin/collected/coin_collect_6.png",
-  //   "./img/8_coin/collected/coin_collect_7.png",
-  // ];
-
   constructor() {
     super();
-    this.isFlipped();
 
-      this.x = this.calculateNewPosition();
-    // this.x = Math.random() * this.canvasWidth;
+    this.x = this.calculateNewPosition();
     this.y = this.floorPosition();
-    this.loadImage("./img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
-    //   this.loadImagesArray(this.COIN_ANIMATION);
-    //   this.loadImagesArray(this.COLLECTED_COIN_ANIMATION);
-    //   this.animate();
+    this.loadImage(this.getBottleImg());
   }
 
-  isFlipped() {
+  getBottleImg() {
     let value = Math.random();
-    if (value >= 0.5) this.otherDirection = true;
+    let src = "";
+    if (value >= 0.7) {
+      src = "./img/6_salsa_bottle/1_salsa_bottle_on_ground.png";
+    } else if (value >= 0.4) {
+      src = "./img/6_salsa_bottle/2_salsa_bottle_on_ground.png";
+    } else if (value >= 0) {
+      src = "./img/6_salsa_bottle/salsa_bottle.png";
+    }
+    return src;
   }
 
   calculateNewPosition() {
@@ -58,8 +35,7 @@ class Bottle extends DrawableObject {
   }
 
   isCollected() {
-    if (world.character.bottles < 5)
-    this.x = this.calculateNewPosition();
+    if (world.character.bottles < 5) this.x = this.calculateNewPosition();
     console.log("Pepe collected this bottle!");
   }
 }
