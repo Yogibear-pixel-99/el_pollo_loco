@@ -77,6 +77,7 @@ class Character extends MovableObject {
 
   coins = 0;
   bottles = 0;
+  bottleThrown = false;
 
   constructor() {
     super();
@@ -93,7 +94,6 @@ class Character extends MovableObject {
     this.animateIdle();
     this.applyGravity();
   }
-
 
   animate() {
     setInterval(() => {
@@ -138,6 +138,9 @@ class Character extends MovableObject {
         this.world.camera_x = 80 - this.x;
         this.otherDirection = true;
       }
+      if (this.world.keyboard.KEY_SHOT == true) {
+        this.throwBottle();
+      }
     }, this.moveCycle);
   }
 
@@ -149,7 +152,7 @@ class Character extends MovableObject {
     );
   }
 
-  animateIdle(){
+  animateIdle() {
     this.playAnimation(this.IDLE_ANIMATION);
   }
 
@@ -160,8 +163,8 @@ class Character extends MovableObject {
   animateHurt() {
     this.playAnimation(this.HURT_ANIMATION);
     this.speedY = 6;
-    this.otherDirection ? this.x += 8 : this.x -= 8;
-    
+    this.otherDirection ? (this.x += 8) : (this.x -= 8);
+
     this.world.camera_x = 80 - this.x;
   }
 
@@ -173,21 +176,28 @@ class Character extends MovableObject {
     this.playAnimation(this.JUMPING_ANIMATION);
   }
 
-  throwBottle() {}
+  throwBottle() {
+    if (!this.bottleThrown) {
+      this.world.level.thrownBottles.push(new Thrownbottle());
+      this.bottleThrown = true;
+      setTimeout(() => {
+        this.bottleThrown = false;
+      }, 2000);
+    }
+  }
 
   jump() {
     this.speedY = 22;
   }
 
-  collectCoin(){
+  collectCoin() {
     this.coins++;
-    console.log('Pepe collect coins: ' + this.coins);
+    console.log("Pepe collect coins: " + this.coins);
   }
 
-  collectBottle(){
-    if (this.bottles < 5)
-    this.bottles++;
-    console.log('Pepe collect bottles: ' + this.bottles);
+  collectBottle() {
+    if (this.bottles < 5) this.bottles++;
+    console.log("Pepe collect bottles: " + this.bottles);
   }
 
   // throwBottle(){
