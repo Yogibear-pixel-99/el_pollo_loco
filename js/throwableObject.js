@@ -1,6 +1,7 @@
-class Bottlethrow extends DrawableObject {
+class ThrowableObject extends DrawableObject {
     width =  55;
     height = 55;
+    objectType = '';
 
     x = 60;
     y = 400;
@@ -14,8 +15,9 @@ class Bottlethrow extends DrawableObject {
         "./img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png",
     ]
 
-    constructor(){
+    constructor(objectType){
         super();
+        this.objectType = objectType;
         this.loadImage("./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
         this.loadImagesArray(this.BOTTLE_THROW_ANIMATION);
         this.animate();
@@ -26,6 +28,12 @@ class Bottlethrow extends DrawableObject {
         setInterval(() => {
             this.playAnimation(this.BOTTLE_THROW_ANIMATION);
         }, 150)
+    }
+
+    checkTypeOfObject(){
+            if (objectType == 'bottle') {
+                return "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
+            }
     }
 
 }

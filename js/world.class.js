@@ -13,8 +13,6 @@ class World {
   keyboard;
   camera_x = 0;
 
-  throwBottle = new Bottlethrow();
-
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -74,9 +72,8 @@ class World {
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
     this.addObjToCanvas(this.character);
-    this.addObjToCanvas(this.throwBottle);
     this.addObjectsToCanvas(this.level.bottles);
-
+    this.addObjectsToCanvas(this.level.thrownBottles);
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
@@ -114,8 +111,9 @@ class World {
   }
 
   addObjectsToCanvas(array) {
+    if (array.length > 0) {
     array.forEach((element) => {
       this.addObjToCanvas(element);
     });
   }
-}
+}}
