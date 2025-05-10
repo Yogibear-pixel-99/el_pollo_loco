@@ -23,7 +23,7 @@ class Endboss extends MovableObject {
   constructor() {
     super();
     this.loadImage(this.ALERT_ANIMATION[0]);
-    this.x = this.canvasWidth  * 4 + 200;
+    this.x = this.canvasWidth  * 1 + 200;
     this.y = this.canvasHeight - this.height - this.floorHeight + 15;
     this.loadImagesArray(this.ALERT_ANIMATION);
     this.animate();

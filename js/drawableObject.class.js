@@ -38,6 +38,7 @@ class DrawableObject {
   drawFrame(ctx) {
     if (
       this instanceof Character ||
+      this instanceof Thrownbottle ||
       this instanceof Coin ||
       this instanceof Bottle ||
       this instanceof Chicken ||
@@ -55,6 +56,7 @@ class DrawableObject {
   drawOffsetFrame(ctx) {
     if (
       this instanceof Character ||
+      this instanceof Thrownbottle ||
       this instanceof Coin ||
       this instanceof Bottle ||
       this instanceof Chicken ||
@@ -83,6 +85,11 @@ class DrawableObject {
     let path = arrayName[animationCount];
     this.img = this.animatedImages[path];
     this.animationCount++;
+  }
+
+  playAnimationOnce(arrayName, count){
+    let path = arrayName[count];
+    this.img = this.animatedImages[path];
   }
 
   loadImage(path) {
