@@ -175,12 +175,13 @@ class Character extends MovableObject {
   animateJump() {
     this.playAnimation(this.JUMPING_ANIMATION);
   }
-
+  // && this.bottles > 0
   throwBottle() {
     if (!this.bottleThrown) {
       this.world.level.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
-
+      this.bottles--;
+      this.world.bottlebar.updateBottleBar();
       setTimeout(() => {
         this.bottleThrown = false;
       }, 2000);
@@ -193,12 +194,10 @@ class Character extends MovableObject {
 
   collectCoin() {
     this.coins++;
-    console.log("Pepe collect coins: " + this.coins);
   }
 
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
-    console.log("Pepe collect bottles: " + this.bottles);
   }
 
   // throwBottle(){
