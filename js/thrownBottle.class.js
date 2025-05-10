@@ -3,6 +3,7 @@ class Thrownbottle extends MovableObject {
   height = 80;
   speedY = 20;
   throwSpeedX = 3.7;
+  walkingSpeed = this.walkingSpeed;
 
   BOTTLE_THROW_ANIMATION = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
@@ -34,6 +35,7 @@ class Thrownbottle extends MovableObject {
     this.animate();
     this.bottleAppearance();
     this.applyBottleGravity();
+    console.log(this.walkingSpeed);
   }
 
   applyBottleGravity() {
@@ -49,11 +51,11 @@ class Thrownbottle extends MovableObject {
 
   animate() {
     let throwIn = setInterval(() => {
-      let bottleIndex = world.level.thrownBottles.indexOf(this);
+      let bottleIndex = world.thrownBottles.indexOf(this);
       if (this.y == this.floorPosition()) {
         this.playAnimation(this.BOTTLE_SPLASH_ANIMATION);
         setTimeout(() => clearInterval(throwIn), 150);
-        setTimeout(() => world.level.thrownBottles.splice(bottleIndex, 1), 280);
+        setTimeout(() => world.thrownBottles.splice(bottleIndex, 1), 280);
       } else {
         this.playAnimation(this.BOTTLE_THROW_ANIMATION);
       }
@@ -69,25 +71,29 @@ class Thrownbottle extends MovableObject {
   }
 
   shotBottleRight() {
-    this.x = world.character.x + world.character.width / 2;
-    this.y = this.floorPosition() - world.character.height / 3;
+    this.x = world.character.x + 35;
+    this.y = world.character.y + 50;
     setInterval(() => {
       if (this.y == this.floorPosition()) {
         return;
       } else {
-        this.x += this.throwSpeedX;
+        world.keyboard.KEY_RIGHT
+          ? this.x += this.throwSpeedX + this.walkingSpeed
+          : this.x += this.throwSpeedX;
       }
     }, 1000 / 60);
   }
 
   shotBottleLeft() {
-    this.x = world.character.x + world.character.width / 2;
-    this.y = this.floorPosition() - world.character.height / 3;
+    this.x = world.character.x;
+    this.y = world.character.y + 50;
     setInterval(() => {
       if (this.y == this.floorPosition()) {
         return;
       } else {
-        this.x -= this.throwSpeedX;
+        world.keyboard.KEY_LEFT
+         ? this.x -= this.throwSpeedX + this.walkingSpeed
+         : this.x -= this.throwSpeedX;
       }
     }, 1000 / 60);
   }

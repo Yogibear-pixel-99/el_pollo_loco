@@ -1,5 +1,5 @@
 class Character extends MovableObject {
-  x = 80;
+  x = 200;
   width = 95;
   height = 190;
   WALKING_ANIMATION = [
@@ -130,12 +130,12 @@ class Character extends MovableObject {
         this.x < this.world.level.level_end_x
       ) {
         this.moveRight();
-        this.world.camera_x = 80 - this.x;
+        this.world.camera_x = 200 - this.x;
         this.otherDirection = false;
       }
       if (this.world.keyboard.KEY_LEFT == true && this.x > -200) {
         this.moveLeft();
-        this.world.camera_x = 80 - this.x;
+        this.world.camera_x = 200 - this.x;
         this.otherDirection = true;
       }
       if (this.world.keyboard.KEY_SHOT == true) {
@@ -165,7 +165,7 @@ class Character extends MovableObject {
     this.speedY = 6;
     this.otherDirection ? (this.x += 8) : (this.x -= 8);
 
-    this.world.camera_x = 80 - this.x;
+    this.world.camera_x = 200 - this.x;
   }
 
   animateDead() {
@@ -178,7 +178,7 @@ class Character extends MovableObject {
   // && this.bottles > 0
   throwBottle() {
     if (!this.bottleThrown) {
-      this.world.level.thrownBottles.push(new Thrownbottle());
+      this.world.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
       this.bottles--;
       this.world.bottlebar.updateBottleBar();

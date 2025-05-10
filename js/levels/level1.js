@@ -26,10 +26,6 @@ const level1 = new Level(
       new Bottle()
     ],
 
-    [
-           
-    ],
-
   [
     new Chicken(),
     new Chicken(),

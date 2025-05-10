@@ -3,6 +3,7 @@ class World {
   healthbar = new Healthbar(20, 10);
   coinbar = new Coinbar(20, 50);
   bottlebar = new Bottlebar(20, 90);
+  thrownBottles = [];
 
   level = level1;
 
@@ -87,7 +88,7 @@ class World {
     this.addObjectsToCanvas(this.level.coins);
     this.addObjToCanvas(this.character);
     this.addObjectsToCanvas(this.level.bottles);
-    this.addObjectsToCanvas(this.level.thrownBottles);
+    this.addObjectsToCanvas(this.thrownBottles);
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
