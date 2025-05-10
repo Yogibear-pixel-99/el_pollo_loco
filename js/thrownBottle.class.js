@@ -1,6 +1,7 @@
 class Thrownbottle extends MovableObject {
     width =  80;
     height = 80;
+    speedY = 20;
 
     BOTTLE_THROW_ANIMATION = [
         "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
@@ -28,17 +29,16 @@ class Thrownbottle extends MovableObject {
         this.loadImagesArray(this.BOTTLE_THROW_ANIMATION);
         this.loadImagesArray(this.BOTTLE_SPLASH_ANIMATION);
         this.animate();
-        this.move();
+        this.bottleAppearance();
         this.applyBottleGravity();
     }
 
 
-    applyGravity() {
+    applyBottleGravity() {
         setInterval(() => {
           if (this.aboveGround() || this.speedY > 0) {
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
-            this.world.character.world.keyboard.KEY_JUMP = false;
           } else {
             this.y = this.floorPosition();
           }
@@ -46,10 +46,12 @@ class Thrownbottle extends MovableObject {
       }
 
     animate(){
-        setInterval(() => {
+        let throwIn = setInterval(() => {
+            let bottleIndex = world.level.thrownBottles.indexOf(this);
             if (this.y == this.floorPosition()) {
             this.playAnimation(this.BOTTLE_SPLASH_ANIMATION);
-            // world.level.thrownBottles.shift();
+            setTimeout(() => clearInterval(throwIn), 150);
+            setTimeout(() => world.level.thrownBottles.splice(bottleIndex, 1), 280);
             } else {
             this.playAnimation(this.BOTTLE_THROW_ANIMATION);
             
@@ -57,11 +59,16 @@ class Thrownbottle extends MovableObject {
         }, 50)
     }
 
-    move(){
+    bottleAppearance(){
+       
         this.x = world.character.x + world.character.width / 2;
-        this.y = world.character.y - world.character.height / 3
+        this.y = this.floorPosition() - world.character.height / 3;
         setInterval(() => {
-            this.x += 1;
+            if (this.y == this.floorPosition()) {
+                return 
+            } else {
+            this.x += 3.7;
+            }
         }, 1000 / 60)
     }
 }

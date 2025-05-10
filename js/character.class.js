@@ -180,6 +180,7 @@ class Character extends MovableObject {
     if (!this.bottleThrown) {
       this.world.level.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
+
       setTimeout(() => {
         this.bottleThrown = false;
       }, 2000);
