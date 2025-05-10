@@ -28,6 +28,8 @@ WALKING_ANIMATION = [
     this.bottleHit();
   }
 
-
+  updateScorePointsBottleHit() {
+    world.playerscore += world.pointTable.chickenBottleHit.points;
+  }
 
 }

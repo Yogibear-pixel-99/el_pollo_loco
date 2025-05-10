@@ -29,8 +29,8 @@ class Enemies extends MovableObject {
             clearInterval(this.walkInterval);
             clearInterval(this.animateInterval);
             clearInterval(hitInterval);
-            // this.img.src = "./img/3_enemies_chicken/chicken_small/2_dead/dead.png";
             this.img.src = this.deadPic;
+            this.updateScorePointsBottleHit();
             setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
           }
         }, 30);

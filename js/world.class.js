@@ -5,6 +5,7 @@ class World {
   bottlebar = new Bottlebar(20, 90);
   thrownBottles = [];
   playerscore = 0;
+  pointTable;
 
   level = level1;
 
@@ -13,15 +14,21 @@ class World {
   keyboard;
   camera_x = 0;
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, pointTable) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.playerscore = this.playerscore;
+    this.pointTable = pointTable;
     this.draw();
     this.setWorld();
     this.runCollisions();
     this.moveBackground();
+    this.updatePlayerScore();
+  }
+
+  updatePlayerScore(){
+    let ref = document.getElementById('player-score');
+    setInterval(() => ref.innerText = this.playerscore);
   }
 
   setWorld() {

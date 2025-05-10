@@ -29,4 +29,9 @@ class Minichicken extends Enemies {
     this.moveLeft();
     this.bottleHit();
   }
+
+  updateScorePointsBottleHit() {
+    world.playerscore += world.pointTable.miniChickenBottleHit.points;
+  }
+
 }

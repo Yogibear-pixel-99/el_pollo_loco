@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let playerscore = 0;
 
 const highscores = [
   { name: "Anna", score: 1200 },
@@ -23,7 +22,7 @@ const MAIN_URL =
 
 function init() {
   canvas = document.getElementById("gamecanvas");
-  world = new World(canvas, keyboard, playerscore);
+  world = new World(canvas, keyboard, pointConfig);
   getHighscores();
 }
 
@@ -90,17 +89,21 @@ function renderGamePointsTable(){
 }
 
 const pointConfig = {
-  miniChickenJump: {
-    name: "mini chicken jump",
-    points: 30,
+  chickenJump: {
+    name: "chicken jump",
+    points: 10,
   },
   chickenBottleHit: {
     name: "chicken bottle hit",
     points: 20,
   },
-  chickenJump: {
-    name: "chicken jump",
-    points: 10,
+  miniChickenJump: {
+    name: "mini chicken jump",
+    points: 30,
+  },
+  miniChickenBottleHit: {
+    name: "mini chicken bottle hit",
+    points: 40,
   },
   collectCoin: {
     name: "collect coin",
