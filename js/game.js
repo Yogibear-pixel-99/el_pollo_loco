@@ -1,11 +1,78 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let playerscore = 0;
+
+const highscores = [
+  { name: "Anna", score: 1200 },
+  { name: "Ben", score: 950 },
+  { name: "Chris", score: 870 },
+  { name: "Daria", score: 850 },
+  { name: "Erik", score: 800 },
+  { name: "Fiona", score: 780 },
+  { name: "Gustav", score: 770 },
+  { name: "Hanna", score: 750 },
+  { name: "Isa", score: 700 },
+  { name: "Jonas", score: 680 }
+];
+
+// let highscores = {};
+
+const MAIN_URL = "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
 
 function init() {
   canvas = document.getElementById("gamecanvas");
-  world = new World(canvas, keyboard);
+  world = new World(canvas, keyboard, playerscore);
+  getHighscores();
 }
+
+function getHighscores(){
+  // get high von api
+  // wenn leer füge template ein.
+  renderHighscore();
+  // bei spielende namen und highscore passend ins object einfügen.
+  // object in die database - PUT
+  // neu im HTML rendern.
+
+}
+
+async function getHighscoreFromApi(){
+  try {
+    let response = await fetch (MAIN_URL + ".json");
+      if (!response.ok) {
+        throw new Error();
+      } else {
+        let data = await response.json();
+        if (data) {
+          highscores = Object.values(data);
+        }
+      }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function renderHighscore(){
+  let ref = document.getElementById('highscore');
+  let data = '';
+      for (let index = 0; index < highscores.length; index++) {
+        const element = highscores[index];
+        data += highscoreTemp(element);
+        
+      }
+    ref.innerHTML = data;
+}
+
+function highscoreTemp(element) {
+  return `<div class="score-wrapper">
+            <div class="player-name">${element.name}</div>
+            <div class="score">${element.score}</div>          
+          </div>`
+}
+
+// 
+
+
 
 window.addEventListener("keydown", (event) => {
   switch (event.key) {

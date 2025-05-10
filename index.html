@@ -1,38 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <link rel="icon" type="x-icon/favicon" href="img/6_salsa_bottle/salsa_bottle.png">
+    <link
+      rel="icon"
+      type="x-icon/favicon"
+      href="img/6_salsa_bottle/salsa_bottle.png" />
 
-<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 
-<script src="./js/world.class.js"></script>
-<script src="./js/drawableObject.class.js"></script>
-<script src="./js/moveableObject.class.js"></script>
-<script src="./js/statusbar.class.js"></script>
-<script src="./js/healthbar.class.js"></script>
-<script src="./js/coinbar.class.js"></script>
-<script src="./js/bottlebar.class.js"></script>
-<script src="./js/coin.class.js"></script>
-<script src="./js/bottle.class.js"></script>
-<script src="./js/thrownBottle.class.js"></script>
-<script src="./js/character.class.js"></script>
-<script src="./js/chicken.class.js"></script>
-<script src="./js/miniChicken.class.js"></script>
-<script src="./js/endboss.class.js"></script>
-<script src="./js/clouds.class.js"></script>
-<script src="./js/backgroundLayer.class.js"></script>
-<script src="./js/keyboard.class.js"></script>
-<script src="./js/level.class.js"></script>
-<script src="./js/levels/level1.js"></script>
-<script src="./js/game.js"></script>
+    <script src="./js/world.class.js"></script>
+    <script src="./js/drawableObject.class.js"></script>
+    <script src="./js/moveableObject.class.js"></script>
+    <script src="./js/statusbar.class.js"></script>
+    <script src="./js/healthbar.class.js"></script>
+    <script src="./js/coinbar.class.js"></script>
+    <script src="./js/bottlebar.class.js"></script>
+    <script src="./js/coin.class.js"></script>
+    <script src="./js/bottle.class.js"></script>
+    <script src="./js/thrownBottle.class.js"></script>
+    <script src="./js/character.class.js"></script>
+    <script src="./js/enemies.class.js"></script>
+    <script src="./js/chicken.class.js"></script>
+    <script src="./js/miniChicken.class.js"></script>
+    <script src="./js/endboss.class.js"></script>
+    <script src="./js/clouds.class.js"></script>
+    <script src="./js/backgroundLayer.class.js"></script>
+    <script src="./js/keyboard.class.js"></script>
+    <script src="./js/level.class.js"></script>
+    <script src="./js/levels/level1.js"></script>
+    <script src="./js/game.js"></script>
+  </head>
+  <body onload="init()">
+    <div class="left-content">
+      <h2>All time highscore</h2>
+      <div class="highscores" id="highscore"></div>
+    </div>
+    <div class="game-wrapper">
+      <h1>El Pollo Loco</h1>
+      <canvas id="gamecanvas" width="720" height="480"></canvas>
+      <h1></h1>
+    </div>
+    <div class="right-content">
+      <h2>PlayerName</h2>
+      <div class="player-score" id="player-score">000</div>
+      <div class="points-table">
+        <div class="item-point-wrapper">
+          <span class="item-name">mini chicken bottle hit</span>
+          <span class="item-points">40</span>
+        </div>
 
-</head>
-<body onload="init()">
-    <h1>El Pollo Loco</h1>
-    <canvas id="gamecanvas" width="720" height="480"></canvas>
-</body>
+        <div class="item-point-wrapper">
+          <span class="item-name">mini chicken jump</span>
+          <span class="item-points">30</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">chicken bottle hit</span>
+          <span class="item-points">20</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">chicken jump</span>
+          <span class="item-points">10</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">collect coin</span>
+          <span class="item-points">60</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">collect bottle</span>
+          <span class="item-points">20</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">bottle missed</span>
+          <span class="item-points">-30</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">endboss hit</span>
+          <span class="item-points">50</span>
+        </div>
+
+        <div class="item-point-wrapper">
+          <span class="item-name">endboss killed</span>
+          <span class="item-points">200</span>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

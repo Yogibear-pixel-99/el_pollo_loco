@@ -12,9 +12,8 @@ class Thrownbottle extends MovableObject {
     top: 20,
     right: 20,
     bottom: 20,
-    left: 20
-
-  }
+    left: 20,
+  };
 
   BOTTLE_THROW_ANIMATION = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
@@ -46,8 +45,6 @@ class Thrownbottle extends MovableObject {
     this.animate();
     this.bottleAppearance();
     this.applyBottleGravity();
-    console.log(this.walkingSpeed);
-    console.log(this.gravityInterval);
   }
 
   applyBottleGravity() {
@@ -61,15 +58,13 @@ class Thrownbottle extends MovableObject {
     }, 1000 / 25);
   }
 
-  stopGravity() {}
-
   animate() {
     let throwIn = setInterval(() => {
       let bottleIndex = world.thrownBottles.indexOf(this);
       if (this.y == this.floorPosition() || this.hitEnemy === true) {
-          clearInterval(throwIn);
-          clearInterval(this.gravityInterval);
-          clearInterval(this.moveBottleInterval_x);
+        clearInterval(throwIn);
+        clearInterval(this.gravityInterval);
+        clearInterval(this.moveBottleInterval_x);
         this.bottleSplash(bottleIndex);
       } else {
         this.playAnimation(this.BOTTLE_THROW_ANIMATION);
@@ -78,18 +73,17 @@ class Thrownbottle extends MovableObject {
   }
 
   bottleSplash(bottleIndex) {
-    this.img = this.animatedImages[this.BOTTLE_SPLASH_ANIMATION[0]]
+    this.img = this.animatedImages[this.BOTTLE_SPLASH_ANIMATION[0]];
     let count = 1;
     let interval = setInterval(() => {
-    if (count < this.BOTTLE_SPLASH_ANIMATION.length) {
-    this.playAnimationOnce(this.BOTTLE_SPLASH_ANIMATION, count);
-    console.log(count);
-    count++;
-    } else {
+      if (count < this.BOTTLE_SPLASH_ANIMATION.length) {
+        this.playAnimationOnce(this.BOTTLE_SPLASH_ANIMATION, count);
+        count++;
+      } else {
         world.thrownBottles.splice(bottleIndex, 1);
         clearInterval(interval);
-    }
-}, 100);
+      }
+    }, 100);
   }
 
   bottleAppearance() {

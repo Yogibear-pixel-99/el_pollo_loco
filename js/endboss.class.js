@@ -1,4 +1,4 @@
-class Endboss extends MovableObject {
+class Endboss extends Enemies {
   height = 300;
   width = 250;
   walkingSpeed = 1.5;

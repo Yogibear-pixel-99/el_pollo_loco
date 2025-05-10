@@ -4,6 +4,7 @@ class World {
   coinbar = new Coinbar(20, 50);
   bottlebar = new Bottlebar(20, 90);
   thrownBottles = [];
+  playerscore = 0;
 
   level = level1;
 
@@ -16,6 +17,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.playerscore = this.playerscore;
     this.draw();
     this.setWorld();
     this.runCollisions();
@@ -42,7 +44,7 @@ class World {
       this.thrownBottles.forEach((bottle) => {
        if  (bottle.isColliding(enemy)) {
           bottle.hitEnemy = true;
-          // enemy.hitBottle();
+          enemy.wasHittet++;
         }
       });
     });

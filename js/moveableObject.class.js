@@ -42,7 +42,6 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    // console.log(`Moving left: x=${this.x}, speed=${this.walkingSpeed}, xFactor=${this.xFactor}`);
     this.x = this.x - this.walkingSpeed * this.xFactor;
   }
 

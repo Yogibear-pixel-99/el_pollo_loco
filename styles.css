@@ -6,11 +6,74 @@ html {
 
 body {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
 }
 
 canvas {
     background-color: black;
+    border-radius: 20px;
     /* background: linear-gradient(rgb(255, 192, 119), rgb(106, 188, 255)); */
+}
+
+h1 {
+    text-align: center;
+    height: 60px;
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+}
+
+.left-content,
+.right-content {
+    background-color: rgb(233, 180, 33);
+    border-radius: 20px;
+    flex: 1;
+    padding: 24px;
+    margin: 0 20px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.score-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.points-table {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.player-name {
+    font-size: 32px;
+}
+
+.player-score {
+    font-size: 28px;
+    text-align: center;
+}
+
+.item-point-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-name {
+    font-size: 20px;
+}
+
+.item-points {
+    font-size: 22px;
 }
