@@ -26,9 +26,9 @@ class World {
     this.updatePlayerScore();
   }
 
-  updatePlayerScore(){
-    let ref = document.getElementById('player-score');
-    setInterval(() => ref.innerText = this.playerscore);
+  updatePlayerScore() {
+    let ref = document.getElementById("player-score");
+        ref.innerText = this.playerscore;
   }
 
   setWorld() {
@@ -49,9 +49,9 @@ class World {
         this.character.hit();
       }
       this.thrownBottles.forEach((bottle) => {
-       if  (bottle.isColliding(enemy)) {
+        if (bottle.isColliding(enemy)) {
           bottle.hitEnemy = true;
-          enemy.wasHittet++;
+          enemy.wasHittet = true;
         }
       });
     });
@@ -78,9 +78,23 @@ class World {
     });
   }
 
-  checkEnemyThrownBottleCollision() {
-  }
+  updateScorePointsBottleHit(enemyName) {
+    switch (enemyName){
+      case 'minichicken' : this.playerscore += this.pointTable.miniChickenBottleHit.points;
+      break;
 
+      case 'chicken' : this.playerscore += this.pointTable.chickenBottleHit.points;
+      break;
+
+      default:
+        break;
+    }
+    
+  }
+  
+
+  // checkEnemyThrownBottleCollision() {
+  // }
 
   moveBackground() {
     setInterval(() => {

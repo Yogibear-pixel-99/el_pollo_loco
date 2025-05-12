@@ -2,6 +2,9 @@ class Minichicken extends Enemies {
   height = 35;
   width = 35;
   walkingSpeed = Math.random() * (0.5 - 0.1) + 0.1;
+
+  enemyName = 'minichicken';
+
   deadPic = "./img/3_enemies_chicken/chicken_small/2_dead/dead.png";
   
   offset = {
@@ -30,8 +33,5 @@ class Minichicken extends Enemies {
     this.bottleHit();
   }
 
-  updateScorePointsBottleHit() {
-    world.playerscore += world.pointTable.miniChickenBottleHit.points;
-  }
-
+ 
 }

@@ -3,6 +3,7 @@ height = 45;
 width = 45;
 walkingSpeed = (Math.random() * (0.8 - 0.3) + 0.3);
 deadPic = "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
+enemyName = 'chicken';
 offset = {
   top: 8,
   right: 3,
@@ -27,9 +28,4 @@ WALKING_ANIMATION = [
     this.moveLeft();
     this.bottleHit();
   }
-
-  updateScorePointsBottleHit() {
-    world.playerscore += world.pointTable.chickenBottleHit.points;
-  }
-
 }

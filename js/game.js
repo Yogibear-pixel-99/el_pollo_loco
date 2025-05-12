@@ -82,7 +82,6 @@ function renderGamePointsTable(){
   let ref = document.getElementById('game-points-table');
   let data = '';
       Object.entries(pointConfig).forEach((element) => {
-        console.log(element);
         data += getPointsTemp(element);
       })
     ref.innerHTML = data;
@@ -126,8 +125,6 @@ const pointConfig = {
     points: 200,
   },
 };
-
-console.log(Object.entries(pointConfig))
 
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
