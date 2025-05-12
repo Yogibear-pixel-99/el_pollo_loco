@@ -31,6 +31,15 @@ class DrawableObject {
     );
   }
 
+  isCollidingHead(obj) {
+    return (
+      this.x + this.width - this.offset.right > obj.offsetHead.x &&
+      this.y + this.height - this.offset.bottom > obj.offsetHead.y &&
+      this.x + this.offset.left < obj.offsetHead.x + obj.offsetHead.width &&
+      this.y + this.offset.top < obj.offsetHead.y + obj.offsetHead.height
+    );
+  }
+
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }

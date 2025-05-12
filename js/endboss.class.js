@@ -17,6 +17,8 @@ class Endboss extends Enemies {
   ];
 
   offset = {
+    width: 250,
+    height: 300,
     top: 115,
     right: 30,
     bottom: 60,
@@ -24,8 +26,11 @@ class Endboss extends Enemies {
   }
 
   offsetHead = {
-    width: 60,
+    width: 68,
     height: 90,
+    
+
+
     x: this.x + 17,
     y: this.y + 65
   }

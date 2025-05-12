@@ -47,16 +47,17 @@ floorHeight;
       this.checkEnemyCollisions();
       this.checkCoinCollision();
       this.checkBottleCollision();
+      this.checkBossCollision();
     }, 20);
   }
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy, 'offset')) {
         this.character.hit();
       }
       this.thrownBottles.forEach((bottle) => {
-        if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+        if (bottle.isColliding(enemy, 'offset') && bottle.hittetEnemy == false) {
             this.enemyBottleHit(enemy, bottle);
             bottle.hittetEnemy = true;
             this.updatePlayerScore(enemy.enemyName);
@@ -65,6 +66,12 @@ floorHeight;
         }
       });
     });
+  }
+
+  checkBossCollision() {
+    if (this.character.isColliding(this.level.endboss) || this.character.isCollidingHead(this.level.endboss)) {
+      this.character.hit();
+    }
   }
 
   enemyBottleHit(enemy){
