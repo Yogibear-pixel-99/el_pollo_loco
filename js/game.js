@@ -223,3 +223,8 @@ window.addEventListener("keyup", (event) => {
 // sounds for pepe
 
 // level logic for bottles, chicken and boss
+
+
+// adjust throw width
+
+// call boss collition interval at pull

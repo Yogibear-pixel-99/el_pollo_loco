@@ -4,7 +4,8 @@ class Endboss extends Enemies {
   walkingSpeed = 1.5;
   enemyName = 'endboss';
   y = 480 - this.height - 58 + 15;
-  x = 450;
+  x = 1150;
+  hitEnemy = false;
   ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
     "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -43,6 +44,13 @@ class Endboss extends Enemies {
     // this.x = this.canvasWidth  * 1;
     this.loadImagesArray(this.ALERT_ANIMATION);
     this.animate();
+    // this.moveEnemies();
+  }
+
+
+  moveLeft() {
+    this.x = this.x - this.walkingSpeed * this.xFactor;
+    this.offsetHead.x = this.offsetHead.x - this.walkingSpeed * this.xFactor;
   }
 
   animate() {
@@ -50,4 +58,6 @@ class Endboss extends Enemies {
       this.playAnimation(this.ALERT_ANIMATION);
     }, this.animationCycle);
   }
+
+  
 }

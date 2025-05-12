@@ -4,6 +4,7 @@ class Enemies extends MovableObject {
     animateInterval;
     wasHittet = false;
     walkingSpeed;
+    hitEnemy = false;
 
     constructor(){
         super();

@@ -89,6 +89,7 @@ class DrawableObject {
     return this.canvasHeight - this.height - this.floorHeight;
   }
 
+
   playAnimation(arrayName) {
     let animationCount = this.animationCount % arrayName.length;
     let path = arrayName[animationCount];

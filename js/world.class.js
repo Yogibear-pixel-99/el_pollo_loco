@@ -6,10 +6,10 @@ class World {
   thrownBottles = [];
   playerscore = 0;
   pointTable;
-  
-canvasHeight;
-canvasWidth;
-floorHeight;
+
+  canvasHeight;
+  canvasWidth;
+  floorHeight;
 
   level = level1;
 
@@ -18,7 +18,14 @@ floorHeight;
   keyboard;
   camera_x = 0;
 
-  constructor(canvas, keyboard, pointTable,  canvasHeight, canvasWidth, floorHeight) {
+  constructor(
+    canvas,
+    keyboard,
+    pointTable,
+    canvasHeight,
+    canvasWidth,
+    floorHeight
+  ) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -31,11 +38,6 @@ floorHeight;
     this.runCollisions();
     this.moveBackground();
     this.updatePlayerScore();
-  }
-
-  updatePlayerScore() {
-    let ref = document.getElementById("player-score");
-        ref.innerText = this.playerscore;
   }
 
   setWorld() {
@@ -53,35 +55,122 @@ floorHeight;
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy, 'offset')) {
+      if (this.character.isColliding(enemy)) {
         this.character.hit();
       }
-      this.thrownBottles.forEach((bottle) => {
-        if (bottle.isColliding(enemy, 'offset') && bottle.hittetEnemy == false) {
-            this.enemyBottleHit(enemy, bottle);
-            bottle.hittetEnemy = true;
-            this.updatePlayerScore(enemy.enemyName);
-          // bottle.hitEnemy = true;
-          // enemy.wasHittet = true;
-        }
-      });
-    });
-  }
 
-  checkBossCollision() {
-    if (this.character.isColliding(this.level.endboss) || this.character.isCollidingHead(this.level.endboss)) {
-      this.character.hit();
+      this.thrownBottles.forEach((bottle) => {
+              if (this.level.enemies == 0) {
+        bottle.hittetEnemy = true;
+        this.clearBottleAnimation(bottle);
+        this.bottleSplash(bottle);
+      } else {
+
+        if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+          this.enemyBottleHit(enemy, bottle);
+          bottle.hittetEnemy = true;
+          this.clearBottleAnimation(bottle);
+          this.bottleSplash(bottle);
+          this.updatePlayerScore(enemy.enemyName);
+        } 
+       if (
+          bottle.y == this.floorPosition(bottle) &&
+          bottle.hittetEnemy == false
+        ) {
+          bottle.hittetEnemy = true;
+          this.clearBottleAnimation(bottle);
+          this.bottleSplash(bottle);
+        }
+      }
+    });
+  });
+}
+
+  clearBottleAnimation(bottle) {
+    if (bottle.y == bottle.floorPosition() || bottle.hittetEnemy === true) {
+      clearInterval(bottle.throwInAnimationInterval);
+      clearInterval(bottle.gravityInterval);
+      clearInterval(bottle.moveBottleInterval_x);
     }
   }
 
-  enemyBottleHit(enemy){
-        let enemyIndex = world.level.enemies.indexOf(enemy)
-        clearInterval(enemy.walkInterval);
-        clearInterval(enemy.animateInterval);
-        enemy.img.src = enemy.deadPic;
-        this.updateScorePointsBottleHit(enemy.enemyName);
-        this.updatePlayerScore();
-        setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
+  bottleSplash(bottle) {
+    let bottleIndex = world.thrownBottles.indexOf(bottle);
+    bottle.img = bottle.animatedImages[bottle.BOTTLE_SPLASH_ANIMATION[0]];
+    let count = 1;
+    let interval = setInterval(() => {
+      if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
+        bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
+        count++;
+      } else {
+        world.thrownBottles.splice(bottleIndex, 1);
+        clearInterval(interval);
+      }
+    }, 100);
+  }
+
+  updatePlayerScore() {
+    let ref = document.getElementById("player-score");
+    ref.innerText = this.playerscore;
+  }
+
+  checkBossCollision() {
+  if (
+    this.character.isColliding(this.level.endboss) ||
+    this.character.isCollidingHead(this.level.endboss)
+  ) {
+    this.character.hit();
+  }
+  this.thrownBottles.forEach((bottle) => {
+    if ((bottle.isColliding(this.level.endboss) || bottle.isCollidingHead(this.level.endboss)) && bottle.hittetEnemy == false) {
+      console.log('bottle hittet boss')
+      this.enemyBottleHit(enemy, bottle);
+      // bottle.hittetEnemy = true;
+      // this.clearBottleAnimation(bottle);
+      // this.bottleSplash(bottle);
+      // this.updatePlayerScore(enemy.enemyName);
+    }})
+  
+}
+
+
+//  {
+//      
+//     }
+//     this.thrownBottles.forEach((bottle) => {
+//       if (
+//         (bottle.isColliding(this.level.endboss) ||
+//           bottle.isCollidingHead(this.level.endboss)) &&
+//         bottle.hittetEnemy == false
+//       ) {
+//         this.level.endboss.alreadyHittet = true;
+//         if (this.level.endboss.energy > 0) {
+//           setTimeout(() => {
+//             this.level.endboss.alreadyHittet = false;
+//           }, 500);
+
+//           // stop old animation
+//           // play animation
+//           // count score
+//           // resetAnimation
+//         }
+//       }
+//     });
+
+//   }
+
+  floorPosition(obj) {
+    return this.canvasHeight - obj.height - this.floorHeight;
+  }
+
+  enemyBottleHit(enemy) {
+    let enemyIndex = world.level.enemies.indexOf(enemy);
+    clearInterval(enemy.walkInterval);
+    clearInterval(enemy.animateInterval);
+    enemy.img.src = enemy.deadPic;
+    this.updateScorePointsBottleHit(enemy.enemyName);
+    this.updatePlayerScore();
+    setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
 
   checkCoinCollision() {
@@ -106,19 +195,19 @@ floorHeight;
   }
 
   updateScorePointsBottleHit(enemyName) {
-    switch (enemyName){
-      case 'minichicken' : this.playerscore += this.pointTable.miniChickenBottleHit.points;
-      break;
+    switch (enemyName) {
+      case "minichicken":
+        this.playerscore += this.pointTable.miniChickenBottleHit.points;
+        break;
 
-      case 'chicken' : this.playerscore += this.pointTable.chickenBottleHit.points;
-      break;
+      case "chicken":
+        this.playerscore += this.pointTable.chickenBottleHit.points;
+        break;
 
       default:
         break;
     }
-    
   }
-  
 
   // checkEnemyThrownBottleCollision() {
   // }
@@ -161,7 +250,7 @@ floorHeight;
     });
   }
 
-  drawBossHeadHitbox(ctx){
+  drawBossHeadHitbox(ctx) {
     ctx.beginPath();
     ctx.lineWidth = "3";
     ctx.strokeStyle = "green";

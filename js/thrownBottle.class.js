@@ -4,11 +4,10 @@ class Thrownbottle extends MovableObject {
   speedY = 20;
   throwSpeedX = 3.7;
   walkingSpeed = this.walkingSpeed;
-  hitEnemy = false;
+  hittetEnemy = false;
   gravityInterval;
   moveBottleInterval_x;
-
-  hittetEnemy = false;
+  throwInAnimationInterval;
 
   offset = {
     top: 20,
@@ -61,32 +60,12 @@ class Thrownbottle extends MovableObject {
   }
 
   animate() {
-    let throwIn = setInterval(() => {
-      let bottleIndex = world.thrownBottles.indexOf(this);
-      if (this.y == this.floorPosition() || this.hitEnemy === true) {
-        clearInterval(throwIn);
-        clearInterval(this.gravityInterval);
-        clearInterval(this.moveBottleInterval_x);
-        this.bottleSplash(bottleIndex);
-      } else {
+    this.throwInAnimationInterval = setInterval(() => {
         this.playAnimation(this.BOTTLE_THROW_ANIMATION);
-      }
     }, 50);
   }
 
-  bottleSplash(bottleIndex) {
-    this.img = this.animatedImages[this.BOTTLE_SPLASH_ANIMATION[0]];
-    let count = 1;
-    let interval = setInterval(() => {
-      if (count < this.BOTTLE_SPLASH_ANIMATION.length) {
-        this.playAnimationOnce(this.BOTTLE_SPLASH_ANIMATION, count);
-        count++;
-      } else {
-        world.thrownBottles.splice(bottleIndex, 1);
-        clearInterval(interval);
-      }
-    }, 100);
-  }
+
 
   bottleAppearance() {
     if (world.character.otherDirection === false) {
