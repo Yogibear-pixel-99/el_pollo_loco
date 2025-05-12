@@ -22,21 +22,22 @@ class Enemies extends MovableObject {
       }
     
 
-    bottleHit(){
-        let hitInterval = setInterval(() => {
-          if (this.wasHittet == true) {
-            let enemyIndex = world.level.enemies.indexOf(this)
-            clearInterval(this.walkInterval);
-            clearInterval(this.animateInterval);
-            clearInterval(hitInterval);
-            this.img.src = this.deadPic;
-            console.log(this);
-            world.updateScorePointsBottleHit(this.enemyName);
-            world.updatePlayerScore();
-            setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
-          }
-        }, 30);
-      }
+    
+    // bottleHit(){
+    //     let hitInterval = setInterval(() => {
+    //       if (this.wasHittet == true) {
+    //         let enemyIndex = world.level.enemies.indexOf(this)
+    //         clearInterval(this.walkInterval);
+    //         clearInterval(this.animateInterval);
+    //         clearInterval(hitInterval);
+    //         this.img.src = this.deadPic;
+    //         console.log(this);
+    //         world.updateScorePointsBottleHit(this.enemyName);
+    //         world.updatePlayerScore();
+    //         setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
+    //       }
+    //     }, 30);
+    //   }
 
     
 

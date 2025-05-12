@@ -36,6 +36,5 @@ class Bottle extends DrawableObject {
 
   isCollected() {
     if (world.character.bottles < 5) this.x = this.calculateNewPosition();
-    console.log("Pepe collected this bottle!");
   }
 }

@@ -8,7 +8,7 @@ class Thrownbottle extends MovableObject {
   gravityInterval;
   moveBottleInterval_x;
 
-  bottleHittetEnemy = false;
+  hittetEnemy = false;
 
   offset = {
     top: 20,

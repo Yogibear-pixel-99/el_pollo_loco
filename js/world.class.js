@@ -6,6 +6,10 @@ class World {
   thrownBottles = [];
   playerscore = 0;
   pointTable;
+  
+canvasHeight;
+canvasWidth;
+floorHeight;
 
   level = level1;
 
@@ -14,11 +18,14 @@ class World {
   keyboard;
   camera_x = 0;
 
-  constructor(canvas, keyboard, pointTable) {
+  constructor(canvas, keyboard, pointTable,  canvasHeight, canvasWidth, floorHeight) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.pointTable = pointTable;
+    this.canvasHeight = canvasHeight;
+    this.canvasWidth = canvasWidth;
+    this.floorHeight = floorHeight;
     this.draw();
     this.setWorld();
     this.runCollisions();
@@ -49,12 +56,25 @@ class World {
         this.character.hit();
       }
       this.thrownBottles.forEach((bottle) => {
-        if (bottle.isColliding(enemy)) {
-          bottle.hitEnemy = true;
-          enemy.wasHittet = true;
+        if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+            this.enemyBottleHit(enemy, bottle);
+            bottle.hittetEnemy = true;
+            this.updatePlayerScore(enemy.enemyName);
+          // bottle.hitEnemy = true;
+          // enemy.wasHittet = true;
         }
       });
     });
+  }
+
+  enemyBottleHit(enemy){
+        let enemyIndex = world.level.enemies.indexOf(enemy)
+        clearInterval(enemy.walkInterval);
+        clearInterval(enemy.animateInterval);
+        enemy.img.src = enemy.deadPic;
+        this.updateScorePointsBottleHit(enemy.enemyName);
+        this.updatePlayerScore();
+        setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
 
   checkCoinCollision() {
@@ -119,9 +139,11 @@ class World {
     this.addObjectsToCanvas(this.level.enemies);
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
-    this.addObjToCanvas(this.character);
     this.addObjectsToCanvas(this.level.bottles);
     this.addObjectsToCanvas(this.thrownBottles);
+    this.addObjToCanvas(this.level.endboss);
+    this.drawBossHeadHitbox(this.ctx);
+    this.addObjToCanvas(this.character);
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
@@ -130,6 +152,19 @@ class World {
     requestAnimationFrame(function () {
       self.draw();
     });
+  }
+
+  drawBossHeadHitbox(ctx){
+    ctx.beginPath();
+    ctx.lineWidth = "3";
+    ctx.strokeStyle = "green";
+    ctx.rect(
+      this.level.endboss.offsetHead.x,
+      this.level.endboss.offsetHead.y,
+      this.level.endboss.offsetHead.width,
+      this.level.endboss.offsetHead.height
+    );
+    ctx.stroke();
   }
 
   addObjToCanvas(obj) {

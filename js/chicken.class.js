@@ -26,6 +26,5 @@ WALKING_ANIMATION = [
     this.animateWalk();
     this.moveEnemies();
     this.moveLeft();
-    this.bottleHit();
   }
 }

@@ -1,6 +1,9 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+canvasHeight = 480;
+canvasWidth = 720;
+floorHeight = 58;
 
 const highscores = [
   { name: "Anna", score: 1200 },
@@ -22,7 +25,7 @@ const MAIN_URL =
 
 function init() {
   canvas = document.getElementById("gamecanvas");
-  world = new World(canvas, keyboard, pointConfig);
+  world = new World(canvas, keyboard, pointConfig, canvasHeight, canvasWidth, floorHeight);
   getHighscores();
 }
 
@@ -197,3 +200,26 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
+
+
+
+
+// throw bottel left, animation should turn.
+// jump on chicken
+  // kill chicken
+  // score +
+  // jump a bit y -
+
+// collect coins should score
+// endboss
+  // hit endboss
+    // score +
+    // live -
+    // trigger animation
+  // kill endboss
+  // score +
+  // trigger final screen
+
+// sounds for pepe
+
+// level logic for bottles, chicken and boss

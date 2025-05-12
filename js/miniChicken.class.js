@@ -30,7 +30,6 @@ class Minichicken extends Enemies {
     this.animateWalk();
     this.moveEnemies();
     this.moveLeft();
-    this.bottleHit();
   }
 
  
