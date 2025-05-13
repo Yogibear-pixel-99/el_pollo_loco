@@ -67,7 +67,7 @@ class World {
         if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
           this.enemyBottleHit(enemy, bottle);
           this.animateBrokenBottle(bottle);
-          this.updatePlayerScore(enemy.enemyName);
+          this.updatePlayerScore();
         } 
        if (
           bottle.y == this.floorPosition(bottle) &&
@@ -126,10 +126,11 @@ animateBrokenBottle(bottle){
   this.thrownBottles.forEach((bottle) => {
     if ((bottle.isColliding(this.level.endboss) || bottle.isCollidingHead(this.level.endboss)) && bottle.hittetEnemy == false) {
       console.log('bottle hittet boss');
-      animateBrokenBottle(bottle)
-      this.bossBottleHit(enemy, bottle);
+      this.animateBrokenBottle(bottle)
+      this.level.endboss.bossBottleHit(bottle);
+      this.updateScorePointsBottleHit('bossBottleHit');
+      this.updatePlayerScore();
       
-      // bottle.hittetEnemy = true;
       // this.clearBottleAnimation(bottle);
       // this.bottleSplash(bottle);
       // this.updatePlayerScore(enemy.enemyName);
@@ -160,13 +161,7 @@ animateBrokenBottle(bottle){
     setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
 
-  bossBottleHit(){
-    if (this.level.endboss.health >= 0){
 
-
-    // this.updateScorePointsBottleHit(enemy.enemyName);
-    // this.updatePlayerScore();
-  }}
 
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {
@@ -198,6 +193,9 @@ animateBrokenBottle(bottle){
       case "chicken":
         this.playerscore += this.pointTable.chickenBottleHit.points;
         break;
+
+      case "bossBottleHit":
+        this.playerscore += this.pointTable.endbossHit.points;
 
       default:
         break;

@@ -2,15 +2,11 @@ class DrawableObject {
   canvasHeight = 480;
   canvasWidth = 720;
   floorHeight = 58;
-
   img;
   x;
   y;
-
-  
   animationCount = 0;
   animatedImages = {};
-
   offset = {
     top: 0,
     right: 0,
@@ -19,7 +15,6 @@ class DrawableObject {
   };
 
   animationCycle = 120;
-
   otherDirection = false;
 
   isColliding(obj) {
@@ -89,7 +84,6 @@ class DrawableObject {
     return this.canvasHeight - this.height - this.floorHeight;
   }
 
-
   playAnimation(arrayName) {
     let animationCount = this.animationCount % arrayName.length;
     let path = arrayName[animationCount];
@@ -97,10 +91,16 @@ class DrawableObject {
     this.animationCount++;
   }
 
-  playAnimationOnce(arrayName, count){
+  playAnimationOnce(arrayName, count) {
     let path = arrayName[count];
     this.img = this.animatedImages[path];
   }
+  
+
+  // playAnimationOnce(arrayName, count) {
+  //   let path = arrayName[count];
+  //   this.img = this.animatedImages[path];
+  // }
 
   loadImage(path) {
     this.img = new Image();

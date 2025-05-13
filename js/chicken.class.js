@@ -3,7 +3,7 @@ height = 145;
 width = 145;
 walkingSpeed = (Math.random() * (0.8 - 0.3) + 0.3);
 deadPic = "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
-enemyName = 'chicken';
+Name = 'chicken';
 offset = {
   top: 8,
   right: 3,

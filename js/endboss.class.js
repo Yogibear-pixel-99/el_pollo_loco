@@ -2,10 +2,12 @@ class Endboss extends Enemies {
   height = 300;
   width = 250;
   walkingSpeed = 1.5;
-  enemyName = 'endboss';
+  enemyName = "endboss";
   y = 480 - this.height - 58 + 15;
-  x = 1150;
+  x = 400;
   hitEnemy = false;
+  energy = 20;
+  alertAnimationInterval;
   ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
     "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -17,24 +19,33 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
+  BOSS_BOTTLE_HIT_ANIMATION = [
+    "./img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "./img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "./img/4_enemie_boss_chicken/4_hurt/G23.png",
+  ];
+
+  BOSS_DEAD_ANIMATION = [
+    "./img/4_enemie_boss_chicken/5_dead/G24.png",
+    "./img/4_enemie_boss_chicken/5_dead/G25.png",
+    "./img/4_enemie_boss_chicken/5_dead/G26.png"
+  ]
+
   offset = {
     width: 250,
     height: 300,
     top: 115,
     right: 30,
     bottom: 60,
-    left: 45
-  }
+    left: 45,
+  };
 
   offsetHead = {
     width: 68,
     height: 90,
-    
-
-
     x: this.x + 17,
-    y: this.y + 65
-  }
+    y: this.y + 65,
+  };
 
   constructor() {
     super();
@@ -43,10 +54,11 @@ class Endboss extends Enemies {
     this.loadImage(this.ALERT_ANIMATION[0]);
     // this.x = this.canvasWidth  * 1;
     this.loadImagesArray(this.ALERT_ANIMATION);
+    this.loadImagesArray(this.BOSS_BOTTLE_HIT_ANIMATION);
+    this.loadImagesArray(this.BOSS_DEAD_ANIMATION);
     this.animate();
     // this.moveEnemies();
   }
-
 
   moveLeft() {
     this.x = this.x - this.walkingSpeed * this.xFactor;
@@ -54,10 +66,62 @@ class Endboss extends Enemies {
   }
 
   animate() {
-    setInterval(() => {
+    this.alertAnimationInterval = setInterval(() => {
       this.playAnimation(this.ALERT_ANIMATION);
     }, this.animationCycle);
   }
 
+  async bossBottleHit() {
+    if (this.energy > 0) {
+      this.energy -= 10;
+      clearInterval(this.alertAnimationInterval);
+      await this.playAnimationSpecificTime(5, this.BOSS_BOTTLE_HIT_ANIMATION);
+      this.animate();
+    } else {
+      clearInterval(this.alertAnimationInterval);
+      await this.playAnimationSpecificTime(5, this.BOSS_BOTTLE_HIT_ANIMATION);
+      await this.playAnimationSpecificTime(1, this.BOSS_DEAD_ANIMATION);
+
+      // this.updateScorePointsBottleHit(enemy.enemyName);
+      // this.updatePlayerScore();
+    }
+  }
+
+
+
+  playDeadAnimation() {
+    let count = 1;
+    let interval = setInterval(() => {
+      if (count < this.BOSS_DEAD_ANIMATION.length) {
+        this.playAnimationOnce(this.BOSS_DEAD_ANIMATION, count);
+        count++;
+      } else {
+        clearInterval(interval);
+        this.animate();
+      }
+    }, 100);
+  }
+
+  async playAnimationSpecificTime(times, imgArray) {
+    return new Promise((resolve) => { 
+    let loop = 0;
+    let count = 0;
   
+    let interval = setInterval(() => {
+      if (count < imgArray.length) {
+        let path = imgArray[count];
+        this.img = this.animatedImages[path];
+        count++;
+      } else {
+        count = 0;
+        loop++;
+  
+        if (loop >= times) {
+          clearInterval(interval);
+          resolve();
+        }
+      }
+    }, 100);
+  });
+}
 }
