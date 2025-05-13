@@ -7,10 +7,32 @@ class Endboss extends Enemies {
   x = 400;
   hitEnemy = false;
   energy = 20;
+
   alertAnimationInterval;
   walkAnimationInterval;
   bottleHitAnimationInterval;
   bossDeadAnimationInterval;
+  bossAttackAlertInterval;
+
+  walkInterval;
+  attackInterval;
+
+  allAnimateIntervals = [
+    'bottleHitAnimationInterval',
+    'bossDeadAnimationInterval',
+    'alertAnimationInterval', 
+    'walkAnimationInterval',
+    'bossAttackAlertAnimationInterval',
+    'bossAttackJumpAnimationInterval'
+  ];
+
+  allMovementIntervals = [
+    'walkInterval',
+    'attackInterval'
+  ]
+
+  animationCycle = 170;
+  moveCycle = 30;
 
 WALKING_ANIMATION = [
   "./img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -42,20 +64,38 @@ WALKING_ANIMATION = [
     "./img/4_enemie_boss_chicken/5_dead/G26.png"
   ]
 
+
+
+  BOSS_ATTACK_ALERT_ANIMATION = [
+    "./img/4_enemie_boss_chicken/3_attack/G13.png",
+    "./img/4_enemie_boss_chicken/3_attack/G14.png",
+    "./img/4_enemie_boss_chicken/3_attack/G15.png",
+  ];
+
+  BOSS_ATTACK_JUMP_ANIMATION = [
+    "./img/4_enemie_boss_chicken/3_attack/G16.png",
+    "./img/4_enemie_boss_chicken/3_attack/G17.png",
+    "./img/4_enemie_boss_chicken/3_attack/G18.png",
+    "./img/4_enemie_boss_chicken/3_attack/G19.png",
+    "./img/4_enemie_boss_chicken/3_attack/G20.png",
+  ];
+
+
+
   offset = {
     width: 250,
     height: 300,
     top: 115,
     right: 30,
     bottom: 60,
-    left: 45,
+    left: 50,
   };
 
   offsetHead = {
-    width: 68,
-    height: 90,
-    x: this.x + 17,
-    y: this.y + 65,
+    width: 70,
+    height: 100,
+    x: this.x + 28,
+    y: this.y + 45,
   };
 
   constructor() {
@@ -63,17 +103,89 @@ WALKING_ANIMATION = [
     console.log(this.x);
     console.log(this.y);
     this.loadImage(this.ALERT_ANIMATION[0]);
-    // this.x = this.canvasWidth  * 1;
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.loadImagesArray(this.ALERT_ANIMATION);
     this.loadImagesArray(this.BOSS_BOTTLE_HIT_ANIMATION);
     this.loadImagesArray(this.BOSS_DEAD_ANIMATION);
+    this.loadImagesArray(this.BOSS_ATTACK_ALERT_ANIMATION);
+    this.loadImagesArray(this.BOSS_ATTACK_JUMP_ANIMATION);
+    this.applyGravity();
   }
 
   startFight(){
-    // this.animateWalk();
-    // this.moveEnemies();
+    this.animateWalk();
+    this.moveEnemies();
+    this.attack();
   }
+
+
+
+
+  async attack(){
+    const rndTime = Math.floor(Math.random() * (6000 - 3000) + 3000);
+    const rndNrForAttack = Math.round(Math.random() * (4 - 1) + 1);
+
+    await this.timeDelay(rndTime);
+
+
+ 
+
+ 
+        // console.log(rndTime);
+        console.log(rndNrForAttack);
+        this.stopAllBossAnimateIntervals();
+        this.stopAllBossMovementIntervals();
+        await this.playAnimationSpecificTime(1, this.ALERT_ANIMATION, 'alertAnimationInterval');
+        await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_ALERT_ANIMATION, 'bossAttackAlertAnimationInterval');
+        await this.randomAttackJumps(rndNrForAttack);
+        // await this.playAnimationSpecificTime(rndNrForAttack, this.BOSS_ATTACK_JUMP_ANIMATION, 'bossAttackJumpAnimationInterval');
+        // await this.playAnimationSpecificTime(1, )
+
+
+
+
+        this.attack();
+      
+
+
+
+
+        // stop x
+        // animate alert
+        // animate attack and x move on and speedY raise
+        // on ground stop short x and move on with walking
+
+  }
+
+  async randomAttackJumps(rounds){
+    for (let attackIndex = 0; attackIndex < rounds; attackIndex++) {
+      this.speedY = 17;
+      let interval = setInterval(() => {
+           this.x = this.x - 7;
+      }, 40);
+      await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_JUMP_ANIMATION, 'bossAttackJumpAnimationInterval');
+      clearInterval(interval);
+    }
+  }
+
+  async timeDelay(time){
+    return new Promise (resolve => setTimeout(resolve, time))
+  }
+
+
+ 
+
+  // attackJump(){
+  //   this.speedY = 20;
+  //   this.attackJumpInterval = setInterval(() => {
+  //    if (this.y > this.floorPosition()) {
+  //     this.x = this.x - 6;
+  //    } else {
+  //     this.stopAllBossAnimateIntervals;
+  //     this.stopAllBossMovementIntervals;
+  //    }
+  //   }, 20);
+  // }
 
   moveLeft() {
     this.x = this.x - this.walkingSpeed * this.xFactor;
@@ -91,15 +203,12 @@ WALKING_ANIMATION = [
     if (this.energy > 0) {
       this.energy -= 10;
       this.stopAllBossAnimateIntervals();
-      // clearInterval(this.walkAnimationInterval);
-      // clearInterval(this.bottleHitAnimationInterval);
-      // clearInterval(this.bossDeadAnimationInterval);
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       this.animateWalk();
     } else {
       this.stopAllBossAnimateIntervals();
-      await this.playAnimationSpecificTime(5, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
-      await this.playAnimationSpecificTime(1, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
+      await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
+      await this.playAnimationSpecificTime(3, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
 
       // this.updateScorePointsBottleHit(enemy.enemyName);
       // this.updatePlayerScore();
@@ -107,8 +216,11 @@ WALKING_ANIMATION = [
   }
 
   stopAllBossAnimateIntervals(){
-    const intervals = ['bottleHitAnimationInterval', 'bossDeadAnimationInterval', 'alertAnimationInterval', 'walkAnimationInterval'];
-          intervals.forEach((interval) => clearInterval(this[interval]));
+          this.allAnimateIntervals.forEach((interval) => clearInterval(this[interval]));
+  }
+
+  stopAllBossMovementIntervals(){
+    this.allMovementIntervals.forEach((interval) => clearInterval(this[interval]));
   }
 
 
