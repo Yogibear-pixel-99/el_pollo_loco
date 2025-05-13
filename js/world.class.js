@@ -154,7 +154,7 @@ animateBrokenBottle(bottle){
   enemyBottleHit(enemy) {
     let enemyIndex = world.level.enemies.indexOf(enemy);
     clearInterval(enemy.walkInterval);
-    clearInterval(enemy.animateInterval);
+    clearInterval(enemy.walkAnimationInterval);
     enemy.img.src = enemy.deadPic;
     this.updateScorePointsBottleHit(enemy.enemyName);
     this.updatePlayerScore();
@@ -170,6 +170,9 @@ animateBrokenBottle(bottle){
         coin.isCollected();
         coin.collected = true;
         this.coinbar.updateCoinBar();
+        if (this.character.coins === 1) {
+          this.level.endboss.startFight();
+        }
       }
     });
   }

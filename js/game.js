@@ -228,3 +228,5 @@ window.addEventListener("keyup", (event) => {
 // adjust throw width
 
 // call boss collition interval at pull
+
+// enemy bottle hit auslagern in enemies von world

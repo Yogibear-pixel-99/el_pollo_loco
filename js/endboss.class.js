@@ -8,6 +8,17 @@ class Endboss extends Enemies {
   hitEnemy = false;
   energy = 20;
   alertAnimationInterval;
+  walkAnimationInterval;
+  bottleHitAnimationInterval;
+  bossDeadAnimationInterval;
+
+WALKING_ANIMATION = [
+  "./img/4_enemie_boss_chicken/1_walk/G1.png",
+  "./img/4_enemie_boss_chicken/1_walk/G2.png",
+  "./img/4_enemie_boss_chicken/1_walk/G3.png",
+  "./img/4_enemie_boss_chicken/1_walk/G4.png"
+]
+
   ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
     "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -53,10 +64,14 @@ class Endboss extends Enemies {
     console.log(this.y);
     this.loadImage(this.ALERT_ANIMATION[0]);
     // this.x = this.canvasWidth  * 1;
+    this.loadImagesArray(this.WALKING_ANIMATION);
     this.loadImagesArray(this.ALERT_ANIMATION);
     this.loadImagesArray(this.BOSS_BOTTLE_HIT_ANIMATION);
     this.loadImagesArray(this.BOSS_DEAD_ANIMATION);
-    this.animate();
+  }
+
+  startFight(){
+    // this.animateWalk();
     // this.moveEnemies();
   }
 
@@ -65,49 +80,45 @@ class Endboss extends Enemies {
     this.offsetHead.x = this.offsetHead.x - this.walkingSpeed * this.xFactor;
   }
 
-  animate() {
+  animateAlert() {
     this.alertAnimationInterval = setInterval(() => {
       this.playAnimation(this.ALERT_ANIMATION);
     }, this.animationCycle);
   }
 
+
   async bossBottleHit() {
     if (this.energy > 0) {
       this.energy -= 10;
-      clearInterval(this.alertAnimationInterval);
-      await this.playAnimationSpecificTime(5, this.BOSS_BOTTLE_HIT_ANIMATION);
-      this.animate();
+      this.stopAllBossAnimateIntervals();
+      // clearInterval(this.walkAnimationInterval);
+      // clearInterval(this.bottleHitAnimationInterval);
+      // clearInterval(this.bossDeadAnimationInterval);
+      await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
+      this.animateWalk();
     } else {
-      clearInterval(this.alertAnimationInterval);
-      await this.playAnimationSpecificTime(5, this.BOSS_BOTTLE_HIT_ANIMATION);
-      await this.playAnimationSpecificTime(1, this.BOSS_DEAD_ANIMATION);
+      this.stopAllBossAnimateIntervals();
+      await this.playAnimationSpecificTime(5, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
+      await this.playAnimationSpecificTime(1, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
 
       // this.updateScorePointsBottleHit(enemy.enemyName);
       // this.updatePlayerScore();
     }
   }
 
-
-
-  playDeadAnimation() {
-    let count = 1;
-    let interval = setInterval(() => {
-      if (count < this.BOSS_DEAD_ANIMATION.length) {
-        this.playAnimationOnce(this.BOSS_DEAD_ANIMATION, count);
-        count++;
-      } else {
-        clearInterval(interval);
-        this.animate();
-      }
-    }, 100);
+  stopAllBossAnimateIntervals(){
+    const intervals = ['bottleHitAnimationInterval', 'bossDeadAnimationInterval', 'alertAnimationInterval', 'walkAnimationInterval'];
+          intervals.forEach((interval) => clearInterval(this[interval]));
   }
 
-  async playAnimationSpecificTime(times, imgArray) {
+
+
+  async playAnimationSpecificTime(times, imgArray, intervalName) {
     return new Promise((resolve) => { 
     let loop = 0;
     let count = 0;
   
-    let interval = setInterval(() => {
+    this[intervalName] = setInterval(() => {
       if (count < imgArray.length) {
         let path = imgArray[count];
         this.img = this.animatedImages[path];
@@ -117,11 +128,12 @@ class Endboss extends Enemies {
         loop++;
   
         if (loop >= times) {
-          clearInterval(interval);
+          clearInterval(this[intervalName]);
           resolve();
         }
       }
     }, 100);
   });
 }
+
 }
