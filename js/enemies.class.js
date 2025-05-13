@@ -24,14 +24,5 @@ class Enemies extends MovableObject {
         }, this.animationCycle);
       }
 
-      applyGravity() {
-        setInterval(() => {
-          if (this.aboveGround() || this.speedY > 0) {
-            this.y -= this.speedY;
-            this.speedY -= this.acceleration;
-          } else {
-            this.y = this.floorPosition();
-          }
-        }, 1000 / 25);
-      }
+
 }

@@ -91,12 +91,21 @@ WALKING_ANIMATION = [
     left: 50,
   };
 
-  offsetHead = {
+  get offsetHead() {
+    return {
     width: 70,
     height: 100,
     x: this.x + 28,
     y: this.y + 45,
   };
+}
+
+  // offsetHead = {
+  //   width: 70,
+  //   height: 100,
+  //   x: this.x + 28,
+  //   y: this.y + 45,
+  // };
 
   constructor() {
     super();
@@ -159,12 +168,14 @@ WALKING_ANIMATION = [
 
   async randomAttackJumps(rounds){
     for (let attackIndex = 0; attackIndex < rounds; attackIndex++) {
-      this.speedY = 17;
+      this.speedY = 18;
       let interval = setInterval(() => {
            this.x = this.x - 7;
-      }, 40);
+           this.offsetHead.x = this.offsetHead.x - 7;
+      }, 16);
       await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_JUMP_ANIMATION, 'bossAttackJumpAnimationInterval');
       clearInterval(interval);
+      await this.timeDelay(350);
     }
   }
 
@@ -186,6 +197,18 @@ WALKING_ANIMATION = [
   //    }
   //   }, 20);
   // }
+
+  applyGravity() {
+    setInterval(() => {
+      if (this.aboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      } else {
+        this.y = this.floorPosition();
+        // this.y = this.offsetHead.y;
+      }
+    }, 1000 / 25);
+  }
 
   moveLeft() {
     this.x = this.x - this.walkingSpeed * this.xFactor;
