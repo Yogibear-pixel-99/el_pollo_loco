@@ -26,13 +26,14 @@ class Enemies extends MovableObject {
         }, this.animationCycle);
       }
 
-    jumpKill(){
+    isKilled(){
       let index = world.level.enemies.indexOf(this);
       this.img.src = this.deadPic;
       clearInterval(this.walkAnimationInterval);
       clearInterval(this.walkInterval);
       setTimeout(() => world.level.enemies.splice(index, 1), 700);
     }
+
 
     
 

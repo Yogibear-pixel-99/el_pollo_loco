@@ -54,7 +54,7 @@ class World {
     }, 25);
   }
 
-checkEnemyCollisions() {
+  checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && enemy.isDead === false) {
         if (
@@ -68,59 +68,46 @@ checkEnemyCollisions() {
         } else {
           this.character.hit();
         }
-      }});
-    }
+      }
+    });
+  }
 
-  checkThrownBottleCollision(){
-      this.thrownBottles.forEach((bottle) => {
-        if (bottle.y === this.floorPosition(bottle) && bottle.alreadyHittet === false) {
-          bottle.alreadyHittet = true;
-             this.animateBrokenBottle(bottle);
-        } else if ((bottle.isColliding(this.level.endboss) || bottle.isCollidingHead(this.level.endboss)) && bottle.alreadyHittet === false) {
-        bottle.alreadyHittet = true;
+  checkThrownBottleCollision() {
+    this.thrownBottles.forEach((bottle) => {
+      if (
+        bottle.y === this.floorPosition(bottle) &&
+        bottle.alreadyHittet === false
+      ) {
+        this.animateBrokenBottle(bottle);
+        this.addPointsToPlayerScore(bottle.itemName);
+      } else if (
+        (bottle.isColliding(this.level.endboss) ||
+          bottle.isCollidingHead(this.level.endboss)) &&
+        bottle.alreadyHittet === false
+      ) {
         this.animateBrokenBottle(bottle);
         this.level.endboss.bossBottleHit(bottle);
-        // this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+        this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+      } else {
+        this.level.enemies.forEach((enemy) => {
+          if (bottle.isColliding(enemy)) {
+            this.animateBrokenBottle(bottle);
+            enemy.isKilled();
+            this.addPointsToPlayerScore(enemy.scoreNameBottle);
+          }
+        });
       }
-        // else if (world.level.enemies.length === 0 && bottle.y === this.floorPosition(bottle)) {
-        //     this.animateBrokenBottle(bottle);
-        //     this.addPointsToPlayerScore(bottle.itemName);
-        //   }
-          // this.level.enemies.forEach((enemy) => {
-          //   if ()
-
-          // })
-      })
-    }
-  // checkBottleCollision(){
-  //    this.thrownBottles.forEach((bottle) => {
-  //       if (this.level.enemies.length === 0) {
-  //         bottle.hittetEnemy = true;
-  //         this.animateBrokenBottle(bottle);
-  //       } else {
-  //         if (bottle.isColliding(enemy)) {
-  //           bottle.hittetEnemy = true;
-  //           this.enemyBottleHit(enemy);
-  //           this.animateBrokenBottle(bottle);
-  //         }
-  //         if (
-  //           bottle.y == this.floorPosition(bottle) &&
-  //           bottle.hittetEnemy == false
-  //         ) {
-  //           bottle.hittetEnemy = true;
-  //           this.animateBrokenBottle(bottle);
-  //         }
-  //       }
-  //     });
-  //   });
- 
+    });
+  }
 
   animateBrokenBottle(bottle) {
+    bottle.alreadyHittet = true;
     this.clearBottleAnimation(bottle);
     this.bottleSplash(bottle);
   }
 
-  clearBottleAnimation(bottle) {{
+  clearBottleAnimation(bottle) {
+    {
       clearInterval(bottle.throwInAnimationInterval);
       clearInterval(bottle.gravityInterval);
       clearInterval(bottle.moveBottleInterval_x);
@@ -156,28 +143,10 @@ checkEnemyCollisions() {
     ) {
       this.character.hit();
     }
-        // this.clearBottleAnimation(bottle);
-        // this.bottleSplash(bottle);
-        // this.updatePlayerScore(enemy.enemyName);
-      }
-  
-
-  //           // stop old animation
-  //           // play animation
-  //           // count score
-  //           // resetAnimation
+  }
 
   floorPosition(obj) {
     return this.canvasHeight - obj.height - this.floorHeight;
-  }
-
-  enemyBottleHit(enemy) {
-    let enemyIndex = world.level.enemies.indexOf(enemy);
-    clearInterval(enemy.walkInterval);
-    clearInterval(enemy.walkAnimationInterval);
-    enemy.img.src = enemy.deadPic;
-    this.addPointsToPlayerScore(enemy.scoreNameBottle);
-    setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
 
   checkCoinCollision() {
@@ -207,7 +176,7 @@ checkEnemyCollisions() {
   }
 
   addPointsToPlayerScore(scoreTypeName) {
-    this.playerscore += this.pointTable[scoreTypeName].points
+    this.playerscore += this.pointTable[scoreTypeName].points;
   }
 
   moveBackground() {
