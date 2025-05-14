@@ -7,6 +7,7 @@ class Enemies extends MovableObject {
     hitEnemy = false;
     acceleration = 2;
     speedY = 0;
+    deadPic;
 
     constructor(){
         super();
@@ -24,5 +25,12 @@ class Enemies extends MovableObject {
         }, this.animationCycle);
       }
 
+    jumpKill(){
+      let index = world.level.enemies.indexOf(this);
+      this.img.src = this.deadPic;
+      clearInterval(this.walkAnimationInterval);
+      clearInterval(this.walkInterval);
+      setTimeout(() => world.level.enemies.splice(index, 1), 1000);
+    }
 
 }

@@ -50,41 +50,54 @@ class World {
       this.checkCoinCollision();
       this.checkBottleCollision();
       this.checkBossCollision();
-    }, 20);
+    }, 25);
   }
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+
+      if (this.character.isColliding(enemy) && this.character.collisionFromAbove(enemy)){
+        this.character.jumpKill = true;
+        enemy.jumpKill();
+          // this.character.jumpOnEnemy();
+          // get score
+          // display score
+        setTimeout(() => {this.character.jumpKill = false}, 1000);
+      } else {
+
+      if (this.character.isColliding(enemy) && this.character.jumpKill == false) {
         this.character.hit();
       }
 
       this.thrownBottles.forEach((bottle) => {
-              if (this.level.enemies == 0) {
-                this.animateBrokenBottle(bottle);
-      } else {
-
-        if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
-          this.enemyBottleHit(enemy, bottle);
+        if (this.level.enemies == 0) {
           this.animateBrokenBottle(bottle);
-          this.updatePlayerScore();
-        } 
-       if (
-          bottle.y == this.floorPosition(bottle) &&
-          bottle.hittetEnemy == false
-        ) {
-          this.animateBrokenBottle(bottle);
+        } else {
+          if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+            this.enemyBottleHit(enemy, bottle);
+            this.animateBrokenBottle(bottle);
+            this.updatePlayerScore();
+          }
+          if (
+            bottle.y == this.floorPosition(bottle) &&
+            bottle.hittetEnemy == false
+          ) {
+            this.animateBrokenBottle(bottle);
+          }
         }
-      }
-    });
-  });
-}
+      });
 
-animateBrokenBottle(bottle){
-  bottle.hittetEnemy = true;
-  this.clearBottleAnimation(bottle);
-  this.bottleSplash(bottle);
-}
+    }
+    });
+
+
+  }
+
+  animateBrokenBottle(bottle) {
+    bottle.hittetEnemy = true;
+    this.clearBottleAnimation(bottle);
+    this.bottleSplash(bottle);
+  }
 
   clearBottleAnimation(bottle) {
     if (bottle.y == bottle.floorPosition() || bottle.hittetEnemy === true) {
@@ -109,43 +122,41 @@ animateBrokenBottle(bottle){
     }, 100);
   }
 
-
-
   updatePlayerScore() {
     let ref = document.getElementById("player-score");
     ref.innerText = this.playerscore;
   }
 
   checkBossCollision() {
-  if (
-    this.character.isColliding(this.level.endboss) ||
-    this.character.isCollidingHead(this.level.endboss)
-  ) {
-    this.character.hit();
+    if (
+      this.character.isColliding(this.level.endboss) ||
+      this.character.isCollidingHead(this.level.endboss)
+    ) {
+      this.character.hit();
+    }
+    this.thrownBottles.forEach((bottle) => {
+      if (
+        (bottle.isColliding(this.level.endboss) ||
+          bottle.isCollidingHead(this.level.endboss)) &&
+        bottle.hittetEnemy == false
+      ) {
+        console.log("bottle hittet boss");
+        this.animateBrokenBottle(bottle);
+        this.level.endboss.bossBottleHit(bottle);
+        this.updateScorePointsBottleHit("bossBottleHit");
+        this.updatePlayerScore();
+
+        // this.clearBottleAnimation(bottle);
+        // this.bottleSplash(bottle);
+        // this.updatePlayerScore(enemy.enemyName);
+      }
+    });
   }
-  this.thrownBottles.forEach((bottle) => {
-    if ((bottle.isColliding(this.level.endboss) || bottle.isCollidingHead(this.level.endboss)) && bottle.hittetEnemy == false) {
-      console.log('bottle hittet boss');
-      this.animateBrokenBottle(bottle)
-      this.level.endboss.bossBottleHit(bottle);
-      this.updateScorePointsBottleHit('bossBottleHit');
-      this.updatePlayerScore();
-      
-      // this.clearBottleAnimation(bottle);
-      // this.bottleSplash(bottle);
-      // this.updatePlayerScore(enemy.enemyName);
-    }})
-  
-}
 
-
-
-
-//           // stop old animation
-//           // play animation
-//           // count score
-//           // resetAnimation
-
+  //           // stop old animation
+  //           // play animation
+  //           // count score
+  //           // resetAnimation
 
   floorPosition(obj) {
     return this.canvasHeight - obj.height - this.floorHeight;
@@ -160,8 +171,6 @@ animateBrokenBottle(bottle){
     this.updatePlayerScore();
     setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
-
-
 
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {

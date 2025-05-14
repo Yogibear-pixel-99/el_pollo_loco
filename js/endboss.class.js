@@ -209,9 +209,9 @@ WALKING_ANIMATION = [
     } else {
       this.stopAllBossAnimateIntervals();
       this.stopAllBossMovementIntervals();
+      this.isDead = true;
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       await this.playAnimationSpecificTime(3, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
-      this.isDead = true;
     }
   }
   }
