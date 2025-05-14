@@ -2,7 +2,8 @@ class Endboss extends Enemies {
   height = 300;
   width = 250;
   walkingSpeed = 2;
-  enemyName = "endboss";
+  scoreNameKilled = "endbossKilled";
+  scoreNameBottle = "endbossBottleHit";
   y = 480 - this.height - 58 + 15;
   x = 1400;
   hitEnemy = false;
@@ -191,33 +192,26 @@ WALKING_ANIMATION = [
     }, this.animationCycle);
   }
 
-
   async bossBottleHit() {
     if (this.isDead == true) {
-      this.stopAllBossAnimateIntervals();
-      this.stopAllBossMovementIntervals();
+      this.stopAllBossAnimations();
       this.img.src = this.BOSS_DEAD_ANIMATION[2];
     } else {
       this.energy -= 10;
       if (this.energy > 0) {
-      this.stopAllBossAnimateIntervals();
-      this.stopAllBossMovementIntervals();
+      this.stopAllBossAnimations();
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       this.animateWalk();
       this.moveEnemies();
       this.attack();
     } else {
-      this.stopAllBossAnimateIntervals();
-      this.stopAllBossMovementIntervals();
+      this.stopAllBossAnimations();
       this.isDead = true;
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       await this.playAnimationSpecificTime(3, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
     }
   }
   }
-      // this.updateScorePointsBottleHit(enemy.enemyName);
-      // this.updatePlayerScore();
-
 
   stopAllBossAnimateIntervals(){
           this.allAnimateIntervals.forEach((interval) => clearInterval(this[interval]));
@@ -225,6 +219,11 @@ WALKING_ANIMATION = [
 
   stopAllBossMovementIntervals(){
     this.allMovementIntervals.forEach((interval) => clearInterval(this[interval]));
+  }
+
+  stopAllBossAnimations(){
+    this.stopAllBossAnimateIntervals();
+    this.stopAllBossMovementIntervals();
   }
 
 

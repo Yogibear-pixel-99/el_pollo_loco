@@ -27,11 +27,11 @@ class Enemies extends MovableObject {
       }
 
     jumpKill(){
-      // let index = world.level.enemies.indexOf(this);
+      let index = world.level.enemies.indexOf(this);
       this.img.src = this.deadPic;
       clearInterval(this.walkAnimationInterval);
       clearInterval(this.walkInterval);
-      // setTimeout(() => world.level.enemies.splice(index, 1), 1000);
+      setTimeout(() => world.level.enemies.splice(index, 1), 700);
     }
 
     

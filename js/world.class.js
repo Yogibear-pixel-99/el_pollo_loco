@@ -53,73 +53,43 @@ class World {
     }, 25);
   }
 
-checkEnemyCollisions() {
-  this.level.enemies.forEach((enemy) => {
-    if (this.character.isColliding(enemy) && enemy.isDead === false) {
-      if (this.character.collisionFromAbove(enemy) && enemy.isDead === false) {
-        enemy.jumpKill();
-        this.character.jumpOnEnemy();
-        this.updateScoreJumpKill(enemy.enemyName);
-        enemy.isDead = true;
-        console.log('jumped on this:');
-      } else {
-        console.log('Not jumped on enemy');
-        this.character.hit();
-      }
-    }
-
-    this.thrownBottles.forEach((bottle) => {
-      if (this.level.enemies.length === 0) {
-        this.animateBrokenBottle(bottle);
-      } else {
-        if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
-          this.enemyBottleHit(enemy);
-          this.animateBrokenBottle(bottle);
-          this.updatePlayerScore();
-        }
+  checkEnemyCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy) && enemy.isDead === false) {
         if (
-          bottle.y == this.floorPosition(bottle) &&
-          bottle.hittetEnemy == false
+          this.character.collisionFromAbove(enemy) &&
+          enemy.isDead === false
         ) {
-          this.animateBrokenBottle(bottle);
+          enemy.jumpKill();
+          this.character.jumpOnEnemy();
+          this.addPointsToPlayerScore(enemy.scoreNameJump);
+          enemy.isDead = true;
+          console.log("jumped on this:");
+        } else {
+          console.log("Not jumped on enemy");
+          this.character.hit();
         }
       }
+
+      this.thrownBottles.forEach((bottle) => {
+        if (this.level.enemies.length === 0) {
+          this.animateBrokenBottle(bottle);
+        } else {
+          if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+            this.enemyBottleHit(enemy);
+            this.animateBrokenBottle(bottle);
+            
+          }
+          if (
+            bottle.y == this.floorPosition(bottle) &&
+            bottle.hittetEnemy == false
+          ) {
+            this.animateBrokenBottle(bottle);
+          }
+        }
+      });
     });
-
-  });
-}    
-  
-
-
-  //     if (this.character.isColliding(enemy) && this.character.collisionFromAbove(enemy)){
-  //       
-  //         
-  //         // get score
-  //         // display score
-  //     }
-  //     else if (this.character.isColliding(enemy) && !this.character.collisionFromAbove(enemy)) {
-  //       this.character.hit();
-  //     }
-  //     this.thrownBottles.forEach((bottle) => {
-  //       if (this.level.enemies.length === 0) {
-  //         this.animateBrokenBottle(bottle);
-  //       } else {
-  //         if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
-  //           this.enemyBottleHit(enemy);
-  //           this.animateBrokenBottle(bottle);
-  //           this.updatePlayerScore();
-  //         }
-  //         if (
-  //           bottle.y == this.floorPosition(bottle) &&
-  //           bottle.hittetEnemy == false
-  //         ) {
-  //           this.animateBrokenBottle(bottle);
-  //         }
-  //       }
-  //     });
-  //   }
-  //   );
-  // }
+  }
 
   animateBrokenBottle(bottle) {
     bottle.hittetEnemy = true;
@@ -154,7 +124,7 @@ checkEnemyCollisions() {
     setInterval(() => {
       let ref = document.getElementById("player-score");
       ref.innerText = this.playerscore;
-    }, 500)
+    }, 500);
   }
 
   checkBossCollision() {
@@ -173,7 +143,7 @@ checkEnemyCollisions() {
         console.log("bottle hittet boss");
         this.animateBrokenBottle(bottle);
         this.level.endboss.bossBottleHit(bottle);
-        this.updateScorePointsBottleHit("bossBottleHit");
+        this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
 
         // this.clearBottleAnimation(bottle);
         // this.bottleSplash(bottle);
@@ -196,7 +166,7 @@ checkEnemyCollisions() {
     clearInterval(enemy.walkInterval);
     clearInterval(enemy.walkAnimationInterval);
     enemy.img.src = enemy.deadPic;
-    this.updateScorePointsBottleHit(enemy.enemyName);
+    this.addPointsToPlayerScore(enemy.scoreNameBottle);
     setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
 
@@ -204,10 +174,11 @@ checkEnemyCollisions() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && coin.collected == false) {
         this.character.collectCoin();
-        coin.isCollected();
+        coin.isCollectedAnimation();
         coin.collected = true;
         this.coinbar.updateCoinBar();
-        if (this.character.coins === 1) {
+        updateP
+        if (this.character.coins === 10) {
           this.level.endboss.startFight();
         }
       }
@@ -224,35 +195,61 @@ checkEnemyCollisions() {
     });
   }
 
-  updateScorePointsBottleHit(enemyName) {
-    switch (enemyName) {
-      case "minichicken":
-        this.playerscore += this.pointTable.miniChickenBottleHit.points;
-        break;
-
-      case "chicken":
-        this.playerscore += this.pointTable.chickenBottleHit.points;
-        break;
-
-      case "bossBottleHit":
-        this.playerscore += this.pointTable.endbossHit.points;
-
-      default:
-        break;
-    }
+  addPointsToPlayerScore(scoreTypeName) {
+    this.playerscore += this.pointTable[scoreTypeName].points
   }
+  // updateScoreToPlayerScore(scoreTypeName) {
+  //   switch (scoreTypeName) {
+  //     case "miniChickenBottleHit":
+  //       this.playerscore += this.pointTable.miniChickenBottleHit.points;
+  //       break;
 
-  updateScoreJumpKill(enemyName) {
-    switch(enemyName) {
-      case 'minichicken':
-        this.playerscore += this.pointTable.miniChickenJump.points;
-        break;
+  //     case "miniChickenJump":
+  //       this.scoreTypeName += this.pointTable.chickenBottleHit.points;
+  //       break;
 
-      case 'chicken':
-        this.playerscore += this.pointTable.chickenJump.points;
-        break;
-    }
-  }
+  //     case "chickenBottle":
+  //       this.scoreTypeName += this.pointTable.chickenBottleHit.points;
+  //       break;
+  //     case "chickenBottle":
+  //       this.scoreTypeName += this.pointTable.chickenBottleHit.points;
+  //       break;
+
+  //     case "bossBottleHit":
+  //       this.scoreTypeName += this.pointTable.endbossHit.points;
+  //     break;
+  //     case "bossBottleHit":
+  //       this.scoreTypeName += this.pointTable.endbossHit.points;
+  //     break;
+  //     case "bossBottleHit":
+  //       this.scoreTypeName += this.pointTable.endbossHit.points;
+  //     break;
+  //     case "bossBottleHit":
+  //       this.scoreTypeName += this.pointTable.endbossHit.points;
+  //     break;
+  //     case "bossBottleHit":
+  //       this.scoreTypeName += this.pointTable.endbossHit.points;
+  //     break;
+  //     case "bossBottleHit":
+  //       this.scoreTypeName += this.pointTable.endbossHit.points;
+  //     break;
+
+  //     default:
+  //       break;
+  //   }
+  // }
+
+  // updateScoreJumpKill(enemyName) {
+  //   switch (enemyName) {
+  //     case "minichicken":
+  //       this.playerscore += this.pointTable.miniChickenJump.points;
+  //       break;
+
+  //     case "chicken":
+  //       this.playerscore += this.pointTable.chickenJump.points;
+  //       break;
+  //   }
+  // }
 
   // checkEnemyThrownBottleCollision() {
   // }

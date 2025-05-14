@@ -17,18 +17,11 @@ class DrawableObject {
   animationCycle = 120;
   otherDirection = false;
 
-  collisionFromAbove(obj){
+  collisionFromAbove(){
     return (
       this.speedY < 0
-    )
+    );
   }
-
-  // collisionFromAbove(obj){
-  //   return (
-  //     (this.y + this.height - this.offset.bottom <= 
-  //     obj.y + obj.offset.top + 2) && this.speedY < 0
-  //   )
-  // }
 
   isColliding(obj) {
     return (

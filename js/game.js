@@ -91,7 +91,7 @@ function renderGamePointsTable(){
 }
 
 const pointConfig = {
-  chickenJump: {
+  chickenJumpKill: {
     name: "chicken jump",
     points: 10,
   },
@@ -99,7 +99,7 @@ const pointConfig = {
     name: "chicken bottle hit",
     points: 20,
   },
-  miniChickenJump: {
+  miniChickenJumpKill: {
     name: "mini chicken jump",
     points: 30,
   },
@@ -119,7 +119,7 @@ const pointConfig = {
     name: "bottle missed",
     points: -30,
   },
-  endbossHit: {
+  endbossBottleHit: {
     name: "endboss hit",
     points: 50,
   },

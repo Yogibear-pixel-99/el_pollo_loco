@@ -56,7 +56,7 @@ class Coin extends DrawableObject {
     }, 50);
   }
 
-  isCollected() {
+  isCollectedAnimation() {
     setInterval(() => {
       this.y = this.y - 2;
     }, 20);
