@@ -193,6 +193,10 @@ class Character extends MovableObject {
     this.speedY = 22;
   }
 
+  jumpOnEnemy() {
+    this.speedY += 15;
+  }
+
   collectCoin() {
     this.coins++;
   }

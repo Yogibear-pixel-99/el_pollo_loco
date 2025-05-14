@@ -55,43 +55,46 @@ class World {
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-
-      if (this.character.isColliding(enemy) && this.character.collisionFromAbove(enemy)){
-        this.character.jumpKill = true;
-        enemy.jumpKill();
-          // this.character.jumpOnEnemy();
-          // get score
-          // display score
-        setTimeout(() => {this.character.jumpKill = false}, 1000);
-      } else {
-
-      if (this.character.isColliding(enemy) && this.character.jumpKill == false) {
-        this.character.hit();
-      }
-
-      this.thrownBottles.forEach((bottle) => {
-        if (this.level.enemies == 0) {
-          this.animateBrokenBottle(bottle);
+      if (this.character.isColliding(enemy)) {
+        if (this.character.collisionFromAbove(enemy)) {
+          console.log('jumped on this:');
         } else {
-          if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
-            this.enemyBottleHit(enemy, bottle);
-            this.animateBrokenBottle(bottle);
-            this.updatePlayerScore();
-          }
-          if (
-            bottle.y == this.floorPosition(bottle) &&
-            bottle.hittetEnemy == false
-          ) {
-            this.animateBrokenBottle(bottle);
-          }
+          console.log('Not jumped in enemy');
         }
-      });
-
-    }
-    });
+      }}
+    )}
 
 
-  }
+
+  //     if (this.character.isColliding(enemy) && this.character.collisionFromAbove(enemy)){
+  //       enemy.jumpKill();
+  //         this.character.jumpOnEnemy();
+  //         // get score
+  //         // display score
+  //     }
+  //     else if (this.character.isColliding(enemy) && !this.character.collisionFromAbove(enemy)) {
+  //       this.character.hit();
+  //     }
+  //     this.thrownBottles.forEach((bottle) => {
+  //       if (this.level.enemies.length === 0) {
+  //         this.animateBrokenBottle(bottle);
+  //       } else {
+  //         if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+  //           this.enemyBottleHit(enemy);
+  //           this.animateBrokenBottle(bottle);
+  //           this.updatePlayerScore();
+  //         }
+  //         if (
+  //           bottle.y == this.floorPosition(bottle) &&
+  //           bottle.hittetEnemy == false
+  //         ) {
+  //           this.animateBrokenBottle(bottle);
+  //         }
+  //       }
+  //     });
+  //   }
+  //   );
+  // }
 
   animateBrokenBottle(bottle) {
     bottle.hittetEnemy = true;

@@ -19,10 +19,26 @@ class DrawableObject {
 
   collisionFromAbove(obj){
     return (
-      (this.y + this.height - this.offset.bottom <= 
-      obj.y + obj.height - obj.offset.bottom) && this.speedY > 0
+      this.speedY < 0
     )
   }
+
+  collisionFromAbove(obj){
+    return (
+      (this.y + this.height - this.offset.bottom <= 
+      obj.y + obj.offset.top + 2) && this.speedY <= 0
+    )
+  }
+
+  
+    // isJumpingOnEnemy(enemy) {
+    //     return this.character.isAboveGround() &&
+    //         this.character.speedY < 0 &&
+    //         this.character.y + this.character.height > enemy.y &&
+    //         this.character.x + this.character.width > enemy.x &&
+    //         this.character.x < enemy.x + enemy.width;
+    // }
+
 
   isColliding(obj) {
     return (
