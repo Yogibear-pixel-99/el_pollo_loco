@@ -53,22 +53,42 @@ class World {
     }, 25);
   }
 
-  checkEnemyCollisions() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && enemy.isDead === false) {
-        if (this.character.collisionFromAbove(enemy) && enemy.isDead === false) {
-          enemy.jumpKill();
-          this.character.jumpOnEnemy();
-          this.updateScoreJumpKill(enemy.enemyName);
-          enemy.isDead = true;
-          console.log('jumped on this:');
-        } else {
-          console.log('Not jumped in enemy');
-          this.character.hit();
-        }
-      }}
-    )}
+checkEnemyCollisions() {
+  this.level.enemies.forEach((enemy) => {
+    if (this.character.isColliding(enemy) && enemy.isDead === false) {
+      if (this.character.collisionFromAbove(enemy) && enemy.isDead === false) {
+        enemy.jumpKill();
+        this.character.jumpOnEnemy();
+        this.updateScoreJumpKill(enemy.enemyName);
+        enemy.isDead = true;
+        console.log('jumped on this:');
+      } else {
+        console.log('Not jumped on enemy');
+        this.character.hit();
+      }
+    }
 
+    this.thrownBottles.forEach((bottle) => {
+      if (this.level.enemies.length === 0) {
+        this.animateBrokenBottle(bottle);
+      } else {
+        if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
+          this.enemyBottleHit(enemy);
+          this.animateBrokenBottle(bottle);
+          this.updatePlayerScore();
+        }
+        if (
+          bottle.y == this.floorPosition(bottle) &&
+          bottle.hittetEnemy == false
+        ) {
+          this.animateBrokenBottle(bottle);
+        }
+      }
+    });
+
+  });
+}    
+  
 
 
   //     if (this.character.isColliding(enemy) && this.character.collisionFromAbove(enemy)){
