@@ -56,15 +56,15 @@ class World {
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && enemy.isDead === false) {
+      if (this.character.isColliding(enemy) && enemy.killed === false) {
         if (
           this.character.collisionFromAbove(enemy) &&
-          enemy.isDead === false
+          enemy.killed === false
         ) {
-          enemy.jumpKill();
+          enemy.isKilled();
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
-          enemy.isDead = true;
+          enemy.killed = true;
         } else {
           this.character.hit();
         }
@@ -82,7 +82,7 @@ class World {
         this.addPointsToPlayerScore(bottle.itemName);
       } else if (
         (bottle.isColliding(this.level.endboss) ||
-          bottle.isCollidingHead(this.level.endboss)) &&
+        bottle.isCollidingHead(this.level.endboss)) &&
         bottle.alreadyHittet === false
       ) {
         this.animateBrokenBottle(bottle);
@@ -90,7 +90,7 @@ class World {
         this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
       } else {
         this.level.enemies.forEach((enemy) => {
-          if (bottle.isColliding(enemy)) {
+          if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
             enemy.isKilled();
             this.addPointsToPlayerScore(enemy.scoreNameBottle);

@@ -6,9 +6,7 @@ class Endboss extends Enemies {
   scoreNameBottle = "endbossBottleHit";
   y = 480 - this.height - 58 + 15;
   x = 400;
-  hitEnemy = false;
   energy = 20;
-  isDead = false;
   
   acceleration = 2.5;
 
@@ -87,6 +85,11 @@ WALKING_ANIMATION = [
   ];
 
 
+  isWalking = false;
+  isAttacking = false;
+  isHurt = false;
+  isDead = false;
+
 
   offset = {
     width: 250,
@@ -118,24 +121,28 @@ WALKING_ANIMATION = [
     this.applyGravity();
   }
 
-  startFight(){
+  startBossFight(){
     this.animateWalk();
     this.moveEnemies();
     this.attack();
   }
+
+
+
+
+
+
 
   async attack(){
     const rndTime = Math.floor(Math.random() * (5000 - 2500) + 2500);
     const rndNrForAttack = Math.round(Math.random() * (3 - 1) + 1);
     await this.timeDelay(rndTime);
         console.log(rndNrForAttack);
-        this.stopAllBossAnimateIntervals();
-        this.stopAllBossMovementIntervals();
+        stopAllBossAnimations()
         await this.playAnimationSpecificTime(1, this.ALERT_ANIMATION, 'alertAnimationInterval');
         await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_ALERT_ANIMATION, 'bossAttackAlertAnimationInterval');
         await this.randomAttackJumps(rndNrForAttack);
-        this.stopAllBossAnimateIntervals();
-        this.stopAllBossMovementIntervals();
+        stopAllBossAnimations()
         this.animateWalk();
         this.moveEnemies();
         this.attack();

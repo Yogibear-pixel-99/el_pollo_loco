@@ -4,11 +4,10 @@ class Enemies extends MovableObject {
     walkAnimationInterval;
     wasHittet = false;
     walkingSpeed;
-    hitEnemy = false;
     acceleration = 2;
     speedY = 0;
     deadPic;
-    isDead = false;
+    killed = false;
 
     constructor(){
         super();
