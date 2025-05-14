@@ -7,6 +7,7 @@ class Endboss extends Enemies {
   x = 1400;
   hitEnemy = false;
   energy = 20;
+  isDead = false;
   
   acceleration = 2.5;
 
@@ -125,24 +126,20 @@ WALKING_ANIMATION = [
   }
 
   async attack(){
-    const rndTime = Math.floor(Math.random() * (6000 - 3000) + 3000);
+    const rndTime = Math.floor(Math.random() * (5000 - 2500) + 2500);
     const rndNrForAttack = Math.round(Math.random() * (3 - 1) + 1);
     await this.timeDelay(rndTime);
-        // console.log(rndTime);
         console.log(rndNrForAttack);
         this.stopAllBossAnimateIntervals();
         this.stopAllBossMovementIntervals();
         await this.playAnimationSpecificTime(1, this.ALERT_ANIMATION, 'alertAnimationInterval');
         await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_ALERT_ANIMATION, 'bossAttackAlertAnimationInterval');
         await this.randomAttackJumps(rndNrForAttack);
+        this.stopAllBossAnimateIntervals();
+        this.stopAllBossMovementIntervals();
         this.animateWalk();
         this.moveEnemies();
-
         this.attack();
-        // stop x
-        // animate alert
-        // animate attack and x move on and speedY raise
-        // on ground stop short x and move on with walking
   }
 
   async randomAttackJumps(rounds){
@@ -153,7 +150,6 @@ WALKING_ANIMATION = [
            this.x = this.x - 7;
       }, 20);
       await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_JUMP_ANIMATION, 'bossAttackJumpAnimationInterval');
-      // await this.timeDelay(130);
       clearInterval(this.jumpAttackInterval);
     }
   }
@@ -197,8 +193,13 @@ WALKING_ANIMATION = [
 
 
   async bossBottleHit() {
-    if (this.energy > 0) {
+    if (this.isDead == true) {
+      this.stopAllBossAnimateIntervals();
+      this.stopAllBossMovementIntervals();
+      this.img.src = this.BOSS_DEAD_ANIMATION[2];
+    } else {
       this.energy -= 10;
+      if (this.energy > 0) {
       this.stopAllBossAnimateIntervals();
       this.stopAllBossMovementIntervals();
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
@@ -207,13 +208,16 @@ WALKING_ANIMATION = [
       this.attack();
     } else {
       this.stopAllBossAnimateIntervals();
+      this.stopAllBossMovementIntervals();
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       await this.playAnimationSpecificTime(3, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
-
-      // this.updateScorePointsBottleHit(enemy.enemyName);
-      // this.updatePlayerScore();
+      this.isDead = true;
     }
   }
+  }
+      // this.updateScorePointsBottleHit(enemy.enemyName);
+      // this.updatePlayerScore();
+
 
   stopAllBossAnimateIntervals(){
           this.allAnimateIntervals.forEach((interval) => clearInterval(this[interval]));
