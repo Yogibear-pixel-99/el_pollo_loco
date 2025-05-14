@@ -2,6 +2,7 @@ class Coin extends DrawableObject {
   height = 100;
   width = 100;
   collected = false;
+  itemName = 'collectCoin';
 
   offset = {
     top: 35,

@@ -11,7 +11,6 @@ class MovableObject extends DrawableObject {
     setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
-        console.log(this.speedY);
         this.speedY -= this.acceleration;
         this.world.character.world.keyboard.KEY_JUMP = false;
       } else {

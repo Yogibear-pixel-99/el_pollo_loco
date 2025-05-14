@@ -108,8 +108,6 @@ WALKING_ANIMATION = [
 
   constructor() {
     super();
-    console.log(this.x);
-    console.log(this.y);
     this.loadImage(this.ALERT_ANIMATION[0]);
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.loadImagesArray(this.ALERT_ANIMATION);

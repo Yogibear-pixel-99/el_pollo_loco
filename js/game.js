@@ -109,15 +109,15 @@ const pointConfig = {
   },
   collectCoin: {
     name: "collect coin",
-    points: 60,
+    points: 10,
   },
   collectBottle: {
     name: "collect bottle",
-    points: 20,
+    points: 5,
   },
   bottleMissed: {
     name: "bottle missed",
-    points: -30,
+    points: -50,
   },
   endbossBottleHit: {
     name: "endboss hit",

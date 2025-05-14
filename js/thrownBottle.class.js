@@ -8,7 +8,8 @@ class Thrownbottle extends MovableObject {
   gravityInterval;
   moveBottleInterval_x;
   throwInAnimationInterval;
-
+  itemName = 'bottleMissed';
+  pointsCount = 0;
   offset = {
     top: 20,
     right: 20,
