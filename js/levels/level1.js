@@ -21,21 +21,21 @@ const level1 = new Level(
   ],
 
     [
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle()
+      // new Bottle(),
+      // new Bottle(),
+      // new Bottle(),
+      // new Bottle(),
+      // new Bottle(),
+      // new Bottle(),
+      // new Bottle()
     ],
 
   [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new Minichicken(),
-    new Minichicken()
+    // new Chicken(),
+    // new Chicken(),
+    // new Chicken(),
+    // new Minichicken(),
+    // new Minichicken()
   ],
 
   new Endboss(),

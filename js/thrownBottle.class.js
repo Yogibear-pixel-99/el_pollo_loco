@@ -4,7 +4,7 @@ class Thrownbottle extends MovableObject {
   speedY = 20;
   throwSpeedX = 3.7;
   walkingSpeed = this.walkingSpeed;
-  hittetEnemy = false;
+  alreadyHittet = false;
   gravityInterval;
   moveBottleInterval_x;
   throwInAnimationInterval;

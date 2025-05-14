@@ -50,13 +50,17 @@ class World {
       this.checkCoinCollision();
       this.checkBottleCollision();
       this.checkBossCollision();
+      this.checkThrownBottleCollision();
     }, 25);
   }
 
-  checkEnemyCollisions() {
+checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && enemy.isDead === false) {
-        if (this.character.collisionFromAbove(enemy) && enemy.isDead === false) {
+        if (
+          this.character.collisionFromAbove(enemy) &&
+          enemy.isDead === false
+        ) {
           enemy.jumpKill();
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
@@ -64,43 +68,59 @@ class World {
         } else {
           this.character.hit();
         }
-      }
+      }});
+    }
 
+  checkThrownBottleCollision(){
       this.thrownBottles.forEach((bottle) => {
-        if (this.level.enemies.length === 0) {
-          this.animateBrokenBottle(bottle);
-          if (bottle.pointsCount < 1) {
-            this.addPointsToPlayerScore(bottle.itemName);
-            bottle.pointsCount++;
-          }
-        } else {
-          if (bottle.isColliding(enemy) && bottle.hittetEnemy == false) {
-            this.enemyBottleHit(enemy);
-            this.animateBrokenBottle(bottle);
-            bottle.hittetEnemy = true;
-          }
-          if (
-            bottle.y == this.floorPosition(bottle) &&
-            bottle.hittetEnemy == false
-          ) {
-            this.animateBrokenBottle(bottle);
-            if (bottle.pointsCount < 1) {
-              this.addPointsToPlayerScore(bottle.itemName);
-              bottle.pointsCount++;
-            }
-          }
-        }
-      });
-    });
-  }
+        if (bottle.y === this.floorPosition(bottle) && bottle.alreadyHittet === false) {
+          bottle.alreadyHittet = true;
+             this.animateBrokenBottle(bottle);
+        } else if ((bottle.isColliding(this.level.endboss) || bottle.isCollidingHead(this.level.endboss)) && bottle.alreadyHittet === false) {
+        bottle.alreadyHittet = true;
+        this.animateBrokenBottle(bottle);
+        this.level.endboss.bossBottleHit(bottle);
+        // this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+      }
+        // else if (world.level.enemies.length === 0 && bottle.y === this.floorPosition(bottle)) {
+        //     this.animateBrokenBottle(bottle);
+        //     this.addPointsToPlayerScore(bottle.itemName);
+        //   }
+          // this.level.enemies.forEach((enemy) => {
+          //   if ()
+
+          // })
+      })
+    }
+  // checkBottleCollision(){
+  //    this.thrownBottles.forEach((bottle) => {
+  //       if (this.level.enemies.length === 0) {
+  //         bottle.hittetEnemy = true;
+  //         this.animateBrokenBottle(bottle);
+  //       } else {
+  //         if (bottle.isColliding(enemy)) {
+  //           bottle.hittetEnemy = true;
+  //           this.enemyBottleHit(enemy);
+  //           this.animateBrokenBottle(bottle);
+  //         }
+  //         if (
+  //           bottle.y == this.floorPosition(bottle) &&
+  //           bottle.hittetEnemy == false
+  //         ) {
+  //           bottle.hittetEnemy = true;
+  //           this.animateBrokenBottle(bottle);
+  //         }
+  //       }
+  //     });
+  //   });
+ 
 
   animateBrokenBottle(bottle) {
     this.clearBottleAnimation(bottle);
     this.bottleSplash(bottle);
   }
 
-  clearBottleAnimation(bottle) {
-    if (bottle.y == bottle.floorPosition() || bottle.hittetEnemy === true) {
+  clearBottleAnimation(bottle) {{
       clearInterval(bottle.throwInAnimationInterval);
       clearInterval(bottle.gravityInterval);
       clearInterval(bottle.moveBottleInterval_x);
@@ -136,22 +156,11 @@ class World {
     ) {
       this.character.hit();
     }
-    this.thrownBottles.forEach((bottle) => {
-      if (
-        (bottle.isColliding(this.level.endboss) ||
-          bottle.isCollidingHead(this.level.endboss)) &&
-        bottle.hittetEnemy == false
-      ) {
-        this.animateBrokenBottle(bottle);
-        this.level.endboss.bossBottleHit(bottle);
-        this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
-
         // this.clearBottleAnimation(bottle);
         // this.bottleSplash(bottle);
         // this.updatePlayerScore(enemy.enemyName);
       }
-    });
-  }
+  
 
   //           // stop old animation
   //           // play animation
@@ -198,7 +207,7 @@ class World {
   }
 
   addPointsToPlayerScore(scoreTypeName) {
-    this.playerscore += this.pointTable[scoreTypeName].points;
+    this.playerscore += this.pointTable[scoreTypeName].points
   }
 
   moveBackground() {
