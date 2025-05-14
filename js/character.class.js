@@ -83,7 +83,7 @@ class Character extends MovableObject {
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
-    this.y = this.floorPosition() - 150;
+    this.y = this.floorPosition();
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.loadImagesArray(this.JUMPING_ANIMATION);
     this.loadImagesArray(this.IDLE_ANIMATION);
@@ -194,7 +194,7 @@ class Character extends MovableObject {
   }
 
   jumpOnEnemy() {
-    this.speedY += 15;
+    this.speedY = 15;
   }
 
   collectCoin() {

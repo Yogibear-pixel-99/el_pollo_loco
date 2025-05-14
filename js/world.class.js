@@ -55,11 +55,16 @@ class World {
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        if (this.character.collisionFromAbove(enemy)) {
+      if (this.character.isColliding(enemy) && enemy.isDead === false) {
+        if (this.character.collisionFromAbove(enemy) && enemy.isDead === false) {
+          enemy.jumpKill();
+          this.character.jumpOnEnemy();
+          this.updateScoreJumpKill(enemy.enemyName);
+          enemy.isDead = true;
           console.log('jumped on this:');
         } else {
           console.log('Not jumped in enemy');
+          this.character.hit();
         }
       }}
     )}
@@ -67,8 +72,8 @@ class World {
 
 
   //     if (this.character.isColliding(enemy) && this.character.collisionFromAbove(enemy)){
-  //       enemy.jumpKill();
-  //         this.character.jumpOnEnemy();
+  //       
+  //         
   //         // get score
   //         // display score
   //     }
@@ -126,8 +131,10 @@ class World {
   }
 
   updatePlayerScore() {
-    let ref = document.getElementById("player-score");
-    ref.innerText = this.playerscore;
+    setInterval(() => {
+      let ref = document.getElementById("player-score");
+      ref.innerText = this.playerscore;
+    }, 500)
   }
 
   checkBossCollision() {
@@ -147,7 +154,6 @@ class World {
         this.animateBrokenBottle(bottle);
         this.level.endboss.bossBottleHit(bottle);
         this.updateScorePointsBottleHit("bossBottleHit");
-        this.updatePlayerScore();
 
         // this.clearBottleAnimation(bottle);
         // this.bottleSplash(bottle);
@@ -171,7 +177,6 @@ class World {
     clearInterval(enemy.walkAnimationInterval);
     enemy.img.src = enemy.deadPic;
     this.updateScorePointsBottleHit(enemy.enemyName);
-    this.updatePlayerScore();
     setTimeout(() => world.level.enemies.splice(enemyIndex, 1), 1800);
   }
 
@@ -213,6 +218,18 @@ class World {
         this.playerscore += this.pointTable.endbossHit.points;
 
       default:
+        break;
+    }
+  }
+
+  updateScoreJumpKill(enemyName) {
+    switch(enemyName) {
+      case 'minichicken':
+        this.playerscore += this.pointTable.miniChickenJump.points;
+        break;
+
+      case 'chicken':
+        this.playerscore += this.pointTable.chickenJump.points;
         break;
     }
   }
