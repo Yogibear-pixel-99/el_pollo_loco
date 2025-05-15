@@ -4,25 +4,57 @@ html {
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: mansalva;
+    src: url("./fonts/Mansalva/Mansalva-Regular.ttf");
+}
+
+@font-face {
+    font-family: agudisplay;
+    src: url("./fonts/Agu_Display/AguDisplay-Regular-VariableFont_MORF.ttf");
+}
+
 body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100dvw;
     height: 100dvh;
     overflow: hidden;
+    font-family: agudisplay;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-background-img {
+    position: absolute;
+    inset: 0;
+    background-image: url("./img/5_background/main-bg.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    filter: blur(3px);
+    z-index: -10;
 }
 
 canvas {
-    background-color: black;
+    background-image: url("img/9_intro_outro_screens/start/startscreen_2.png");
+    background-size: 100% 100%;
+    background-position: center;
     border-radius: 20px;
     /* background: linear-gradient(rgb(255, 192, 119), rgb(106, 188, 255)); */
 }
 
 h1 {
     text-align: center;
-    height: 60px;
+    height: 90px;
     font-size: 60px;
 }
 
@@ -34,15 +66,16 @@ h2 {
 
 .left-content,
 .right-content {
-    background-color: rgb(233, 180, 33);
     border-radius: 20px;
     flex: 1;
+    background-color: rgba(233, 180, 33, 0.6);
     padding: 24px;
     margin: 0 20px;
     font-size: 24px;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    overflow: hidden;
 }
 
 .score-wrapper {
@@ -61,7 +94,7 @@ h2 {
 }
 
 .player-score {
-    font-size: 28px;
+    font-size: 40px;
     text-align: center;
 }
 
@@ -71,9 +104,28 @@ h2 {
 }
 
 .item-name {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .item-points {
-    font-size: 22px;
+    font-size: 28px;
+    padding-left: 14px;
 }
+
+.settings-wrapper {
+    border-radius: 8px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin:  0 140px 40px;
+    padding: 20px;
+    background-color: blanchedalmond;
+    font-size: 28px;
+    display: flex;
+    justify-content: space-around;
+    font-family: mansalva;
+}
+
+
+

@@ -25,8 +25,12 @@ const MAIN_URL =
 
 function init() {
   canvas = document.getElementById("gamecanvas");
-  world = new World(canvas, keyboard, pointConfig, canvasHeight, canvasWidth, floorHeight);
   getHighscores();
+}
+
+function startNormalGame() {
+  canvas = document.getElementById("gamecanvas");
+  world = new World(canvas, keyboard, pointConfig, canvasHeight, canvasWidth, floorHeight);
 }
 
 function getHighscores() {
