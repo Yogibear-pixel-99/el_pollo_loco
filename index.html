@@ -11,7 +11,8 @@
       href="img/6_salsa_bottle/salsa_bottle.png" />
 
     <link rel="stylesheet" href="styles.css" />
-    
+
+    <script src="./js/templates.js"></script>
     <script src="./js/world.class.js"></script>
     <script src="./js/drawableObject.class.js"></script>
     <script src="./js/moveableObject.class.js"></script>
@@ -36,41 +37,65 @@
   </head>
   <body onload="init()">
     <main class="main-container">
-    <div class="left-content">
-      <h2>Highscore</h2>
-      <div class="highscores" id="highscore"></div>
-    </div>
-    <div class="game-wrapper">
-      <h1>Normal mode</h1>
-      <canvas id="gamecanvas" width="720" height="480"></canvas>
-      <h1></h1>
-    </div>
-    <div class="right-content">
-      <h2>PlayerName</h2>
-      <div class="player-score" id="player-score">000</div>
-      <div class="points-table" id="game-points-table">
+      <div class="left-content">
+        <h2>Highscore</h2>
+        <div class="highscores" id="highscore"></div>
       </div>
-    </div>
+      <div class="game-wrapper">
+        <h1>Normal mode</h1>
+        <section class="canvas-wrapper">
+          <canvas id="gamecanvas" width="720" height="480"></canvas>
+          <section id="canvas-option-container" class="canvas-menu-display d-none">
+            
+          </section>
+        </section>
+        <h1></h1>
+      </div>
+      <div class="right-content">
+        <h2>PlayerName</h2>
+        <div class="player-score" id="player-score">000</div>
+        <div class="points-table" id="game-points-table"></div>
+      </div>
     </main>
     <footer class="settings-wrapper">
-      <div class="opt-wrapper">
-        <img src="" alt="" class="opt-img">
+      <div class="opt-wrapper" onclick="toggleStory()">
+        <img
+          class="settings-img"
+          src="./img/book-4109187_640.png"
+          alt="story-icon"
+          class="opt-img" />
         <span class="opt-text">Story</span>
       </div>
       <div class="opt-wrapper">
-        <img src="" alt="" class="opt-img">
+        <img
+          class="settings-img"
+          src="./img/controller-3364881_640.png"
+          alt="controls-icon"
+          class="opt-img" />
         <span class="opt-text">Controls</span>
       </div>
       <div class="opt-wrapper">
-        <img src="" alt="" class="opt-img">
+        <img
+          class="settings-img"
+          src="./img/rooster-47475_640.png"
+          alt="rooster-icon"
+          class="opt-img" />
         <span class="opt-text">Gamemode</span>
       </div>
       <div class="opt-wrapper">
-        <img src="" alt="" class="opt-img">
+        <img
+          class="settings-img"
+          src="./img/guitar-7288462_640.png"
+          alt="sound-icon"
+          class="opt-img" />
         <span class="opt-text">Sound on/off</span>
       </div>
       <div class="opt-wrapper">
-        <img src="" alt="" class="opt-img">
+        <img
+          class="settings-img"
+          src="./img/basket-1296634_640.png"
+          alt="basket-icon"
+          class="opt-img" />
         <span class="opt-text">Fullscreen</span>
       </div>
     </footer>

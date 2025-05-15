@@ -23,6 +23,7 @@ body {
     height: 100dvh;
     overflow: hidden;
     font-family: agudisplay;
+    cursor: url('./img/cursor.png'), auto;
 }
 
 .main-container {
@@ -44,12 +45,25 @@ body {
     z-index: -10;
 }
 
+.canvas-wrapper {
+    position: relative;
+}
+
 canvas {
     background-image: url("img/9_intro_outro_screens/start/startscreen_2.png");
     background-size: 100% 100%;
     background-position: center;
     border-radius: 20px;
+    z-index: 100;
     /* background: linear-gradient(rgb(255, 192, 119), rgb(106, 188, 255)); */
+}
+
+.canvas-menu-display {
+    position: absolute;
+    padding: 20px;
+    inset: 0;
+    z-index: 150;
+    border-radius: 20px;
 }
 
 h1 {
@@ -62,6 +76,10 @@ h2 {
     font-size: 40px;
     text-align: center;
     margin: 0;
+}
+
+.d-none {
+    display: none !important;
 }
 
 .left-content,
@@ -114,18 +132,50 @@ h2 {
 
 .settings-wrapper {
     border-radius: 8px;
-    position: absolute;
+    width: 80%;
+    /* position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0; */
     margin:  0 140px 40px;
-    padding: 20px;
+    padding: 10px;
     background-color: blanchedalmond;
     font-size: 28px;
     display: flex;
     justify-content: space-around;
     font-family: mansalva;
+    /* gap: 80px; */
 }
 
+.settings-wrapper img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
 
+.opt-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
 
+.opt-wrapper:hover .settings-img{
+    transform: translateY(40px);
+    transition: transform 300ms;
+}
+
+.opt-wrapper:hover .opt-text{
+      transform: translateY(-40px);
+    transition: transform 300ms;
+}
+
+.story-text {
+    position: absolute;
+    inset: 0;
+    font-family: mansalva;
+    font-size: 28px;
+    background-color: beige;
+    border-radius: 20px;;
+}

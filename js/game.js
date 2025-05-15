@@ -206,6 +206,18 @@ window.addEventListener("keyup", (event) => {
 });
 
 
+document.addEventListener('DOMContentLoaded', () => {
+document.querySelectorAll('.opt-wrapper').forEach((element) => {
+  element.addEventListener('mousedown', () => {
+    element.style.cursor = "url('./img/cursor-active.png'), auto";
+  });
+  element.addEventListener('mouseup', () => {
+    element.style.cursor = "url('./img/cursor.png'), auto";
+  });
+});
+})
+
+
 
 
 // throw bottel left, animation should turn.
@@ -234,3 +246,6 @@ window.addEventListener("keyup", (event) => {
 // call boss collition interval at pull
 
 // enemy bottle hit auslagern in enemies von world
+
+// BACKGROUND TO THE SETTINGS MENUS
+
