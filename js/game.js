@@ -206,16 +206,22 @@ window.addEventListener("keyup", (event) => {
 });
 
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-document.querySelectorAll('.opt-wrapper').forEach((element) => {
-  element.addEventListener('mousedown', () => {
-    element.style.cursor = "url('./img/cursor-active.png'), auto";
-  });
-  element.addEventListener('mouseup', () => {
-    element.style.cursor = "url('./img/cursor.png'), auto";
-  });
-});
-})
+
+document.addEventListener('mousedown', () => {
+    document.body.style.cursor = "url('./img/cursor-active.png'), auto";
+  })
+document.addEventListener('mouseup', () => {
+    document.body.style.cursor = "url('./img/cursor.png'), auto";
+
+
+  })});
+
+
 
 
 

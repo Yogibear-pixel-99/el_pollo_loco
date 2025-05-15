@@ -14,6 +14,10 @@ html {
     src: url("./fonts/Agu_Display/AguDisplay-Regular-VariableFont_MORF.ttf");
 }
 
+:root {
+    --score-bg: rgba(233, 180, 33, 0.6);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,12 @@ body {
     overflow: hidden;
     font-family: agudisplay;
     cursor: url('./img/cursor.png'), auto;
+}
+
+.flex-ctr-spbtw {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .main-container {
@@ -38,6 +48,7 @@ body {
 .main-background-img {
     position: absolute;
     inset: 0;
+    /* background-image: url("./img/5_background/main-bg-2.jpg"); */
     background-image: url("./img/5_background/main-bg.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -86,7 +97,7 @@ h2 {
 .right-content {
     border-radius: 20px;
     flex: 1;
-    background-color: rgba(233, 180, 33, 0.6);
+    background-color: var(--score-bg);
     padding: 24px;
     margin: 0 20px;
     font-size: 24px;
@@ -107,8 +118,8 @@ h2 {
     flex-direction: column;
 }
 
-.player-name {
-    font-size: 32px;
+.highscore-player-name {
+    font-size: 26px;
 }
 
 .player-score {
@@ -172,10 +183,83 @@ h2 {
 }
 
 .story-text {
+    padding: 20px;
     position: absolute;
     inset: 0;
     font-family: mansalva;
     font-size: 28px;
     background-color: beige;
-    border-radius: 20px;;
+    border-radius: 20px;
 }
+
+.story-text p {
+    margin: 16px;
+}
+
+.story-text p:first-child {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.story-text p:last-child {
+    margin-bottom: 0;
+}
+
+.controls-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    position: absolute;
+    inset: 0;
+    font-family: mansalva;
+    font-size: 28px;
+    background-color: beige;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls-settings table {
+    padding: 16px;
+    width: 100%;
+}
+.controls-settings th {
+    text-align: left;
+    padding-bottom: 20px;
+    font-size: 32px;
+}
+
+.controls-header {
+    justify-self: center;
+}
+
+.settings-close-button {
+        position: absolute;
+    right: 20px;
+    top: 20px;
+    margin: 0 0 0 auto;
+    height: 28px;
+    width: 28px;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.settings-close-button:hover{
+    background-color: var(--score-bg);
+}
+
+.player-name {
+    align-self: center;
+    text-align: center;
+    width: 200px;
+    background-color: var(--score-bg);
+    outline: none;
+    border: none;
+}
+
+.player-name::placeholder {
+
+}
+

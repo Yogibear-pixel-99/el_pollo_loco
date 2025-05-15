@@ -1,47 +1,60 @@
-
-
-function getStoryTemp(){
-    return `<div class="story-text">
-    Welcome to the world of Pepe. Last night, there was a crumbling
-            voice in the air. On the next morning, pepe woke up and
-            heard...nothing. The villagers are all gone. but in the distance a
-            chicken could be heard clucking. Pepe now moves on to that chicken
-            sound... El pollo loco is a 2D jump n run platformer. Collect ten
-            coins to trigger the bossfight. Kill the boss to finish the game.
-            </div>`
+/**
+ * Creates the HTMLElement for the story.
+ * 
+ * @returns - The story template.
+ */
+function getStoryTemp() {
+  return `<div class="story-text">
+                <div class="flex-ctr-spbtw">
+                <p>Welcome to the world of Pepe!</p>
+                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                </div>
+                <p>Last night, there was a crumbling
+                 voice in the air. The next morning,
+                  Pepe woke up and heard... nothing.
+                   The villagers were all gone. But
+                    in the distance, a chicken could
+                     be heard clucking. Pepe now moves
+                      toward the sound of that chicken...
+                </p>
+                <p>
+El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the boss fight. Defeat the boss to finish the game.
+            </p></div>`;
 }
-
-
-function getControlsTemp(){
-
-}
-
 
 
 /**
- * This function hides a html container. It adds the class d-none.
- *
- * @param {string} containerId - The id of the HTML container.
+ * Creates the HTMLElement for the controls.
+ * 
+ * @returns - The controls template.
  */
-function toggleSingleContainerById(containerId) {
-  let content = document.getElementById(containerId);
-  content.classList.toggle("d-none");
-}
-
-/**
- * Gets a HTML template and renders it in an HTML element.
- *
- * @param {string} id - The id of the HTML element to render the template.
- * @param {HTMLElement} template - The HTML template.
- */
-function getTemplateToContent(id, template) {
-  let ref = document.getElementById(id);
-  ref.innerHTML = template;
-}
-
-
-
-function toggleStory(){
-    toggleSingleContainerById('canvas-option-container');
-    getTemplateToContent('canvas-option-container', getStoryTemp());
+function getControlsTemp() {
+  return `<div class="controls-settings">
+            <div class="flex-ctr-spbtw">
+                <h2 class="controls-header">Control Pepe</h2>
+                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                </div>
+                    <table>
+                        <tr>
+                            <th>Action</th>
+                            <th>Key</th>
+                        </tr>
+                        <tr>
+                            <td>Run left</td>
+                            <td>Arrow left</td>
+                        </tr>
+                        <tr>
+                            <td>Run right</td>
+                            <td>Arrow right</td>
+                        </tr>
+                        <tr>
+                            <td>Jump</td>
+                            <td>Space</td>
+                        </tr>
+                        <tr>
+                            <td>Shot bottle</td>
+                            <td>Strg/Ctrl or D</td>
+                        </tr>
+                    </table>
+                </div>`;
 }

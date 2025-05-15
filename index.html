@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles.css" />
 
     <script src="./js/templates.js"></script>
+    <script src="./js/settings.js"></script>
     <script src="./js/world.class.js"></script>
     <script src="./js/drawableObject.class.js"></script>
     <script src="./js/moveableObject.class.js"></script>
@@ -52,7 +53,7 @@
         <h1></h1>
       </div>
       <div class="right-content">
-        <h2>PlayerName</h2>
+        <input class="player-name" maxlength="20" id="player-name-input" type="text" oninput="returnOnlyLettersAndNumbers(this)">
         <div class="player-score" id="player-score">000</div>
         <div class="points-table" id="game-points-table"></div>
       </div>
@@ -66,7 +67,7 @@
           class="opt-img" />
         <span class="opt-text">Story</span>
       </div>
-      <div class="opt-wrapper">
+      <div class="opt-wrapper" onclick="toggleControls()">
         <img
           class="settings-img"
           src="./img/controller-3364881_640.png"
