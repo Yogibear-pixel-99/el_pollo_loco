@@ -69,20 +69,7 @@ function renderHighscore() {
   ref.innerHTML = data;
 }
 
-function highscoreTemp(element) {
-  return `<div class="score-wrapper">
-            <div class="player-name">${element.name}</div>
-            <div class="score">${element.score}</div>          
-          </div>`;
-}
 
-function getPointsTemp(element) {
-  return `<div class="item-point-wrapper">
-            <span class="item-name">${element[1].name}</span>
-            <span class="item-points" id="${element[0]}">${element[1].points}</span>
-          </div>
-  `;
-}
 
 
 function renderGamePointsTable(){
