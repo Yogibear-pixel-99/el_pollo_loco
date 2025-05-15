@@ -142,7 +142,7 @@ WALKING_ANIMATION = [
         await this.playAnimationSpecificTime(1, this.ALERT_ANIMATION, 'alertAnimationInterval');
         await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_ALERT_ANIMATION, 'bossAttackAlertAnimationInterval');
         await this.randomAttackJumps(rndNrForAttack);
-        stopAllBossAnimations()
+        this.stopAllBossAnimations()
         this.animateWalk();
         this.moveEnemies();
         this.attack();
@@ -230,30 +230,4 @@ WALKING_ANIMATION = [
     this.stopAllBossAnimateIntervals();
     this.stopAllBossMovementIntervals();
   }
-
-
-
-  async playAnimationSpecificTime(times, imgArray, intervalName) {
-    return new Promise((resolve) => { 
-    let loop = 0;
-    let count = 0;
-  
-    this[intervalName] = setInterval(() => {
-      if (count < imgArray.length) {
-        let path = imgArray[count];
-        this.img = this.animatedImages[path];
-        count++;
-      } else {
-        count = 0;
-        loop++;
-  
-        if (loop >= times) {
-          clearInterval(this[intervalName]);
-          resolve();
-        }
-      }
-    }, 100);
-  });
-}
-
 }

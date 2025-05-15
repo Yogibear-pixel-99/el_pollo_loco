@@ -158,7 +158,7 @@ class World {
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
         if (this.character.coins === 10) {
-          this.level.endboss.startFight();
+          this.level.endboss.startBossFight();
         }
       }
     });
