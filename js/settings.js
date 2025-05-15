@@ -63,3 +63,13 @@ function returnOnlyLettersAndNumbers (id){
         userInput = userInput.replace(regex, '');
     id.value = userInput;
 }
+
+function unblurInput(event, element) {
+    if (event.key === 'Enter') {
+        element.blur();
+    }
+}
+
+function trimPlayerName(element) {
+    element.value = element.value.trim();
+}
