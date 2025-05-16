@@ -58,7 +58,7 @@ function toggleControls() {
 
 
 function returnOnlyLettersAndNumbers (id){
-    let regex = /[^A-Za-z0-9\s+]/g;
+    let regex = /[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfA-Za-z0-9\s+]/g;
     let userInput = id.value;
         userInput = userInput.replace(regex, '');
     id.value = userInput;
