@@ -18,6 +18,11 @@ class Bottle extends DrawableObject {
     this.loadImage(this.getBottleImg());
   }
 
+  /**
+   * Chooses with a random number, the bottle img.
+   * 
+   * @returns - The img src of the bottle to collect.
+   */
   getBottleImg() {
     let value = Math.random();
     let src = "";
@@ -31,8 +36,13 @@ class Bottle extends DrawableObject {
     return src;
   }
 
+  /**
+   * Calculates a new x position, depending on the canvas width.
+   * 
+   * @returns 
+   */
   calculateNewPosition() {
-    return Math.random() * this.canvasWidth * 3;
+    return Math.random() * canvasWidth * 5;
   }
 
   isCollected() {

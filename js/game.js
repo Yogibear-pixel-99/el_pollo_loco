@@ -321,30 +321,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// throw bottel left, animation should turn.
-// jump on chicken
-// kill chicken
-// score +
-// jump a bit y -
 
-// collect coins should score
-// endboss
-// hit endboss
-// score +
-// live -
-// trigger animation
-// kill endboss
-// score +
+
+
+
+
+// healthbar boss
+// if pepe is killed, deactivate
+  // bottlethrow
+  // pepemovement
+  // chickenmovement
+  // bosmovement
+
+// kill chicken, they dont disappear correct
+// chars should not move until the game starts
+// game over screen
+  // lost
+  // win
+  // update scoreboard after end game
+  // restart button or display menu
+// endboss - should move to pepe if jumps over him
 // trigger final screen
-
-// sounds for pepe
-
-// level logic for bottles, chicken and boss
-
-// adjust throw width
-
-// call boss collition interval at pull
-
+// soundeffects
+// music
 // enemy bottle hit auslagern in enemies von world
+// chickenrush
 
-// BACKGROUND TO THE SETTINGS MENUS
+// update canvasWidth and canvasheight to global variable
+  // change this in level for coins and emenies and backgrounds
+
+// splice more than 30 entries
+
+
+// start game
+// game end
+// save name and score in object
+// put data to api
+// render new highscoretable from api inkl sort etc.
+
+// responsive for all screens
+// turn to landscape if in portrait mode
+// mobile controlling options
+
+// documenatation
+
+
+

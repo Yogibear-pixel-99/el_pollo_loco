@@ -47,13 +47,3 @@ function hideSingleContainerById(containerId) {
 }
 
 
-// splice more than 30 entries
-// if data - sort highscores to top 30
-// make highscore scrollable
-// display pattern or render entries
-
-// start game
-// game end
-// save name and score in object
-// put data to api
-// render new highscoretable from api inkl sort etc.
