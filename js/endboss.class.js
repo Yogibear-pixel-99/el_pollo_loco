@@ -6,7 +6,7 @@ class Endboss extends Enemies {
   scoreNameBottle = "endbossBottleHit";
   y = 480 - this.height - 58 + 15;
   x = 719 * 5;
-  energy = 20;
+  energy = 100;
   
   acceleration = 2.5;
 

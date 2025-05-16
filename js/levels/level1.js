@@ -1,5 +1,7 @@
 
 
+let rndXPosition = Math.random() * canvasWidth
+
 const level1 = new Level(
 
 
@@ -13,8 +15,8 @@ const level1 = new Level(
     new Coin(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
     new Coin(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
     new Coin(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 4) - (720 * 4)) + 720 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 4) - (720 * 4)) + 720 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
 
   ],
 
@@ -29,11 +31,21 @@ const level1 = new Level(
     ],
 
   [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new Minichicken(),
-    new Minichicken()
+    new Chicken(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0),
+    new Chicken(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0),
+    new Chicken(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1),
+    new Chicken(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1),
+    new Chicken(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2),
+    new Chicken(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2),
+    new Chicken(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3),
+    new Chicken(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3),
+    new Chicken(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4),
+    new Chicken(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4),
+    new Minichicken(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0),
+    new Minichicken(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1),
+    new Minichicken(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2),
+    new Minichicken(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3),
+    new Minichicken(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4),
   ],
 
   new Endboss(),

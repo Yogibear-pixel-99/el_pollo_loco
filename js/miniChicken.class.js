@@ -21,11 +21,14 @@ class Minichicken extends Enemies {
     "./img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
   ];
 
-  constructor() {
+  constructor(x) {
     super();
     this.loadImage("./img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.y = this.floorPosition() - (Math.random() * 8 - 1);
-    this.x = this.canvasWidth - Math.random() * 500 + 1;
+    if (x < 400) {
+      x = x + 700;
+    }
+    this.x = x;
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.animateWalk();
     this.moveEnemies();

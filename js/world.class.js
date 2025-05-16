@@ -167,10 +167,12 @@ class World {
   checkBottleCollision() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
+        if (world.character.bottles < 5) {
+          this.addPointsToPlayerScore(bottle.itemName);
+        }
         bottle.isCollected();
         this.character.collectBottle();
         this.bottlebar.updateBottleBar();
-        this.addPointsToPlayerScore(bottle.itemName);
       }
     });
   }

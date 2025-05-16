@@ -176,9 +176,9 @@ class Character extends MovableObject {
   animateJump() {
     this.playAnimation(this.JUMPING_ANIMATION);
   }
-  // && this.bottles > 0
+  
   throwBottle() {
-    if (!this.bottleThrown) {
+    if (!this.bottleThrown && this.bottles > 0 ) {
       this.world.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
       this.bottles--;
