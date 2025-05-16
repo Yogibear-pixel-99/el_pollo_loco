@@ -7,17 +7,16 @@ const level1 = new Level(
 
 
   [
-    new Coin(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
-
+    new Coin(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
   ],
 
     [
@@ -31,21 +30,21 @@ const level1 = new Level(
     ],
 
   [
-    new Chicken(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0),
-    new Chicken(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0),
-    new Chicken(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1),
-    new Chicken(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1),
-    new Chicken(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2),
-    new Chicken(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2),
-    new Chicken(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3),
-    new Chicken(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3),
-    new Chicken(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4),
-    new Chicken(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4),
-    new Minichicken(Math.random() * ((720 * 1) - (720 * 0)) + 720 * 0),
-    new Minichicken(Math.random() * ((720 * 2) - (720 * 1)) + 720 * 1),
-    new Minichicken(Math.random() * ((720 * 3) - (720 * 2)) + 720 * 2),
-    new Minichicken(Math.random() * ((720 * 4) - (720 * 3)) + 720 * 3),
-    new Minichicken(Math.random() * ((720 * 5) - (720 * 4)) + 720 * 4),
+    new Chicken(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0),
+    new Chicken(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0),
+    new Chicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
+    new Chicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
+    new Chicken(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2),
+    new Chicken(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2),
+    new Chicken(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3),
+    new Chicken(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3),
+    new Chicken(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4),
+    new Chicken(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4),
+    new Minichicken(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0),
+    new Minichicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
+    new Minichicken(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2),
+    new Minichicken(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3),
+    new Minichicken(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4),
   ],
 
   new Endboss(),
@@ -104,6 +103,6 @@ const level1 = new Level(
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 5, 0),
   ],
 
-  719 * 4 + 50
+  719 * 5 + 50
 
 );
