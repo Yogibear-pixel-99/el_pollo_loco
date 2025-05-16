@@ -17,7 +17,7 @@ class Thrownbottle extends MovableObject {
     left: 20,
   };
 
-  BOTTLE_THROW_ANIMATION = [
+  BOTTLE_THROW_ANIMATION_RIGHT = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_2.png",
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_3.png",
@@ -26,6 +26,17 @@ class Thrownbottle extends MovableObject {
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_6.png",
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_7.png",
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_8.png",
+  ];
+
+  BOTTLE_THROW_ANIMATION_LEFT = [
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_8.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_7.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_6.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_5.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_4.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_3.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_2.png",
+    "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
   ];
 
   BOTTLE_SPLASH_ANIMATION = [
@@ -42,7 +53,7 @@ class Thrownbottle extends MovableObject {
     this.loadImage(
       "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png"
     );
-    this.loadImagesArray(this.BOTTLE_THROW_ANIMATION);
+    this.loadImagesArray(this.BOTTLE_THROW_ANIMATION_LEFT);
     this.loadImagesArray(this.BOTTLE_SPLASH_ANIMATION);
     this.animate();
     this.bottleAppearance();
@@ -61,12 +72,13 @@ class Thrownbottle extends MovableObject {
   }
 
   animate() {
+    const direction = world.character.otherDirection;
     this.throwInAnimationInterval = setInterval(() => {
-        this.playAnimation(this.BOTTLE_THROW_ANIMATION);
+      direction ? 
+        this.playAnimation(this.BOTTLE_THROW_ANIMATION_LEFT) :
+        this.playAnimation(this.BOTTLE_THROW_ANIMATION_RIGHT);
     }, 50);
   }
-
-
 
   bottleAppearance() {
     if (world.character.otherDirection === false) {
@@ -77,13 +89,14 @@ class Thrownbottle extends MovableObject {
   }
 
   shotBottleRight() {
+    const moveRight = world.keyboard.KEY_RIGHT;
     this.x = world.character.x + 35;
     this.y = world.character.y + 50;
     this.moveBottleInterval_x = setInterval(() => {
       if (this.y == this.floorPosition()) {
         return;
       } else {
-        world.keyboard.KEY_RIGHT
+        moveRight
           ? (this.x += this.throwSpeedX + this.walkingSpeed)
           : (this.x += this.throwSpeedX);
       }
@@ -91,13 +104,14 @@ class Thrownbottle extends MovableObject {
   }
 
   shotBottleLeft() {
+    const moveLeft = world.keyboard.KEY_LEFT;
     this.x = world.character.x;
     this.y = world.character.y + 50;
     this.moveBottleInterval_x = setInterval(() => {
       if (this.y == this.floorPosition()) {
         return;
       } else {
-        world.keyboard.KEY_LEFT
+        moveLeft
           ? (this.x -= this.throwSpeedX + this.walkingSpeed)
           : (this.x -= this.throwSpeedX);
       }

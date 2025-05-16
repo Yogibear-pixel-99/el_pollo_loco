@@ -193,8 +193,19 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 620px;
+  height: 620px;
   min-width: 350px;
+}
+
+.left-content {
+  border: solid 24px rgba(233, 180, 33, 0.0);
+  padding: 0;
+}
+
+.left-content::-webkit-scrollbar {
+  width: 5px;
 }
 
 .right-content {

@@ -5,147 +5,194 @@ canvasHeight = 480;
 canvasWidth = 720;
 floorHeight = 58;
 
-const highscores = [
-  { name: "Anna", score: 1200 },
-  { name: "Ben", score: 950 },
-  { name: "Chris", score: 870 },
-  { name: "Daria", score: 850 },
-  { name: "Erik", score: 800 },
-  { name: "Fiona", score: 780 },
-  { name: "Gustav", score: 770 },
-  { name: "Hanna", score: 750 },
-  { name: "Isa", score: 700 },
-  { name: "Jonas", score: 680 },
-];
-
-// let highscores = {};
-
-const MAIN_URL =
-  "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
-
 function init() {
   canvas = document.getElementById("gamecanvas");
   getHighscores();
+  startGame();
 }
 
-function startGame(){
-  if (checkNameInput()) {
-  deactivateMenu();
-  let gameMode = document.getElementById('game-mode-txt');
-      switch (gameMode.innerText) {
-        case 'Normal Mode': startNormalGame();
-          break;
+function startGame() {
+    deactivateMenu();
+    let gameMode = document.getElementById("game-mode-txt");
+    switch (gameMode.innerText) {
+      case "Normal Mode":
+        startNormalGame();
+        break;
 
-        case 'Chicken Rush': startChickenRushGame();
-          break;
-      
-        default:
-          break;
-      }
-    } else {
-      playerNameError();
+      case "Chicken Rush":
+        startChickenRushGame();
+        break;
+
+      default:
+        break;
     }
 }
 
-function checkNameInput(){
-  const nameInput = document.getElementById('player-name-input');
-   return nameInput.value.trim() !== '';
+// function init() {
+//   canvas = document.getElementById("gamecanvas");
+//   getHighscores();
+// }
+
+// function startGame() {
+//   if (checkNameInput()) {
+//     deactivateMenu();
+//     let gameMode = document.getElementById("game-mode-txt");
+//     switch (gameMode.innerText) {
+//       case "Normal Mode":
+//         startNormalGame();
+//         break;
+
+//       case "Chicken Rush":
+//         startChickenRushGame();
+//         break;
+
+//       default:
+//         break;
+//     }
+//   } else {
+//     playerNameError();
+//   }
+// }
+
+function checkNameInput() {
+  const nameInput = document.getElementById("player-name-input");
+  return nameInput.value.trim() !== "";
 }
 
-function playerNameError(){
-  const nameInput = document.getElementById('player-name-input');
-  const errorTextRef = document.getElementById('name-error-text');
-        nameInput.placeholder.color = 'red';
-        nameInput.classList.add('error-blink');
-        errorTextRef.innerText = 'Enter your name!'
+function playerNameError() {
+  const nameInput = document.getElementById("player-name-input");
+  const errorTextRef = document.getElementById("name-error-text");
+  nameInput.placeholder.color = "red";
+  nameInput.classList.add("error-blink");
+  errorTextRef.innerText = "Enter your name!";
 }
 
-function removeNameError(){
-  removeClass('player-name-input', 'error-blink');
-  removeErrorMessage('name-error-text');
+function removeNameError() {
+  removeClass("player-name-input", "error-blink");
+  removeErrorMessage("name-error-text");
 }
 
-function removeClass(id, className){
+function removeClass(id, className) {
   const ref = document.getElementById(id);
   ref.classList.remove(className);
 }
 
-function removeErrorMessage(id){
+function removeErrorMessage(id) {
   const ref = document.getElementById(id);
-        ref.innerText = '';
+  ref.innerText = "";
 }
 
 function startNormalGame() {
-  canvas = document.getElementById('gamecanvas');
-  world = new World(canvas, keyboard, pointConfig, canvasHeight, canvasWidth, floorHeight);
+  canvas = document.getElementById("gamecanvas");
+  world = new World(
+    canvas,
+    keyboard,
+    pointConfig,
+    canvasHeight,
+    canvasWidth,
+    floorHeight
+  );
 }
 
-function startChickenRush() {
+function startChickenRush() {}
 
-}
-
-function deactivateMenu(){
+function deactivateMenu() {
   // document.body.style.cursor = 'none';
-  showSingleContainerById('game-mask');
-  hideSingleContainerById('canvas-option-container');
-  const startBlinkRef = document.getElementById('start-game-text');
-      startBlinkRef.classList.remove('start-game-text');
+  showSingleContainerById("game-mask");
+  hideSingleContainerById("canvas-option-container");
+  const startBlinkRef = document.getElementById("start-game-text");
+  startBlinkRef.classList.remove("start-game-text");
 }
 
-function activateMenu(){
+function activateMenu() {
   // document.body.style.cursor = 'default';
-  hideSingleContainerById('game-mask');
-  showSingleContainerById('canvas-option-container');
-  const startBlinkRef = document.getElementById('start-game-text');
-      startBlinkRef.classList.add('start-game-text');
+  hideSingleContainerById("game-mask");
+  showSingleContainerById("canvas-option-container");
+  const startBlinkRef = document.getElementById("start-game-text");
+  startBlinkRef.classList.add("start-game-text");
 }
 
-function getHighscores() {
+async function getHighscores() {
+  await fetchHighscores();
+  sortHighscores();
   // get high von api
   // wenn leer füge template ein.
-  renderHighscore();
+  renderHighscores("normal");
   renderGamePointsTable();
   // bei spielende namen und highscore passend ins object einfügen.
   // object in die database - PUT
   // neu im HTML rendern.
 }
 
-async function getHighscoreFromApi() {
-  try {
-    let response = await fetch(MAIN_URL + '.json');
-    if (!response.ok) {
-      throw new Error();
-    } else {
-      let data = await response.json();
-      if (data) {
-        highscores = Object.values(data);
-      }
-    }
-  } catch (error) {
-    console.log(error);
-  }
+// async function getHighscoreFromApi() {
+//   try {
+//     let response = await fetch(MAIN_URL + '.json');
+//     if (!response.ok) {
+//       throw new Error();
+//     } else {
+//       let data = await response.json();
+//       if (data) {
+//         highscores = Object.values(data);
+//       }
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+function sortHighscores() {
+  highscores.normal.sort((a, b) => b.score - a.score);
+  highscores.chickenrush.sort((a, b) => b.score - a.score);
+  console.log(highscores);
 }
 
-function renderHighscore() {
-  let ref = document.getElementById('highscore');
+function renderHighscores(scorename) {
+  let ref = document.getElementById("highscore");
   let data = "";
-  for (let index = 0; index < highscores.length; index++) {
-    const element = highscores[index];
+  for (
+    let index = 0;
+    index < highscores[scorename].length && index <= 30;
+    index++
+  ) {
+    const element = highscores[scorename][index];
     data += highscoreTemp(element);
   }
   ref.innerHTML = data;
 }
 
+function renderGamePointsTable() {
+  let ref = document.getElementById("game-points-table");
+  let data = "";
+  Object.entries(pointConfig).forEach((element) => {
+    data += getPointsTemp(element);
+  });
+  ref.innerHTML = data;
+}
 
+function changeGameMode() {
+  changeGameModeHeaderText();
+  changeGameModeHighscoreTable();
+}
 
+function changeGameModeHeaderText() {
+  let ref = document.getElementById("game-mode-txt");
+  let expRef = document.getElementById("game-mode-exp");
+  if (ref.innerText === "Normal Mode") {
+    ref.innerText = "Chicken Rush";
+    expRef.innerText = "Endless chicken, unlimited bottles, no jumpkill";
+  } else {
+    ref.innerText = "Normal Mode";
+    expRef.innerText = "Standard Level";
+  }
+}
 
-function renderGamePointsTable(){
-  let ref = document.getElementById('game-points-table');
-  let data = '';
-      Object.entries(pointConfig).forEach((element) => {
-        data += getPointsTemp(element);
-      })
-    ref.innerHTML = data;
+function changeGameModeHighscoreTable() {
+  let ref = document.getElementById("game-mode-txt");
+  if (ref.innerText === "Normal Mode") {
+    renderHighscores('normal');
+  } else {
+    renderHighscores('chickenrush');
+  }
 }
 
 const pointConfig = {
@@ -187,7 +234,7 @@ const pointConfig = {
   },
 };
 
-window.addEventListener('keydown', (event) => {
+window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = true;
@@ -223,7 +270,7 @@ window.addEventListener('keydown', (event) => {
   }
 });
 
-window.addEventListener('keyup', (event) => {
+window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = false;
@@ -259,57 +306,40 @@ window.addEventListener('keyup', (event) => {
   }
 });
 
-function changeGameMode(){
-  let ref = document.getElementById('game-mode-txt');
-  let expRef = document.getElementById('game-mode-exp');
-      if (ref.innerText === 'Normal Mode') {
-        ref.innerText = 'Chicken Rush'
-        expRef.innerText = 'Endless chicken, unlimited bottles, no jumpkill';
-      } else {
-        ref.innerText = 'Normal Mode';
-        expRef.innerText = 'Standard Level';
-      }
-}
 
 
-
-
-document.addEventListener('DOMContentLoaded', () => {
-
-document.addEventListener('mousedown', () => {
+document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("mousedown", () => {
     document.body.style.cursor = "url('./img/cursor-active.png'), auto";
-  })
-document.addEventListener('mouseup', () => {
+  });
+  document.addEventListener("mouseup", () => {
     document.body.style.cursor = "url('./img/cursor.png'), auto";
+  });
+});
 
 
-  })});
-
-
-// REMOVE ALL OPTION MENUS ON GAME START!!!!
 
 
 
 // throw bottel left, animation should turn.
 // jump on chicken
-  // kill chicken
-  // score +
-  // jump a bit y -
+// kill chicken
+// score +
+// jump a bit y -
 
 // collect coins should score
 // endboss
-  // hit endboss
-    // score +
-    // live -
-    // trigger animation
-  // kill endboss
-  // score +
-  // trigger final screen
+// hit endboss
+// score +
+// live -
+// trigger animation
+// kill endboss
+// score +
+// trigger final screen
 
 // sounds for pepe
 
 // level logic for bottles, chicken and boss
-
 
 // adjust throw width
 
@@ -318,4 +348,3 @@ document.addEventListener('mouseup', () => {
 // enemy bottle hit auslagern in enemies von world
 
 // BACKGROUND TO THE SETTINGS MENUS
-

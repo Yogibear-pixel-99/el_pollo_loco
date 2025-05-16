@@ -1,3 +1,31 @@
+const MAIN_URL =
+  "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
+
+let highscores = {
+  chickenrush: [
+
+  ],
+  normal: [
+
+  ]
+};
+
+async function fetchHighscores() {
+  try {
+    let response = await fetch(MAIN_URL + '.json');
+    if (!response.ok) {
+        throw new Error();
+    } else {
+        let data = await response.json();
+        if (data) {
+        highscores = data;
+        }
+    }
+  } catch (error) {
+    console.log('Highscore fetch error: ' + error)
+  }
+}
+
 /**
  * This function shows a html container. It removes the class d-none.
  *
@@ -17,3 +45,15 @@ function hideSingleContainerById(containerId) {
   let content = document.getElementById(containerId);
   content.classList.add("d-none");
 }
+
+
+// splice more than 30 entries
+// if data - sort highscores to top 30
+// make highscore scrollable
+// display pattern or render entries
+
+// start game
+// game end
+// save name and score in object
+// put data to api
+// render new highscoretable from api inkl sort etc.
