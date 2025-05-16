@@ -43,17 +43,38 @@
         <div class="highscores" id="highscore"></div>
       </div>
       <div class="game-wrapper">
-        <h1>Normal mode</h1>
+        <section class="start-game-mask d-none" id="game-mask"></section>
+        <div class="header-wrapper">
+          <h1 id="game-mode-txt" class="top-game-header">Normal Mode</h1>
+          <span id="game-mode-exp">Standard level</span>
+        </div>
         <section class="canvas-wrapper">
           <canvas id="gamecanvas" width="720" height="480"></canvas>
-          <section id="canvas-option-container" class="canvas-menu-display d-none">
-            
-          </section>
+          <section
+            id="canvas-option-container"
+            class="canvas-menu-display d-none"></section>
         </section>
-        <h1 class="start-game-text">Start</h1>
+        <div class="header-wrapper">
+          <h1
+            class="start-game-text top-game-header"
+            id="start-game-text"
+            onclick="startGame()">
+            Start
+          </h1>
+          <span id="name-error-text" class="name-error-text"></span>
+        </div>
       </div>
       <div class="right-content">
-        <input class="player-name" maxlength="20" id="player-name-input" autocomplete="off" type="text" placeholder="your name *click*" oninput="returnOnlyLettersAndNumbers(this)" onkeydown="unblurInput(event, this)" onblur="trimPlayerName(this)">
+        <input
+          class="player-name"
+          maxlength="20"
+          id="player-name-input"
+          autocomplete="off"
+          type="text"
+          placeholder="Enter your name"
+          oninput="returnOnlyLettersAndNumbers(this); removeNameError()"
+          onkeydown="unblurInput(event, this)"
+          onblur="trimPlayerName(this)" />
         <div class="player-score" id="player-score">000</div>
         <div class="points-table" id="game-points-table"></div>
       </div>
@@ -81,7 +102,7 @@
           src="./img/rooster-47475_640.png"
           alt="rooster-icon"
           class="opt-img" />
-        <span class="opt-text">Gamemode</span>
+        <span class="opt-text" onclick="changeGameMode()">Gamemode</span>
       </div>
       <div class="opt-wrapper">
         <img

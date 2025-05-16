@@ -28,9 +28,76 @@ function init() {
   getHighscores();
 }
 
+function startGame(){
+  if (checkNameInput()) {
+  deactivateMenu();
+  let gameMode = document.getElementById('game-mode-txt');
+      switch (gameMode.innerText) {
+        case 'Normal Mode': startNormalGame();
+          break;
+
+        case 'Chicken Rush': startChickenRushGame();
+          break;
+      
+        default:
+          break;
+      }
+    } else {
+      playerNameError();
+    }
+}
+
+function checkNameInput(){
+  const nameInput = document.getElementById('player-name-input');
+   return nameInput.value.trim() !== '';
+}
+
+function playerNameError(){
+  const nameInput = document.getElementById('player-name-input');
+  const errorTextRef = document.getElementById('name-error-text');
+        nameInput.placeholder.color = 'red';
+        nameInput.classList.add('error-blink');
+        errorTextRef.innerText = 'Enter your name!'
+}
+
+function removeNameError(){
+  removeClass('player-name-input', 'error-blink');
+  removeErrorMessage('name-error-text');
+}
+
+function removeClass(id, className){
+  const ref = document.getElementById(id);
+  ref.classList.remove(className);
+}
+
+function removeErrorMessage(id){
+  const ref = document.getElementById(id);
+        ref.innerText = '';
+}
+
 function startNormalGame() {
-  canvas = document.getElementById("gamecanvas");
+  canvas = document.getElementById('gamecanvas');
   world = new World(canvas, keyboard, pointConfig, canvasHeight, canvasWidth, floorHeight);
+}
+
+function startChickenRush() {
+
+}
+
+function deactivateMenu(){
+  // document.body.style.cursor = 'none';
+  const maskRef = document.getElementById('game-mask');
+      maskRef.classList.remove('d-none');
+  const startBlinkRef = document.getElementById('start-game-text');
+      startBlinkRef.classList.remove('start-game-text');
+}
+
+function activateMenu(){
+  // document.body.style.cursor = 'default';
+    const maskRef = document.getElementById('game-mask');
+      maskRef.classList.add('d-none');
+  const startBlinkRef = document.getElementById('start-game-text');
+      startBlinkRef.classList.add('start-game-text');
 }
 
 function getHighscores() {
@@ -45,7 +112,7 @@ function getHighscores() {
 
 async function getHighscoreFromApi() {
   try {
-    let response = await fetch(MAIN_URL + ".json");
+    let response = await fetch(MAIN_URL + '.json');
     if (!response.ok) {
       throw new Error();
     } else {
@@ -60,7 +127,7 @@ async function getHighscoreFromApi() {
 }
 
 function renderHighscore() {
-  let ref = document.getElementById("highscore");
+  let ref = document.getElementById('highscore');
   let data = "";
   for (let index = 0; index < highscores.length; index++) {
     const element = highscores[index];
@@ -120,7 +187,7 @@ const pointConfig = {
   },
 };
 
-window.addEventListener("keydown", (event) => {
+window.addEventListener('keydown', (event) => {
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = true;
@@ -156,7 +223,7 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("keyup", (event) => {
+window.addEventListener('keyup', (event) => {
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = false;
@@ -192,7 +259,17 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-
+function changeGameMode(){
+  let ref = document.getElementById('game-mode-txt');
+  let expRef = document.getElementById('game-mode-exp');
+      if (ref.innerText === 'Normal Mode') {
+        ref.innerText = 'Chicken Rush'
+        expRef.innerText = 'Endless chicken, unlimited bottles, no jumpkill';
+      } else {
+        ref.innerText = 'Normal Mode';
+        expRef.innerText = 'Standard Level';
+      }
+}
 
 
 
