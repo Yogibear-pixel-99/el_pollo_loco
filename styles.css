@@ -155,7 +155,7 @@ h2 {
 
 .error-blink {
     animation-name: blink-name;
-    animation-duration: 3000ms;
+    animation-duration: 800ms;
     animation-iteration-count: infinite;
     animation-delay: 0ms;
 }
@@ -164,10 +164,10 @@ h2 {
   0% {
     background-color: var(--score-bg);
   }
-  5% {
+  50% {
     background-color: var(--score-name);
   }
-  10% {
+  /* 10% {
     background-color: var(--score-bg);
   }
   15% {
@@ -175,7 +175,7 @@ h2 {
   }
   20% {
     background-color: var(--score-bg);;
-  }
+  } */
   100% {
     background-color: var(--score-bg);
   }
@@ -368,4 +368,5 @@ h2 {
 
 .name-error-text {
     height: 36px;
-}
+  font-weight: 700;
+  }

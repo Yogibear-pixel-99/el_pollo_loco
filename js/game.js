@@ -86,16 +86,16 @@ function startChickenRush() {
 
 function deactivateMenu(){
   // document.body.style.cursor = 'none';
-  const maskRef = document.getElementById('game-mask');
-      maskRef.classList.remove('d-none');
+  showSingleContainerById('game-mask');
+  hideSingleContainerById('canvas-option-container');
   const startBlinkRef = document.getElementById('start-game-text');
       startBlinkRef.classList.remove('start-game-text');
 }
 
 function activateMenu(){
   // document.body.style.cursor = 'default';
-    const maskRef = document.getElementById('game-mask');
-      maskRef.classList.add('d-none');
+  hideSingleContainerById('game-mask');
+  showSingleContainerById('canvas-option-container');
   const startBlinkRef = document.getElementById('start-game-text');
       startBlinkRef.classList.add('start-game-text');
 }
@@ -286,7 +286,7 @@ document.addEventListener('mouseup', () => {
   })});
 
 
-
+// REMOVE ALL OPTION MENUS ON GAME START!!!!
 
 
 

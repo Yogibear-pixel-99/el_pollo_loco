@@ -5,7 +5,7 @@ class Endboss extends Enemies {
   scoreNameKilled = "endbossKilled";
   scoreNameBottle = "endbossBottleHit";
   y = 480 - this.height - 58 + 15;
-  x = 700;
+  x = 719 * 5;
   energy = 20;
   
   acceleration = 2.5;
@@ -134,22 +134,30 @@ WALKING_ANIMATION = [
 
 
   async attack(){
+    if (!this.isDead) {
     const rndTime = Math.floor(Math.random() * (5000 - 2500) + 2500);
     const rndNrForAttack = Math.round(Math.random() * (3 - 1) + 1);
     await this.timeDelay(rndTime);
-        console.log(rndNrForAttack);
         this.stopAllBossAnimations();
+        if (this.isDead) return;
         await this.playAnimationSpecificTime(1, this.ALERT_ANIMATION, 'alertAnimationInterval');
+        if (this.isDead) return;
         await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_ALERT_ANIMATION, 'bossAttackAlertAnimationInterval');
+        if (this.isDead) return;
         await this.randomAttackJumps(rndNrForAttack);
+        if (this.isDead) return;
         this.stopAllBossAnimations()
         this.animateWalk();
         this.moveEnemies();
+      if (!this.isDead){
         this.attack();
-  }
+      }
+        
+  }}
 
   async randomAttackJumps(rounds){
     for (let attackIndex = 0; attackIndex < rounds; attackIndex++) {
+      if (this.isDead) return;
       await this.bossMovesToFloor();
       this.speedY = 20;
       this.jumpAttackInterval = setInterval(() => {
@@ -157,6 +165,7 @@ WALKING_ANIMATION = [
       }, 20);
       await this.playAnimationSpecificTime(1, this.BOSS_ATTACK_JUMP_ANIMATION, 'bossAttackJumpAnimationInterval');
       clearInterval(this.jumpAttackInterval);
+      if (this.isDead) return;
     }
   }
 
@@ -198,7 +207,7 @@ WALKING_ANIMATION = [
   }
 
   async bossBottleHit() {
-    if (this.isDead == true) {
+    if (this.isDead === true) {
       this.stopAllBossAnimations();
       this.img.src = this.BOSS_DEAD_ANIMATION[2];
     } else {
@@ -219,7 +228,7 @@ WALKING_ANIMATION = [
   }
 
   stopAllBossAnimateIntervals(){
-          this.allAnimateIntervals.forEach((interval) => clearInterval(this[interval]));
+    this.allAnimateIntervals.forEach((interval) => clearInterval(this[interval]));
   }
 
   stopAllBossMovementIntervals(){
