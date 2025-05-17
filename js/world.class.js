@@ -214,7 +214,9 @@ class World {
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
     this.addObjToCanvas(this.bottlebar);
-    this.addObjToCanvas(this.bossHealthbar);
+    if (this.level.endboss.isWalking){
+      this.addObjToCanvas(this.bossHealthbar);
+    }
     let self = this;
     requestAnimationFrame(function () {
       self.draw();

@@ -1,6 +1,6 @@
 class Bosshealthbar extends Statusbar {
-    x = 500;
-    y = 10;
+    x = 490;
+    y = 15;
 
   HEALTH_BAR_IMAGES = [
     "./img/7_statusbars/2_statusbar_endboss/orange/orange0.png",

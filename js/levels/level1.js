@@ -7,16 +7,16 @@ const level1 = new Level(
 
 
   [
-    new Coin(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
-    new Coin(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4, Math.random() * ((480 - 100 - 58) - 190) + 190),
+    new Coin(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 1) - (719 * 0)) + 719 * 0, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 3) - (719 * 2)) + 719 * 2, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 4) - (719 * 3)) + 719 * 3, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4, Math.random() * ((480 - 100 - 58) - 130) + 130),
+    new Coin(Math.random() * ((719 * 5) - (719 * 4)) + 719 * 4, Math.random() * ((480 - 100 - 58) - 130) + 130),
   ],
 
     [

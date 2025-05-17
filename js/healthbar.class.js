@@ -24,13 +24,13 @@ updateHealthbar() {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[5]];
     } else if (energy >= 80) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[4]];
-    } else if (energy >= 60) {
+    } else if (energy >= 50) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[3]];
-    } else if (energy >= 40) {
-      this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[2]];
     } else if (energy >= 20) {
+      this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[2]];
+    } else if (energy > 0) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[1]];
-    } else if (energy <= 5){
+    } else if (energy == 0){
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[0]];
     }
   }

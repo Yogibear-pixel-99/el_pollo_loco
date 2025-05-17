@@ -86,8 +86,6 @@ WALKING_ANIMATION = [
 
 
   isWalking = false;
-  isAttacking = false;
-  isHurt = false;
   isDead = false;
 
 
@@ -125,6 +123,7 @@ WALKING_ANIMATION = [
     this.animateWalk();
     this.moveEnemies();
     this.attack();
+    this.isWalking = true;
   }
 
 
@@ -138,7 +137,7 @@ WALKING_ANIMATION = [
     const rndTime = Math.floor(Math.random() * (5000 - 2500) + 2500);
     const rndNrForAttack = Math.round(Math.random() * (3 - 1) + 1);
     await this.timeDelay(rndTime);
-        this.stopAllBossAnimations();
+        this.stopAllBossIntervals();
         if (this.isDead) return;
         await this.playAnimationSpecificTime(1, this.ALERT_ANIMATION, 'alertAnimationInterval');
         if (this.isDead) return;
@@ -146,7 +145,7 @@ WALKING_ANIMATION = [
         if (this.isDead) return;
         await this.randomAttackJumps(rndNrForAttack);
         if (this.isDead) return;
-        this.stopAllBossAnimations()
+        this.stopAllBossIntervals()
         this.animateWalk();
         this.moveEnemies();
       if (!this.isDead){
@@ -206,21 +205,23 @@ WALKING_ANIMATION = [
     }, this.animationCycle);
   }
 
+
+
   async bossBottleHit() {
     if (this.isDead === true) {
-      this.stopAllBossAnimations();
+      this.stopAllBossIntervals();
       this.img.src = this.BOSS_DEAD_ANIMATION[2];
     } else {
       this.energy -= 10;
       world.bossHealthbar.updateBossHealthbar();
       if (this.energy > 0) {
-      this.stopAllBossAnimations();
+      this.stopAllBossIntervals();
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       this.animateWalk();
       this.moveEnemies();
       this.attack();
     } else {
-      this.stopAllBossAnimations();
+      this.stopAllBossIntervals();
       this.isDead = true;
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
       await this.playAnimationSpecificTime(3, this.BOSS_DEAD_ANIMATION, 'bossDeadAnimationInterval');
@@ -236,7 +237,7 @@ WALKING_ANIMATION = [
     this.allMovementIntervals.forEach((interval) => clearInterval(this[interval]));
   }
 
-  stopAllBossAnimations(){
+  stopAllBossIntervals(){
     this.stopAllBossAnimateIntervals();
     this.stopAllBossMovementIntervals();
   }
