@@ -1,4 +1,6 @@
 class Coinbar extends Statusbar {
+  x = 20;
+  y = 50;
   COIN_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",
@@ -8,10 +10,8 @@ class Coinbar extends Statusbar {
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png",
   ];
 
-  constructor(x, y) {
+  constructor() {
     super();
-    this.x = x;
-    this.y = y;
     this.loadImage(this.COIN_BAR_IMAGES[0]);
     this.loadImagesArray(this.COIN_BAR_IMAGES);
   }

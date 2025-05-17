@@ -101,12 +101,6 @@ class DrawableObject {
     let path = arrayName[count];
     this.img = this.animatedImages[path];
   }
-  
-
-  // playAnimationOnce(arrayName, count) {
-  //   let path = arrayName[count];
-  //   this.img = this.animatedImages[path];
-  // }
 
   loadImage(path) {
     this.img = new Image();

@@ -1,8 +1,9 @@
 class World {
   character = new Character();
-  healthbar = new Healthbar(20, 10);
-  coinbar = new Coinbar(20, 50);
-  bottlebar = new Bottlebar(20, 90);
+  healthbar = new Healthbar();
+  coinbar = new Coinbar();
+  bottlebar = new Bottlebar();
+  bossHealthbar = new Bosshealthbar()
   thrownBottles = [];
   playerscore = 0;
   pointTable;
@@ -213,6 +214,7 @@ class World {
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
     this.addObjToCanvas(this.bottlebar);
+    this.addObjToCanvas(this.bossHealthbar);
     let self = this;
     requestAnimationFrame(function () {
       self.draw();

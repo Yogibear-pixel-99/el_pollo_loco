@@ -1,5 +1,6 @@
 class Healthbar extends Statusbar{
-    
+    x = 20;
+    y = 10;
 
     HEALTH_BAR_IMAGES = [
         "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
@@ -10,10 +11,8 @@ class Healthbar extends Statusbar{
         "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png"
       ];
 
-constructor(x, y){
+constructor(){
     super();
-    this.x = x;
-    this.y = y;
     this.loadImage(this.HEALTH_BAR_IMAGES[5]);
     this.loadImagesArray(this.HEALTH_BAR_IMAGES);
 }
