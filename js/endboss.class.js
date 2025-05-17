@@ -212,6 +212,7 @@ WALKING_ANIMATION = [
       this.img.src = this.BOSS_DEAD_ANIMATION[2];
     } else {
       this.energy -= 10;
+      world.bossHealthbar.updateBossHealthbar();
       if (this.energy > 0) {
       this.stopAllBossAnimations();
       await this.playAnimationSpecificTime(3, this.BOSS_BOTTLE_HIT_ANIMATION, 'bottleHitAnimationInterval');
