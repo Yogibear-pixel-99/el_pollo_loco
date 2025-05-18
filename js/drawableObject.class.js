@@ -2,6 +2,8 @@ class DrawableObject {
   canvasHeight = 480;
   canvasWidth = 720;
   floorHeight = 58;
+  animateInterval;
+  moveInterval;
   img;
   x;
   y;

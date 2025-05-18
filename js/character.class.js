@@ -66,7 +66,7 @@ class Character extends MovableObject {
   animationCycle = 100;
   moveCycle = 1000 / 60;
 
-  energy = 100;
+  energy = 1;
   idleLoopCount = 0;
 
   offset = {
@@ -97,7 +97,7 @@ class Character extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
+   this.animateInterval =  setInterval(() => {
       if (this.isDead()) {
         this.animateDead();
         return;
@@ -127,7 +127,7 @@ class Character extends MovableObject {
   }
 
   moveDetection() {
-    setInterval(() => {
+    this. moveInterval = setInterval(() => {
       if (!this.isDead()) {
       if (
         this.world.keyboard.KEY_RIGHT == true &&

@@ -11,6 +11,7 @@ class World {
   canvasHeight;
   canvasWidth;
   floorHeight;
+  backgroundMoveInterval;
 
   level = level1;
 
@@ -39,10 +40,25 @@ class World {
     this.runCollisions();
     this.moveBackground();
     this.updatePlayerScore();
+    this.checkIfGameIsOver();
   }
 
   setWorld() {
     this.character.world = this;
+  }
+
+  checkIfGameIsOver(){
+   let interval = setInterval(() => {
+      if (this.character.energy <= 0) {
+      clearInterval(interval);
+    clearInterval(this.backgroundMoveInterval);
+
+      this.level.enemies.forEach((enemy) => {
+        enemy.clearAllEnemyIntervalls();
+      })
+
+  }
+    }, 100);
   }
 
   runCollisions() {
@@ -183,7 +199,7 @@ class World {
   }
 
   moveBackground() {
-    setInterval(() => {
+    this.backgroundMoveInterval = setInterval(() => {
       this.level.backgrounds.forEach((bg) => {
         if (world.keyboard.KEY_LEFT && this.character.x > -200) {
           bg.x = bg.x + bg.xFactor;

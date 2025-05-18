@@ -1,6 +1,6 @@
 class Enemies extends MovableObject {
     deadPic;
-    walkInterval;
+    walkMoveInterval;
     walkAnimationInterval;
     wasHittet = false;
     walkingSpeed;
@@ -14,7 +14,7 @@ class Enemies extends MovableObject {
     }
 
     moveEnemies(){
-        this.walkInterval = setInterval(() => {
+        this.walkMoveInterval = setInterval(() => {
             this.moveLeft();
         }, this.moveCycle)
       }
@@ -33,7 +33,10 @@ class Enemies extends MovableObject {
       setTimeout(() => world.level.enemies.splice(index, 1), 700);
     }
 
-
+    clearAllEnemyIntervalls(){
+      clearInterval(this.walkAnimationInterval);
+      clearInterval(this.walkMoveInterval);
+    };
     
 
 }

@@ -333,6 +333,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // chickenmovement
   // bosmovement
 
+  // pepe fix health bar if energy is 0
+
 // kill chicken, they dont disappear correct
 // chars should not move until the game starts
 // game over screen
@@ -365,5 +367,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // documenatation
 
-
-
+// close icon licenc
