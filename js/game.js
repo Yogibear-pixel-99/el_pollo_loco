@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // rewrite the boss bottle hit function
 
-// healthbar boss
+
 // if pepe is killed, deactivate
   // bottlethrow
   // pepemovement

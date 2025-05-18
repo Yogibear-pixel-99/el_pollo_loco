@@ -100,7 +100,9 @@ class Character extends MovableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.animateDead();
-        this.world.healthbar.updateHealthbar();
+        return;
+      } else if (this.world.keyboard.KEY_SHOT == true) {
+        this.throwBottle();
       } else if (this.isHurt()) {
         this.animateHurt();
         this.world.healthbar.updateHealthbar();
@@ -126,6 +128,7 @@ class Character extends MovableObject {
 
   moveDetection() {
     setInterval(() => {
+      if (!this.isDead()) {
       if (
         this.world.keyboard.KEY_RIGHT == true &&
         this.x < this.world.level.level_end_x
@@ -138,10 +141,7 @@ class Character extends MovableObject {
         this.moveLeft();
         this.world.camera_x = 200 - this.x;
         this.otherDirection = true;
-      }
-      if (this.world.keyboard.KEY_SHOT == true) {
-        this.throwBottle();
-      }
+      }}
     }, this.moveCycle);
   }
 
@@ -165,7 +165,6 @@ class Character extends MovableObject {
     this.playAnimation(this.HURT_ANIMATION);
     this.speedY = 6;
     this.otherDirection ? (this.x += 8) : (this.x -= 8);
-
     this.world.camera_x = 200 - this.x;
   }
 
@@ -204,8 +203,4 @@ class Character extends MovableObject {
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
   }
-
-  // throwBottle(){
-  //   this.world.
-  // }
 }
