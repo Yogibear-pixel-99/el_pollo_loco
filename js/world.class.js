@@ -3,10 +3,13 @@ class World {
   healthbar = new Healthbar();
   coinbar = new Coinbar();
   bottlebar = new Bottlebar();
-  bossHealthbar = new Bosshealthbar()
+  bossHealthbar = new Bosshealthbar();
   thrownBottles = [];
   playerscore = 0;
   pointTable;
+  gameWon = false;
+  gameWonImg = new DrawableObject();
+  gameLostImg = new DrawableObject();
 
   canvasHeight;
   canvasWidth;
@@ -47,17 +50,24 @@ class World {
     this.character.world = this;
   }
 
-  checkIfGameIsOver(){
-   let interval = setInterval(() => {
+  checkIfGameIsOver() {
+    let interval = setInterval(() => {
       if (this.character.energy <= 0) {
-      clearInterval(interval);
-    clearInterval(this.backgroundMoveInterval);
-
-      this.level.enemies.forEach((enemy) => {
-        enemy.clearAllEnemyIntervalls();
-      })
-
-  }
+        clearInterval(interval);
+        clearInterval(this.backgroundMoveInterval);
+        setTimeout(() => {
+          // show game over screen
+          // show play again button
+          // show main menu button
+          // play end sound win
+          // play end sound lose
+          // update highscore board
+          // show mousepointer
+        }, 2000);
+        this.level.enemies.forEach((enemy) => {
+          enemy.clearAllEnemyIntervalls();
+        });
+      }
     }, 100);
   }
 
@@ -100,7 +110,7 @@ class World {
         this.addPointsToPlayerScore(bottle.itemName);
       } else if (
         (bottle.isColliding(this.level.endboss) ||
-        bottle.isCollidingHead(this.level.endboss)) &&
+          bottle.isCollidingHead(this.level.endboss)) &&
         bottle.alreadyHittet === false
       ) {
         this.animateBrokenBottle(bottle);
@@ -225,13 +235,13 @@ class World {
     this.addObjectsToCanvas(this.level.bottles);
     this.addObjectsToCanvas(this.thrownBottles);
     this.addObjToCanvas(this.level.endboss);
-    this.drawBossHeadHitbox(this.ctx);
+    // this.drawBossHeadHitbox(this.ctx);
     this.addObjToCanvas(this.character);
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
     this.addObjToCanvas(this.bottlebar);
-    if (this.level.endboss.isWalking){
+    if (this.level.endboss.isWalking) {
       this.addObjToCanvas(this.bossHealthbar);
     }
     let self = this;
@@ -240,18 +250,18 @@ class World {
     });
   }
 
-  drawBossHeadHitbox(ctx) {
-    ctx.beginPath();
-    ctx.lineWidth = "3";
-    ctx.strokeStyle = "green";
-    ctx.rect(
-      this.level.endboss.offsetHead.x,
-      this.level.endboss.offsetHead.y,
-      this.level.endboss.offsetHead.width,
-      this.level.endboss.offsetHead.height
-    );
-    ctx.stroke();
-  }
+  // drawBossHeadHitbox(ctx) {
+  //   ctx.beginPath();
+  //   ctx.lineWidth = "3";
+  //   ctx.strokeStyle = "green";
+  //   ctx.rect(
+  //     this.level.endboss.offsetHead.x,
+  //     this.level.endboss.offsetHead.y,
+  //     this.level.endboss.offsetHead.width,
+  //     this.level.endboss.offsetHead.height
+  //   );
+  //   ctx.stroke();
+  // }
 
   addObjToCanvas(obj) {
     if (obj.otherDirection) {
@@ -259,8 +269,8 @@ class World {
     }
 
     obj.draw(this.ctx);
-    obj.drawFrame(this.ctx);
-    obj.drawOffsetFrame(this.ctx);
+    // obj.drawFrame(this.ctx);
+    // obj.drawOffsetFrame(this.ctx);
 
     if (obj.otherDirection) {
       this.flipImageBack(obj);
@@ -284,6 +294,12 @@ class World {
       array.forEach((element) => {
         this.addObjToCanvas(element);
       });
+    }
+  }
+
+  gameOver(){
+    if (this.gameWon) {
+
     }
   }
 }

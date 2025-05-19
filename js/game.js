@@ -326,17 +326,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // rewrite the boss bottle hit function
 
-
-// if pepe is killed, deactivate
-  // bottlethrow
-  // pepemovement
-  // chickenmovement
-  // bosmovement
-
-  // pepe fix health bar if energy is 0
-
-// kill chicken, they dont disappear correct
 // chars should not move until the game starts
+
+// clear oll hitbos draw functions
+
+// implement normal/hard/chickenrush mode
+
+
+
+
+
 // game over screen
   // lost
   // win
