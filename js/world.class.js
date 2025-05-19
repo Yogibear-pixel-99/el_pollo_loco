@@ -84,6 +84,7 @@ class World {
           enemy.killed = true;
         } else {
           this.character.hit();
+          this.healthbar.updateHealthbar();
         }
       }
     });

@@ -28,8 +28,7 @@ class Enemies extends MovableObject {
     isKilled(){
       let index = world.level.enemies.indexOf(this);
       this.img.src = this.deadPic;
-      clearInterval(this.walkAnimationInterval);
-      clearInterval(this.walkInterval);
+      this.clearAllEnemyIntervalls();
       setTimeout(() => world.level.enemies.splice(index, 1), 700);
     }
 

@@ -3,6 +3,19 @@ class Character extends MovableObject {
   width = 95;
   height = 190;
   jumpKill = false;
+  energy = 100;
+  idleLoopCount = 0;
+  offset = {
+    top: 90,
+    right: 30,
+    bottom: 10,
+    left: 20,
+  };
+
+  coins = 0;
+  bottles = 0;
+  bottleThrown = false;
+
   WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
@@ -61,25 +74,6 @@ class Character extends MovableObject {
     "./img/2_character_pepe/4_hurt/H-43.png",
   ];
 
-  world;
-
-  animationCycle = 100;
-  moveCycle = 1000 / 60;
-
-  energy = 1;
-  idleLoopCount = 0;
-
-  offset = {
-    top: 90,
-    right: 30,
-    bottom: 10,
-    left: 20,
-  };
-
-  coins = 0;
-  bottles = 0;
-  bottleThrown = false;
-
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
@@ -105,12 +99,9 @@ class Character extends MovableObject {
         this.throwBottle();
       } else if (this.isHurt()) {
         this.animateHurt();
-        this.world.healthbar.updateHealthbar();
       } else if (this.aboveGround()) {
         this.animateJump();
-        // console.log(this.y + this.offset.top);
       } else if (this.characterIdle()) {
-        // console.log('pepe is idle')
         this.animateIdle();
       } else {
         if (
@@ -123,7 +114,7 @@ class Character extends MovableObject {
           this.jump();
         }
       }
-    }, this.animationCycle);
+    }, 100);
   }
 
   moveDetection() {
@@ -142,7 +133,7 @@ class Character extends MovableObject {
         this.world.camera_x = 200 - this.x;
         this.otherDirection = true;
       }}
-    }, this.moveCycle);
+    }, 1000 / 60);
   }
 
   characterIdle() {

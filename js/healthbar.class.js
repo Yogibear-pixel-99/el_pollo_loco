@@ -28,7 +28,7 @@ updateHealthbar() {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[3]];
     } else if (energy >= 20) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[2]];
-    } else if (energy > 0) {
+    } else if (energy >= 5) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[1]];
     } else if (energy == 0){
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[0]];
