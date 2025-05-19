@@ -55,18 +55,47 @@
           <section
             id="canvas-option-container"
             class="canvas-menu-display d-none"></section>
-            <section id="canvas-won-container" class="canvas-won-lost-container flex-ctr-ctr flex-col">
-              <img class="game-won-img" alt="game-won-img">
-              <div>Play again</div>
-              <div>Main menu</div>
-            </section>
-            <section id="canvas-won-container" class="canvas-won-lost-container flex-ctr-ctr flex-col">
-              <img class="game-lost-img" alt="game lost image">
-              <div>Play again</div>
-              <div>Main menu</div>
-            </section>
+
+
+          <section
+            id="canvas-won-container"
+            class="canvas-won-container flex-ctr-ctr flex-col d-none">
+            <img
+              src="./img/You won, you lost/You Won B.png"
+              class="game-won-img"
+              alt="game-won-img" />
+            <div class="won-lost-wrapper">
+              <div class="won-lost-single-button-wrapper">
+                <img src="./img/icons/mask-306939_640.png" alt="" />
+                <div>Play again</div>
+              </div>
+              <div class="won-lost-single-button-wrapper">
+                <img src="./img/icons/cactus-8142375_640.png" alt="" />
+                <div>Main Menu</div>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="canvas-lost-container"
+            class="canvas-won-container flex-ctr-ctr flex-col d-none">
+            <img
+              src="img/You won, you lost/Game over A.png"
+              class="game-lost-img"
+              alt="game-lost-img" />
+            <div class="won-lost-wrapper">
+              <div class="won-lost-single-button-wrapper">
+                <img src="./img/icons/mask-306939_640.png" alt="" />
+                <div>Play again</div>
+              </div>
+              <div class="won-lost-single-button-wrapper">
+                <img src="./img/icons/cactus-8142375_640.png" alt="" />
+                <div>Main Menu</div>
+              </div>
+            </div>
+          </section>
         </section>
-        
+
         <div class="header-wrapper">
           <h1
             class="start-game-text top-game-header"
@@ -96,7 +125,7 @@
       <div class="opt-wrapper" onclick="toggleStory()">
         <img
           class="settings-img"
-          src="./img/book-4109187_640.png"
+          src="./img/icons/book-4109187_640.png"
           alt="story-icon"
           class="opt-img" />
         <span class="opt-text">Story</span>
@@ -104,7 +133,7 @@
       <div class="opt-wrapper" onclick="toggleControls()">
         <img
           class="settings-img"
-          src="./img/controller-3364881_640.png"
+          src="./img/icons/controller-3364881_640.png"
           alt="controls-icon"
           class="opt-img" />
         <span class="opt-text">Controls</span>
@@ -112,7 +141,7 @@
       <div class="opt-wrapper" onclick="changeGameMode()">
         <img
           class="settings-img"
-          src="./img/rooster-47475_640.png"
+          src="./img/icons/rooster-47475_640.png"
           alt="rooster-icon"
           class="opt-img" />
         <span class="opt-text">Gamemode</span>
@@ -120,7 +149,7 @@
       <div class="opt-wrapper">
         <img
           class="settings-img"
-          src="./img/guitar-7288462_640.png"
+          src="./img/icons/guitar-7288462_640.png"
           alt="sound-icon"
           class="opt-img" />
         <span class="opt-text">Sound on/off</span>
@@ -128,7 +157,7 @@
       <div class="opt-wrapper">
         <img
           class="settings-img"
-          src="./img/basket-1296634_640.png"
+          src="./img/icons/basket-1296634_640.png"
           alt="basket-icon"
           class="opt-img" />
         <span class="opt-text">Fullscreen</span>

@@ -54,14 +54,7 @@ class World {
         clearInterval(interval);
         clearInterval(this.backgroundMoveInterval);
         setTimeout(() => {
-        
-          // show game over screen
-          // show play again button
-          // show main menu button
-          // play end sound win
-          // play end sound lose
-          // update highscore board
-          // show mousepointer
+          this.gameOver(); 
         }, 2000);
         this.level.enemies.forEach((enemy) => {
           enemy.clearAllEnemyIntervalls();
@@ -296,9 +289,19 @@ class World {
     }
   }
 
-  gameOver(){
-    if (this.gameWon) {
-
-    }
+  gameOver() {
+    this.showGameOverScreen();
+          // play end sound win
+          // play end sound lose
+          // update highscore board
+          // show mousepointer
+          // function for play again button
+          // function for main menu button
   }
+
+  showGameOverScreen(){
+    this.gameWon ? 
+    showSingleContainerById('canvas-won-container') :
+    showSingleContainerById('canvas-lost-container');
+   }
 }
