@@ -209,11 +209,20 @@ class Endboss extends Enemies {
     }, 150);
   }
 
-  bossAttackMovement(nr) {
+  bossAttackMovement() {
+    let count = 0;
+    let interval;
     if (!this.aboveGround()) {
       this.speedY = 20;
+      interval = setInterval(() => {
+        if (count < 30) {
+        this.x = this.x - 5;
+        count++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 20);
       }
-    this.x = this.x - 3;
   }
 
   // async attack(){
