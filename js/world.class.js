@@ -116,7 +116,7 @@ class World {
         bottle.alreadyHittet === false
       ) {
         this.animateBrokenBottle(bottle);
-        this.level.endboss.bossBottleHit(bottle);
+        this.level.endboss.hitBoss();
         this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
       } else {
         this.level.enemies.forEach((enemy) => {

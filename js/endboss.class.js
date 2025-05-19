@@ -12,6 +12,7 @@ class Endboss extends Enemies {
   alreadyAttacks = false;
   animateInterval;
   moveInterval;
+  jumpAttackInterval;
 
   // alertAnimationInterval;
   // walkAnimationInterval;
@@ -45,7 +46,7 @@ class Endboss extends Enemies {
     };
   }
 
-  allAnimateIntervals = ["animateInterval"];
+  allAnimateIntervals = ["animateInterval", "jumpAttackInterval"];
 
   allMovementIntervals = ["moveInterval"];
 
@@ -124,9 +125,9 @@ class Endboss extends Enemies {
   }
 
   startBossFight() {
+    this.attack();
     this.animate();
     this.move();
-    this.attack();
   }
 
   // startBossFight(){
@@ -138,7 +139,11 @@ class Endboss extends Enemies {
 
   animate() {
     this.animateInterval = setInterval(() => {
-      if (!this.isDead()) {
+      if (this.isDead()) {
+        this.playAnimation(this.BOSS_DEAD_ANIMATION);
+      } else if (this.bossIsHurt()) {
+        this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
+      } else {
         this.animateWalk();
       }
     }, 150);
@@ -167,18 +172,14 @@ class Endboss extends Enemies {
       this.stopAllBossMovementIntervals();
       this.jumpAttack();
     }, attackDelay);
-    // rnd number of jumps 1-3
-    // stop movement
-    // stop animation
-    // new animation
-    // new movement
   }
 
   jumpAttack() {
     let attackAnimationNr = Math.ceil(Math.random() * 3) * 5 + 10;
     let attackCount = 0;
     this.animationCount = 0;
-    let interval = setInterval(() => {
+    this.jumpAttackInterval = setInterval(() => {
+      if (!this.bossIsHurt()) {
       if (attackCount < 8 && !this.isDead()) {
         this.playAnimation(this.ALERT_ANIMATION);
       } else if (attackCount >= 8 && attackCount <= 10 && !this.isDead()) {
@@ -198,31 +199,47 @@ class Endboss extends Enemies {
         this.bossAttackMovement(attackAnimationNr);
       } else if (attackCount > attackAnimationNr && !this.isDead()) {
         this.animationCount = 0;
-        clearInterval(interval);
+        clearInterval(this.jumpAttackInterval);
         this.animate();
         this.move();
         this.attack();
       } else if (this.isDead()) {
-        clearInterval(interval);
+        clearInterval(this.jumpAttackInterval);
       }
       attackCount++;
-    }, 150);
+  } else {
+    this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
+  }}, 150);
   }
 
   bossAttackMovement() {
     let count = 0;
     let interval;
     if (!this.aboveGround()) {
-      this.speedY = 20;
+      this.speedY = 22;
       interval = setInterval(() => {
         if (count < 30) {
-        this.x = this.x - 5;
-        count++;
+          this.x = this.x - 8;
+          count++;
         } else {
           clearInterval(interval);
         }
       }, 20);
-      }
+    }
+  }
+
+  hitBoss() {
+    this.energy -= 10;
+    if (this.energy <= 0) {
+      this.energy = 0;
+    }
+    this.lastHit = new Date().getTime();
+  }
+
+  bossIsHurt() {
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000; // millisec / 1000 = sec.
+    return timePassed < 1.5;
   }
 
   // async attack(){
