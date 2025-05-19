@@ -53,12 +53,12 @@ class World {
       if (this.character.energy <= 0) {
         clearInterval(interval);
         clearInterval(this.backgroundMoveInterval);
-        setTimeout(() => {
-          this.gameOver(); 
-        }, 2000);
         this.level.enemies.forEach((enemy) => {
           enemy.clearAllEnemyIntervalls();
         });
+        setTimeout(() => {
+          this.gameOver();
+        }, 2000);
       }
     }, 100);
   }
@@ -75,21 +75,31 @@ class World {
 
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && enemy.killed === false) {
+      if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (
           this.character.collisionFromAbove(enemy) &&
-          enemy.killed === false
+          enemy.lives === true
         ) {
           enemy.isKilled();
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
-          enemy.killed = true;
+          enemy.lives = false;
         } else {
           this.character.hit();
           this.healthbar.updateHealthbar();
         }
       }
     });
+  }
+
+    checkBossCollision() {
+    if (
+      this.character.isColliding(this.level.endboss) ||
+      this.character.isCollidingHead(this.level.endboss)
+    ) {
+      this.character.hit();
+      
+    }
   }
 
   checkThrownBottleCollision() {
@@ -156,15 +166,6 @@ class World {
     }, 500);
   }
 
-  checkBossCollision() {
-    if (
-      this.character.isColliding(this.level.endboss) ||
-      this.character.isCollidingHead(this.level.endboss)
-    ) {
-      this.character.hit();
-    }
-  }
-
   floorPosition(obj) {
     return this.canvasHeight - obj.height - this.floorHeight;
   }
@@ -177,7 +178,7 @@ class World {
         coin.collected = true;
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 10) {
+        if (this.character.coins === 1) {
           this.level.endboss.startBossFight();
         }
       }
@@ -291,17 +292,17 @@ class World {
 
   gameOver() {
     this.showGameOverScreen();
-          // play end sound win
-          // play end sound lose
-          // update highscore board
-          // show mousepointer
-          // function for play again button
-          // function for main menu button
+    // play end sound win
+    // play end sound lose
+    // update highscore board
+    // show mousepointer
+    // function for play again button
+    // function for main menu button
   }
 
-  showGameOverScreen(){
-    this.gameWon ? 
-    showSingleContainerById('canvas-won-container') :
-    showSingleContainerById('canvas-lost-container');
-   }
+  showGameOverScreen() {
+    this.gameWon
+      ? showSingleContainerById("canvas-won-container")
+      : showSingleContainerById("canvas-lost-container");
+  }
 }

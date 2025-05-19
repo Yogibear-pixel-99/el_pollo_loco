@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
+// set coin collision to 10 after boss animation
 
 // rewrite the boss bottle hit function
 

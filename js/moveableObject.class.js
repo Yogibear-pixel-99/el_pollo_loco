@@ -4,7 +4,6 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 2;
   lastHit = 0;
-  xFactor = 1;
   walkingSpeed = 2.8;
 
   applyGravity() {
@@ -43,33 +42,33 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    this.x = this.x - this.walkingSpeed * this.xFactor;
+    this.x = this.x - this.walkingSpeed;
   }
 
   moveRight() {
-    this.x = this.x + this.walkingSpeed * this.xFactor;
+    this.x = this.x + this.walkingSpeed;
   }
 
-  async playAnimationSpecificTime(times, imgArray, intervalName) {
-    return new Promise((resolve) => {
-      let loop = 0;
-      let count = 0;
+  // async playAnimationSpecificTime(times, imgArray, intervalName) {
+  //   return new Promise((resolve) => {
+  //     let loop = 0;
+  //     let count = 0;
 
-      this[intervalName] = setInterval(() => {
-        if (count < imgArray.length) {
-          let path = imgArray[count];
-          this.img = this.animatedImages[path];
-          count++;
-        } else {
-          count = 0;
-          loop++;
+  //     this[intervalName] = setInterval(() => {
+  //       if (count < imgArray.length) {
+  //         let path = imgArray[count];
+  //         this.img = this.animatedImages[path];
+  //         count++;
+  //       } else {
+  //         count = 0;
+  //         loop++;
 
-          if (loop >= times) {
-            clearInterval(this[intervalName]);
-            resolve();
-          }
-        }
-      }, 100);
-    });
-  }
+  //         if (loop >= times) {
+  //           clearInterval(this[intervalName]);
+  //           resolve();
+  //         }
+  //       }
+  //     }, 100);
+  //   });
+  // }
 }

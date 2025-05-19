@@ -6,8 +6,7 @@ class Enemies extends MovableObject {
     walkingSpeed;
     acceleration = 2;
     speedY = 0;
-    deadPic;
-    killed = false;
+    lives = true;
 
     constructor(){
         super();
