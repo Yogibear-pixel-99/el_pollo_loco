@@ -37,7 +37,6 @@
     <script src="./js/game.js"></script>
     <script src="./js/endboss.class.js"></script>
     <script src="./js/levels/level1.js"></script>
-    <script src="./js/gameFinishedMessage.class.js"></script>
   </head>
   <body onload="init()">
     <main class="main-container">
@@ -56,7 +55,18 @@
           <section
             id="canvas-option-container"
             class="canvas-menu-display d-none"></section>
+            <section id="canvas-won-container" class="canvas-won-lost-container flex-ctr-ctr flex-col">
+              <img class="game-won-img" alt="game-won-img">
+              <div>Play again</div>
+              <div>Main menu</div>
+            </section>
+            <section id="canvas-won-container" class="canvas-won-lost-container flex-ctr-ctr flex-col">
+              <img class="game-lost-img" alt="game lost image">
+              <div>Play again</div>
+              <div>Main menu</div>
+            </section>
         </section>
+        
         <div class="header-wrapper">
           <h1
             class="start-game-text top-game-header"

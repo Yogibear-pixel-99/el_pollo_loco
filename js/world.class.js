@@ -8,8 +8,6 @@ class World {
   playerscore = 0;
   pointTable;
   gameWon = false;
-  gameWonImg = new DrawableObject();
-  gameLostImg = new DrawableObject();
 
   canvasHeight;
   canvasWidth;
@@ -56,6 +54,7 @@ class World {
         clearInterval(interval);
         clearInterval(this.backgroundMoveInterval);
         setTimeout(() => {
+        
           // show game over screen
           // show play again button
           // show main menu button

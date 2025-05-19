@@ -77,6 +77,14 @@ canvas {
   border-radius: 20px;
 }
 
+.canvas-won-lost-container {
+  position: absolute;
+  inset: 0 0 5px 0;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
 .start-game-mask {
   position: absolute;
   inset: 0;
@@ -111,6 +119,16 @@ h2 {
 
 .d-none {
   display: none !important;
+}
+
+.flex-ctr-ctr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .start-game-text {
