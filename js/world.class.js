@@ -116,8 +116,10 @@ class World {
         bottle.alreadyHittet === false
       ) {
         this.animateBrokenBottle(bottle);
+        if (this.level.endboss.isTriggered) {
         this.level.endboss.hitBoss();
         this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+        }
       } else {
         this.level.enemies.forEach((enemy) => {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
@@ -178,7 +180,7 @@ class World {
         coin.collected = true;
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 1) {
+        if (this.character.coins === 10) {
           this.level.endboss.startBossFight();
         }
       }

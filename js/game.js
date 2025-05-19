@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // implement normal/hard/chickenrush mode
 
 
-
+// display info to collect 10 coins to trigger boss
 
 // game over screen
   // lost
