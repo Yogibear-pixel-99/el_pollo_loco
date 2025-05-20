@@ -5,8 +5,9 @@ class Endboss extends Enemies {
   scoreNameKilled = "endbossKilled";
   scoreNameBottle = "endbossBottleHit";
   y = 480 - this.height - 58 + 15;
-  x = 719 * 5 + 300;
-  energy = 100;
+  x = 500;
+  // x = 719 * 5 + 300;
+  energy = 10;
   acceleration = 2.5;
   isTriggered = false;
   animateInterval;
@@ -113,7 +114,9 @@ class Endboss extends Enemies {
    */
   animate() {
     this.animateInterval = setInterval(() => {
-      if (!this.isTriggered) {
+      if (this.isDead()) {
+        this.endBossDead();
+      } else if (!this.isTriggered) {
         this.playAnimation(this.ALERT_ANIMATION);
       } else if (this.isDead()) {
         this.playAnimation(this.BOSS_DEAD_ANIMATION);
@@ -123,6 +126,20 @@ class Endboss extends Enemies {
         this.playAnimation(this.WALKING_ANIMATION);
       }
     }, 150);
+  }
+
+  endBossDead(){
+    this.stopAllBossIntervals();
+    let count = 0;
+      let interval = setInterval(() => {
+        if (count < 9) {
+          this.playAnimation(this.BOSS_DEAD_ANIMATION);
+        } else {
+          clearInterval(interval);
+          this.img.src = this.BOSS_DEAD_ANIMATION[2];
+        }
+        count++;
+      }, 150);
   }
 
   /**
@@ -236,23 +253,23 @@ class Endboss extends Enemies {
     return timePassed < 1.5;
   }
 
-  async randomAttackJumps(rounds) {
-    for (let attackIndex = 0; attackIndex < rounds; attackIndex++) {
-      if (this.isDead) return;
-      await this.bossMovesToFloor();
-      this.speedY = 20;
-      this.jumpAttackInterval = setInterval(() => {
-        this.x = this.x - 7;
-      }, 20);
-      await this.playAnimationSpecificTime(
-        1,
-        this.BOSS_ATTACK_JUMP_ANIMATION,
-        "bossAttackJumpAnimationInterval"
-      );
-      clearInterval(this.jumpAttackInterval);
-      if (this.isDead) return;
-    }
-  }
+  // async randomAttackJumps(rounds) {
+  //   for (let attackIndex = 0; attackIndex < rounds; attackIndex++) {
+  //     if (this.isDead()) return;
+  //     await this.bossMovesToFloor();
+  //     this.speedY = 20;
+  //     this.jumpAttackInterval = setInterval(() => {
+  //       this.x = this.x - 7;
+  //     }, 20);
+  //     await this.playAnimationSpecificTime(
+  //       1,
+  //       this.BOSS_ATTACK_JUMP_ANIMATION,
+  //       "bossAttackJumpAnimationInterval"
+  //     );
+  //     clearInterval(this.jumpAttackInterval);
+  //     if (this.isDead()) return;
+  //   }
+  // }
 
   applyGravity() {
     setInterval(() => {

@@ -322,6 +322,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// SOUNDS FOR:
+    // Pepe walking
+    // pepe jumping
+    // pepe throwing
+    // pepe jumps on chicken
+    // pepe is idle
+    // pepe is sleeping snorring
+    // pepe collects a coin
+    // pepe collects a bottle
+    // bottle is broken
+    // wind is blowing
+
+
+    // chicken cluckern
+    // minichicken cluckern
+    // loud cry for chicken if they are running back
+    // chicken is killed
+
+    // boss is walking
+    // boss is attacking
+    // boss gehts hittet
+    // boss is killed
+
+    // music for the menu
+    // music for chickenrush
+
+
+// 
+
+// set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
+
+// Gameend - boss right pic and call gameend screen
+
 // set coin collision to 10 after boss animation
 
 // rewrite the boss bottle hit function

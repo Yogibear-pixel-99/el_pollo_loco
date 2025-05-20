@@ -50,13 +50,12 @@ class World {
 
   checkIfGameIsOver() {
     let interval = setInterval(() => {
-      if (this.character.energy <= 0) {
+      if (this.character.energy <= 0 || this.level.endboss.energy <= 0) {
         clearInterval(interval);
-        clearInterval(this.backgroundMoveInterval);
-        this.level.enemies.forEach((enemy) => {
-          enemy.clearAllEnemyIntervalls();
-        });
         setTimeout(() => {
+          if (this.level.endboss.energy <= 0) {
+            this.gameWon = true;
+          }
           this.gameOver();
         }, 2000);
       }
@@ -76,10 +75,7 @@ class World {
   checkEnemyCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
-        if (
-          this.character.collisionFromAbove(enemy) &&
-          enemy.lives === true
-        ) {
+        if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
           enemy.isKilled();
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
@@ -92,13 +88,12 @@ class World {
     });
   }
 
-    checkBossCollision() {
+  checkBossCollision() {
     if (
       this.character.isColliding(this.level.endboss) ||
       this.character.isCollidingHead(this.level.endboss)
     ) {
       this.character.hit();
-      
     }
   }
 
@@ -117,8 +112,8 @@ class World {
       ) {
         this.animateBrokenBottle(bottle);
         if (this.level.endboss.isTriggered) {
-        this.level.endboss.hitBoss();
-        this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+          this.level.endboss.hitBoss();
+          this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
         this.level.enemies.forEach((enemy) => {
@@ -180,7 +175,7 @@ class World {
         coin.collected = true;
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 10) {
+        if (this.character.coins === 1) {
           this.level.endboss.startBossFight();
         }
       }
@@ -294,9 +289,13 @@ class World {
 
   gameOver() {
     this.showGameOverScreen();
+    this.clearEnemyMovement();
+    clearInterval(this.character.moveInterval);
+    clearInterval(this.backgroundMoveInterval);
+    clearInterval(this.level.endboss.stopAllBossIntervals());
+    if (this.gameWon) this.addPointsToPlayerScore('endbossKilled');
     // play end sound win
     // play end sound lose
-    // update highscore board
     // show mousepointer
     // function for play again button
     // function for main menu button
@@ -306,5 +305,11 @@ class World {
     this.gameWon
       ? showSingleContainerById("canvas-won-container")
       : showSingleContainerById("canvas-lost-container");
+  }
+
+  clearEnemyMovement() {
+    this.level.enemies.forEach((enemy) => {
+      enemy.clearAllEnemyIntervalls();
+    });
   }
 }

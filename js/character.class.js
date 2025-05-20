@@ -118,7 +118,7 @@ class Character extends MovableObject {
   }
 
   moveDetection() {
-    this. moveInterval = setInterval(() => {
+    this.moveInterval = setInterval(() => {
       if (!this.isDead()) {
       if (
         this.world.keyboard.KEY_RIGHT == true &&
@@ -132,8 +132,8 @@ class Character extends MovableObject {
         this.moveLeft();
         this.world.camera_x = 200 - this.x;
         this.otherDirection = true;
-      }}
-    }, 1000 / 60);
+      }
+  }}, 1000 / 60);
   }
 
   characterIdle() {
@@ -167,8 +167,10 @@ class Character extends MovableObject {
     this.playAnimation(this.JUMPING_ANIMATION);
   }
   
+    // if (!this.bottleThrown && this.bottles >= 0 ) {
+
   throwBottle() {
-    if (!this.bottleThrown && this.bottles > 0 ) {
+    if (!this.bottleThrown) {
       this.world.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
       this.bottles--;
