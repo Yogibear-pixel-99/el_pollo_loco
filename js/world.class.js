@@ -145,9 +145,11 @@ class World {
     let bottleIndex = world.thrownBottles.indexOf(bottle);
     bottle.img = bottle.animatedImages[bottle.BOTTLE_SPLASH_ANIMATION[0]];
     let count = 1;
+    bottle.playBreakSound();
     let interval = setInterval(() => {
       if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
         bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
+        
         count++;
       } else {
         world.thrownBottles.splice(bottleIndex, 1);

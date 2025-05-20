@@ -5,11 +5,20 @@ class Character extends MovableObject {
   jumpKill = false;
   energy = 100;
   idleLoopCount = 0;
+  soundinterval;
   offset = {
     top: 90,
     right: 30,
     bottom: 10,
     left: 20,
+  };
+
+  sfx = {
+    walk: new Audio("./audio/1_pepe/walking-sound-effect-272246.mp3"),
+    jump: new Audio("./audio/1_pepe/sound_jump-90516.mp3"),
+    collectBottle: new Audio(),
+    collectCoin: new Audio(),
+    throwBottle: new Audio(),
   };
 
   coins = 0;
@@ -88,10 +97,31 @@ class Character extends MovableObject {
     this.moveDetection();
     this.animateIdle();
     this.applyGravity();
+    this.sounds();
+  }
+
+  sounds() {
+    this.soundinterval = setInterval(() => {
+      const right = this.world.keyboard.KEY_RIGHT;
+      const left = this.world.keyboard.KEY_LEFT;
+      const jump = this.world.keyboard.KEY_JUMP;
+      const shot = this.world.keyboard.KEY_SHOT;
+      if (!this.aboveGround() && (right || left)) {
+        this.sfx.walk.play();
+      } else {
+        this.sfx.walk.pause();
+      }
+      if (jump) {
+        this.sfx.jump.play();
+      }
+      if (shot) {
+        this.sfx.shot.play();
+      }
+    }, 1000 / 60);
   }
 
   animate() {
-   this.animateInterval =  setInterval(() => {
+    this.animateInterval = setInterval(() => {
       if (this.isDead()) {
         this.animateDead();
         return;
@@ -120,20 +150,21 @@ class Character extends MovableObject {
   moveDetection() {
     this.moveInterval = setInterval(() => {
       if (!this.isDead()) {
-      if (
-        this.world.keyboard.KEY_RIGHT == true &&
-        this.x < this.world.level.level_end_x
-      ) {
-        this.moveRight();
-        this.world.camera_x = 200 - this.x;
-        this.otherDirection = false;
+        if (
+          this.world.keyboard.KEY_RIGHT == true &&
+          this.x < this.world.level.level_end_x
+        ) {
+          this.moveRight();
+          this.world.camera_x = 200 - this.x;
+          this.otherDirection = false;
+        }
+        if (this.world.keyboard.KEY_LEFT == true && this.x > -200) {
+          this.moveLeft();
+          this.world.camera_x = 200 - this.x;
+          this.otherDirection = true;
+        }
       }
-      if (this.world.keyboard.KEY_LEFT == true && this.x > -200) {
-        this.moveLeft();
-        this.world.camera_x = 200 - this.x;
-        this.otherDirection = true;
-      }
-  }}, 1000 / 60);
+    }, 1000 / 60);
   }
 
   characterIdle() {
@@ -166,8 +197,8 @@ class Character extends MovableObject {
   animateJump() {
     this.playAnimation(this.JUMPING_ANIMATION);
   }
-  
-    // if (!this.bottleThrown && this.bottles >= 0 ) {
+
+  // if (!this.bottleThrown && this.bottles >= 0 ) {
 
   throwBottle() {
     if (!this.bottleThrown) {
