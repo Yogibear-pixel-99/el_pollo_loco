@@ -36,11 +36,4 @@ class Enemies extends MovableObject {
       clearInterval(this.walkAnimationInterval);
       clearInterval(this.walkMoveInterval);
     };
-    
-  playKilledChickenSound() {
-    let rnd = Math.floor(
-      Math.random() * world.audiofiles.sfx.deadChicken.length
-    );
-    world.audiofiles.sfx.deadChicken[rnd].play();
-  }
 }

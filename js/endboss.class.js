@@ -292,9 +292,4 @@ class Endboss extends Enemies {
       clearInterval(this[interval]);
     })
   }
-
-  playHittedSound(){
-    let sound = world.audiofiles.sfx.bossHitted.cloneNode();
-        sound.play();
-  }
 }

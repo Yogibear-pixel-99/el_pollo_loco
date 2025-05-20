@@ -199,7 +199,7 @@ class Character extends MovableObject {
       this.bottleThrown = true;
       this.bottles--;
       this.world.bottlebar.updateBottleBar();
-      this.playThrowSound();
+      this.playRandomSound('bottleThrow');
       setTimeout(() => {
         this.bottleThrown = false;
       }, 2000);
@@ -220,12 +220,5 @@ class Character extends MovableObject {
 
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
-  }
-
-    playThrowSound() {
-    let rnd = Math.floor(
-      Math.random() * world.audiofiles.sfx.bottleThrow.length
-    );
-    world.audiofiles.sfx.bottleThrow[rnd].play();
   }
 }

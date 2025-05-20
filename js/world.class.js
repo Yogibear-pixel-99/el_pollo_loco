@@ -84,7 +84,7 @@ class World {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
           enemy.isKilled();
-          enemy.playKilledChickenSound();
+          enemy.playRandomSound('deadChicken');
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           enemy.lives = false;
@@ -121,7 +121,7 @@ class World {
         this.animateBrokenBottle(bottle);
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
-          this.level.endboss.playHittedSound();
+          this.level.endboss.playSound('bossHitted');
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
@@ -181,7 +181,7 @@ class World {
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && coin.collected == false) {
-        world.audiofiles.sfx.collectCoin.play();
+        coin.playSound('collectCoin');
         this.character.collectCoin();
         coin.isCollectedAnimation();
         coin.collected = true;
