@@ -8,6 +8,11 @@ class Audiofiles {
       new Audio("./audio/items/movement-swipe-whoosh-1-186575.mp3"),
       new Audio("./audio/items/movement-swipe-whoosh-3-186577.mp3")
     ],
+    deadChicken: [
+      new Audio("./audio/chicken/chicken-noise-196746.mp3"),
+      new Audio("./audio/chicken/chicken-single-alarm-call-6056.mp3")
+    ],
+    pepeLanding: new Audio("./audio/1_pepe/land-81509.mp3"),
     pepeWalk: new Audio("./audio/pepe/walking-sound-effect-272246.mp3"),
     pepeJump: new Audio("./audio/pepe/sound_jump-90516.mp3"),
     pepeCollectBottle: new Audio(),

@@ -323,9 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // SOUNDS FOR:
-    // Pepe walking
-    // pepe jumping
-    // pepe throwing
     // pepe jumps on chicken
     // pepe is idle
     // pepe is sleeping snorring
@@ -365,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // implement normal/hard/chickenrush mode
 
+// pepe dont show animation if throw bottle
 
 // display info to collect 10 coins to trigger boss
 

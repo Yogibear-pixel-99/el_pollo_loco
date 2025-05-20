@@ -104,13 +104,11 @@ class Character extends MovableObject {
       } else {
         world.audiofiles.sfx.pepeWalk.pause();
       }
-      if (jump) {
+      if (jump && !this.aboveGround()) {
         world.audiofiles.sfx.pepeJump.play();
       }
-      if (shot) {
-        this.timestamp = new Date().getTime();
-        this.playThrowSound();
-        // world.audiofiles.sfx.pepeThrowBottle.play();
+      if (this.speedY < 0 && !this.aboveGround()) {
+        world.audiofiles.sfx.pepeLanding.play();
       }
     }, 1000 / 60);
   }
@@ -201,6 +199,7 @@ class Character extends MovableObject {
       this.bottleThrown = true;
       this.bottles--;
       this.world.bottlebar.updateBottleBar();
+      this.playThrowSound();
       setTimeout(() => {
         this.bottleThrown = false;
       }, 2000);
@@ -223,13 +222,10 @@ class Character extends MovableObject {
     if (this.bottles < 5) this.bottles++;
   }
 
-  playThrowSound() {
-    let soundTime = new Date().getTime();
-    let delta = this.timestamp - soundTime / 1000;
-    if (delta < 0.5 && world.throwBottle.length === 0) {
+    playThrowSound() {
     let rnd = Math.floor(
       Math.random() * world.audiofiles.sfx.bottleThrow.length
     );
     world.audiofiles.sfx.bottleThrow[rnd].play();
-  }}
+  }
 }

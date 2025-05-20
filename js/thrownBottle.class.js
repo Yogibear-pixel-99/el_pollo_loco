@@ -8,7 +8,7 @@ class Thrownbottle extends MovableObject {
   gravityInterval;
   moveBottleInterval_x;
   throwInAnimationInterval;
-  itemName = 'bottleMissed';
+  itemName = "bottleMissed";
   pointsCount = 0;
   offset = {
     top: 20,
@@ -16,7 +16,6 @@ class Thrownbottle extends MovableObject {
     bottom: 20,
     left: 20,
   };
-
 
   BOTTLE_THROW_ANIMATION_RIGHT = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
@@ -75,9 +74,9 @@ class Thrownbottle extends MovableObject {
   animate() {
     const direction = world.character.otherDirection;
     this.throwInAnimationInterval = setInterval(() => {
-      direction ? 
-        this.playAnimation(this.BOTTLE_THROW_ANIMATION_LEFT) :
-        this.playAnimation(this.BOTTLE_THROW_ANIMATION_RIGHT);
+      direction
+        ? this.playAnimation(this.BOTTLE_THROW_ANIMATION_LEFT)
+        : this.playAnimation(this.BOTTLE_THROW_ANIMATION_RIGHT);
     }, 50);
   }
 
@@ -119,10 +118,10 @@ class Thrownbottle extends MovableObject {
     }, 1000 / 60);
   }
 
-  playBreakSound(){
-    let rnd = Math.floor(Math.random() * world.audiofiles.sfx.bottleBreak.length);
+  playBreakSound() {
+    let rnd = Math.floor(
+      Math.random() * world.audiofiles.sfx.bottleBreak.length
+    );
     world.audiofiles.sfx.bottleBreak[rnd].play();
   }
-
-
 }

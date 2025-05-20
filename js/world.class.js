@@ -84,6 +84,7 @@ class World {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
           enemy.isKilled();
+          enemy.playKilledChickenSound();
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           enemy.lives = false;
