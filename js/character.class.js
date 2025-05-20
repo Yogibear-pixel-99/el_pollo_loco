@@ -4,8 +4,11 @@ class Character extends MovableObject {
   height = 190;
   jumpKill = false;
   energy = 100;
-  idleLoopCount = 0;
+  idlecount = 0;
   soundinterval;
+  idleInterval;
+  checkIdleInterval;
+  isIdle = false;
   timestamp;
   offset = {
     top: 90,
@@ -88,7 +91,7 @@ class Character extends MovableObject {
     this.loadImagesArray(this.HURT_ANIMATION);
     this.animate();
     this.moveDetection();
-    this.animateIdle();
+    this.checkIdle();
     this.applyGravity();
     this.playSounds();
   }
@@ -99,7 +102,7 @@ class Character extends MovableObject {
       const left = world.keyboard.KEY_LEFT;
       const jump = world.keyboard.KEY_JUMP;
       if (!this.aboveGround() && (right || left)) {
-        if (world.audiofiles.sfx.pepeWalk.currentTime > 3.7){
+        if (world.audiofiles.sfx.pepeWalk.currentTime > 3.7) {
           world.audiofiles.sfx.pepeWalk.currentTime = 0;
         }
         world.audiofiles.sfx.pepeWalk.play();
@@ -112,6 +115,14 @@ class Character extends MovableObject {
       if (this.speedY < 0 && !this.aboveGround()) {
         world.audiofiles.sfx.pepeLanding.play();
       }
+      // if (this.characterIdle()){
+      //   if (this.characterLongIdle()){
+      //     this.playSounds('pepeLongIdle');
+      //   } else {
+      //     this.playSounds('pepeIdle');
+      //   }
+
+      // }
     }, 1000 / 60);
   }
 
@@ -142,6 +153,47 @@ class Character extends MovableObject {
     }, 100);
   }
 
+  checkIdle() {
+    this.checkIdleInterval = setInterval(() => {
+      if (
+        this.world.keyboard.KEY_RIGHT == true ||
+        this.world.keyboard.KEY_LEFT == true ||
+        this.world.keyboard.KEY_JUMP ||
+        this.isHurt()
+      ) {
+        this.resetIdle();
+      }
+    }, 20);
+  }
+
+  animateIdle() {
+    this.idleInterval = setInterval(() => {
+  
+      
+      if (this.idlecount > 40) {
+        this.playAnimation(this.IDLE_LONG_ANIMATION);
+        world.audiofiles.sfx.pepeLongIdle.play();
+      } else {
+        if (this.idlecount === 10) {
+          world.audiofiles.sfx.pepeIdle.play();
+        }
+        this.playAnimation(this.IDLE_ANIMATION);
+      }
+      this.idlecount++;
+    }, 200);
+  }
+
+  resetIdle() {
+    clearInterval(this.idleInterval);
+    this.idlecount = 0;
+    this.isIdle = false;
+    this.animate();
+    world.audiofiles.sfx.pepeIdle.pause();
+    world.audiofiles.sfx.pepeLongIdle.pause();
+    world.audiofiles.sfx.pepeIdle.currentTime = 0;
+    world.audiofiles.sfx.pepeLongIdle.currentTime = 0;
+  }
+
   moveDetection() {
     this.moveInterval = setInterval(() => {
       if (!this.isDead()) {
@@ -168,10 +220,6 @@ class Character extends MovableObject {
       this.world.keyboard.KEY_LEFT == false &&
       this.world.keyboard.KEY_JUMP == false
     );
-  }
-
-  animateIdle() {
-    this.playAnimation(this.IDLE_ANIMATION);
   }
 
   animateWalk() {
@@ -201,7 +249,7 @@ class Character extends MovableObject {
       this.bottleThrown = true;
       this.bottles--;
       this.world.bottlebar.updateBottleBar();
-      this.playRandomSound('bottleThrow');
+      this.playRandomSound("bottleThrow");
       setTimeout(() => {
         this.bottleThrown = false;
       }, 2000);

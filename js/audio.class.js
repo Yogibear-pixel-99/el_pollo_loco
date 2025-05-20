@@ -20,6 +20,8 @@ class Audiofiles {
     pepeLanding: new Audio("./audio/pepe/land-81509.mp3"),
     pepeWalk: new Audio("./audio/pepe/walking-sound-effect-272246.mp3"),
     pepeJump: new Audio("./audio/pepe/sound_jump-90516.mp3"),
+    pepeIdle: new Audio("./audio/pepe/yawn-with-end-38154.mp3"),
+    pepeLongIdle: new Audio("./audio/pepe/labored-breathing-sleeping-73258.mp3"),
     collectCoin: new Audio("./audio/items/coins/coin-collision-sound-342335.mp3"),
     collectBottle : [
       new Audio("./audio/items/bottles/glass-bottle-clink-90671.mp3"),

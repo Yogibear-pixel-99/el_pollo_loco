@@ -325,10 +325,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // SOUNDS FOR:
     // pepe is idle
     // pepe is sleeping snorring
-    // pepe collects a coin
-    // pepe collects a bottle
-    // bottle is broken
     // wind is blowing
+    // endboss jump attack sound
 
 
     // chicken cluckern
