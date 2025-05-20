@@ -117,11 +117,4 @@ class Thrownbottle extends MovableObject {
       }
     }, 1000 / 60);
   }
-
-  playBreakSound() {
-    let rnd = Math.floor(
-      Math.random() * world.audiofiles.sfx.bottleBreak.length
-    );
-    world.audiofiles.sfx.bottleBreak[rnd].play();
-  }
 }

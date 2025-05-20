@@ -129,6 +129,7 @@ class World {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
             enemy.isKilled();
+            enemy.playRandomSound('deadChicken');
             this.addPointsToPlayerScore(enemy.scoreNameBottle);
           }
         });
@@ -154,7 +155,7 @@ class World {
     let bottleIndex = world.thrownBottles.indexOf(bottle);
     bottle.img = bottle.animatedImages[bottle.BOTTLE_SPLASH_ANIMATION[0]];
     let count = 1;
-    bottle.playBreakSound();
+    bottle.playRandomSound('bottleBreak');
     let interval = setInterval(() => {
       if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
         bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
@@ -199,6 +200,7 @@ class World {
       if (this.character.isColliding(bottle)) {
         if (world.character.bottles < 5) {
           this.addPointsToPlayerScore(bottle.itemName);
+          bottle.playRandomSound('collectBottle');
         }
         bottle.isCollected();
         this.character.collectBottle();

@@ -98,8 +98,10 @@ class Character extends MovableObject {
       const right = world.keyboard.KEY_RIGHT;
       const left = world.keyboard.KEY_LEFT;
       const jump = world.keyboard.KEY_JUMP;
-      const shot = world.keyboard.KEY_SHOT;
       if (!this.aboveGround() && (right || left)) {
+        if (world.audiofiles.sfx.pepeWalk.currentTime > 3.7){
+          world.audiofiles.sfx.pepeWalk.currentTime = 0;
+        }
         world.audiofiles.sfx.pepeWalk.play();
       } else {
         world.audiofiles.sfx.pepeWalk.pause();

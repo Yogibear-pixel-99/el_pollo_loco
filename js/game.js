@@ -323,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // SOUNDS FOR:
-    // pepe jumps on chicken
     // pepe is idle
     // pepe is sleeping snorring
     // pepe collects a coin
