@@ -13,13 +13,7 @@ class Character extends MovableObject {
     left: 20,
   };
 
-  sfx = {
-    walk: new Audio("./audio/1_pepe/walking-sound-effect-272246.mp3"),
-    jump: new Audio("./audio/1_pepe/sound_jump-90516.mp3"),
-    collectBottle: new Audio(),
-    collectCoin: new Audio(),
-    throwBottle: new Audio(),
-  };
+
 
   coins = 0;
   bottles = 0;
@@ -97,25 +91,25 @@ class Character extends MovableObject {
     this.moveDetection();
     this.animateIdle();
     this.applyGravity();
-    this.sounds();
+    this.playSounds();
   }
 
-  sounds() {
+      playSounds() {
     this.soundinterval = setInterval(() => {
-      const right = this.world.keyboard.KEY_RIGHT;
-      const left = this.world.keyboard.KEY_LEFT;
-      const jump = this.world.keyboard.KEY_JUMP;
-      const shot = this.world.keyboard.KEY_SHOT;
+      const right = world.keyboard.KEY_RIGHT;
+      const left = world.keyboard.KEY_LEFT;
+      const jump = world.keyboard.KEY_JUMP;
+      const shot = world.keyboard.KEY_SHOT;
       if (!this.aboveGround() && (right || left)) {
-        this.sfx.walk.play();
+        world.audiofiles.sfx.pepeWalk.play();
       } else {
-        this.sfx.walk.pause();
+        world.audiofiles.sfx.pepeWalk.pause();
       }
       if (jump) {
-        this.sfx.jump.play();
+        world.audiofiles.sfx.pepeJump.play();
       }
       if (shot) {
-        this.sfx.shot.play();
+        world.audiofiles.sfx.pepeThrowBottle.play();
       }
     }, 1000 / 60);
   }

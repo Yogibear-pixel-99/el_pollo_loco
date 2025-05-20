@@ -16,13 +16,7 @@ class Thrownbottle extends MovableObject {
     bottom: 20,
     left: 20,
   };
-   sfx = {
-    bottleBreak: 
-    [
-      new Audio('./audio/1_pepe/bottle-break-39916.mp3'),
-      new Audio('./audio/1_pepe/bottle-smash-107832.mp3'),
-    ]
-  };
+
 
   BOTTLE_THROW_ANIMATION_RIGHT = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
@@ -126,10 +120,7 @@ class Thrownbottle extends MovableObject {
   }
 
   playBreakSound(){
-    let rnd = Math.floor(Math.random() * 2);
-    if (rnd === 1) {
-      this.sfx.bottleBreak[rnd].currentTime = 0.4;
-    }
-    this.sfx.bottleBreak[rnd].play();
+    let rnd = Math.floor(Math.random() * world.audiofiles.sfx.bottleBreak.length);
+    world.audiofiles.sfx.bottleBreak[rnd].play();
   }
 }

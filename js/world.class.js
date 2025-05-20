@@ -4,11 +4,11 @@ class World {
   coinbar = new Coinbar();
   bottlebar = new Bottlebar();
   bossHealthbar = new Bosshealthbar();
+  audiofiles = new Audiofiles();
   thrownBottles = [];
   playerscore = 0;
   pointTable;
   gameWon = false;
-
   canvasHeight;
   canvasWidth;
   floorHeight;
@@ -27,7 +27,7 @@ class World {
     pointTable,
     canvasHeight,
     canvasWidth,
-    floorHeight
+    floorHeight,
   ) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -42,7 +42,14 @@ class World {
     this.moveBackground();
     this.updatePlayerScore();
     this.checkIfGameIsOver();
+    this.playGameMusic();
   }
+
+  playGameMusic(){
+        this.audiofiles.music.gameMusic.loop = true;
+    this.audiofiles.music.gameMusic.play();
+  }
+
 
   setWorld() {
     this.character.world = this;
@@ -172,6 +179,7 @@ class World {
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && coin.collected == false) {
+        world.audiofiles.sfx.collectCoin.play();
         this.character.collectCoin();
         coin.isCollectedAnimation();
         coin.collected = true;

@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // music for chickenrush
 
 
-// 
+// look for canvasheight and width variable in game.js, they havent a let.
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 
