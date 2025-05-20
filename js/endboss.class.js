@@ -7,7 +7,7 @@ class Endboss extends Enemies {
   y = 480 - this.height - 58 + 15;
   x = 500;
   // x = 719 * 5 + 300;
-  energy = 10;
+  energy = 30;
   acceleration = 2.5;
   isTriggered = false;
   animateInterval;
@@ -291,5 +291,10 @@ class Endboss extends Enemies {
     this.allBossIntervals.forEach((interval) => {
       clearInterval(this[interval]);
     })
+  }
+
+  playHittedSound(){
+    let sound = world.audiofiles.sfx.bossHitted.cloneNode();
+        sound.play();
   }
 }

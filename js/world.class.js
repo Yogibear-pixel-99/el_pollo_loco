@@ -121,6 +121,7 @@ class World {
         this.animateBrokenBottle(bottle);
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
+          this.level.endboss.playHittedSound();
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {

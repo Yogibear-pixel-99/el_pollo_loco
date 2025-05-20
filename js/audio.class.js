@@ -10,14 +10,21 @@ class Audiofiles {
     ],
     deadChicken: [
       new Audio("./audio/chicken/chicken-noise-196746.mp3"),
-      new Audio("./audio/chicken/chicken-single-alarm-call-6056.mp3")
+      new Audio("./audio/chicken/chicken-single-alarm-call-6056.mp3"),
+      new Audio("./audio/chicken/chicken-noise-228106.mp3")
     ],
-    pepeLanding: new Audio("./audio/1_pepe/land-81509.mp3"),
+    deadMiniChicken: [
+
+    ],
+    pepeLanding: new Audio("./audio/pepe/land-81509.mp3"),
     pepeWalk: new Audio("./audio/pepe/walking-sound-effect-272246.mp3"),
     pepeJump: new Audio("./audio/pepe/sound_jump-90516.mp3"),
     pepeCollectBottle: new Audio(),
     collectCoin: new Audio("./audio/items/coin-collision-sound-342335.mp3"),
-    pepeThrowBottle: new Audio(),
+    collectBottle : [
+
+    ],
+    bossHitted: new Audio("./audio/boss/lighting-a-fire-14421.mp3"),
   };
 
   music = {
