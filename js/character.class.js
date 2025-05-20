@@ -6,14 +6,13 @@ class Character extends MovableObject {
   energy = 100;
   idleLoopCount = 0;
   soundinterval;
+  timestamp;
   offset = {
     top: 90,
     right: 30,
     bottom: 10,
     left: 20,
   };
-
-
 
   coins = 0;
   bottles = 0;
@@ -94,7 +93,7 @@ class Character extends MovableObject {
     this.playSounds();
   }
 
-      playSounds() {
+  playSounds() {
     this.soundinterval = setInterval(() => {
       const right = world.keyboard.KEY_RIGHT;
       const left = world.keyboard.KEY_LEFT;
@@ -109,7 +108,9 @@ class Character extends MovableObject {
         world.audiofiles.sfx.pepeJump.play();
       }
       if (shot) {
-        world.audiofiles.sfx.pepeThrowBottle.play();
+        this.timestamp = new Date().getTime();
+        this.playThrowSound();
+        // world.audiofiles.sfx.pepeThrowBottle.play();
       }
     }, 1000 / 60);
   }
@@ -221,4 +222,14 @@ class Character extends MovableObject {
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
   }
+
+  playThrowSound() {
+    let soundTime = new Date().getTime();
+    let delta = this.timestamp - soundTime / 1000;
+    if (delta < 0.5 && world.throwBottle.length === 0) {
+    let rnd = Math.floor(
+      Math.random() * world.audiofiles.sfx.bottleThrow.length
+    );
+    world.audiofiles.sfx.bottleThrow[rnd].play();
+  }}
 }
