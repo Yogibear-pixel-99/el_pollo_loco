@@ -9,13 +9,14 @@ class World {
   playerscore = 0;
   pointTable;
   gameWon = false;
-  canvasHeight;
-  canvasWidth;
   floorHeight;
-  backgroundMoveInterval;
   chickenNear = false;
   level = level1;
-
+  allWorldIntervals = ['collisionInterval', 'cluckerInterval', 'updateScoreInterval', 'backgroundMoveInterval'];
+  collisionInterval;
+  cluckerInterval;
+  updateScoreInterval;
+  backgroundMoveInterval;
   canvas;
   ctx;
   keyboard;
@@ -25,17 +26,11 @@ class World {
     canvas,
     keyboard,
     pointTable,
-    canvasHeight,
-    canvasWidth,
-    floorHeight
   ) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.pointTable = pointTable;
-    this.canvasHeight = canvasHeight;
-    this.canvasWidth = canvasWidth;
-    this.floorHeight = floorHeight;
     this.draw();
     this.setWorld();
     this.runCollisions();
@@ -70,7 +65,7 @@ class World {
   }
 
   runCollisions() {
-    setInterval(() => {
+    this.collisionInterval = setInterval(() => {
       this.checkEnemyCollisions();
       this.checkCoinCollision();
       this.checkBottleCollision();
@@ -171,14 +166,14 @@ class World {
   }
 
   updatePlayerScore() {
-    setInterval(() => {
+    this.updateScoreInterval = setInterval(() => {
       let ref = document.getElementById("player-score");
       ref.innerText = this.playerscore;
     }, 500);
   }
 
   floorPosition(obj) {
-    return this.canvasHeight - obj.height - this.floorHeight;
+    return canvasHeight - obj.height - floorHeight;
   }
 
   checkCoinCollision() {
@@ -232,7 +227,7 @@ class World {
   }
 
   checkCluckerSound() {
-    setInterval(() => {
+    this.cluckerInterval = setInterval(() => {
       let charX = this.character.x;
       this.chickenNear = false;
       this.level.enemies.forEach((enemy) => {
@@ -324,11 +319,13 @@ class World {
 
   gameOver() {
     this.showGameOverScreen();
-    this.clearEnemyMovement();
-    clearInterval(this.character.moveInterval);
-    clearInterval(this.backgroundMoveInterval);
-    clearInterval(this.level.endboss.stopAllBossIntervals());
-    if (this.gameWon) this.addPointsToPlayerScore("endbossKilled");
+    this.stopAllGameIntervals();
+
+
+    if (this.gameWon) {this.addPointsToPlayerScore("endbossKilled")};
+   
+
+    this.audiofiles.sfx.cluckern.pause();
     // play end sound win
     // play end sound lose
     // show mousepointer
@@ -342,7 +339,27 @@ class World {
       : showSingleContainerById("canvas-lost-container");
   }
 
-  clearEnemyMovement() {
+stopAllGameIntervals(){
+  this.stopAllWorldIntervals();
+  this.stopEnemyIntervals();
+  this.level.endboss.stopAllBossIntervals();
+  this.character.stopAllCharIntervals();
+  this.stopAllCloudInterval();
+}
+
+stopAllCloudInterval(){
+  this.level.skyObjects.forEach((cloud) => 
+  cloud.cancelAutoMove());
+}
+
+
+  stopAllWorldIntervals(){
+    this.allWorldIntervals.forEach((interval) => {
+      clearInterval(this[interval]);
+    })
+  }
+
+  stopEnemyIntervals() {
     this.level.enemies.forEach((enemy) => {
       enemy.clearAllEnemyIntervalls();
     });

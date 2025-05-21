@@ -1,6 +1,4 @@
 class DrawableObject {
-  canvasHeight = 480;
-  canvasWidth = 720;
   floorHeight = 58;
   animateInterval;
   moveInterval;
@@ -102,7 +100,7 @@ class DrawableObject {
   // }
 
   floorPosition() {
-    return this.canvasHeight - this.height - this.floorHeight;
+    return canvasHeight - this.height - floorHeight;
   }
 
   playAnimation(arrayName) {

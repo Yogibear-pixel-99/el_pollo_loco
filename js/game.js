@@ -1,9 +1,9 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-canvasHeight = 480;
-canvasWidth = 720;
-floorHeight = 58;
+let canvasHeight = 480;
+let canvasWidth = 720;
+let floorHeight = 58;
 
 function init() {
   canvas = document.getElementById("gamecanvas");
@@ -88,8 +88,6 @@ function startNormalGame() {
     canvas,
     keyboard,
     pointConfig,
-    canvasHeight,
-    canvasWidth,
     floorHeight
   );
 }
@@ -318,23 +316,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// end screen lost - pepe stop walking sound
+// stop boss attack
+
+// endscreen win - stop moving sound and stop cicken sound
 
 
 
 
 // SOUNDS FOR:
 
-
-    // chicken cluckern
-    // minichicken cluckern
     // loud cry for chicken if they are running back
-   
-
-  
-    // boss is attacking
-
-
-
     // music for the menu
     // music for chickenrush
 

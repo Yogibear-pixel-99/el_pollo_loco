@@ -6,9 +6,10 @@ class Character extends MovableObject {
   energy = 100;
   idleCount = 0;
   animateInterval;
-  soundinterval;
+  soundInterval;
   idleInterval;
   checkIdleInterval;
+  allIntervals = ['animateInterval', 'soundInterval', 'idleInterval', 'checkIdleInterval'];
   jumpCount = 2;
   alreadyJumps = false;
   isIdle = false;
@@ -98,7 +99,7 @@ class Character extends MovableObject {
   }
 
   playSounds() {
-    this.soundinterval = setInterval(() => {
+    this.soundInterval = setInterval(() => {
       const right = world.keyboard.KEY_RIGHT;
       const left = world.keyboard.KEY_LEFT;
       const jump = world.keyboard.KEY_JUMP;
@@ -140,15 +141,15 @@ class Character extends MovableObject {
         ) {
           this.animateWalk();
         }
-
+        
         if (
           this.world.keyboard.KEY_JUMP === true &&
           !this.aboveGround() &&
           this.alreadyJumps === false
         ) {
           this.alreadyJumps = true;
-          // this.loadImage(this.JUMPING_ANIMATION[2]);
-          this.img.src = this.JUMPING_ANIMATION[2];
+          this.loadImage(this.JUMPING_ANIMATION[2]);
+          // this.img.src = this.JUMPING_ANIMATION[2];
           setTimeout(() => this.jump(), 50);
         }
         if (this.characterIdle()) {
@@ -187,6 +188,7 @@ class Character extends MovableObject {
       this.world.keyboard.KEY_RIGHT == false &&
       this.world.keyboard.KEY_LEFT == false &&
       this.world.keyboard.KEY_JUMP == false &&
+      this.world.keyboard.KEY_SHOT == false &&
       !this.isHurt()
     );
   }
@@ -287,5 +289,11 @@ class Character extends MovableObject {
 
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
+  }
+
+  stopAllCharIntervals(){
+    this.allIntervals.forEach((interval) => {
+      clearInterval(this[interval]);
+    })
   }
 }
