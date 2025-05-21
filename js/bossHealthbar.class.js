@@ -20,13 +20,13 @@ class Bosshealthbar extends Statusbar {
 updateBossHealthbar(){
     const energy = world.level.endboss.energy;
 
-        if (energy === 100) {
+        if (energy === 50) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[5]];
-    } else if (energy >= 80) {
+    } else if (energy >= 40) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[4]];
-    } else if (energy >= 50) {
-      this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[3]];
     } else if (energy >= 30) {
+      this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[3]];
+    } else if (energy >= 20) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[2]];
     } else if (energy >= 10) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[1]];

@@ -7,14 +7,31 @@ class Enemies extends MovableObject {
     acceleration = 2;
     speedY = 0;
     lives = true;
+    otherDirection;
 
     constructor(){
         super();
+        this.moveDirection();
+    }
+
+    moveDirection(){
+      setInterval(() => {
+        if (this.x < world.character.x - canvasWidth) {
+          this.otherDirection = true;
+        }
+        if (this.x > world.character.x + canvasWidth) {
+          this.otherDirection = false;
+        }
+      }, 1000);
     }
 
     moveEnemies(){
         this.walkMoveInterval = setInterval(() => {
+          if (this.otherDirection) {
+            this.moveRight();
+          } else {
             this.moveLeft();
+          }
         }, this.moveCycle)
       }
     
