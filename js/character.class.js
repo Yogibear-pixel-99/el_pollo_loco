@@ -124,6 +124,9 @@ class Character extends MovableObject {
       if (this.speedY < 0 && !this.aboveGround()) {
         world.audiofiles.sfx.pepeLanding.play();
       }
+      if (this.isHurt()){
+        world.audiofiles.sfx.pepeHurt.play();
+      }
     }, 1000 / 60);
   }
 
