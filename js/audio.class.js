@@ -30,6 +30,7 @@ class Audiofiles {
     ],
     bossHitted: new Audio("./audio/boss/lighting-a-fire-14421.mp3"),
     bossCrys : new Audio ("./audio/boss/gatre-101240.mp3"),
+    bossDied : new Audio ("./audio/boss/rooster-crow-1-281011.mp3"),
     bossAttacks: new Audio("./audio/boss/chicken-laying-an-egg-330874.mp3"),
     bossIsTriggerd: new Audio("./audio/boss/rooster-crowing-80258.mp3"),
   };

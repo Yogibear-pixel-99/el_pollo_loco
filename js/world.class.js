@@ -63,7 +63,7 @@ class World {
             this.gameWon = true;
           }
           this.gameOver();
-        }, 2000);
+        }, 4000);
       }
     }, 100);
   }

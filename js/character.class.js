@@ -124,7 +124,6 @@ class Character extends MovableObject {
       if (this.speedY < 0 && !this.aboveGround()) {
         world.audiofiles.sfx.pepeLanding.play();
       }
-      console.log("soundinterval activ");
     }, 1000 / 60);
   }
 
@@ -163,7 +162,6 @@ class Character extends MovableObject {
           this.animateIdle();
         }
       }
-      console.log("animateInterval active");
     }, 100);
   }
 
@@ -184,9 +182,6 @@ class Character extends MovableObject {
           this.otherDirection = true;
         }
       }
-      console.log("moveInterval active");
-      // console.log(this.speedY);
-      // console.log(this.y);
     }, 1000 / 60);
   }
 

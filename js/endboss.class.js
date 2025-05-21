@@ -116,31 +116,32 @@ class Endboss extends Enemies {
   animate() {
     this.animateInterval = setInterval(() => {
       if (this.isDead()) {
+        console.log('boss is dead');
+        this.stopAllBossIntervals();
         this.endBossDead();
       } else if (!this.isTriggered) {
         this.playAnimation(this.ALERT_ANIMATION);
-      } else if (this.isDead()) {
-        this.playAnimation(this.BOSS_DEAD_ANIMATION);
       } else if (this.bossIsHurt()) {
         this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
       } else {
         this.playAnimation(this.WALKING_ANIMATION);
       }
-    }, 150);
+    }, 130);
   }
 
   endBossDead(){
-    this.stopAllBossIntervals();
     let count = 0;
+    world.audiofiles.sfx.bossDied.play();
       let interval = setInterval(() => {
         if (count < 9) {
           this.playAnimation(this.BOSS_DEAD_ANIMATION);
         } else {
           clearInterval(interval);
+          
           this.img.src = this.BOSS_DEAD_ANIMATION[2];
         }
         count++;
-      }, 150);
+      }, 100);
   }
 
   /**
@@ -180,11 +181,10 @@ class Endboss extends Enemies {
     let attackCount = 0;
     this.animationCount = 0;
     this.jumpAttackInterval = setInterval(() => {
-      if (world.gameEnd) return;
       if (!this.bossIsHurt()) {
-      if (attackCount < 8 && !this.isDead()) {
+      if (attackCount < 8) {
         this.playAnimation(this.ALERT_ANIMATION);
-      } else if (attackCount >= 8 && attackCount <= 10 && !this.isDead()) {
+      } else if (attackCount >= 8 && attackCount <= 10) {
         if (attackCount === 8) {
           this.animationCount = 0;
         }
@@ -206,8 +206,10 @@ class Endboss extends Enemies {
         this.animate();
         this.move();
         this.attack();
-      } else if (this.isDead()) {
+      }
+       else if (this.isDead()) {
         clearInterval(this.jumpAttackInterval);
+        this.animate();
       }
       attackCount++;
   } else {
@@ -239,9 +241,6 @@ class Endboss extends Enemies {
    */
   hitBoss() {
     this.energy -= 10;
-    if (this.energy <= 0) {
-      this.energy = 0;
-    }
     this.lastHit = new Date().getTime();
   }
 
