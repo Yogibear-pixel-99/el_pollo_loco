@@ -180,6 +180,7 @@ class Endboss extends Enemies {
     let attackCount = 0;
     this.animationCount = 0;
     this.jumpAttackInterval = setInterval(() => {
+      if (world.gameEnd) return;
       if (!this.bossIsHurt()) {
       if (attackCount < 8 && !this.isDead()) {
         this.playAnimation(this.ALERT_ANIMATION);

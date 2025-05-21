@@ -21,6 +21,7 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  gameEnd = false;
 
   constructor(
     canvas,
@@ -231,8 +232,6 @@ class World {
       let charX = this.character.x;
       this.chickenNear = false;
       this.level.enemies.forEach((enemy) => {
-        console.log(charX);
-        console.log(enemy.x);
         if (enemy.x > charX - 200 && enemy.x < charX + 450) {
           this.chickenNear = true;
         }
@@ -318,9 +317,10 @@ class World {
   }
 
   gameOver() {
+    this.gameEnd = true;
     this.showGameOverScreen();
     this.stopAllGameIntervals();
-
+    
 
     if (this.gameWon) {this.addPointsToPlayerScore("endbossKilled")};
    
