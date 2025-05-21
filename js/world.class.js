@@ -122,6 +122,7 @@ class World {
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
           this.level.endboss.playSound('bossHitted');
+          this.level.endboss.playSound('bossCrys');
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {

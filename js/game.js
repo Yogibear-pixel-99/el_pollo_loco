@@ -323,21 +323,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // SOUNDS FOR:
-    // pepe is idle
-    // pepe is sleeping snorring
-    // wind is blowing
     // endboss jump attack sound
 
 
     // chicken cluckern
     // minichicken cluckern
     // loud cry for chicken if they are running back
-    // chicken is killed
+   
 
-    // boss is walking
+  
     // boss is attacking
-    // boss gehts hittet
-    // boss is killed
+
+
 
     // music for the menu
     // music for chickenrush

@@ -104,6 +104,7 @@ class Endboss extends Enemies {
    * Starts the boss fight by calling the movement, attacking and animate intervall.
    */
   startBossFight() {
+    world.audiofiles.sfx.bossIsTriggerd.play();
     this.attack();
     this.move();
     this.isTriggered = true;
@@ -196,6 +197,7 @@ class Endboss extends Enemies {
           this.animationCount = 0;
         }
         this.playAnimation(this.BOSS_ATTACK_JUMP_ANIMATION);
+        world.audiofiles.sfx.bossAttacks.play();
         this.bossAttackMovement(attackAnimationNr);
       } else if (attackCount > attackAnimationNr && !this.isDead()) {
         this.animationCount = 0;
