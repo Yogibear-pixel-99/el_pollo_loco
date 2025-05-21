@@ -1,5 +1,6 @@
 class Audiofiles {
   sfx = {
+    cluckern : new Audio("./audio/environment/chicken-chatter-33515.mp3"),
     bottleBreak: [
       new Audio("./audio/items/bottles/bottle-break-39916.mp3"),
       new Audio("./audio/items/bottles/broken-beer-bottle-311131.mp3"),

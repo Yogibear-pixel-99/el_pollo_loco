@@ -177,8 +177,8 @@ class Character extends MovableObject {
         }
       }
 
-      console.log(this.speedY);
-      console.log(this.y);
+      // console.log(this.speedY);
+      // console.log(this.y);
     }, 1000 / 60);
   }
 

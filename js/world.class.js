@@ -13,7 +13,7 @@ class World {
   canvasWidth;
   floorHeight;
   backgroundMoveInterval;
-
+  chickenNear = false;
   level = level1;
 
   canvas;
@@ -27,7 +27,7 @@ class World {
     pointTable,
     canvasHeight,
     canvasWidth,
-    floorHeight,
+    floorHeight
   ) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -43,13 +43,13 @@ class World {
     this.updatePlayerScore();
     this.checkIfGameIsOver();
     this.playGameMusic();
+    this.checkCluckerSound();
   }
 
-  playGameMusic(){
-        this.audiofiles.music.gameMusic.loop = true;
+  playGameMusic() {
+    this.audiofiles.music.gameMusic.loop = true;
     this.audiofiles.music.gameMusic.play();
   }
-
 
   setWorld() {
     this.character.world = this;
@@ -84,7 +84,7 @@ class World {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
           enemy.isKilled();
-          enemy.playRandomSound('deadChicken');
+          enemy.playRandomSound("deadChicken");
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           enemy.lives = false;
@@ -121,8 +121,8 @@ class World {
         this.animateBrokenBottle(bottle);
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
-          this.level.endboss.playSound('bossHitted');
-          this.level.endboss.playSound('bossCrys');
+          this.level.endboss.playSound("bossHitted");
+          this.level.endboss.playSound("bossCrys");
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
@@ -130,7 +130,7 @@ class World {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
             enemy.isKilled();
-            enemy.playRandomSound('deadChicken');
+            enemy.playRandomSound("deadChicken");
             this.addPointsToPlayerScore(enemy.scoreNameBottle);
           }
         });
@@ -156,11 +156,11 @@ class World {
     let bottleIndex = world.thrownBottles.indexOf(bottle);
     bottle.img = bottle.animatedImages[bottle.BOTTLE_SPLASH_ANIMATION[0]];
     let count = 1;
-    bottle.playRandomSound('bottleBreak');
+    bottle.playRandomSound("bottleBreak");
     let interval = setInterval(() => {
       if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
         bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
-        
+
         count++;
       } else {
         world.thrownBottles.splice(bottleIndex, 1);
@@ -183,7 +183,7 @@ class World {
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && coin.collected == false) {
-        coin.playSound('collectCoin');
+        coin.playSound("collectCoin");
         this.character.collectCoin();
         coin.isCollectedAnimation();
         coin.collected = true;
@@ -201,7 +201,7 @@ class World {
       if (this.character.isColliding(bottle)) {
         if (world.character.bottles < 5) {
           this.addPointsToPlayerScore(bottle.itemName);
-          bottle.playRandomSound('collectBottle');
+          bottle.playRandomSound("collectBottle");
         }
         bottle.isCollected();
         this.character.collectBottle();
@@ -228,6 +228,25 @@ class World {
         }
       });
     }, 100);
+  }
+
+  checkCluckerSound() {
+    setInterval(() => {
+      let charX = this.character.x;
+      this.chickenNear = false;
+      this.level.enemies.forEach((enemy) => {
+        console.log(charX);
+        console.log(enemy.x);
+        if (enemy.x > charX - 200 && enemy.x < charX + 450) {
+          this.chickenNear = true;
+        }
+        if (this.chickenNear === true) {
+          this.audiofiles.sfx.cluckern.play();
+        } else {
+          this.audiofiles.sfx.cluckern.pause();
+        }
+      });
+    }, 500);
   }
 
   draw() {
@@ -308,7 +327,7 @@ class World {
     clearInterval(this.character.moveInterval);
     clearInterval(this.backgroundMoveInterval);
     clearInterval(this.level.endboss.stopAllBossIntervals());
-    if (this.gameWon) this.addPointsToPlayerScore('endbossKilled');
+    if (this.gameWon) this.addPointsToPlayerScore("endbossKilled");
     // play end sound win
     // play end sound lose
     // show mousepointer

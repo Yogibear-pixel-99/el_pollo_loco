@@ -323,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // SOUNDS FOR:
-    // endboss jump attack sound
 
 
     // chicken cluckern
