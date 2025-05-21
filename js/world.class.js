@@ -21,7 +21,6 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
-  gameEnd = false;
 
   constructor(
     canvas,
@@ -51,9 +50,13 @@ class World {
     this.character.world = this;
   }
 
+  checkGameEnd(){
+    return this.character.energy <= 0 || this.level.endboss.energy <= 0;
+  }
+
   checkIfGameIsOver() {
     let interval = setInterval(() => {
-      if (this.character.energy <= 0 || this.level.endboss.energy <= 0) {
+      if (this.checkGameEnd()) {
         clearInterval(interval);
         setTimeout(() => {
           if (this.level.endboss.energy <= 0) {
@@ -317,7 +320,6 @@ class World {
   }
 
   gameOver() {
-    this.gameEnd = true;
     this.showGameOverScreen();
     this.stopAllGameIntervals();
     

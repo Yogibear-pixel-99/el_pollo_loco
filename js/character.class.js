@@ -107,10 +107,6 @@ class Character extends MovableObject {
 
   playSounds() {
     this.soundInterval = setInterval(() => {
-      if (world.gameEnd) {
-        clearInterval(this.soundInterval);
-        return;
-      }
       const right = world.keyboard.KEY_RIGHT;
       const left = world.keyboard.KEY_LEFT;
       const jump = world.keyboard.KEY_JUMP;
@@ -134,17 +130,12 @@ class Character extends MovableObject {
 
   animate() {
     this.animateInterval = setInterval(() => {
-      if (world.gameEnd) {
-        clearInterval(this.animateInterval);
-        return;
-      }
       if (!this.aboveGround()) {
         this.alreadyJumps = false;
       }
       if (this.isDead()) {
         this.animateDead();
-        return;
-      } else if (this.world.keyboard.KEY_SHOT == true) {
+      } else         if (this.world.keyboard.KEY_SHOT == true) {
         this.throwBottle();
       } else if (this.isHurt()) {
         this.animateHurt();
@@ -165,7 +156,6 @@ class Character extends MovableObject {
         ) {
           this.alreadyJumps = true;
           this.loadImage(this.JUMPING_ANIMATION[2]);
-          // this.img.src = this.JUMPING_ANIMATION[2];
           setTimeout(() => this.jump(), 50);
         }
         if (this.characterIdle()) {
@@ -223,7 +213,7 @@ class Character extends MovableObject {
 
   animateIdle() {
     clearInterval(this.animateInterval);
-    let interval = setInterval(() => {
+    this.idleInterval = setInterval(() => {
       if (this.isIdle) {
         if (this.idleCount < 28) {
           this.playAnimation(this.IDLE_ANIMATION);
@@ -232,11 +222,11 @@ class Character extends MovableObject {
           world.audiofiles.sfx.pepeLongIdle.play();
         }
       }
-      if (!this.characterIdle()) {
+      if (!this.characterIdle() && !world.checkGameEnd()) {
         this.resetIdleAudio();
         this.isIdle = false;
         this.animate();
-        clearInterval(interval);
+        clearInterval(this.idleInterval);
         this.idleCount = 0;
       }
       this.idleCount++;
