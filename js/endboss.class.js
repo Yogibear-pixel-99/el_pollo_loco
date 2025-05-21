@@ -5,9 +5,10 @@ class Endboss extends Enemies {
   scoreNameKilled = "endbossKilled";
   scoreNameBottle = "endbossBottleHit";
   y = 480 - this.height - 58 + 15;
-  x = 500;
-  // x = 719 * 5 + 300;
-  energy = 30;
+  // x = 500;
+  x = 719 * 5 + 300;
+  energy = 50;
+  // energy = 30;
   acceleration = 2.5;
   isTriggered = false;
   animateInterval;
@@ -149,17 +150,32 @@ class Endboss extends Enemies {
    */
   move() {
     this.moveInterval = setInterval(() => {
-      if (!this.isDead()) {
-        this.moveLeft();
+      if (this.x <= 0) {
+        this.otherDirection = true;
       }
-    }, 1000 / 60);
+      if (this.x >= 719 * 5) {
+        this.otherDirection = false;
+      }
+      if (!this.isDead()) {}
+        if (this.otherDirection) {
+          this.bossMoveRight();
+        } else {
+        this.bossMoveLeft();
+    }}, 1000 / 60);
   }
 
   /**
    * Sets the x position to -1.
    */
-  moveLeft() {
+  bossMoveLeft() {
     this.x = this.x - 1;
+  }
+
+  /**
+   * Sets the x position to -1.
+   */
+  bossMoveRight() {
+    this.x = this.x + 1;
   }
 
   /**
@@ -227,9 +243,13 @@ class Endboss extends Enemies {
       this.speedY = 22;
       interval = setInterval(() => {
         if (count < 30) {
+          if(this.otherDirection){
+            this.x = this.x + 6;
+          } else {
           this.x = this.x - 6;
-          count++;
-        } else {
+        }
+        count++;
+      } else {
           clearInterval(interval);
         }
       }, 20);

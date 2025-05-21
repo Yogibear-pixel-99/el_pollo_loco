@@ -124,7 +124,7 @@ class Character extends MovableObject {
       if (this.speedY < 0 && !this.aboveGround()) {
         world.audiofiles.sfx.pepeLanding.play();
       }
-      if (this.isHurt()){
+      if (this.isHurt()) {
         world.audiofiles.sfx.pepeHurt.play();
       }
     }, 1000 / 60);
@@ -252,10 +252,9 @@ class Character extends MovableObject {
     this.playAnimation(this.DEAD_ANIMATION);
   }
 
-  // if (!this.bottleThrown && this.bottles >= 0 ) {
-
   throwBottle() {
-    if (!this.bottleThrown) {
+    // if (!this.bottleThrown) {
+    if (!this.bottleThrown && this.bottles <= 5) {
       this.world.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
       this.bottles--;

@@ -189,7 +189,7 @@ class World {
         coin.collected = true;
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 1) {
+        if (this.character.coins === 10) {
           this.level.endboss.startBossFight();
         }
       }
@@ -263,7 +263,7 @@ class World {
     this.addObjToCanvas(this.healthbar);
     this.addObjToCanvas(this.coinbar);
     this.addObjToCanvas(this.bottlebar);
-    if (this.level.endboss.isWalking) {
+    if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);
     }
     let self = this;
