@@ -5,18 +5,42 @@ let canvasHeight = 480;
 let canvasWidth = 720;
 let floorHeight = 58;
 
+// function init() {
+//   canvas = document.getElementById("gamecanvas");
+//   getHighscores();
+// }
+
+// function startGame() {
+//     deactivateMenu();
+//     let gameMode = document.getElementById("game-mode-txt");
+//     switch (gameMode.innerText) {
+//       case "Normal Mode":
+//         loadNormalGame();
+//         break;
+
+//       case "Chicken Rush":
+//         loadChickenRushGame();
+//         break;
+
+//       default:
+//         break;
+//     }
+// }
+
 function init() {
   canvas = document.getElementById("gamecanvas");
   getHighscores();
-  startGame();
 }
 
 function startGame() {
+  if (checkNameInput()) {
     deactivateMenu();
     let gameMode = document.getElementById("game-mode-txt");
     switch (gameMode.innerText) {
       case "Normal Mode":
         startNormalGame();
+        loadNormalGame();
+
         break;
 
       case "Chicken Rush":
@@ -26,33 +50,10 @@ function startGame() {
       default:
         break;
     }
+  } else {
+    playerNameError();
+  }
 }
-
-// function init() {
-//   canvas = document.getElementById("gamecanvas");
-//   getHighscores();
-// }
-
-// function startGame() {
-//   if (checkNameInput()) {
-//     deactivateMenu();
-//     let gameMode = document.getElementById("game-mode-txt");
-//     switch (gameMode.innerText) {
-//       case "Normal Mode":
-//         startNormalGame();
-//         break;
-
-//       case "Chicken Rush":
-//         startChickenRushGame();
-//         break;
-
-//       default:
-//         break;
-//     }
-//   } else {
-//     playerNameError();
-//   }
-// }
 
 function checkNameInput() {
   const nameInput = document.getElementById("player-name-input");
@@ -80,6 +81,19 @@ function removeClass(id, className) {
 function removeErrorMessage(id) {
   const ref = document.getElementById(id);
   ref.innerText = "";
+}
+
+function playAgain(){
+  resetGame();
+  let lostRef = document.getElementById('canvas-lost-container');
+  let wonRef = document.getElementById('canvas-won-container');
+      lostRef.classList.add('d-none');
+      wonRef.classList.add('d-none');
+}
+
+function resetGame(){
+  world = '';
+  startNormalGame();
 }
 
 function startNormalGame() {
@@ -141,7 +155,6 @@ async function getHighscores() {
 function sortHighscores() {
   highscores.normal.sort((a, b) => b.score - a.score);
   highscores.chickenrush.sort((a, b) => b.score - a.score);
-  console.log(highscores);
 }
 
 function renderHighscores(scorename) {
@@ -381,3 +394,4 @@ document.addEventListener("DOMContentLoaded", () => {
 // Boss kill animation not smooth
 // parallax is not workin
 // bottle throw is not normal triggerd
+// adding random spawn point

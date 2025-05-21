@@ -31,20 +31,21 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.pointTable = pointTable;
-    this.draw();
-    this.setWorld();
-    this.runCollisions();
-    this.moveBackground();
-    this.updatePlayerScore();
-    this.checkIfGameIsOver();
-    this.playGameMusic();
-    this.checkCluckerSound();
   }
 
-  playGameMusic() {
-    this.audiofiles.music.gameMusic.loop = true;
-    this.audiofiles.music.gameMusic.play();
+  enemyMoveDirection() {
+    setInterval(() => {
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.x < this.character.x - canvasWidth) {
+        enemy.otherDirection = true;
+      }
+      if (enemy.x > this.character.x + canvasWidth) {
+        enemy.otherDirection = false;
+      }
+    })
+  }, 1000);
   }
+
 
   setWorld() {
     this.character.world = this;
@@ -189,7 +190,7 @@ class World {
         coin.collected = true;
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 10) {
+        if (this.character.coins === 1) {
           this.level.endboss.startBossFight();
         }
       }

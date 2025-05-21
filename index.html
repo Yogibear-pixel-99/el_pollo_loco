@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="styles.css" />
 
     <script src="./js/script.js"></script>
+    <script src="./js/gameConfig.js"></script>
     <script src="./js/templates.js"></script>
     <script src="./js/settings.js"></script>
     <script src="./js/keyboard.class.js"></script>
@@ -37,6 +38,7 @@
     <script src="./js/level.class.js"></script>
     <script src="./js/game.js"></script>
     <script src="./js/endboss.class.js"></script>
+    <script src="./js/levels/chickenrush.js"></script>
     <script src="./js/levels/level1.js"></script>
   </head>
   <body onload="init()">
@@ -85,7 +87,7 @@
               class="game-lost-img"
               alt="game-lost-img" />
             <div class="won-lost-wrapper">
-              <div class="won-lost-single-button-wrapper">
+              <div class="won-lost-single-button-wrapper" onclick="playAgain()">
                 <img src="./img/icons/mask-306939_640.png" alt="" />
                 <div>Play again</div>
               </div>

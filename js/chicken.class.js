@@ -19,7 +19,7 @@ class Chicken extends Enemies {
     "./img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
-  constructor(x) {
+  constructor(x, world) {
     super();
     this.loadImage("./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.y = this.floorPosition() - (Math.random() * 8 - 1);
@@ -28,7 +28,7 @@ class Chicken extends Enemies {
     }
     this.x = x;
     this.loadImagesArray(this.WALKING_ANIMATION);
-    this.animateWalk();
     this.moveEnemies();
+    this.animateWalk();
   }
 }

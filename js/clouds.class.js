@@ -9,7 +9,6 @@ class Clouds extends MovableObject {
     this.y = (Math.random() * canvasHeight) / 5;
     this.x = x + Math.random() * (canvasWidth - -100) + -100;
     this.speedNumber = speedNumber;
-
     this.autoMoveLeft();
   }
 

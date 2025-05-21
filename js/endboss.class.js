@@ -4,17 +4,16 @@ class Endboss extends Enemies {
   walkingSpeed = 1.3;
   scoreNameKilled = "endbossKilled";
   scoreNameBottle = "endbossBottleHit";
-  y = 480 - this.height - 58 + 15;
-  // x = 500;
-  x = 719 * 6;
-  energy = 50;
-  // energy = 30;
+  // y = 480 - this.height - 58 + 15;
+  x = 500;
+  // x = 719 * 6;
+  // energy = 50;
+  energy = 30;
   acceleration = 2.5;
   isTriggered = false;
   animateInterval;
   moveInterval;
   jumpAttackInterval;
-
 
 
   isWalking = false;
@@ -109,6 +108,7 @@ class Endboss extends Enemies {
     this.attack();
     this.move();
     this.isTriggered = true;
+    this.bossMoveDirection();
   }
 
   /**
@@ -299,14 +299,20 @@ class Endboss extends Enemies {
     }, 1000 / 25);
   }
 
-  moveLeft() {
-    this.x = this.x - this.walkingSpeed;
-    this.offsetHead.x = this.offsetHead.x - this.walkingSpeed;
-  }
-
   stopAllBossIntervals(){
     this.allBossIntervals.forEach((interval) => {
       clearInterval(this[interval]);
     })
+  }
+
+  bossMoveDirection() {
+    this.moveDirectionInterval = setInterval(() => {
+      if (this.x < world.character.x - canvasWidth) {
+        this.otherDirection = true;
+      }
+      if (this.x > world.character.x + canvasWidth) {
+        this.otherDirection = false;
+      }
+  }, 1000);
   }
 }
