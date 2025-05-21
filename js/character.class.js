@@ -134,7 +134,7 @@ class Character extends MovableObject {
       }
       if (this.isDead()) {
         this.animateDead();
-      } else         if (this.world.keyboard.KEY_SHOT == true) {
+      } else if (this.world.keyboard.KEY_SHOT == true) {
         this.throwBottle();
       } else if (this.isHurt()) {
         this.animateHurt();

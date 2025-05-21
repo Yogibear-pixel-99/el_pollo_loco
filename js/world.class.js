@@ -63,7 +63,7 @@ class World {
             this.gameWon = true;
           }
           this.gameOver();
-        }, 4000);
+        }, 3000);
       }
     }, 100);
   }
@@ -324,8 +324,13 @@ class World {
     this.stopAllGameIntervals();
     
 
-    if (this.gameWon) {this.addPointsToPlayerScore("endbossKilled")};
-   
+    if (this.gameWon) {
+      this.addPointsToPlayerScore("endbossKilled");
+      this.audiofiles.sfx.gameWon.play();
+    } else {
+      this.audiofiles.sfx.gameLost.play();
+    };
+  
 
     this.audiofiles.sfx.cluckern.pause();
     // play end sound win

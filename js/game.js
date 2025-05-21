@@ -177,7 +177,7 @@ function changeGameModeHeaderText() {
   let expRef = document.getElementById("game-mode-exp");
   if (ref.innerText === "Normal Mode") {
     ref.innerText = "Chicken Rush";
-    expRef.innerText = "Endless chicken, unlimited bottles, no jumpkill";
+    expRef.innerText = "Endless chicken, unlimited bottles";
   } else {
     ref.innerText = "Normal Mode";
     expRef.innerText = "Standard Level";
@@ -316,11 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// end screen lost - pepe stop walking sound
-// stop boss attack
-
-// endscreen win - stop moving sound and stop cicken sound
-
 
 
 
@@ -340,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // set coin collision to 10 after boss animation
 
 // rewrite the boss bottle hit function
-
+// chicken should turn arround if they reach the level end
 // chars should not move until the game starts
 
 // clear oll hitbos draw functions
@@ -382,3 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // documenatation
 
 // close icon licenc
+
+// Boss kill animation not smooth
+// parallax is not workin
+// bottle throw is not normal triggerd

@@ -1,6 +1,6 @@
 class Audiofiles {
   sfx = {
-    cluckern : new Audio("./audio/environment/chicken-chatter-33515.mp3"),
+    cluckern : new Audio("./audio/level/environment/chicken-chatter-33515.mp3"),
     bottleBreak: [
       new Audio("./audio/items/bottles/bottle-break-39916.mp3"),
       new Audio("./audio/items/bottles/broken-beer-bottle-311131.mp3"),
@@ -15,9 +15,8 @@ class Audiofiles {
       new Audio("./audio/chicken/chicken-single-alarm-call-6056.mp3"),
       new Audio("./audio/chicken/chicken-noise-228106.mp3")
     ],
-    deadMiniChicken: [
-
-    ],
+    gameWon: new Audio("./audio/level/won_lost/level-win-6416.mp3"),
+    gameLost : new Audio("./audio/level/won_lost/fail-234710.mp3"),
     pepeLanding: new Audio("./audio/pepe/land-81509.mp3"),
     pepeWalk: new Audio("./audio/pepe/walking-sound-effect-272246.mp3"),
     pepeJump: new Audio("./audio/pepe/sound_jump-90516.mp3"),
