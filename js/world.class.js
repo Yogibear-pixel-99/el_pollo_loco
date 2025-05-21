@@ -102,6 +102,7 @@ class World {
       this.character.isCollidingHead(this.level.endboss)
     ) {
       this.character.hit();
+      this.healthbar.updateHealthbar();
     }
   }
 
