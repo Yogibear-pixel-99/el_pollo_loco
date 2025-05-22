@@ -4,7 +4,7 @@ class World {
   coinbar = new Coinbar();
   bottlebar = new Bottlebar();
   bossHealthbar = new Bosshealthbar();
-  audiofiles = new Audiofiles();
+  audiofiles;
   thrownBottles = [];
   playerscore = 0;
   pointTable;
@@ -12,7 +12,12 @@ class World {
   floorHeight;
   chickenNear = false;
   level = level1;
-  allWorldIntervals = ['collisionInterval', 'cluckerInterval', 'updateScoreInterval', 'backgroundMoveInterval'];
+  allWorldIntervals = [
+    "collisionInterval",
+    "cluckerInterval",
+    "updateScoreInterval",
+    "backgroundMoveInterval",
+  ];
   collisionInterval;
   cluckerInterval;
   updateScoreInterval;
@@ -22,36 +27,46 @@ class World {
   keyboard;
   camera_x = 0;
 
-  constructor(
-    canvas,
-    keyboard,
-    pointTable,
-  ) {
+  constructor(canvas, keyboard, pointTable, audiofiles) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.pointTable = pointTable;
+    this.audiofiles = audiofiles;
+    this.draw();
+    this.setWorld();
+    this.runCollisions();
+    this.moveBackground();
+    this.updatePlayerScore();
+    this.checkIfGameIsOver();
+    this.playGameMusic();
+    this.checkCluckerSound();
+    this.enemyMoveDirection();
+  }
+
+  playGameMusic() {
+    audiofiles.music.gameMusic.loop = true;
+    audiofiles.music.gameMusic.play();
   }
 
   enemyMoveDirection() {
     setInterval(() => {
-    this.level.enemies.forEach((enemy) => {
-      if (enemy.x < this.character.x - canvasWidth) {
-        enemy.otherDirection = true;
-      }
-      if (enemy.x > this.character.x + canvasWidth) {
-        enemy.otherDirection = false;
-      }
-    })
-  }, 1000);
+      this.level.enemies.forEach((enemy) => {
+        if (enemy.x < this.character.x - canvasWidth) {
+          enemy.otherDirection = true;
+        }
+        if (enemy.x > this.character.x + canvasWidth) {
+          enemy.otherDirection = false;
+        }
+      });
+    }, 1000);
   }
-
 
   setWorld() {
     this.character.world = this;
   }
 
-  checkGameEnd(){
+  checkGameEnd() {
     return this.character.energy <= 0 || this.level.endboss.energy <= 0;
   }
 
@@ -321,17 +336,16 @@ class World {
   }
 
   gameOver() {
+    document.body.style.cursor = 'url("./img/cursor.png"), auto';
     this.showGameOverScreen();
     this.stopAllGameIntervals();
-    
 
     if (this.gameWon) {
       this.addPointsToPlayerScore("endbossKilled");
       this.audiofiles.sfx.gameWon.play();
     } else {
       this.audiofiles.sfx.gameLost.play();
-    };
-  
+    }
 
     this.audiofiles.sfx.cluckern.pause();
     // play end sound win
@@ -347,24 +361,22 @@ class World {
       : showSingleContainerById("canvas-lost-container");
   }
 
-stopAllGameIntervals(){
-  this.stopAllWorldIntervals();
-  this.stopEnemyIntervals();
-  this.level.endboss.stopAllBossIntervals();
-  this.character.stopAllCharIntervals();
-  this.stopAllCloudInterval();
-}
+  stopAllGameIntervals() {
+    this.stopAllWorldIntervals();
+    this.stopEnemyIntervals();
+    this.level.endboss.stopAllBossIntervals();
+    this.character.stopAllCharIntervals();
+    this.stopAllCloudInterval();
+  }
 
-stopAllCloudInterval(){
-  this.level.skyObjects.forEach((cloud) => 
-  cloud.cancelAutoMove());
-}
+  stopAllCloudInterval() {
+    this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
+  }
 
-
-  stopAllWorldIntervals(){
+  stopAllWorldIntervals() {
     this.allWorldIntervals.forEach((interval) => {
       clearInterval(this[interval]);
-    })
+    });
   }
 
   stopEnemyIntervals() {

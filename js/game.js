@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let audiofiles = new Audiofiles();
 let canvasHeight = 480;
 let canvasWidth = 720;
 let floorHeight = 58;
@@ -39,7 +40,7 @@ function startGame() {
     switch (gameMode.innerText) {
       case "Normal Mode":
         startNormalGame();
-        loadNormalGame();
+        // loadNormalGame();
 
         break;
 
@@ -93,23 +94,25 @@ function playAgain(){
 
 function resetGame(){
   world = '';
-  startNormalGame();
+  level1 = '';
+  startGame();
 }
 
 function startNormalGame() {
   canvas = document.getElementById("gamecanvas");
+  initNormalLevel();
   world = new World(
     canvas,
     keyboard,
     pointConfig,
-    floorHeight
+    audiofiles
   );
 }
 
 function startChickenRush() {}
 
 function deactivateMenu() {
-  // document.body.style.cursor = 'none';
+  document.body.style.cursor = 'none';
   showSingleContainerById("game-mask");
   hideSingleContainerById("canvas-option-container");
   const startBlinkRef = document.getElementById("start-game-text");
@@ -117,7 +120,6 @@ function deactivateMenu() {
 }
 
 function activateMenu() {
-  // document.body.style.cursor = 'default';
   hideSingleContainerById("game-mask");
   showSingleContainerById("canvas-option-container");
   const startBlinkRef = document.getElementById("start-game-text");
