@@ -1,8 +1,12 @@
 
-let level1;
+
+
+
+
+
 
 function initNormalLevel() {
-level1 = new Level(
+return new Level(
 
 
 

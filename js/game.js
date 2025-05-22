@@ -31,15 +31,15 @@ function startGame() {
     deactivateMenu();
     switch (gameMode) {
       case "normal":
-        startNormalGame();
+        configNormalMode();
         break;
 
       case "chickenRush":
-        startChickenRushGame();
+        configChickenRushMode();
         break;
 
       case "hard":
-        startHardGame();
+        configHardMode();
         break;
     }
   } else {
@@ -103,29 +103,6 @@ function goToMainMenu(){
 function resetGame(){
   world = '';
   level1 = '';
-}
-
-function startNormalGame() {
-  // canvas = document.getElementById("gamecanvas");
-  initNormalLevel();
-  world = new World(
-    canvas,
-    keyboard,
-    pointConfig,
-    audio
-  );
-}
-
-function startChickenRush() {
-    // canvas = document.getElementById("gamecanvas");
-  initChickenRushLevel();
-  world = new World(
-    canvas,
-    keyboard,
-    pointConfig,
-    audio
-  );
-  configChickenRushMode();
 }
 
 function deactivateMenu() {
@@ -197,65 +174,6 @@ function toggleGameMode() {
 }
 
 
-// function changeGameModeHeaderText() {
-//   let ref = document.getElementById("game-mode-txt");
-//   let expRef = document.getElementById("game-mode-exp");
-//   if (ref.innerText === "Normal Mode") {
-//     ref.innerText = "Chicken Rush";
-//     expRef.innerText = "Endless chicken, unlimited bottles";
-//   } else {
-//     ref.innerText = "Normal Mode";
-//     expRef.innerText = "Standard Level";
-//   }
-// }
-
-// function changeGameModeHighscoreTable() {
-//   let ref = document.getElementById("game-mode-txt");
-//   if (ref.innerText === "Normal Mode") {
-//     renderHighscores('normal');
-//   } else {
-//     renderHighscores('chickenrush');
-//   }
-// }
-
-const pointConfig = {
-  chickenJumpKill: {
-    name: "chicken jump",
-    points: 10,
-  },
-  chickenBottleHit: {
-    name: "chicken bottle hit",
-    points: 20,
-  },
-  miniChickenJumpKill: {
-    name: "mini chicken jump",
-    points: 30,
-  },
-  miniChickenBottleHit: {
-    name: "mini chicken bottle hit",
-    points: 40,
-  },
-  collectCoin: {
-    name: "collect coin",
-    points: 10,
-  },
-  collectBottle: {
-    name: "collect bottle",
-    points: 5,
-  },
-  bottleMissed: {
-    name: "bottle missed",
-    points: -50,
-  },
-  endbossBottleHit: {
-    name: "endboss hit",
-    points: 50,
-  },
-  endbossKilled: {
-    name: "endboss killed",
-    points: 200,
-  },
-};
 
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
@@ -355,56 +273,30 @@ document.addEventListener('click', () => {
 
 
 
-// SOUNDS FOR:
-
-    // loud cry for chicken if they are running back
-    // music for chickenrush
 
 
+// loud cry for chicken if they are running back
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation
-
-
-
 
 // implement normal/hard/chickenrush mode
 
 // pepe dont show animation if throw bottle
 
 // display info to collect 10 coins to trigger boss
-
+// boss kill doesnt count 200 + points
 // game over screen
-  // lost
-  // win
-  // update scoreboard after end game
-  // restart button or display menu
-// endboss - should move to pepe if jumps over him
-// trigger final screen
-// soundeffects
-// music
+
 // enemy bottle hit auslagern in enemies von world
-// chickenrush
 
-// update canvasWidth and canvasheight to global variable
-  // change this in level for coins and emenies and backgrounds
-
-// splice more than 30 entries
-
-
-// start game
-// game end
-// save name and score in object
-// put data to api
-// render new highscoretable from api inkl sort etc.
+// change this in level for coins and emenies and backgrounds
 
 // responsive for all screens
 // turn to landscape if in portrait mode
 // mobile controlling options
 
 // documenatation
-
-// close icon licenc
 
 // Boss kill animation not smooth
 // parallax is not workin
@@ -413,3 +305,7 @@ document.addEventListener('click', () => {
 
 // controll all intervals!!!! and stop them after game finished.
 // change the splice array method for scores to 100 from 10
+
+// parallax effect
+
+// check all object with console logs for undefined values

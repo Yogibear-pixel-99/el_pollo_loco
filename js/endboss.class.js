@@ -8,7 +8,7 @@ class Endboss extends Enemies {
   x = 500;
   // x = 719 * 6;
   // energy = 50;
-  energy = 30;
+  energy;
   acceleration = 2.5;
   isTriggered = false;
   animateInterval;

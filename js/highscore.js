@@ -87,9 +87,41 @@ function renderHighscores() {
 
 
 
-
-
-
-// on load get and render normal - check if more than 100
-// on switch get and render switched - check if more than 100
-// on game end save score, get and render active on - check if more than 100
+const pointConfig = {
+  chickenJumpKill: {
+    name: "chicken jump",
+    points: 10,
+  },
+  chickenBottleHit: {
+    name: "chicken bottle hit",
+    points: 20,
+  },
+  miniChickenJumpKill: {
+    name: "mini chicken jump",
+    points: 30,
+  },
+  miniChickenBottleHit: {
+    name: "mini chicken bottle hit",
+    points: 40,
+  },
+  collectCoin: {
+    name: "collect coin",
+    points: 10,
+  },
+  collectBottle: {
+    name: "collect bottle",
+    points: 5,
+  },
+  bottleMissed: {
+    name: "bottle missed",
+    points: -50,
+  },
+  endbossBottleHit: {
+    name: "endboss hit",
+    points: 50,
+  },
+  endbossKilled: {
+    name: "endboss killed",
+    points: 200,
+  },
+};

@@ -11,7 +11,7 @@ class World {
   gameWon = false;
   floorHeight;
   chickenNear = false;
-  level = level1;
+  level;
   allWorldIntervals = [
     "collisionInterval",
     "cluckerInterval",
@@ -28,12 +28,13 @@ class World {
   camera_x = 0;
   drawInterval;
 
-  constructor(canvas, keyboard, pointTable, audio) {
+  constructor(canvas, keyboard, pointTable, audio, level) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.pointTable = pointTable;
     this.audio = audio;
+    this.level = level;
     this.draw();
     this.setWorld();
     this.runCollisions();
@@ -100,10 +101,12 @@ class World {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
           enemy.isKilled();
+          this.spawnNewChickensForRushMode(enemy);
           audio.playRandomSound("deadChicken");
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           enemy.lives = false;
+          console.log(enemy);
         } else {
           this.character.hit();
           this.healthbar.updateHealthbar();
@@ -146,6 +149,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
+            this.spawnNewChickensForRushMode(enemy);
             enemy.isKilled();
             audio.playRandomSound("deadChicken");
             this.addPointsToPlayerScore(enemy.scoreNameBottle);
@@ -153,6 +157,22 @@ class World {
         });
       }
     });
+  }
+
+  spawnNewChickensForRushMode(enemy) {
+    if (gameMode === "chickenRush") {
+      if (enemy instanceof Chicken) {
+        this.level.enemies.push(
+          new Chicken(this.character.x + 1400),
+          new Chicken(this.character.x - 1400)
+        );
+      } else {
+        this.level.enemies.push(
+          new Minichicken(this.character.x + 1400),
+          new Minichicken(this.character.x - 1400)
+        );
+      }
+    }
   }
 
   animateBrokenBottle(bottle) {
@@ -206,7 +226,7 @@ class World {
         coin.collected = true;
         this.coinbar.updateCoinBar();
         this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 1) {
+        if (this.character.coins === 1 && gameMode != "chickenRush") {
           this.level.endboss.startBossFight();
         }
       }
