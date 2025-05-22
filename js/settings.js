@@ -79,25 +79,25 @@ function trimPlayerName(element) {
 }
 
 function getSoundSettings() {
-  soundMute = localStorage.getItem("soundMute") === "true";
-  console.log(soundMute);
+  sfxMute = localStorage.getItem("sfxMute") === "true";
+  console.log(sfxMute);
   musicMute = localStorage.getItem("musicMute") === "true";
   console.log(musicMute);
   sfxVolume = localStorage.getItem("sfxVolume");
   musicVolume = localStorage.getItem("musicVolume");
 
-  if (soundMute === null) soundMute = false;
+  if (sfxMute === null) sfxMute = false;
   if (musicMute === null) musicMute = false;
-  if (sfxVolume === null) sfxVolume = 5;
-  if (musicVolume === null) musicVolume = 8;
+  if (sfxVolume === null) sfxVolume = 8;
+  if (musicVolume === null) musicVolume = 3;
 }
 
 function assignSoundSettings() {
   calculateVolumesForAssign();
-  assignVolume("sfx", sfxVolume);
-  assignVolume("music", musicVolume);
-  assignMute("sfx", soundMute);
-  assignMute("music", musicMute);
+  // assignVolume("sfx", sfxVolume);
+  // assignVolume("music", musicVolume);
+  assignMuteAndVolume("sfx", sfxMute, sfxVolume);
+  assignMuteAndVolume("music", musicMute, musicVolume);
 }
 
 function calculateVolumesForAssign() {
@@ -105,128 +105,88 @@ function calculateVolumesForAssign() {
   musicVolume === 10 ? (musicVolume = 1) : (musicVolume = musicVolume / 10);
 }
 
-function assignVolume(src, vol) {
+// function assignMuteAndVolume(src, vol) {
+//   Object.values(audio[src]).forEach((audio) => {
+//     checkArrayAndSetVol(audio, vol);
+//   });
+// }
+
+// function checkArrayAndSetVol(audio, vol) {
+//   if (Array.isArray(audio)) {
+//     audio.forEach((audio) => {
+//       checkArrayAndSetVol(audio, vol);
+//     });
+//   } else {
+//     audio.volume = vol;
+//   }
+// }
+
+function assignMuteAndVolume(src, mute, vol) {
   Object.values(audio[src]).forEach((audio) => {
-    checkArrayAndSetVol(audio, vol);
+    checkArrayAndSetMuteAndVol(audio, mute, vol);
   });
 }
 
-function checkArrayAndSetVol(audio, vol) {
+function checkArrayAndSetMuteAndVol(audio, mute, vol) {
   if (Array.isArray(audio)) {
     audio.forEach((audio) => {
-      checkArrayAndSetVol(audio, vol);
+      checkArrayAndSetMuteAndVol(audio, mute, vol);
     });
   } else {
+    audio.muted = mute;
     audio.volume = vol;
   }
 }
 
-function assignMute(src, mute) {
-  Object.values(audio[src]).forEach((audio) => {
-    checkArrayAndSetMute(audio, mute);
-  });
-}
-
-function checkArrayAndSetMute(audio, mute) {
-  if (Array.isArray(audio)) {
-    audio.forEach((audio) => {
-      checkArrayAndSetMute(audio, mute);
-    });
-  } else {
-    audio.muted = mute;
-  }
-}
-
-
-
-
-
 function toggleSoundsOnOff() {
-  soundMute ? soundMute = false : soundMute = true;
-  console.log(soundMute);
-  assignMute("sfx", soundMute);
-  localStorage.setItem('soundMute', soundMute.toString());
+  sfxMute ? (sfxMute = false) : (sfxMute = true);
+  console.log(sfxMute);
+  assignMuteAndVolume("sfx", sfxMute, sfxVolume);
+  localStorage.setItem("sfxMute", sfxMute.toString());
   initSoundSettings();
 }
 
 function toggleMusicOnOff() {
-    musicMute ? musicMute = false : musicMute = true;
-  assignMute("music", musicMute);
-  localStorage.setItem('musicMute', musicMute.toString());
+  musicMute ? (musicMute = false) : (musicMute = true);
+  assignMuteAndVolume("music", musicMute, musicVolume);
+  localStorage.setItem("musicMute", musicMute.toString());
   initSoundSettings();
 }
-// function toggleSoundsOnOff() {
-//   let onRef = document.getElementById("sound-on");
-//   let offRef = document.getElementById("sound-off");
-//   onRef.classList.toggle("selected");
-//   onRef.classList.toggle("not-selected");
-//   offRef.classList.toggle("selected");
-//   offRef.classList.toggle("not-selected");
-//   onRef.classList.contains("selected")
-//     ? (soundMute = false)
-//     : (soundMute = true);
-//   assignMute("sfx", soundMute);
-//   localStorage.setItem('soundMute', soundMute.toString());
-// }
-
-// function toggleMusicOnOff() {
-//   let onRef = document.getElementById("music-on");
-//   let offRef = document.getElementById("music-off");
-//   onRef.classList.toggle("selected");
-//   onRef.classList.toggle("not-selected");
-//   offRef.classList.toggle("selected");
-//   offRef.classList.toggle("not-selected");
-//   onRef.classList.contains("selected")
-//     ? (musicMute = false)
-//     : (musicMute = true);
-//   assignMute("music", musicMute);
-//   localStorage.setItem('musicMute', musicMute.toString());
-// }
 
 function initSoundSettings() {
   let soundOnRef = document.getElementById("sound-on");
   let soundOffRef = document.getElementById("sound-off");
   let musicOnRef = document.getElementById("music-on");
   let musicOffRef = document.getElementById("music-off");
-  if (soundMute === false) {
-    soundOnRef.classList.add('selected');
-    soundOffRef.classList.remove('selected');
+  let musicInputRef = document.getElementById("menu-music-vol");
+  let sfxInputRef = document.getElementById("menu-sound-vol");
+  if (sfxMute === false) {
+    soundOnRef.classList.add("selected");
+    soundOffRef.classList.remove("selected");
   } else {
-        soundOnRef.classList.remove('selected');
-    soundOffRef.classList.add('selected');
+    soundOnRef.classList.remove("selected");
+    soundOffRef.classList.add("selected");
   }
   if (musicMute === false) {
-    musicOnRef.classList.add('selected');
-    musicOffRef.classList.remove('selected');
+    musicOnRef.classList.add("selected");
+    musicOffRef.classList.remove("selected");
   } else {
-        musicOnRef.classList.remove('selected');
-    musicOffRef.classList.add('selected');
+    musicOnRef.classList.remove("selected");
+    musicOffRef.classList.add("selected");
   }
-    assignMute("sfx", soundMute);
-      assignMute("music", musicMute);
+  musicInputRef.value = musicVolume * 10;
+  sfxInputRef.value = sfxVolume * 10;
+  assignMuteAndVolume("sfx", sfxMute, sfxVolume);
+  assignMuteAndVolume("music", musicMute, musicVolume);
 }
 
-
-
-// get sound setings from local
-
-// if not data
-// set volume to 50
-// on sfx
-// on music
-// set sound/music to on
-// on sfx
-// on music
-// set sound text on to bold
-// on sfx
-// on music
-// set sound range to 50
-// on sfx
-// on music
-
-// start GAME
-
-// get sound settings
-// get sound voume
-// set soundVolume
-// set sound settings to settings container if open
+function setVolume() {
+  let musicInputRef = document.getElementById("menu-music-vol");
+  musicVolume = musicInputRef.value;
+  localStorage.setItem("musicVolume", musicVolume.toString());
+  let sfxInputRef = document.getElementById("menu-sound-vol");
+  sfxVolume = sfxInputRef.value;
+  localStorage.setItem("sfxVolume", sfxVolume.toString());
+  calculateVolumesForAssign();
+  initSoundSettings();
+}

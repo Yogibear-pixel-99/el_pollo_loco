@@ -46,8 +46,8 @@ class World {
   }
 
   playGameMusic() {
-    audio.music.gameMusic.loop = true;
-    audio.music.gameMusic.play();
+    audio.sfx.gameAmbience.loop = true;
+    audio.sfx.gameAmbience.play();
   }
 
   enemyMoveDirection() {

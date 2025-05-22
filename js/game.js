@@ -4,7 +4,7 @@ let keyboard = new Keyboard();
 let audio = new Audiofiles();
 let sfxVolume;
 let musicVolume;
-let soundMute;
+let sfxMute;
 let musicMute;
 let canvasHeight = 480;
 let canvasWidth = 720;
@@ -367,9 +367,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.cursor = "url('./img/cursor.png'), auto";
   });
 
-  document.querySelectorAll('.opt-wrapper, #player-name-input').forEach((element) => {
+  document.querySelectorAll('.opt-wrapper, .sound-wrapper, #player-name-input').forEach((element) => {
     element.addEventListener('click', () => {
-      
+
       audio.playSound('menuClick');
     })
   })

@@ -38,6 +38,10 @@ class Audiofiles {
       "./audio/items/coins/coin-collision-sound-342335.mp3"
     ),
 
+    gameAmbience: new Audio(
+      "./audio/level/semi-desert-insects-ravens-birds-quiet-with-bad-mic-noise-badlands-ab-190818-7028.mp3"
+    ),
+
     collectBottle: [
       new Audio("./audio/items/bottles/glass-bottle-clink-90671.mp3"),
       new Audio("./audio/items/bottles/glass-clink-6-188126.mp3"),
@@ -51,9 +55,7 @@ class Audiofiles {
   };
 
   music = {
-    gameMusic: new Audio(
-      "./audio/level/semi-desert-insects-ravens-birds-quiet-with-bad-mic-noise-badlands-ab-190818-7028.mp3"
-    ),
+    
 
     menuError: new Audio("./audio/menu/error-sound-39539.mp3"),
     bossIsTriggerd: new Audio("./"),
@@ -68,7 +70,7 @@ class Audiofiles {
   playRandomSound(objSrc) {
     let rnd = Math.floor(Math.random() * audio.sfx[objSrc].length);
     let sound = audio.sfx[objSrc][rnd].cloneNode();
-    sound.muted = soundMute;
+    sound.muted = sfxMute;
     sound.volume = sfxVolume;
     sound.play();
   }
@@ -76,7 +78,7 @@ class Audiofiles {
 
   playSound(objSrc) {
     let sound = audio.sfx[objSrc].cloneNode();
-    sound.muted = soundMute;
+    sound.muted = sfxMute;
     sound.volume = sfxVolume;
     sound.play();
   }
