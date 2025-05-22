@@ -347,8 +347,8 @@ class World {
     } else {
       this.audio.sfx.gameLost.play();
     }
-
     this.audio.sfx.cluckern.pause();
+    saveScore();
     // play end sound win
     // play end sound lose
     // show mousepointer

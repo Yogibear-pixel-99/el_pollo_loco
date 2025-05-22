@@ -11,50 +11,35 @@ let canvasWidth = 720;
 let floorHeight = 58;
 let playMusicOnStart = false;
 let fullScreen = false;
+let gameMode = 'normal';
+const MAIN_URL =
+  "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
 
-// function init() {
-//   canvas = document.getElementById("gamecanvas");
-//   getHighscores();
-// }
+let highscores = {};
 
-// function startGame() {
-//     deactivateMenu();
-//     let gameMode = document.getElementById("game-mode-txt");
-//     switch (gameMode.innerText) {
-//       case "Normal Mode":
-//         loadNormalGame();
-//         break;
-
-//       case "Chicken Rush":
-//         loadChickenRushGame();
-//         break;
-
-//       default:
-//         break;
-//     }
-// }
 
 function init() {
   canvas = document.getElementById("gamecanvas");
   getSoundSettings();
   assignSoundSettings();
-  getHighscores();
+  getActiveHighscores();
+   renderGamePointsTable();
 }
 
 function startGame() {
   if (checkNameInput()) {
     deactivateMenu();
-    let gameMode = document.getElementById("game-mode-txt");
-    switch (gameMode.innerText) {
-      case "Normal Mode":
+    switch (gameMode) {
+      case "normal":
         startNormalGame();
         break;
 
-      case "Chicken Rush":
+      case "chickenRush":
         startChickenRushGame();
         break;
 
-      default:
+      case "hard":
+        startHardGame();
         break;
     }
   } else {
@@ -165,52 +150,12 @@ function activateMenu() {
   startBlinkRef.classList.add("start-game-text");
 }
 
-async function getHighscores() {
-  await fetchHighscores();
-  sortHighscores();
-  // get high von api
-  // wenn leer füge template ein.
-  renderHighscores("normal");
-  renderGamePointsTable();
-  // bei spielende namen und highscore passend ins object einfügen.
-  // object in die database - PUT
-  // neu im HTML rendern.
-}
 
-// async function getHighscoreFromApi() {
-//   try {
-//     let response = await fetch(MAIN_URL + '.json');
-//     if (!response.ok) {
-//       throw new Error();
-//     } else {
-//       let data = await response.json();
-//       if (data) {
-//         highscores = Object.values(data);
-//       }
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
-function sortHighscores() {
-  highscores.normal.sort((a, b) => b.score - a.score);
-  highscores.chickenrush.sort((a, b) => b.score - a.score);
-}
 
-function renderHighscores(scorename) {
-  let ref = document.getElementById("highscore");
-  let data = "";
-  for (
-    let index = 0;
-    index < highscores[scorename].length && index <= 30;
-    index++
-  ) {
-    const element = highscores[scorename][index];
-    data += highscoreTemp(element);
-  }
-  ref.innerHTML = data;
-}
+
+
+
 
 function renderGamePointsTable() {
   let ref = document.getElementById("game-points-table");
@@ -221,31 +166,57 @@ function renderGamePointsTable() {
   ref.innerHTML = data;
 }
 
+
 function toggleGameMode() {
-  changeGameModeHeaderText();
-  changeGameModeHighscoreTable();
-}
-
-function changeGameModeHeaderText() {
-  let ref = document.getElementById("game-mode-txt");
+    let ref = document.getElementById("game-mode-txt");
   let expRef = document.getElementById("game-mode-exp");
-  if (ref.innerText === "Normal Mode") {
-    ref.innerText = "Chicken Rush";
-    expRef.innerText = "Endless chicken, unlimited bottles";
-  } else {
-    ref.innerText = "Normal Mode";
-    expRef.innerText = "Standard Level";
+  switch (gameMode) {
+    case 'normal': {
+      ref.innerText = 'Hard Mode';
+      expRef.innerText = 'more Chickens, more Bosslife';
+      gameMode = 'hard';
+      getActiveHighscores();
+    }
+      break;
+    case 'hard': {
+      ref.innerText = 'Chicken Rush';
+      expRef.innerText = 'endless Chickens, no Boss';
+      gameMode = 'chickenRush';
+       getActiveHighscores();
+    }
+      break;
+    case 'chickenRush': {
+      ref.innerText = 'Normal Mode';
+      expRef.innerText = 'Standard Level';
+      gameMode = 'normal';
+       getActiveHighscores();
+    }
+      break;
+  
   }
 }
 
-function changeGameModeHighscoreTable() {
-  let ref = document.getElementById("game-mode-txt");
-  if (ref.innerText === "Normal Mode") {
-    renderHighscores('normal');
-  } else {
-    renderHighscores('chickenrush');
-  }
-}
+
+// function changeGameModeHeaderText() {
+//   let ref = document.getElementById("game-mode-txt");
+//   let expRef = document.getElementById("game-mode-exp");
+//   if (ref.innerText === "Normal Mode") {
+//     ref.innerText = "Chicken Rush";
+//     expRef.innerText = "Endless chicken, unlimited bottles";
+//   } else {
+//     ref.innerText = "Normal Mode";
+//     expRef.innerText = "Standard Level";
+//   }
+// }
+
+// function changeGameModeHighscoreTable() {
+//   let ref = document.getElementById("game-mode-txt");
+//   if (ref.innerText === "Normal Mode") {
+//     renderHighscores('normal');
+//   } else {
+//     renderHighscores('chickenrush');
+//   }
+// }
 
 const pointConfig = {
   chickenJumpKill: {
@@ -390,19 +361,12 @@ document.addEventListener('click', () => {
     // music for chickenrush
 
 
-// look for canvasheight and width variable in game.js, they havent a let.
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
-
-// Gameend - boss right pic and call gameend screen
-
 // set coin collision to 10 after boss animation
 
-// rewrite the boss bottle hit function
-// chicken should turn arround if they reach the level end
-// chars should not move until the game starts
 
-// clear oll hitbos draw functions
+
 
 // implement normal/hard/chickenrush mode
 
@@ -448,3 +412,4 @@ document.addEventListener('click', () => {
 // adding random spawn point
 
 // controll all intervals!!!! and stop them after game finished.
+// change the splice array method for scores to 100 from 10

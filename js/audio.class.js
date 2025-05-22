@@ -2,7 +2,7 @@ class Audiofiles {
   sfx = {
 
     menuClick : new Audio("./audio/menu/toggle-button-off-166328.mp3"),
-    menuError : new Audio("./audio/menu/error-sound-39539.mp3"),
+      menuError: new Audio("./audio/menu/guitar-apoggiatura2_16b-41545.mp3"),
 
     cluckern: new Audio("./audio/level/environment/chicken-chatter-33515.mp3"),
     bottleBreak: [
@@ -57,12 +57,12 @@ class Audiofiles {
   music = {
     
 
-    menuError: new Audio("./audio/menu/error-sound-39539.mp3"),
-    bossIsTriggerd: new Audio("./"),
+  
+    bossIsTriggerd: new Audio(),
 
-    menuMusic: new Audio(
-      "./audio/menu/mexican-music-latin-guitar-mexico-mariachi-background-intro-theme-328253.mp3"
-    ),
+    menuMusic: new Audio("./audio/menu/mexican-music-latin-guitar-mexico-mariachi-background-intro-theme-328253.mp3"),
+    normalModeMusic : new Audio("./audio/level/little-village-251736.mp3"),
+    chickenRushMusic : new Audio("./audio/level/fiesta-forever-165168.mp3"),
   };
 
   constructor() {}

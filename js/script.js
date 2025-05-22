@@ -1,25 +1,16 @@
-const MAIN_URL =
-  "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let highscores = {
-  chickenrush: [
-
-  ],
-  normal: [
-
-  ]
-};
 
 async function fetchHighscores() {
   try {
-    let response = await fetch(MAIN_URL + '.json');
+    let response = await fetch(MAIN_URL + gameMode +  '/.json');
     if (!response.ok) {
         throw new Error();
     } else {
         let data = await response.json();
         if (data) {
-        highscores = data;
+        highscores[gameMode] = Object.values(data);
         }
+        await deleteIfMoreThan100Scores();
     }
   } catch (error) {
     console.log('Highscore fetch error: ' + error)
