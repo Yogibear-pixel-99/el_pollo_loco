@@ -4,11 +4,12 @@ let keyboard = new Keyboard();
 let audio = new Audiofiles();
 let sfxVolume;
 let musicVolume;
-let musicOn;
-let musicOff;
+let soundMute;
+let musicMute;
 let canvasHeight = 480;
 let canvasWidth = 720;
 let floorHeight = 58;
+let playMusicOnStart = false;
 
 // function init() {
 //   canvas = document.getElementById("gamecanvas");
@@ -37,7 +38,6 @@ function init() {
   getSoundSettings();
   assignSoundSettings();
   getHighscores();
-  // audio.playMusicOnce('menuMusic');
 }
 
 function startGame() {
@@ -374,7 +374,11 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 });
 
-
+document.addEventListener('click', () => {
+  if (!playMusicOnStart)
+  audio.playMusicOnce('menuMusic');
+  playMusicOnStart = true;
+})
 
 
 

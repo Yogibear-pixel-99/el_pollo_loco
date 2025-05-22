@@ -40,6 +40,17 @@ body {
   align-items: center;
 }
 
+.not-selected {
+  font-weight: 300;
+  transform: scale(70%);
+}
+
+.selected {
+  font-weight: 700;
+  transform: scale(110%);
+}
+
+
 .main-container {
   display: flex;
   flex-direction: row;
@@ -547,10 +558,6 @@ h2 {
 .sound-text-wrapper:hover span:first-child{
   font-weight: 700;
   transform: scale(110%);
-}
-
-.fw800 {
-  font-weight: 800;
 }
 
 input[type=range] {

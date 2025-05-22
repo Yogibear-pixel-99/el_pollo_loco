@@ -77,21 +77,21 @@ function getSoundOptionsTemp() {
   return `<div class="sound-settings">
     
             <div class="sound-wrapper">
-                <div class="sound-text-wrapper">
+                <div class="sound-text-wrapper" onclick="toggleSoundsOnOff()">
                     <span>Sounds</span>
-                    <span>On</span>
+                    <span id="sound-on" class="not-selected">On</span>
                     <span>/</span>
-                    <span>Off</span>
+                    <span id="sound-off" class="not-selected">Off</span>
                 </div>
                 <input id="menu-music" type="range" min="0" max="10">
             </div>
 
             <div class="sound-wrapper">
-                <div class="sound-text-wrapper">
+                <div class="sound-text-wrapper" onclick="toggleMusicOnOff()">
                     <span>Music</span>
-                    <span>On</span>
+                    <span id="music-on" class="not-selected">On</span>
                     <span>/</span>
-                    <span>Off</span>
+                    <span id="music-off" class="not-selected">Off</span>
                 </div>
                 <input id="menu-music" type="range" min="0" max="10">
             </div>
