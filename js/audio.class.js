@@ -68,11 +68,16 @@ class Audiofiles {
   playRandomSound(objSrc) {
     let rnd = Math.floor(Math.random() * audio.sfx[objSrc].length);
     let sound = audio.sfx[objSrc][rnd].cloneNode();
+    sound.muted = soundMute;
+    sound.volume = sfxVolume;
     sound.play();
   }
 
+
   playSound(objSrc) {
     let sound = audio.sfx[objSrc].cloneNode();
+    sound.muted = soundMute;
+    sound.volume = sfxVolume;
     sound.play();
   }
 

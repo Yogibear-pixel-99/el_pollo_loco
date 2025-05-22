@@ -369,6 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll('.opt-wrapper, #player-name-input').forEach((element) => {
     element.addEventListener('click', () => {
+      
       audio.playSound('menuClick');
     })
   })
