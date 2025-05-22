@@ -63,7 +63,6 @@ body {
 .main-background-img {
   position: absolute;
   inset: 0;
-  /* background-image: url("./img/5_background/main-bg-2.jpg"); */
   background-image: url("./img/5_background/main-bg.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -81,8 +80,7 @@ canvas {
   background-position: center;
   border-radius: 20px;
   z-index: 100;
-  /* background: linear-gradient(rgb(255, 192, 119), rgb(106, 188, 255)); */
-}
+  }
 
 .canvas-menu-display {
   position: absolute;
@@ -151,7 +149,7 @@ canvas {
 h1 {
   text-align: center;
   height: 90px;
-  font-size: 60px;
+  font-size: 48px;
 }
 
 h2 {
@@ -258,11 +256,9 @@ h2 {
 
 .left-content,
 .right-content {
-  /* margin: 0 80px; */
   border-radius: 20px;
-  /* flex: 1; */
   background-color: var(--score-bg);
-  padding: 24px;
+  padding: 18px;
   margin: 0 20px;
   font-size: 24px;
   display: flex;
@@ -275,7 +271,7 @@ h2 {
 }
 
 .left-content {
-  border: solid 24px rgba(233, 180, 33, 0);
+  border: solid 18px rgba(233, 180, 33, 0);
   padding: 0;
 }
 
@@ -591,4 +587,9 @@ input[type=range]::-moz-range-thumb {
   background-size: contain;
   border: none;
   cursor: url("./img/cursor.png"), auto;
+}
+
+.full-screen-button {
+  background-color: var(--settings-bg-active);
+  color: var(--settings-text-active);
 }

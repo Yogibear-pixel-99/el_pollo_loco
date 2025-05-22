@@ -125,7 +125,8 @@
       </div>
     </main>
     <footer class="settings-wrapper">
-      <div class="opt-wrapper" onclick="toggleStory()">
+      <div class="opt-wrapper" onclick="toggleOptionMenu(getStoryTemp, 'story')">
+      <!-- <div class="opt-wrapper" onclick="toggleStory()"> -->
         <img
           class="settings-img"
           src="./img/icons/book-4109187_640.png"
@@ -133,7 +134,7 @@
           class="opt-img" />
         <span class="opt-text">Story</span>
       </div>
-      <div class="opt-wrapper" onclick="toggleControls()">
+      <div class="opt-wrapper" onclick="toggleOptionMenu(getControlsTemp, 'controls')">
         <img
           class="settings-img"
           src="./img/icons/controller-3364881_640.png"
@@ -149,7 +150,7 @@
           class="opt-img" />
         <span class="opt-text">Gamemode</span>
       </div>
-      <div class="opt-wrapper" onclick="toggleSounds()">
+      <div class="opt-wrapper" onclick="toggleOptionMenu(getSoundOptionsTemp, 'sounds'); initSoundSettings()">
         <img
           class="settings-img"
           src="./img/icons/guitar-7288462_640.png"
@@ -157,7 +158,7 @@
           class="opt-img" />
         <span class="opt-text">Sound on/off</span>
       </div>
-      <div class="opt-wrapper">
+      <div id="full-screen-button" class="opt-wrapper" onclick="toggleFullScreen()">
         <img
           class="settings-img"
           src="./img/icons/basket-1296634_640.png"

@@ -58,6 +58,12 @@ function getControlsTemp() {
                 </div>`;
 }
 
+/**
+ * Creates a HTML element to display the players score.
+ * 
+ * @param {Object} element - The player object with name and score.
+ * @returns - A HTML template
+ */
 function highscoreTemp(element) {
   return `<div class="score-wrapper">
             <div class="highscore-player-name">${element.name}</div>
@@ -65,6 +71,12 @@ function highscoreTemp(element) {
           </div>`;
 }
 
+/**
+ * Creates a HTML element to display the score board.
+ * 
+ * @param {Object} element - The score object with name and points.
+ * @returns - A HTML template
+ */
 function getPointsTemp(element) {
   return `<div class="item-point-wrapper">
             <span class="item-name">${element[1].name}</span>
@@ -73,27 +85,32 @@ function getPointsTemp(element) {
   `;
 }
 
+/**
+ * Creates a HTML element for the sound settings.
+ * 
+ * @returns - A HTML template.
+ */
 function getSoundOptionsTemp() {
   return `<div class="sound-settings">
     
-            <div class="sound-wrapper">
+            <div class="sound-wrapper" onclick="">
                 <div class="sound-text-wrapper" onclick="toggleSoundsOnOff(); audio.playSound('menuClick')">
                     <span>Sounds</span>
                     <span id="sound-on" class="not-selected">On</span>
                     <span>/</span>
                     <span id="sound-off" class="not-selected">Off</span>
                 </div>
-                <input id="menu-sound-vol" oninput="setVolume()" type="range" min="1" max="10">
+                <input id="menu-sound-vol" onchange="audio.playSound('menuClick')" oninput="setVolume()" type="range" value="5" min="1" max="10">
             </div>
 
-            <div class="sound-wrapper">
-                <div class="sound-text-wrapper" onclick="toggleMusicOnOff(); audio.playSound('menuClick')">
+            <div class="sound-wrapper" onclick="audio.playSound('menuClick')">
+                <div class="sound-text-wrapper" onclick="toggleMusicOnOff()">
                     <span>Music</span>
                     <span id="music-on" class="not-selected">On</span>
                     <span>/</span>
                     <span id="music-off" class="not-selected">Off</span>
                 </div>
-                <input id="menu-music-vol" oninput="setVolume()" type="range" min="1" max="10">
+                <input id="menu-music-vol" onchange="audio.playSound('menuClick')" oninput="setVolume()" type="range" value="5" min="1" max="10">
             </div>
         `;
 }

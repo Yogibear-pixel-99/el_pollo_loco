@@ -10,6 +10,7 @@ let canvasHeight = 480;
 let canvasWidth = 720;
 let floorHeight = 58;
 let playMusicOnStart = false;
+let fullScreen = false;
 
 // function init() {
 //   canvas = document.getElementById("gamecanvas");

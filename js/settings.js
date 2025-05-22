@@ -29,6 +29,23 @@ function showSingleContainerById(containerId) {
   content.classList.remove("d-none");
 }
 
+function toggleOptionMenu(getTemp, settingsMenu) {
+      let ref = document.getElementById("canvas-option-container");
+      let template = getTemp();
+  if (sessionStorage.getItem('menu') === settingsMenu && !ref.classList.contains('d-none')) {
+    ref.classList.add("d-none");
+  } else {
+    if (ref.classList.contains("d-none")) {
+      showSingleContainerById("canvas-option-container");
+      getTemplateToContent("canvas-option-container", template);
+      sessionStorage.setItem('menu', settingsMenu);
+    } else {
+      getTemplateToContent("canvas-option-container", template);
+      sessionStorage.setItem('menu', settingsMenu);
+    }
+  }
+}
+
 /**
  * This function hides a html container. It adds the class d-none.
  *
@@ -39,27 +56,18 @@ function hideSingleContainerById(containerId) {
   content.classList.add("d-none");
 }
 
-/**
- * Shows the settings HTMLElement and gets the story template.
- */
-function toggleStory() {
-  toggleSingleContainerById("canvas-option-container");
-  getTemplateToContent("canvas-option-container", getStoryTemp());
+function toggleFullScreen(){
+  let buttonRef = document.getElementById('full-screen-button');
+  if (fullScreen) {
+      buttonRef.classList.remove('full-screen-button');
+     fullScreen = false;
+  } else {
+    fullScreen = true;
+    buttonRef.classList.add('full-screen-button');
+  }
 }
 
-/**
- * Shows the settingsHTMLElement and gets the controls template.
- */
-function toggleControls() {
-  toggleSingleContainerById("canvas-option-container");
-  getTemplateToContent("canvas-option-container", getControlsTemp());
-}
 
-function toggleSounds() {
-  toggleSingleContainerById("canvas-option-container");
-  getTemplateToContent("canvas-option-container", getSoundOptionsTemp());
-  initSoundSettings();
-}
 
 function returnOnlyLettersAndNumbers(id) {
   let regex = /[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfA-Za-z0-9\s+]/g;
@@ -88,14 +96,12 @@ function getSoundSettings() {
 
   if (sfxMute === null) sfxMute = false;
   if (musicMute === null) musicMute = false;
-  if (sfxVolume === null) sfxVolume = 8;
-  if (musicVolume === null) musicVolume = 3;
+  if (sfxVolume === null) sfxVolume = 7;
+  if (musicVolume === null) musicVolume = 4;
 }
 
 function assignSoundSettings() {
   calculateVolumesForAssign();
-  // assignVolume("sfx", sfxVolume);
-  // assignVolume("music", musicVolume);
   assignMuteAndVolume("sfx", sfxMute, sfxVolume);
   assignMuteAndVolume("music", musicMute, musicVolume);
 }
@@ -104,22 +110,6 @@ function calculateVolumesForAssign() {
   sfxVolume === 10 ? (sfxVolume = 1) : (sfxVolume = sfxVolume / 10);
   musicVolume === 10 ? (musicVolume = 1) : (musicVolume = musicVolume / 10);
 }
-
-// function assignMuteAndVolume(src, vol) {
-//   Object.values(audio[src]).forEach((audio) => {
-//     checkArrayAndSetVol(audio, vol);
-//   });
-// }
-
-// function checkArrayAndSetVol(audio, vol) {
-//   if (Array.isArray(audio)) {
-//     audio.forEach((audio) => {
-//       checkArrayAndSetVol(audio, vol);
-//     });
-//   } else {
-//     audio.volume = vol;
-//   }
-// }
 
 function assignMuteAndVolume(src, mute, vol) {
   Object.values(audio[src]).forEach((audio) => {
