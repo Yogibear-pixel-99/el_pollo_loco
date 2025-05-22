@@ -23,6 +23,7 @@ class Minichicken extends Enemies {
 
   constructor(x) {
     super();
+    this.getChickenSize();
     this.loadImage("./img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.y = this.floorPosition() - (Math.random() * 8 - 1);
     if (x < 400) {
@@ -32,5 +33,16 @@ class Minichicken extends Enemies {
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.moveEnemies();
     this.animateWalk();
+  }
+
+    getChickenSize(){
+    if (gameMode === 'chickenRush') {
+      let size = Math.ceil(Math.random() * (70 - 30) + 30);
+      let speed = parseFloat((Math.random() * 3).toFixed(1));
+      this.width = size;
+      this.height = size;
+      this.walkingSpeed = speed;
+      this.y = this.floorPosition() - (Math.random() * 8 - 1);
+    }
   }
 }

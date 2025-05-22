@@ -17,15 +17,7 @@ class Enemies extends MovableObject {
 
 
 
-  moveEnemies() {
-    this.walkMoveInterval = setInterval(() => {
-      if (this.otherDirection) {
-        this.moveRight();
-      } else {
-        this.moveLeft();
-      }
-    }, this.moveCycle);
-  }
+
 
   animateWalk() {
     this.walkAnimationInterval = setInterval(() => {
@@ -45,5 +37,15 @@ class Enemies extends MovableObject {
   clearAllEnemyIntervalls() {
     clearInterval(this.walkAnimationInterval);
     clearInterval(this.walkMoveInterval);
+  }
+
+      moveEnemies() {
+    this.walkMoveInterval = setInterval(() => {
+      if (this.otherDirection) {
+        this.moveRight();
+      } else {
+        this.moveLeft();
+      }
+    }, this.moveCycle);
   }
 }

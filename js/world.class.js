@@ -54,6 +54,7 @@ class World {
   enemyMoveDirection() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
+        console.log('enemy-x: ' + enemy.x);
         if (enemy.x < this.character.x - canvasWidth) {
           enemy.otherDirection = true;
         }
@@ -61,7 +62,7 @@ class World {
           enemy.otherDirection = false;
         }
       });
-    }, 1000);
+    }, 500);
   }
 
   setWorld() {
