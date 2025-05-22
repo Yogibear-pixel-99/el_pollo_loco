@@ -17,18 +17,7 @@ class DrawableObject {
   animationCycle = 120;
   otherDirection = false;
   
-  playRandomSound(objSrc){
-      let rnd = Math.floor(
-      Math.random() * world.audiofiles.sfx[objSrc].length
-    );
-    let sound = world.audiofiles.sfx[objSrc][rnd].cloneNode();
-        sound.play();
-  }
 
-  playSound(objSrc){
-       let sound = world.audiofiles.sfx[objSrc].cloneNode();
-            sound.play();
-  }
 
   collisionFromAbove(){
     return (

@@ -4,7 +4,7 @@ class World {
   coinbar = new Coinbar();
   bottlebar = new Bottlebar();
   bossHealthbar = new Bosshealthbar();
-  audiofiles;
+  audio;
   thrownBottles = [];
   playerscore = 0;
   pointTable;
@@ -26,13 +26,14 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  drawInterval;
 
-  constructor(canvas, keyboard, pointTable, audiofiles) {
+  constructor(canvas, keyboard, pointTable, audio) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.pointTable = pointTable;
-    this.audiofiles = audiofiles;
+    this.audio = audio;
     this.draw();
     this.setWorld();
     this.runCollisions();
@@ -45,8 +46,8 @@ class World {
   }
 
   playGameMusic() {
-    audiofiles.music.gameMusic.loop = true;
-    audiofiles.music.gameMusic.play();
+    audio.music.gameMusic.loop = true;
+    audio.music.gameMusic.play();
   }
 
   enemyMoveDirection() {
@@ -99,7 +100,7 @@ class World {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
           enemy.isKilled();
-          enemy.playRandomSound("deadChicken");
+          audio.playRandomSound("deadChicken");
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           enemy.lives = false;
@@ -137,8 +138,8 @@ class World {
         this.animateBrokenBottle(bottle);
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
-          this.level.endboss.playSound("bossHitted");
-          this.level.endboss.playSound("bossCrys");
+          audio.playSound("bossHitted");
+          audio.playSound("bossCrys");
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
@@ -146,7 +147,7 @@ class World {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
             enemy.isKilled();
-            enemy.playRandomSound("deadChicken");
+            audio.playRandomSound("deadChicken");
             this.addPointsToPlayerScore(enemy.scoreNameBottle);
           }
         });
@@ -172,7 +173,7 @@ class World {
     let bottleIndex = world.thrownBottles.indexOf(bottle);
     bottle.img = bottle.animatedImages[bottle.BOTTLE_SPLASH_ANIMATION[0]];
     let count = 1;
-    bottle.playRandomSound("bottleBreak");
+    audio.playRandomSound("bottleBreak");
     let interval = setInterval(() => {
       if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
         bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
@@ -199,7 +200,7 @@ class World {
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && coin.collected == false) {
-        coin.playSound("collectCoin");
+        audio.playSound("collectCoin");
         this.character.collectCoin();
         coin.isCollectedAnimation();
         coin.collected = true;
@@ -217,7 +218,7 @@ class World {
       if (this.character.isColliding(bottle)) {
         if (world.character.bottles < 5) {
           this.addPointsToPlayerScore(bottle.itemName);
-          bottle.playRandomSound("collectBottle");
+          audio.playRandomSound("collectBottle");
         }
         bottle.isCollected();
         this.character.collectBottle();
@@ -255,9 +256,9 @@ class World {
           this.chickenNear = true;
         }
         if (this.chickenNear === true) {
-          this.audiofiles.sfx.cluckern.play();
+          this.audio.sfx.cluckern.play();
         } else {
-          this.audiofiles.sfx.cluckern.pause();
+          this.audio.sfx.cluckern.pause();
         }
       });
     }, 500);
@@ -283,7 +284,7 @@ class World {
       this.addObjToCanvas(this.bossHealthbar);
     }
     let self = this;
-    requestAnimationFrame(function () {
+    this.drawInterval = requestAnimationFrame(function () {
       self.draw();
     });
   }
@@ -342,12 +343,12 @@ class World {
 
     if (this.gameWon) {
       this.addPointsToPlayerScore("endbossKilled");
-      this.audiofiles.sfx.gameWon.play();
+      this.audio.sfx.gameWon.play();
     } else {
-      this.audiofiles.sfx.gameLost.play();
+      this.audio.sfx.gameLost.play();
     }
 
-    this.audiofiles.sfx.cluckern.pause();
+    this.audio.sfx.cluckern.pause();
     // play end sound win
     // play end sound lose
     // show mousepointer

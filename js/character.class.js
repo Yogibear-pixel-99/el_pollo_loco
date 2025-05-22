@@ -111,21 +111,21 @@ class Character extends MovableObject {
       const left = world.keyboard.KEY_LEFT;
       const jump = world.keyboard.KEY_JUMP;
       if (!this.aboveGround() && (right || left)) {
-        if (world.audiofiles.sfx.pepeWalk.currentTime > 3.7) {
-          world.audiofiles.sfx.pepeWalk.currentTime = 0;
+        if (audio.sfx.pepeWalk.currentTime > 3.7) {
+          audio.sfx.pepeWalk.currentTime = 0;
         }
-        world.audiofiles.sfx.pepeWalk.play();
+        audio.sfx.pepeWalk.play();
       } else {
-        world.audiofiles.sfx.pepeWalk.pause();
+        audio.sfx.pepeWalk.pause();
       }
       if (jump && !this.aboveGround()) {
-        world.audiofiles.sfx.pepeJump.play();
+        audio.sfx.pepeJump.play();
       }
       if (this.speedY < 0 && !this.aboveGround()) {
-        world.audiofiles.sfx.pepeLanding.play();
+        audio.sfx.pepeLanding.play();
       }
       if (this.isHurt()) {
-        world.audiofiles.sfx.pepeHurt.play();
+        audio.sfx.pepeHurt.play();
       }
     }, 1000 / 60);
   }
@@ -217,7 +217,7 @@ class Character extends MovableObject {
           this.playAnimation(this.IDLE_ANIMATION);
         } else {
           this.playAnimation(this.IDLE_LONG_ANIMATION);
-          world.audiofiles.sfx.pepeLongIdle.play();
+          audio.sfx.pepeLongIdle.play();
         }
       }
       if (!this.characterIdle() && !world.checkGameEnd()) {
@@ -244,8 +244,8 @@ class Character extends MovableObject {
   }
 
   resetIdleAudio() {
-    world.audiofiles.sfx.pepeLongIdle.pause();
-    world.audiofiles.sfx.pepeLongIdle.currentTime = 0;
+    audio.sfx.pepeLongIdle.pause();
+    audio.sfx.pepeLongIdle.currentTime = 0;
   }
 
   animateDead() {
@@ -259,7 +259,7 @@ class Character extends MovableObject {
       this.bottleThrown = true;
       this.bottles--;
       this.world.bottlebar.updateBottleBar();
-      this.playRandomSound("bottleThrow");
+      audio.playRandomSound("bottleThrow");
       setTimeout(() => {
         this.bottleThrown = false;
       }, 2000);

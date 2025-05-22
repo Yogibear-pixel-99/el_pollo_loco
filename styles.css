@@ -17,6 +17,9 @@ html {
   --score-bg: rgba(233, 180, 33, 0.6);
   --score-name: rgba(179, 146, 55, 0.411);
   --settings-bg: rgb(255, 217, 112);
+  --settings-bg-hover: rgb(247, 200, 73);
+  --settings-bg-active: rgb(219, 179, 68);
+  --settings-text-active: rgb(255, 231, 163);
 }
 
 body {
@@ -88,10 +91,10 @@ canvas {
 }
 
 .won-lost-wrapper {
-display: flex;
-margin-top: 24px;
-gap: 50px;
-font-size: 32px;
+  display: flex;
+  margin-top: 24px;
+  gap: 50px;
+  font-size: 32px;
 }
 
 .won-lost-wrapper img {
@@ -101,18 +104,18 @@ font-size: 32px;
 }
 
 .won-lost-single-button-wrapper {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 20px;
-background-color:var(--settings-bg);
-padding: 12px;
-border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--settings-bg);
+  padding: 12px;
+  border-radius: 12px;
 }
 
 .won-lost-single-button-wrapper:hover {
-filter: brightness(120%);
-transform: scale(105%);
+  filter: brightness(120%);
+  transform: scale(105%);
 }
 
 .won-lost-single-button-wrapper:active {
@@ -215,10 +218,10 @@ h2 {
 }
 
 .error-blink {
-    animation-name: blink-name;
-    animation-duration: 800ms;
-    animation-iteration-count: infinite;
-    animation-delay: 0ms;
+  animation-name: blink-name;
+  animation-duration: 800ms;
+  animation-iteration-count: infinite;
+  animation-delay: 0ms;
 }
 
 @keyframes blink-name {
@@ -261,7 +264,7 @@ h2 {
 }
 
 .left-content {
-  border: solid 24px rgba(233, 180, 33, 0.0);
+  border: solid 24px rgba(233, 180, 33, 0);
   padding: 0;
 }
 
@@ -315,7 +318,7 @@ h2 {
     right: 0;
     bottom: 0; */
   margin: 0 140px 40px;
-  padding: 10px;
+  padding: 0 10px;
   background-color: var(--settings-bg);
   font-size: 28px;
   display: flex;
@@ -336,6 +339,16 @@ h2 {
   justify-content: center;
   align-items: center;
   padding-top: 10px;
+  padding: 10px;
+}
+
+
+.opt-wrapper:hover {
+  background-color: var(--settings-bg-hover);
+}
+.opt-wrapper:active {
+  background-color: var(--settings-bg-active);
+  color: var(--settings-text-active);
 }
 
 .opt-wrapper:hover .settings-img {
@@ -354,7 +367,7 @@ h2 {
   inset: 0;
   font-family: mansalva;
   font-size: 28px;
-  background-color: beige;
+  background-color: var(--settings-bg);
   border-radius: 20px;
 }
 
@@ -380,10 +393,8 @@ h2 {
   inset: 0;
   font-family: mansalva;
   font-size: 28px;
-  background-color: beige;
+  background-color: var(--settings-bg);
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -399,6 +410,25 @@ h2 {
 
 .controls-header {
   justify-self: center;
+}
+
+.sound-settings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 20px;
+  position: absolute;
+  inset: 0;
+  font-family: mansalva;
+  font-size: 28px;
+  background-color: var(--settings-bg);
+  border-radius: 20px;
+}
+
+.sound-wrapper span:first-child {
+  margin-right: 40px;
 }
 
 .settings-close-button {
@@ -439,6 +469,119 @@ h2 {
 }
 
 .name-error-text {
-    height: 36px;
+  height: 36px;
   font-weight: 700;
+}
+
+@keyframes start-error {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
   }
+  5% {
+    transform: translate(-8px, 5px) rotate(-2deg);
+  }
+  10% {
+    transform: translate(6px, -6px) rotate(2deg);
+  }
+  15% {
+    transform: translate(-7px, 4px) rotate(-3deg);
+  }
+  20% {
+    transform: translate(7px, -3px) rotate(3deg);
+  }
+  25% {
+    transform: translate(-5px, -6px) rotate(-2deg);
+  }
+  30% {
+    transform: translate(4px, 6px) rotate(2deg);
+  }
+  40% {
+    transform: translate(-3px, -2px) rotate(-1deg);
+  }
+  50% {
+    transform: translate(2px, 2px) rotate(1deg);
+  }
+  60% {
+    transform: translate(-1px, 1px) rotate(0.5deg);
+  }
+  70% {
+    transform: translate(1px, -1px) rotate(-0.5deg);
+  }
+  80% {
+    transform: translate(0.5px, 0.5px) rotate(0.2deg);
+  }
+  90% {
+    transform: translate(-0.5px, -0.5px) rotate(-0.2deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+.shake-error {
+  animation: start-error 1s ease-out;
+}
+
+
+
+
+
+.sound-settings {
+  padding: 20px;
+  background: var(--settings-bg);
+}
+
+.sound-wrapper {
+  margin-bottom: 30px;
+}
+
+.sound-text-wrapper {
+  display: flex;
+  gap: 8px;
+  color: black;
+  margin-bottom: 10px;
+  justify-content: center;
+  font-family: mansalva;
+}
+
+.sound-text-wrapper:hover span:first-child{
+  font-weight: 700;
+  transform: scale(110%);
+}
+
+.fw800 {
+  font-weight: 800;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #f4a261;
+  border-radius: 6px;
+  outline: none;
+   cursor: url("./img/cursor.png"), auto;
+}
+
+/* WebKit (Chrome, Safari) */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  background: url('img/icons/guitar-7288462_640.png') no-repeat center center;
+  background-size: contain;
+  border: none;
+    cursor: url("./img/cursor.png"), auto;
+  transform: rotate(-45deg);
+  margin-top: -9px;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: url('guitar-icon.svg') no-repeat center center;
+  background-size: contain;
+  border: none;
+  cursor: url("./img/cursor.png"), auto;
+}

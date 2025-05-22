@@ -1,8 +1,7 @@
+let chickenRushLevel;
 
-
-
-
-const chickenRushLevel = new Level(
+function initChickenRushLevel() {
+chickenRushLevel = new Level(
 
 
 
@@ -108,4 +107,5 @@ const chickenRushLevel = new Level(
 
   719 * 5 + 50
 
-);
+)
+};

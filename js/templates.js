@@ -1,6 +1,6 @@
 /**
  * Creates the HTMLElement for the story.
- * 
+ *
  * @returns - The story template.
  */
 function getStoryTemp() {
@@ -22,10 +22,9 @@ El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the 
             </p></div>`;
 }
 
-
 /**
  * Creates the HTMLElement for the controls.
- * 
+ *
  * @returns - The controls template.
  */
 function getControlsTemp() {
@@ -72,4 +71,29 @@ function getPointsTemp(element) {
             <span class="item-points" id="${element[0]}">${element[1].points}</span>
           </div>
   `;
+}
+
+function getSoundOptionsTemp() {
+  return `<div class="sound-settings">
+    
+            <div class="sound-wrapper">
+                <div class="sound-text-wrapper">
+                    <span>Sounds</span>
+                    <span>On</span>
+                    <span>/</span>
+                    <span>Off</span>
+                </div>
+                <input id="menu-music" type="range" min="0" max="10">
+            </div>
+
+            <div class="sound-wrapper">
+                <div class="sound-text-wrapper">
+                    <span>Music</span>
+                    <span>On</span>
+                    <span>/</span>
+                    <span>Off</span>
+                </div>
+                <input id="menu-music" type="range" min="0" max="10">
+            </div>
+        `;
 }

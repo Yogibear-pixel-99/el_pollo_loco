@@ -1,7 +1,11 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let audiofiles = new Audiofiles();
+let audio = new Audiofiles();
+let sfxVolume;
+let musicVolume;
+let musicOn;
+let musicOff;
 let canvasHeight = 480;
 let canvasWidth = 720;
 let floorHeight = 58;
@@ -30,7 +34,10 @@ let floorHeight = 58;
 
 function init() {
   canvas = document.getElementById("gamecanvas");
+  getSoundSettings();
+  assignSoundSettings();
   getHighscores();
+  // audio.playMusicOnce('menuMusic');
 }
 
 function startGame() {
@@ -40,8 +47,6 @@ function startGame() {
     switch (gameMode.innerText) {
       case "Normal Mode":
         startNormalGame();
-        // loadNormalGame();
-
         break;
 
       case "Chicken Rush":
@@ -53,7 +58,16 @@ function startGame() {
     }
   } else {
     playerNameError();
+    audio.playSound('menuError');
+    addErrorAnimation('start-game-text', 'shake-error');
+    addErrorAnimation('name-error-text', 'shake-error');
   }
+}
+
+function addErrorAnimation(id, className){
+  let ref = document.getElementById(id);
+      ref.classList.add(className);
+  setTimeout(() => ref.classList.remove(className), 1000);
 }
 
 function checkNameInput() {
@@ -86,6 +100,14 @@ function removeErrorMessage(id) {
 
 function playAgain(){
   resetGame();
+  startGame();
+  let lostRef = document.getElementById('canvas-lost-container');
+  let wonRef = document.getElementById('canvas-won-container');
+      lostRef.classList.add('d-none');
+      wonRef.classList.add('d-none');
+}
+
+function goToMainMenu(){
   let lostRef = document.getElementById('canvas-lost-container');
   let wonRef = document.getElementById('canvas-won-container');
       lostRef.classList.add('d-none');
@@ -95,21 +117,30 @@ function playAgain(){
 function resetGame(){
   world = '';
   level1 = '';
-  startGame();
 }
 
 function startNormalGame() {
-  canvas = document.getElementById("gamecanvas");
+  // canvas = document.getElementById("gamecanvas");
   initNormalLevel();
   world = new World(
     canvas,
     keyboard,
     pointConfig,
-    audiofiles
+    audio
   );
 }
 
-function startChickenRush() {}
+function startChickenRush() {
+    // canvas = document.getElementById("gamecanvas");
+  initChickenRushLevel();
+  world = new World(
+    canvas,
+    keyboard,
+    pointConfig,
+    audio
+  );
+  configChickenRushMode();
+}
 
 function deactivateMenu() {
   document.body.style.cursor = 'none';
@@ -122,6 +153,13 @@ function deactivateMenu() {
 function activateMenu() {
   hideSingleContainerById("game-mask");
   showSingleContainerById("canvas-option-container");
+    hideSingleContainerById("canvas-lost-container");
+  hideSingleContainerById("canvas-won-container");
+  cancelAnimationFrame(world.drawInterval);
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  // canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_2.png")';
   const startBlinkRef = document.getElementById("start-game-text");
   startBlinkRef.classList.add("start-game-text");
 }
@@ -182,7 +220,7 @@ function renderGamePointsTable() {
   ref.innerHTML = data;
 }
 
-function changeGameMode() {
+function toggleGameMode() {
   changeGameModeHeaderText();
   changeGameModeHighscoreTable();
 }
@@ -328,6 +366,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mouseup", () => {
     document.body.style.cursor = "url('./img/cursor.png'), auto";
   });
+
+  document.querySelectorAll('.opt-wrapper, #player-name-input').forEach((element) => {
+    element.addEventListener('click', () => {
+      audio.playSound('menuClick');
+    })
+  })
 });
 
 
@@ -337,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // SOUNDS FOR:
 
     // loud cry for chicken if they are running back
-    // music for the menu
     // music for chickenrush
 
 
@@ -397,3 +440,5 @@ document.addEventListener("DOMContentLoaded", () => {
 // parallax is not workin
 // bottle throw is not normal triggerd
 // adding random spawn point
+
+// controll all intervals!!!! and stop them after game finished.
