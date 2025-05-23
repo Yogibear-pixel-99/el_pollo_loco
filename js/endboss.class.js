@@ -181,7 +181,7 @@ class Endboss extends Enemies {
    * Calls an attack mode.
    */
   attack() {
-    if (!world.checkIfGameIsOver()) {
+    if (!world.checkGameEnd()) {
     let attackDelay = Math.round(Math.random() * (4500 - 2500) + 2500);
     setTimeout(() => {
       this.stopAllBossIntervals();
