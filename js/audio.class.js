@@ -22,6 +22,8 @@ class Audiofiles {
       new Audio("./audio/chicken/chicken-noise-228106.mp3"),
     ],
 
+    chickenRun : new Audio('./audio/chicken/chicken-noise-196746.mp3'),
+
     gameWon: new Audio("./audio/level/won_lost/level-win-6416.mp3"),
     gameLost: new Audio("./audio/level/won_lost/fail-234710.mp3"),
 

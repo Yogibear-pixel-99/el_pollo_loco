@@ -267,8 +267,8 @@ class Character extends MovableObject {
   }
 
   jump() {
-    this.speedY = 0;
     this.speedY = 22;
+    world.enemyRunAwayOnCharJump();
   }
 
   jumpOnEnemy() {

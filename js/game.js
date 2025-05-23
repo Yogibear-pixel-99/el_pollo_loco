@@ -314,3 +314,12 @@ document.addEventListener('click', () => {
 // parallax effect
 
 // check all object with console logs for undefined values
+
+
+
+
+
+// CALL QUESTIONS
+  // bottle throw klappt nicht immer flüssig.
+  // jump animation flackert
+  // interalle löschen sich nicht richtig

@@ -48,4 +48,33 @@ class Enemies extends MovableObject {
       }
     }, this.moveCycle);
   }
+
+  runAway() {
+    audio.playSound('chickenRun');
+    let count = 0;
+    let interval = setInterval(() => {
+      if (count < 20) {
+      this.playAnimation(this.WALKING_ANIMATION);
+
+      if (this.x < world.character.x) {
+        this.otherDirection = false;
+        this.x -= this.walkingSpeed + 5;
+      } else {
+        this.otherDirection = true;
+        this.x += this.walkingSpeed + 5;
+      }
+      count++;
+    } else {
+      if (this.x > world.character.x) {
+        this.otherDirection = false;
+      } else {
+        this.otherDirection = true;
+      }
+      clearInterval(interval);
+      this.animateWalk();
+      this.moveEnemies();
+    }
+    }, 20)
+  }
+
 }

@@ -110,9 +110,9 @@ class Endboss extends Enemies {
    */
   startBossFight() {
     audio.sfx.bossIsTriggerd.play();
+    this.isTriggered = true;
     this.attack();
     this.move();
-    this.isTriggered = true;
     this.bossMoveDirection();
   }
 
@@ -183,6 +183,7 @@ class Endboss extends Enemies {
    * Calls an attack mode.
    */
   attack() {
+    if (world.checkIfGameIsOver()) return;
     let attackDelay = Math.round(Math.random() * (4500 - 2500) + 2500);
     setTimeout(() => {
       this.stopAllBossIntervals();

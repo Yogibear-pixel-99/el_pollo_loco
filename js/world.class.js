@@ -285,6 +285,16 @@ class World {
     }, 500);
   }
 
+  enemyRunAwayOnCharJump(){
+    this.level.enemies.forEach((enemy) => {
+    let rndRun = Math.ceil(Math.random() * 4);
+      if (rndRun === 1 && enemy.lives && (enemy.x > this.character.x -150 && enemy.x < this.character.x + 320)) {
+        enemy.clearAllEnemyIntervalls();
+        enemy.runAway();
+      }
+       })
+    }
+
   getPlayerScore(){
     this.score = document.getElementById('player-score').innerText;
             this.ctx.font = "30px agudisplay";
