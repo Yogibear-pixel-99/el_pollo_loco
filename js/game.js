@@ -313,7 +313,7 @@ document.addEventListener('click', () => {
 
 // check all object with console logs for undefined values
 
-
+// make easy mode, easier
 
 
 
