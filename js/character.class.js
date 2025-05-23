@@ -247,7 +247,7 @@ class Character extends MovableObject {
   }
 
   throwBottle() {
-    if (!this.bottleThrown && this.bottles <= 5) {
+    if (!this.bottleThrown && this.bottles > 0) {
       this.world.thrownBottles.push(new Thrownbottle());
       this.bottleThrown = true;
       this.bottles--;
