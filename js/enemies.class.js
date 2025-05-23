@@ -51,6 +51,7 @@ class Enemies extends MovableObject {
 
   runAway() {
     audio.playSound('chickenRun');
+    let activeDirection = this.otherDirection;
     let count = 0;
     let interval = setInterval(() => {
       if (count < 20) {
@@ -71,6 +72,7 @@ class Enemies extends MovableObject {
         this.otherDirection = true;
       }
       clearInterval(interval);
+      this.otherDirection = activeDirection;
       this.animateWalk();
       this.moveEnemies();
     }

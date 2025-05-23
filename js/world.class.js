@@ -321,7 +321,9 @@ class World {
     if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);
     }
-    this.getPlayerScore();
+    if (fullScreen) {
+      this.getPlayerScore();
+    }
     let self = this;
     this.drawInterval = requestAnimationFrame(function () {
       self.draw();

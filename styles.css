@@ -40,6 +40,10 @@ body {
   align-items: center;
 }
 
+.flex.col {
+  flex-direction: column;
+}
+
 .not-selected {
   font-weight: 300;
   transform: scale(70%);

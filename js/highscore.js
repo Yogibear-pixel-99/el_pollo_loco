@@ -10,8 +10,8 @@ async function getActiveHighscores() {
 
 async function deleteIfMoreThan100Scores(){
   let longer = false;
-    if (highscores[gameMode]?.length > 10) {
-      highscores[gameMode].splice(10);
+    if (highscores[gameMode]?.length > 30) {
+      highscores[gameMode].splice(30);
       longer = true;
     }
   if (longer) await putHighscoreToApi();
