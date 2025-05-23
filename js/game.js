@@ -279,16 +279,14 @@ document.addEventListener('click', () => {
 
 
 
-// loud cry for chicken if they are running back
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation
 
-// implement normal/hard/chickenrush mode
 
 // pepe dont show animation if throw bottle
-
 // display info to collect 10 coins to trigger boss
+
 // boss kill doesnt count 200 + points
 // game over screen
 
@@ -363,7 +361,7 @@ document.addEventListener('click', () => {
 
     // WORLD
       // ENEMYMOVEDIRECTIONINTERVAL
-      // CHECKIFGAMEOVERINTERVAL
+      // CHECKIFGAMEOVERINTERVAL - selfclearing
       // COLLISIONINTERVAL
       // bottlesplash - self clearing
       // UPDATESCOREINTERVAL

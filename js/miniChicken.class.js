@@ -38,7 +38,7 @@ class Minichicken extends Enemies {
     getChickenSize(){
     if (gameMode === 'chickenRush') {
       let size = Math.ceil(Math.random() * (70 - 35) + 35);
-      let speed = parseFloat((Math.random() * 2.5).toFixed(1));
+      let speed = parseFloat((Math.random() * 1.5).toFixed(1));
       this.width = size;
       this.height = size;
       this.walkingSpeed = speed;

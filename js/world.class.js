@@ -78,17 +78,19 @@ class World {
   }
 
   checkIfGameIsOver() {
-    this.checkGameOverInterval = setInterval(() => {
+    let interval = setInterval(() => {
       if (this.checkGameEnd()) {
         clearInterval(interval);
         setTimeout(() => {
           if (this.level.endboss.energy <= 0) {
             this.gameWon = true;
           }
+          if (gameHasStarted) {
           this.gameOver();
+          }
         }, 3000);
       }
-    }, 100);
+    }, 500);
   }
 
   runCollisions() {
@@ -385,13 +387,13 @@ class World {
   }
 
   gameOver() {
+    console.trace('wurder aufgerufen von:');
     cancelAnimationFrame(this.drawInterval);
     gameHasStarted = false;
     document.body.style.cursor = 'url("./img/cursor.png"), auto';
     audio.stopMusic("chickenRushMusic");
     audio.stopMusic("normalModeMusic");
     this.showGameOverScreen();
-    this.stopAllGameIntervals();
     checkFullscreenMode();
     if (this.gameWon) {
       this.addPointsToPlayerScore("endbossKilled");
@@ -400,6 +402,7 @@ class World {
       this.audio.sfx.gameLost.play();
     }
     this.audio.sfx.cluckern.pause();
+    this.stopAllGameIntervals();
     saveScore();
   }
 

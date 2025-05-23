@@ -21,7 +21,7 @@ class Chicken extends Enemies {
 
   constructor(x) {
     super();
-    this.getChickenSize();
+    this.getChickenRushMode();
     this.loadImage("./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.y = this.floorPosition() - (Math.random() * 8 - 1);
     if (x < 400) {
@@ -33,10 +33,11 @@ class Chicken extends Enemies {
     this.animateWalk();
   }
 
-  getChickenSize(){
+
+  getChickenRushMode(){
     if (gameMode === 'chickenRush') {
       let size = Math.ceil(Math.random() * 40 + 40);
-      let speed = parseFloat((Math.random() * 3.3).toFixed(1));
+      let speed = parseFloat((Math.random() * 2.0).toFixed(1));
       this.width = size;
       this.height = size;
       this.walkingSpeed = speed;
