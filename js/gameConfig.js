@@ -2,6 +2,7 @@
 let chickenSpawnInterval;
 
 function configChickenRushMode () {
+   audio.stopMusic('menuMusic');
     let level = initChickenRushLevel();
   world = new World(
     canvas,
@@ -11,9 +12,12 @@ function configChickenRushMode () {
     level
   );
   world.level.endboss.x = 720 * 6;
+  audio.resetMusic('chickenRushMusic');
+  audio.playMusicOnce('chickenRushMusic');
 }
 
 function configNormalMode() {
+   audio.stopMusic('menuMusic');
   let level = initNormalLevel();
   world = new World(
     canvas,
@@ -29,9 +33,12 @@ function configNormalMode() {
     new Chicken(canvasWidth * 5)
   )
   }, 6000);
+  audio.resetMusic('normalModeMusic');
+  audio.playMusicOnce('normalModeMusic');
 }
 
 function configHardMode() {
+   audio.stopMusic('menuMusic');
   let level = initHardLevel();
   world = new World(
     canvas,
@@ -47,6 +54,8 @@ function configHardMode() {
     new Chicken(canvasWidth * 5)
   )
   }, 3000);
+  audio.resetMusic('normalModeMusic');
+  audio.playMusicOnce('normalModeMusic');
 }
 
 // KEEP IT ALL IN THE LEVELS JS AS WELL

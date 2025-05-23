@@ -12,6 +12,7 @@ class World {
   floorHeight;
   chickenNear = false;
   level;
+  score = 0;
   allWorldIntervals = [
     "collisionInterval",
     "cluckerInterval",
@@ -44,6 +45,7 @@ class World {
     this.playGameMusic();
     this.checkCluckerSound();
     this.enemyMoveDirection();
+    // this.getPlayerScore();
   }
 
   playGameMusic() {
@@ -54,7 +56,6 @@ class World {
   enemyMoveDirection() {
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
-        console.log('enemy-x: ' + enemy.x);
         if (enemy.x < this.character.x - canvasWidth) {
           enemy.otherDirection = true;
         }
@@ -107,7 +108,6 @@ class World {
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           enemy.lives = false;
-          console.log(enemy);
         } else {
           this.character.hit();
           this.healthbar.updateHealthbar();
@@ -285,6 +285,13 @@ class World {
     }, 500);
   }
 
+  getPlayerScore(){
+    this.score = document.getElementById('player-score').innerText;
+            this.ctx.font = "30px agudisplay";
+    this.ctx.fillText(this.score, canvasWidth - 220, 100);
+      console.log(this.score)
+  }
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -304,6 +311,7 @@ class World {
     if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);
     }
+    this.getPlayerScore();
     let self = this;
     this.drawInterval = requestAnimationFrame(function () {
       self.draw();
@@ -358,10 +366,15 @@ class World {
   }
 
   gameOver() {
+    cancelAnimationFrame(this.drawInterval);
+    gameHasStarted = false;
     document.body.style.cursor = 'url("./img/cursor.png"), auto';
+    audio.stopMusic('chickenRushMusic');
+    audio.stopMusic('normalModeMusic');
     this.showGameOverScreen();
     this.stopAllGameIntervals();
-
+    
+  checkFullscreenMode();
     if (this.gameWon) {
       this.addPointsToPlayerScore("endbossKilled");
       this.audio.sfx.gameWon.play();
@@ -388,10 +401,11 @@ class World {
     this.stopEnemyIntervals();
     this.level.endboss.stopAllBossIntervals();
     this.character.stopAllCharIntervals();
-    this.stopAllCloudInterval();
+    this.stopAllCloudIntervals();
+    this.clearAllGameConfigIntervals();
   }
 
-  stopAllCloudInterval() {
+  stopAllCloudIntervals() {
     this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
   }
 
@@ -405,5 +419,9 @@ class World {
     this.level.enemies.forEach((enemy) => {
       enemy.clearAllEnemyIntervalls();
     });
+  }
+
+  clearAllGameConfigIntervals(){
+    clearInterval(chickenSpawnInterval);
   }
 }

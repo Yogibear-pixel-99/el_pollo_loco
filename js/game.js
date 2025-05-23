@@ -11,6 +11,7 @@ let canvasWidth = 720;
 let floorHeight = 58;
 let playMusicOnStart = false;
 let fullScreen = false;
+let gameHasStarted;
 let gameMode = 'normal';
 const MAIN_URL =
   "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -27,8 +28,10 @@ function init() {
 }
 
 function startGame() {
+  gameHasStarted = true;
   if (checkNameInput()) {
     deactivateMenu();
+    checkFullscreenMode();
     switch (gameMode) {
       case "normal":
         configNormalMode();
@@ -49,6 +52,19 @@ function startGame() {
     addErrorAnimation('name-error-text', 'shake-error');
   }
 }
+
+function checkFullscreenMode(){
+  if (fullScreen && gameHasStarted) {
+    canvas.requestFullscreen();
+    // canvas.webkitRequestFullscreen();
+    // canvas.msRequestFullscreen();
+  }
+   else if (fullScreen && !gameHasStarted) {
+    document.exitFullscreen();
+    // canvas.webkitExitFullscreen();
+    // canvas.msExitFullscreen();
+  }
+};
 
 function addErrorAnimation(id, className){
   let ref = document.getElementById(id);
@@ -85,7 +101,6 @@ function removeErrorMessage(id) {
 }
 
 function playAgain(){
-  resetGame();
   startGame();
   let lostRef = document.getElementById('canvas-lost-container');
   let wonRef = document.getElementById('canvas-won-container');
@@ -100,9 +115,9 @@ function goToMainMenu(){
       wonRef.classList.add('d-none');
 }
 
-function resetGame(){
-  world = '';
-  level1 = '';
+function resetCanvas(){
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function deactivateMenu() {
@@ -114,25 +129,14 @@ function deactivateMenu() {
 }
 
 function activateMenu() {
+  gameHasStarted = false;
+  resetCanvas();
   hideSingleContainerById("game-mask");
-  showSingleContainerById("canvas-option-container");
-    hideSingleContainerById("canvas-lost-container");
+  hideSingleContainerById("canvas-option-container");
+  hideSingleContainerById("canvas-lost-container");
   hideSingleContainerById("canvas-won-container");
-  cancelAnimationFrame(world.drawInterval);
-  let ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-  // canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_2.png")';
-  const startBlinkRef = document.getElementById("start-game-text");
-  startBlinkRef.classList.add("start-game-text");
+  document.getElementById("start-game-text").classList.add("start-game-text");
 }
-
-
-
-
-
-
-
 
 function renderGamePointsTable() {
   let ref = document.getElementById("game-points-table");
@@ -299,6 +303,7 @@ document.addEventListener('click', () => {
 // documenatation
 
 // Boss kill animation not smooth
+// boss attack sound interval still working after game end!
 // parallax is not workin
 // bottle throw is not normal triggerd
 // adding random spawn point

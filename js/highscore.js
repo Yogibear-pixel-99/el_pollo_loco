@@ -3,6 +3,7 @@
 async function getActiveHighscores() {
   await fetchHighscores();
   sortHighscores();
+  deleteIfMoreThan100Scores();
   renderHighscores();
 }
 
@@ -11,16 +12,31 @@ async function deleteIfMoreThan100Scores(){
   let longer = false;
     if (highscores[gameMode]?.length > 10) {
       highscores[gameMode].splice(10);
-      checkPost = true;
+      longer = true;
     }
-  if (longer) await patchHighscoreToApi();
+  if (longer) await putHighscoreToApi();
 }
 
+async function fetchHighscores() {
+  try {
+    let response = await fetch(MAIN_URL + gameMode +  '/.json');
+    if (!response.ok) {
+        throw new Error();
+    } else {
+        let data = await response.json();
+        if (data) {
+        highscores[gameMode] = Object.values(data);
+        }
+    }
+  } catch (error) {
+    console.log('Highscore fetch error: ' + error)
+  }
+}
 
-async function patchHighscoreToApi(){
+async function putHighscoreToApi(){
     try {
     let response = await fetch(MAIN_URL + gameMode + "/.json", {
-      method: "PATCH",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

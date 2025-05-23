@@ -91,4 +91,8 @@ class Audiofiles {
   stopMusic(objSrc) {
     audio.music[objSrc].pause();
   }
+
+  resetMusic(objSrc){
+    audio.music[objSrc].currentTime = 0;
+  }
 }

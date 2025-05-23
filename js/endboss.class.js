@@ -11,10 +11,11 @@ class Endboss extends Enemies {
   energy;
   acceleration = 2.5;
   isTriggered = false;
+
   animateInterval;
   moveInterval;
   jumpAttackInterval;
-
+  moveDirectionInterval;
 
   isWalking = false;
   lives = true;
@@ -38,7 +39,12 @@ class Endboss extends Enemies {
     };
   }
 
-  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
+  allBossIntervals = [
+    "moveInterval",
+    "animateInterval",
+    "jumpAttackInterval",
+    "moveDirectionInterval",
+  ];
   animationCycle = 170;
   moveCycle = 30;
 
@@ -86,7 +92,6 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
-
   constructor() {
     super();
     this.loadImage(this.ALERT_ANIMATION[0]);
@@ -117,7 +122,7 @@ class Endboss extends Enemies {
   animate() {
     this.animateInterval = setInterval(() => {
       if (this.isDead()) {
-        console.log('boss is dead');
+        console.log("boss is dead");
         this.stopAllBossIntervals();
         this.endBossDead();
       } else if (!this.isTriggered) {
@@ -130,32 +135,34 @@ class Endboss extends Enemies {
     }, 130);
   }
 
-  endBossDead(){
+  endBossDead() {
     let count = 0;
     audio.sfx.bossDied.play();
-      let interval = setInterval(() => {
-        if (count < 9) {
-          this.playAnimation(this.BOSS_DEAD_ANIMATION);
-        } else {
-          clearInterval(interval);
-          
-          this.img.src = this.BOSS_DEAD_ANIMATION[2];
-        }
-        count++;
-      }, 100);
+    let interval = setInterval(() => {
+      if (count < 9) {
+        this.playAnimation(this.BOSS_DEAD_ANIMATION);
+      } else {
+        clearInterval(interval);
+
+        this.img.src = this.BOSS_DEAD_ANIMATION[2];
+      }
+      count++;
+    }, 100);
   }
 
   /**
-   * 
+   *
    */
   move() {
     this.moveInterval = setInterval(() => {
-      if (!this.isDead()) {}
-        if (this.otherDirection) {
-          this.bossMoveRight();
-        } else {
+      if (!this.isDead()) {
+      }
+      if (this.otherDirection) {
+        this.bossMoveRight();
+      } else {
         this.bossMoveLeft();
-    }}, 1000 / 60);
+      }
+    }, 1000 / 60);
   }
 
   /**
@@ -192,39 +199,39 @@ class Endboss extends Enemies {
     this.animationCount = 0;
     this.jumpAttackInterval = setInterval(() => {
       if (!this.bossIsHurt()) {
-      if (attackCount < 8) {
-        this.playAnimation(this.ALERT_ANIMATION);
-      } else if (attackCount >= 8 && attackCount <= 10) {
-        if (attackCount === 8) {
+        if (attackCount < 8) {
+          this.playAnimation(this.ALERT_ANIMATION);
+        } else if (attackCount >= 8 && attackCount <= 10) {
+          if (attackCount === 8) {
+            this.animationCount = 0;
+          }
+          this.playAnimation(this.BOSS_ATTACK_ALERT_ANIMATION);
+        } else if (
+          attackCount >= 11 &&
+          attackCount <= attackAnimationNr &&
+          !this.isDead()
+        ) {
+          if (attackCount === 11) {
+            this.animationCount = 0;
+          }
+          this.playAnimation(this.BOSS_ATTACK_JUMP_ANIMATION);
+          audio.sfx.bossAttacks.play();
+          this.bossAttackMovement(attackAnimationNr);
+        } else if (attackCount > attackAnimationNr && !this.isDead()) {
           this.animationCount = 0;
+          clearInterval(this.jumpAttackInterval);
+          this.animate();
+          this.move();
+          this.attack();
+        } else if (this.isDead()) {
+          clearInterval(this.jumpAttackInterval);
+          this.animate();
         }
-        this.playAnimation(this.BOSS_ATTACK_ALERT_ANIMATION);
-      } else if (
-        attackCount >= 11 &&
-        attackCount <= attackAnimationNr &&
-        !this.isDead()
-      ) {
-        if (attackCount === 11) {
-          this.animationCount = 0;
-        }
-        this.playAnimation(this.BOSS_ATTACK_JUMP_ANIMATION);
-        audio.sfx.bossAttacks.play();
-        this.bossAttackMovement(attackAnimationNr);
-      } else if (attackCount > attackAnimationNr && !this.isDead()) {
-        this.animationCount = 0;
-        clearInterval(this.jumpAttackInterval);
-        this.animate();
-        this.move();
-        this.attack();
+        attackCount++;
+      } else {
+        this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
       }
-       else if (this.isDead()) {
-        clearInterval(this.jumpAttackInterval);
-        this.animate();
-      }
-      attackCount++;
-  } else {
-    this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
-  }}, 150);
+    }, 150);
   }
 
   /**
@@ -237,13 +244,13 @@ class Endboss extends Enemies {
       this.speedY = 22;
       interval = setInterval(() => {
         if (count < 30) {
-          if(this.otherDirection){
+          if (this.otherDirection) {
             this.x = this.x + 6;
           } else {
-          this.x = this.x - 6;
-        }
-        count++;
-      } else {
+            this.x = this.x - 6;
+          }
+          count++;
+        } else {
           clearInterval(interval);
         }
       }, 20);
@@ -261,7 +268,7 @@ class Endboss extends Enemies {
 
   /**
    * Checks if the boss was hurt within the last 1,5 seconds.
-   * 
+   *
    * @returns A boolean.
    */
   bossIsHurt() {
@@ -269,24 +276,6 @@ class Endboss extends Enemies {
     timePassed = timePassed / 1000; // millisec / 1000 = sec.
     return timePassed < 1.5;
   }
-
-  // async randomAttackJumps(rounds) {
-  //   for (let attackIndex = 0; attackIndex < rounds; attackIndex++) {
-  //     if (this.isDead()) return;
-  //     await this.bossMovesToFloor();
-  //     this.speedY = 20;
-  //     this.jumpAttackInterval = setInterval(() => {
-  //       this.x = this.x - 7;
-  //     }, 20);
-  //     await this.playAnimationSpecificTime(
-  //       1,
-  //       this.BOSS_ATTACK_JUMP_ANIMATION,
-  //       "bossAttackJumpAnimationInterval"
-  //     );
-  //     clearInterval(this.jumpAttackInterval);
-  //     if (this.isDead()) return;
-  //   }
-  // }
 
   applyGravity() {
     setInterval(() => {
@@ -299,10 +288,10 @@ class Endboss extends Enemies {
     }, 1000 / 25);
   }
 
-  stopAllBossIntervals(){
+  stopAllBossIntervals() {
     this.allBossIntervals.forEach((interval) => {
       clearInterval(this[interval]);
-    })
+    });
   }
 
   bossMoveDirection() {
@@ -313,6 +302,6 @@ class Endboss extends Enemies {
       if (this.x > world.character.x + canvasWidth) {
         this.otherDirection = false;
       }
-  }, 1000);
+    }, 1000);
   }
 }
