@@ -67,47 +67,47 @@ return new Level(
   ],
 
   [
-    new BackgroundLayer("./img/5_background/layers/air.png", -719 * 2, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", -719 * 2, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", -719 * 2, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", -719 * 2, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", -719 * 2, 0),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", -719, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", -719, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", -719, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", -719, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", -719, 0),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 0, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 0, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 0, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 0, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 0, 0),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 719, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 719, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", 719, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", 719, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", 719, 0),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 2, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 2, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 719 * 2, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 719 * 2, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 2, 0),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 3, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 3, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/2.png", 719 * 3, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/2.png", 719 * 3, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", 719 * 3, 0),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 4, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 4, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 719 * 4, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 719 * 4, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 4, 1),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 5, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 5, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 719 * 5, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 719 * 5, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 5, 1),
 
-    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 6, -6),
+    new BackgroundLayer("./img/5_background/layers/air.png", 719 * 6, -16),
     new BackgroundLayer("./img/5_background/layers/3_third_layer/1.png", 719 * 6, -4),
     new BackgroundLayer("./img/5_background/layers/2_second_layer/1.png", 719 * 6, -2),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 6, 1),

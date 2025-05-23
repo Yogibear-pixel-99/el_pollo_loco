@@ -43,7 +43,6 @@ class Endboss extends Enemies {
     "moveInterval",
     "animateInterval",
     "jumpAttackInterval",
-    "moveDirectionInterval",
   ];
   animationCycle = 170;
   moveCycle = 30;
@@ -111,9 +110,9 @@ class Endboss extends Enemies {
   startBossFight() {
     audio.sfx.bossIsTriggerd.play();
     this.isTriggered = true;
+    this.bossMoveDirection();
     this.attack();
     this.move();
-    this.bossMoveDirection();
   }
 
   /**
@@ -122,7 +121,6 @@ class Endboss extends Enemies {
   animate() {
     this.animateInterval = setInterval(() => {
       if (this.isDead()) {
-        console.log("boss is dead");
         this.stopAllBossIntervals();
         this.endBossDead();
       } else if (!this.isTriggered) {
@@ -297,6 +295,7 @@ class Endboss extends Enemies {
 
   bossMoveDirection() {
     this.moveDirectionInterval = setInterval(() => {
+      console.log(this.otherDirection);
       if (this.x < world.character.x - canvasWidth) {
         this.otherDirection = true;
       }

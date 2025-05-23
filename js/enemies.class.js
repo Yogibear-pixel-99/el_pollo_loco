@@ -7,9 +7,8 @@ class Enemies extends MovableObject {
   acceleration = 2;
   speedY = 0;
   lives = true;
-  otherDirection;
+  otherDirection = false;
   character;
-  world;
 
   constructor() {
     super();
