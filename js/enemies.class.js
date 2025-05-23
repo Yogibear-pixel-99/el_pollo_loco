@@ -1,6 +1,6 @@
 class Enemies extends MovableObject {
   deadPic;
-  walkMoveInterval;
+  moveInterval;
   walkAnimationInterval;
   wasHittet = false;
   walkingSpeed;
@@ -39,7 +39,7 @@ class Enemies extends MovableObject {
   }
 
       moveEnemies() {
-    this.walkMoveInterval = setInterval(() => {
+    this.moveInterval = setInterval(() => {
       if (this.otherDirection) {
         this.moveRight();
       } else {

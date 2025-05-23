@@ -3,6 +3,7 @@ class Coin extends DrawableObject {
   width = 100;
   collected = false;
   itemName = 'collectCoin';
+  coininterval;
 
   offset = {
     top: 35,
@@ -48,7 +49,7 @@ class Coin extends DrawableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.coinInterval = setInterval(() => {
       if (!this.collected) {
         this.playAnimation(this.COIN_ANIMATION);
       } else {
@@ -63,3 +64,6 @@ class Coin extends DrawableObject {
     }, 20);
   }
 }
+
+
+// COIN INTERVALL

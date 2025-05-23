@@ -1,8 +1,7 @@
 class Audiofiles {
   sfx = {
-
-    menuClick : new Audio("./audio/menu/toggle-button-off-166328.mp3"),
-      menuError: new Audio("./audio/menu/guitar-apoggiatura2_16b-41545.mp3"),
+    menuClick: new Audio("./audio/menu/toggle-button-off-166328.mp3"),
+    menuError: new Audio("./audio/menu/guitar-apoggiatura2_16b-41545.mp3"),
 
     cluckern: new Audio("./audio/level/environment/chicken-chatter-33515.mp3"),
     bottleBreak: [
@@ -22,7 +21,7 @@ class Audiofiles {
       new Audio("./audio/chicken/chicken-noise-228106.mp3"),
     ],
 
-    chickenRun : new Audio('./audio/chicken/chicken-noise-196746.mp3'),
+    chickenRun: new Audio("./audio/chicken/chicken-noise-196746.mp3"),
 
     gameWon: new Audio("./audio/level/won_lost/level-win-6416.mp3"),
     gameLost: new Audio("./audio/level/won_lost/fail-234710.mp3"),
@@ -57,18 +56,22 @@ class Audiofiles {
   };
 
   music = {
-    
-
-  
     bossIsTriggerd: new Audio(),
 
-    menuMusic: new Audio("./audio/menu/mexican-music-latin-guitar-mexico-mariachi-background-intro-theme-328253.mp3"),
-    normalModeMusic : new Audio("./audio/level/little-village-251736.mp3"),
-    chickenRushMusic : new Audio("./audio/level/fiesta-forever-165168.mp3"),
+    menuMusic: new Audio(
+      "./audio/menu/mexican-music-latin-guitar-mexico-mariachi-background-intro-theme-328253.mp3"
+    ),
+    normalModeMusic: new Audio("./audio/level/little-village-251736.mp3"),
+    chickenRushMusic: new Audio("./audio/level/fiesta-forever-165168.mp3"),
   };
 
   constructor() {}
 
+  /**
+   * Plays a random audio object from the sfx object.
+   *
+   * @param {Array} objSrc The audio array name.
+   */
   playRandomSound(objSrc) {
     let rnd = Math.floor(Math.random() * audio.sfx[objSrc].length);
     let sound = audio.sfx[objSrc][rnd].cloneNode();
@@ -77,7 +80,11 @@ class Audiofiles {
     sound.play();
   }
 
-
+  /**
+   * Plays a sound clone of the audio object.
+   *
+   * @param {string} objSrc The audio name.
+   */
   playSound(objSrc) {
     let sound = audio.sfx[objSrc].cloneNode();
     sound.muted = sfxMute;
@@ -85,16 +92,31 @@ class Audiofiles {
     sound.play();
   }
 
+  /**
+   * Plays the audio object in a loop.
+   *
+   * @param {string} objSrc The audio name.
+   */
   playMusicOnce(objSrc) {
     audio.music[objSrc].loop = true;
     audio.music[objSrc].play();
   }
 
+  /**
+   * Pause the audio object.
+   *
+   * @param {string} objSrc The audio name.
+   */
   stopMusic(objSrc) {
     audio.music[objSrc].pause();
   }
 
-  resetMusic(objSrc){
+  /**
+   * Set the current play time of the audio object to zero.
+   *
+   * @param {string} objSrc The audio name;
+   */
+  resetMusic(objSrc) {
     audio.music[objSrc].currentTime = 0;
   }
 }

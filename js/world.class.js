@@ -18,11 +18,15 @@ class World {
     "cluckerInterval",
     "updateScoreInterval",
     "backgroundMoveInterval",
+    "enemyMoveDirectionInterval",
+    "checkGameOverInterval"
   ];
   collisionInterval;
   cluckerInterval;
   updateScoreInterval;
   backgroundMoveInterval;
+  enemyMoveDirectionInterval;
+  checkGameOverInterval;
   canvas;
   ctx;
   keyboard;
@@ -53,7 +57,7 @@ class World {
   }
 
   enemyMoveDirection() {
-    setInterval(() => {
+    this.enemyMoveDirectionInterval = setInterval(() => {
       this.level.enemies.forEach((enemy) => {
         if (enemy.x < this.character.x - canvasWidth) {
           enemy.otherDirection = true;
@@ -74,7 +78,7 @@ class World {
   }
 
   checkIfGameIsOver() {
-    let interval = setInterval(() => {
+    this.checkGameOverInterval = setInterval(() => {
       if (this.checkGameEnd()) {
         clearInterval(interval);
         setTimeout(() => {

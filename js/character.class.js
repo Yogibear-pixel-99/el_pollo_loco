@@ -289,3 +289,10 @@ class Character extends MovableObject {
     });
   }
 }
+
+
+
+// SOUNDINTERVAL
+// ANIMATE INTERVAL
+// MOVEINTERVAL
+// IDLEINTERVAL

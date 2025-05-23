@@ -323,3 +323,49 @@ document.addEventListener('click', () => {
   // bottle throw klappt nicht immer flüssig.
   // jump animation flackert
   // interalle löschen sich nicht richtig
+
+
+
+  // INTERVALLS:
+
+    // CHAR
+      // SOUNDINTERVAL
+      // ANIMATE INTERVAL
+      // MOVEINTERVAL
+      // IDLEINTERVAL
+
+    // CLOUD FRAME INTERVALL
+
+    // COININTERVAL
+
+    // BOSS
+      // ANIMATEINTERVAL
+      // endboss dead interval - selfclearing
+      // MOVEINTERVAL
+      // JUMPATTACKINTERVAL
+      // bossattackmovementinterval - selfclearing
+      // APPLY GRAVITY INTERVALL - BOSS - not clearing
+      // MOVEDIRECTIONINTERVAL
+
+    // ENEMIES
+      // WALKANIMATIONINTERVAL
+      // MOVEINTERVAL
+      // runawayinterval - selclearing
+
+    // GAMECONFIG
+      // normal mode - CHICKENSPAWNINTERVAL
+      // hard mode - CHICKENSPAWNINTERVAL
+
+    // APPLY GRAVITY TO ALL MOVEABLE OBJECTS
+
+    // THROWN BOTTLES
+      // GRAVITY INTERVAL
+
+    // WORLD
+      // ENEMYMOVEDIRECTIONINTERVAL
+      // CHECKIFGAMEOVERINTERVAL
+      // COLLISIONINTERVAL
+      // bottlesplash - self clearing
+      // UPDATESCOREINTERVAL
+      // BACKGROUNDMOVEINTERVAL
+      // CLUCKERINTERVAL
