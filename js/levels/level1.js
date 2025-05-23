@@ -2,9 +2,6 @@
 
 
 
-
-
-
 function initNormalLevel() {
 return new Level(
 

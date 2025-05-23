@@ -261,12 +261,11 @@ class World {
     this.backgroundMoveInterval = setInterval(() => {
       this.level.backgrounds.forEach((bg) => {
         if (world.keyboard.KEY_LEFT && this.character.x > -200) {
-          bg.x = bg.x + bg.xFactor;
-          // world.character.x - 200 + bg.xStart;
+          bg.x = bg.x;
         }
         if ( world.keyboard.KEY_RIGHT &&
           this.character.x < world.level.level_end_x) {
-             bg.x = bg.x - bg.xFactor;
+             bg.x = bg.x;
           }
       });
     }, 100);

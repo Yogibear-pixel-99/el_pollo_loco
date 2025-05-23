@@ -320,7 +320,8 @@ document.addEventListener('click', () => {
 // CALL QUESTIONS
   // bottle throw klappt nicht immer flüssig.
   // jump animation flackert
-  // interalle löschen sich nicht richtig
+  // intervalle löschen sich nicht richtig
+  // parallax mode
 
 
 

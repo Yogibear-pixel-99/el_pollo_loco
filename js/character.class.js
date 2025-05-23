@@ -158,7 +158,7 @@ class Character extends MovableObject {
         ) {
           this.alreadyJumps = true;
           this.loadImage(this.JUMPING_ANIMATION[2]);
-          setTimeout(() => this.jump(), 50);
+          setTimeout(() => this.jump(), 5);
         }
         if (this.characterIdle()) {
           this.isIdle = true;
@@ -218,8 +218,7 @@ class Character extends MovableObject {
         } else {
           this.playAnimation(this.IDLE_LONG_ANIMATION);
           audio.sfx.pepeLongIdle.play();
-        }
-      }
+        }}
       if (!this.characterIdle() && !world.checkGameEnd()) {
         this.resetIdleAudio();
         this.isIdle = false;

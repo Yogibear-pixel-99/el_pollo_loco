@@ -35,7 +35,7 @@ class Enemies extends MovableObject {
 
   clearAllEnemyIntervalls() {
     clearInterval(this.walkAnimationInterval);
-    clearInterval(this.walkMoveInterval);
+    clearInterval(this.moveInterval);
   }
 
       moveEnemies() {
