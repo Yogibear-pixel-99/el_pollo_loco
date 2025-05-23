@@ -45,7 +45,6 @@ class World {
     this.playGameMusic();
     this.checkCluckerSound();
     this.enemyMoveDirection();
-    // this.getPlayerScore();
   }
 
   playGameMusic() {
@@ -257,13 +256,12 @@ class World {
       this.level.backgrounds.forEach((bg) => {
         if (world.keyboard.KEY_LEFT && this.character.x > -200) {
           bg.x = bg.x + bg.xFactor;
+          // world.character.x - 200 + bg.xStart;
         }
-        if (
-          world.keyboard.KEY_RIGHT &&
-          this.character.x < world.level.level_end_x
-        ) {
-          bg.x = bg.x - bg.xFactor;
-        }
+        if ( world.keyboard.KEY_RIGHT &&
+          this.character.x < world.level.level_end_x) {
+             bg.x = bg.x - bg.xFactor;
+          }
       });
     }, 100);
   }
@@ -285,21 +283,26 @@ class World {
     }, 500);
   }
 
-  enemyRunAwayOnCharJump(){
+  enemyRunAwayOnCharJump() {
     this.level.enemies.forEach((enemy) => {
-    let rndRun = Math.ceil(Math.random() * 4);
-      if (rndRun === 1 && enemy.lives && (enemy.x > this.character.x -150 && enemy.x < this.character.x + 320)) {
+      let rndRun = Math.ceil(Math.random() * 4);
+      if (
+        rndRun === 1 &&
+        enemy.lives &&
+        enemy.x > this.character.x - 150 &&
+        enemy.x < this.character.x + 320
+      ) {
         enemy.clearAllEnemyIntervalls();
         enemy.runAway();
       }
-       })
-    }
+    });
+  }
 
-  getPlayerScore(){
-    this.score = document.getElementById('player-score').innerText;
-            this.ctx.font = "30px agudisplay";
+  getPlayerScore() {
+    this.score = document.getElementById("player-score").innerText;
+    this.ctx.font = "30px agudisplay";
     this.ctx.fillText(this.score, canvasWidth - 220, 100);
-      console.log(this.score)
+    console.log(this.score);
   }
 
   draw() {
@@ -381,12 +384,11 @@ class World {
     cancelAnimationFrame(this.drawInterval);
     gameHasStarted = false;
     document.body.style.cursor = 'url("./img/cursor.png"), auto';
-    audio.stopMusic('chickenRushMusic');
-    audio.stopMusic('normalModeMusic');
+    audio.stopMusic("chickenRushMusic");
+    audio.stopMusic("normalModeMusic");
     this.showGameOverScreen();
     this.stopAllGameIntervals();
-    
-  checkFullscreenMode();
+    checkFullscreenMode();
     if (this.gameWon) {
       this.addPointsToPlayerScore("endbossKilled");
       this.audio.sfx.gameWon.play();
@@ -395,11 +397,6 @@ class World {
     }
     this.audio.sfx.cluckern.pause();
     saveScore();
-    // play end sound win
-    // play end sound lose
-    // show mousepointer
-    // function for play again button
-    // function for main menu button
   }
 
   showGameOverScreen() {
@@ -433,7 +430,7 @@ class World {
     });
   }
 
-  clearAllGameConfigIntervals(){
+  clearAllGameConfigIntervals() {
     clearInterval(chickenSpawnInterval);
   }
 }

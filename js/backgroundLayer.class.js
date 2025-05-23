@@ -1,7 +1,10 @@
 class BackgroundLayer extends MovableObject {
   y = 0;
+  xStart;
   width = canvasWidth;
   height = canvasHeight;
+  getXPositionInterval;
+  xFactor;
 
   constructor(imagePath, x, xFactor) {
     super();
@@ -10,7 +13,4 @@ class BackgroundLayer extends MovableObject {
     this.xFactor = xFactor;
     this.x = x;
   }
-
-
-
 }

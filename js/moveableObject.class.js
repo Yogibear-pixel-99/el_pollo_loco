@@ -48,27 +48,4 @@ class MovableObject extends DrawableObject {
   moveRight() {
     this.x = this.x + this.walkingSpeed;
   }
-
-  // async playAnimationSpecificTime(times, imgArray, intervalName) {
-  //   return new Promise((resolve) => {
-  //     let loop = 0;
-  //     let count = 0;
-
-  //     this[intervalName] = setInterval(() => {
-  //       if (count < imgArray.length) {
-  //         let path = imgArray[count];
-  //         this.img = this.animatedImages[path];
-  //         count++;
-  //       } else {
-  //         count = 0;
-  //         loop++;
-
-  //         if (loop >= times) {
-  //           clearInterval(this[intervalName]);
-  //           resolve();
-  //         }
-  //       }
-  //     }, 100);
-  //   });
-  // }
 }

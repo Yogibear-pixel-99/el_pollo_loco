@@ -183,13 +183,13 @@ class Endboss extends Enemies {
    * Calls an attack mode.
    */
   attack() {
-    if (world.checkIfGameIsOver()) return;
+    if (!world.checkIfGameIsOver()) {
     let attackDelay = Math.round(Math.random() * (4500 - 2500) + 2500);
     setTimeout(() => {
       this.stopAllBossIntervals();
       this.jumpAttack();
     }, attackDelay);
-  }
+  }}
 
   /**
    * Calls a random jump attack.
