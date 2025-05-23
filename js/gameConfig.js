@@ -29,10 +29,11 @@ function configNormalMode() {
   world.level.endboss.energy = 50;
     chickenSpawnInterval = setInterval(() => {
   world.level.enemies.push(
-    new Minichicken(world.character.x + canvasWidth * 2),
+    new Minichicken(world.character.x + canvasWidth * 1),
     new Chicken(world.character.x + canvasWidth * 2)
   )
-  }, 6000);
+  }, 12000);
+
   audio.resetMusic('normalModeMusic');
   audio.playMusicOnce('normalModeMusic');
 }
@@ -50,10 +51,10 @@ function configHardMode() {
   world.level.endboss.energy = 100;
   chickenSpawnInterval = setInterval(() => {
   world.level.enemies.push(
-    new Minichicken(world.character.x + canvasWidth * 2),
+    new Minichicken(world.character.x + canvasWidth * 1),
     new Chicken(world.character.x + canvasWidth * 2)
   )
-  }, 3000);
+  }, 4000);
   audio.resetMusic('normalModeMusic');
   audio.playMusicOnce('normalModeMusic');
 }

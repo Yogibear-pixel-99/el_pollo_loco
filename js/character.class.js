@@ -6,20 +6,15 @@ class Character extends MovableObject {
   energy = 100;
   animateInterval;
   soundInterval;
-  idleInterval;
-  checkIdleInterval;
   moveInterval;
   allIntervals = [
     "animateInterval",
     "soundInterval",
-    "idleInterval",
-    "checkIdleInterval",
     "moveInterval",
   ];
 
   isIdle = false;
   idleCount = 0;
-  idleInterval;
   isJumping = false;
 
   timestamp;
@@ -216,68 +211,6 @@ class Character extends MovableObject {
     audio.sfx.pepeLongIdle.currentTime = 0;
   }
 
-  // animateIdle() {
-  // clearInterval(this.animateInterval);
-  // this.idleCount = 0;
-  // this.idleInterval = setInterval(() => {
-
-  // if (this.idleCount < 50 && this.isIdle) {
-  //   this.playAnimation(this.IDLE_ANIMATION);
-  // } else {
-  //   this.playAnimation(this.IDLE_LONG_ANIMATION);
-  //   audio.sfx.pepeLongIdle.play();
-  // }
-
-  // if (!this.characterIdle() && !world.checkGameEnd()) {
-  //   this.resetIdleAudio();
-  //   clearInterval(this.animateInterval);
-  //   this.animate();
-  //   this.idleCount = 0;
-  // }
-  // this.idleCount++;
-  // }, 180);
-  // }
-  // animateIdle() {
-  //   clearInterval(this.animateInterval);
-  //   let count = 0;
-  //   this.animateInterval = setInterval(() => {
-
-  //       if (count < 28) {
-  //         this.playAnimation(this.IDLE_ANIMATION);
-  //       } else {
-  //         this.playAnimation(this.IDLE_LONG_ANIMATION);
-  //         audio.sfx.pepeLongIdle.play();
-  //       }
-
-  //     if (!this.characterIdle() && !world.checkGameEnd()) {
-  //       this.resetIdleAudio();
-  //       clearInterval(this.animateInterval);
-  //       this.animate();
-  //     }
-  //     count++;
-  //   }, 180);
-  // }
-
-  // animateJump() {
-  //   if (!this.isJumping) {
-  //     this.img = this.animatedImages[this.JUMPING_ANIMATION[2]];
-  //     this.isJumping = true;
-  //     return;
-  //   }
-  //   if (this.speedY > 0.5) {
-  //     this.img = this.animatedImages[this.JUMPING_ANIMATION[3]];
-  //   } else if (this.speedY <= 0.5 && this.speedY > -0.2) {
-  //     this.img = this.animatedImages[this.JUMPING_ANIMATION[4]];
-  //   } else if (this.speedY <= -0.2 && this.speedY > -0.6) {
-  //     this.img = this.animatedImages[this.JUMPING_ANIMATION[5]];
-  //   } else if (this.speedY <= -0.6) {
-  //     this.img = this.animatedImages[this.JUMPING_ANIMATION[6]];
-  //   } else {
-  //     this.img = this.animatedImages[this.JUMPING_ANIMATION[7]];
-  //     this.isJumping = false;
-  //   }
-  // }
-
   animateJump() {
     if (!this.isJumping) {
       this.img = this.animatedImages[this.JUMPING_ANIMATION[2]];
@@ -357,4 +290,3 @@ class Character extends MovableObject {
 // SOUNDINTERVAL
 // ANIMATE INTERVAL
 // MOVEINTERVAL
-// IDLEINTERVAL
