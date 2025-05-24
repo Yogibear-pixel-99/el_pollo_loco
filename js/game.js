@@ -154,21 +154,21 @@ function toggleGameMode() {
   switch (gameMode) {
     case 'normal': {
       ref.innerText = 'Hard Mode';
-      expRef.innerText = 'more Chickens, more Bosslife';
+      expRef.innerText = 'More chickens, more boss health';
       gameMode = 'hard';
       getActiveHighscores();
     }
       break;
     case 'hard': {
       ref.innerText = 'Chicken Rush';
-      expRef.innerText = 'endless Chickens, no Boss';
+      expRef.innerText = 'Endless chickens, no boss';
       gameMode = 'chickenRush';
        getActiveHighscores();
     }
       break;
     case 'chickenRush': {
       ref.innerText = 'Normal Mode';
-      expRef.innerText = 'Standard Level';
+      expRef.innerText = 'Collect 10 coins to trigger the boss';
       gameMode = 'normal';
        getActiveHighscores();
     }
@@ -284,13 +284,8 @@ document.addEventListener('click', () => {
 // set coin collision to 10 after boss animation
 
 
-// pepe dont show animation if throw bottle
-// display info to collect 10 coins to trigger boss
-
-// boss kill doesnt count 200 + points
-// game over screen
-
-// enemy bottle hit auslagern in enemies von world
+// ebenso clucker intervall
+// Sounds alle zusammenfassen und in die enemies stecken bzw. in die boss klasse.
 
 // change this in level for coins and emenies and backgrounds
 
@@ -313,14 +308,11 @@ document.addEventListener('click', () => {
 
 // check all object with console logs for undefined values
 
-// make easy mode, easier
+// collect all intervals and reduce them.
 
+// Shorten all functions
 
-
-// CALL QUESTIONS
-  // bottle throw klappt nicht immer flüssig.
-  // jump animation flackert
-  // intervalle löschen sich nicht richtig
+// CALL QUESTIONS - ANSWERES
   // parallax mode
 
 

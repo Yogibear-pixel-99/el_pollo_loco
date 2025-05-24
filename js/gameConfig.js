@@ -9,7 +9,8 @@ function configChickenRushMode () {
     keyboard,
     pointConfig,
     audio,
-    level
+    level,
+    1
   );
   world.level.endboss.x = 720 * 6;
   audio.resetMusic('chickenRushMusic');
@@ -24,7 +25,7 @@ function configNormalMode() {
     keyboard,
     pointConfig,
     audio,
-    level
+    level,
   );
   world.level.endboss.energy = 50;
     chickenSpawnInterval = setInterval(() => {
@@ -46,7 +47,8 @@ function configHardMode() {
     keyboard,
     pointConfig,
     audio,
-    level
+    level,
+    6
   );
   world.level.endboss.energy = 100;
   chickenSpawnInterval = setInterval(() => {
@@ -60,15 +62,3 @@ function configHardMode() {
 }
 
 // KEEP IT ALL IN THE LEVELS JS AS WELL
-
-// THINGS TO CHANGE
-
-// boss appearence
-// bottlebar appearence
-// spawnmode for chickens
-// resizemode for chickens
-// no bottles
-// spawn intervall for enemies
-// healmode
-// endless bottles
-// endboss trigger on coin collect

@@ -213,10 +213,8 @@ class World {
   }
 
   updatePlayerScore() {
-    this.updateScoreInterval = setInterval(() => {
       let ref = document.getElementById("player-score");
       ref.innerText = this.playerscore;
-    }, 500);
   }
 
   floorPosition(obj) {
@@ -228,6 +226,7 @@ class World {
       if (this.character.isColliding(coin) && coin.collected == false) {
         audio.playSound("collectCoin");
         this.character.collectCoin();
+        this.character.coinHeal();
         coin.isCollectedAnimation();
         coin.collected = true;
         this.coinbar.updateCoinBar();
@@ -255,6 +254,7 @@ class World {
 
   addPointsToPlayerScore(scoreTypeName) {
     this.playerscore += this.pointTable[scoreTypeName].points;
+    this.updatePlayerScore();
   }
 
   moveBackground() {
@@ -270,6 +270,13 @@ class World {
       });
     }, 100);
   }
+
+      logBgs(){
+        for (let index = 0; index < world.level.backgrounds.length; index++) {
+            console.log(world.level.backgrounds[index].img.currentSrc);
+            
+        }
+    }
 
   checkCluckerSound() {
     this.cluckerInterval = setInterval(() => {
@@ -386,7 +393,12 @@ class World {
   }
 
   gameOver() {
-    console.trace('wurder aufgerufen von:');
+    if (this.gameWon) {
+      this.addPointsToPlayerScore("endbossKilled");
+      this.audio.sfx.gameWon.play();
+    } else {
+      this.audio.sfx.gameLost.play();
+    }
     cancelAnimationFrame(this.drawInterval);
     gameHasStarted = false;
     document.body.style.cursor = 'url("./img/cursor.png"), auto';
@@ -394,12 +406,6 @@ class World {
     audio.stopMusic("normalModeMusic");
     this.showGameOverScreen();
     checkFullscreenMode();
-    if (this.gameWon) {
-      this.addPointsToPlayerScore("endbossKilled");
-      this.audio.sfx.gameWon.play();
-    } else {
-      this.audio.sfx.gameLost.play();
-    }
     this.audio.sfx.cluckern.pause();
     this.stopAllGameIntervals();
     saveScore();

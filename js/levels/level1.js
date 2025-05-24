@@ -3,6 +3,16 @@
 
 
 function initNormalLevel() {
+
+
+
+
+
+
+
+
+
+
 return new Level(
 
 
@@ -104,7 +114,11 @@ return new Level(
     new BackgroundLayer("./img/5_background/layers/1_first_layer/2.png", 719 * 5, 0),
     new BackgroundLayer("./img/5_background/layers/1_first_layer/1.png", 719 * 6, 0),
   ],
-  719 * 5 + 50
+  719 * 5 + 50,
+
+  6,
+
+  -1.5
 
 );
 }

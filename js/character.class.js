@@ -285,6 +285,10 @@ class Character extends MovableObject {
       clearInterval(this[interval]);
     });
   }
+
+  coinHeal (){
+    this.energy + 10;
+  }
 }
 
 // SOUNDINTERVAL
