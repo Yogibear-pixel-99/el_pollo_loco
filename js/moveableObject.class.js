@@ -20,17 +20,24 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 2;
+    if (!this.isImmune()) {
+    this.energy -= 10;
     if (this.energy <= 0) {
       this.energy = 0;
     }
     this.lastHit = new Date().getTime();
-  }
+  }}
 
   isHurt() {
     let timePassed = new Date().getTime() - this.lastHit;
     timePassed = timePassed / 1000; // millisec / 1000 = sec.
     return timePassed < 0.3;
+  }
+
+    isImmune(){
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000;
+    return timePassed < 1.2;
   }
 
   isDead() {

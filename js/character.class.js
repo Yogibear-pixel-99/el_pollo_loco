@@ -274,6 +274,8 @@ class Character extends MovableObject {
     this.coins++;
   }
 
+
+
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
   }
