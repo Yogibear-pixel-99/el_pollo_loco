@@ -29,6 +29,10 @@ class Chicken extends Enemies {
     }
     this.x = x;
     this.loadImagesArray(this.WALKING_ANIMATION);
+    setTimeout(() => this.startEnemy(), 4000);
+  }
+
+  startEnemy(){
     this.moveEnemies();
     this.animateWalk();
   }

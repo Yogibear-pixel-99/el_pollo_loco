@@ -92,6 +92,9 @@ class Character extends MovableObject {
     this.loadImagesArray(this.IDLE_LONG_ANIMATION);
     this.loadImagesArray(this.DEAD_ANIMATION);
     this.loadImagesArray(this.HURT_ANIMATION);
+  }
+
+  startChar() {
     this.animate();
     this.moveDetection();
     this.applyGravity();
@@ -273,8 +276,6 @@ class Character extends MovableObject {
   collectCoin() {
     this.coins++;
   }
-
-
 
   collectBottle() {
     if (this.bottles < 5) this.bottles++;

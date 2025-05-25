@@ -1,6 +1,16 @@
 
 let chickenSpawnInterval;
 
+
+function startGameIntervals () {
+  world.character.startChar();
+  // start all enemies
+  // start boss
+  
+}
+
+
+
 function configChickenRushMode () {
    audio.stopMusic('menuMusic');
     let level = initChickenRushLevel();

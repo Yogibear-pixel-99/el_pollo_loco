@@ -36,6 +36,8 @@ function startGame() {
     switch (gameMode) {
       case "normal":
         configNormalMode();
+        setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
+        setTimeout(() => startGameIntervals(), 3000);
         break;
 
       case "chickenRush":
@@ -57,9 +59,7 @@ function startGame() {
 function showLoadingScreen(){
 getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
 showSingleContainerById("canvas-option-container");
-setTimeout(() => {
-  hideSingleContainerById("canvas-option-container");
-}, 4000);
+
 }
 
 function checkFullscreenMode(){
@@ -286,7 +286,7 @@ document.addEventListener('click', () => {
 
 // ladebildschirm
 // boss animation
-
+// bottles should not collide with char on start, same as coins function
 
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
