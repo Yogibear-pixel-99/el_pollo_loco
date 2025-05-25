@@ -10,7 +10,6 @@ class Endboss extends Enemies {
   // energy = 50;
   energy;
   acceleration = 2.5;
-  isTriggered = false;
   deadAnimationCount = 0;
 
   animateInterval;
@@ -109,7 +108,8 @@ class Endboss extends Enemies {
    * Starts the boss fight by calling the movement, attacking and animate intervall.
    */
   startBossFight() {
-    audio.sfx.bossIsTriggerd.play();
+    // audio.sfx.bossIsTriggerd.play();
+    audio.playSound('bossIsTriggerd');
     this.isTriggered = true;
     this.bossMoveDirection();
     this.attack();
@@ -124,8 +124,6 @@ class Endboss extends Enemies {
       if (this.isDead()) {
         // this.stopAllBossIntervals();
         this.endBossDead();
-      } else if (!this.isTriggered) {
-        this.playAnimation(this.ALERT_ANIMATION);
       } else if (this.bossIsHurt()) {
         this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
       } else {

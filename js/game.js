@@ -50,7 +50,7 @@ function startGame() {
     }
   } else {
     playerNameError();
-    audio.playSound("menuError");
+    audio.playSoundClone("menuError");
     addErrorAnimation("start-game-text", "shake-error");
     addErrorAnimation("name-error-text", "shake-error");
   }
@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll(".opt-wrapper, .sound-wrapper, #player-name-input")
     .forEach((element) => {
       element.addEventListener("click", () => {
-        audio.playSound("menuClick");
+        audio.playSoundClone("menuClick");
       });
     });
 });

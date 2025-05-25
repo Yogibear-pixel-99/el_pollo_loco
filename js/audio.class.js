@@ -73,8 +73,8 @@ class Audiofiles {
    * @param {Array} objSrc The audio array name.
    */
   playRandomSound(objSrc) {
-    let rnd = Math.floor(Math.random() * audio.sfx[objSrc].length);
-    let sound = audio.sfx[objSrc][rnd].cloneNode();
+    let rnd = Math.floor(Math.random() * this.sfx[objSrc].length);
+    let sound = this.sfx[objSrc][rnd].cloneNode();
     sound.muted = sfxMute;
     sound.volume = sfxVolume;
     sound.play();
@@ -86,9 +86,7 @@ class Audiofiles {
    * @param {string} objSrc The audio name.
    */
   playSound(objSrc) {
-    sound.muted = sfxMute;
-    sound.volume = sfxVolume;
-    let sound = audio.sfx[objSrc].play();
+    this.sfx[objSrc].play();
   }
 
   /**
@@ -97,10 +95,14 @@ class Audiofiles {
    * @param {string} objSrc The audio name.
    */
   playSoundClone(objSrc) {
-    let sound = audio.sfx[objSrc].cloneNode();
+    let sound = this.sfx[objSrc].cloneNode();
     sound.muted = sfxMute;
     sound.volume = sfxVolume;
     sound.play();
+  }
+
+  pauseSound(objSrc){
+  this.sfx[objSrc].pause();
   }
 
   /**
@@ -108,9 +110,9 @@ class Audiofiles {
    *
    * @param {string} objSrc The audio name.
    */
-  playMusicOnce(objSrc) {
-    audio.music[objSrc].loop = true;
-    audio.music[objSrc].play();
+  playMusicLoop(objSrc) {
+    this.music[objSrc].loop = true;
+    this.music[objSrc].play();
   }
 
   /**
@@ -119,7 +121,7 @@ class Audiofiles {
    * @param {string} objSrc The audio name.
    */
   stopMusic(objSrc) {
-    audio.music[objSrc].pause();
+    this.music[objSrc].pause();
   }
 
   /**
@@ -128,6 +130,6 @@ class Audiofiles {
    * @param {string} objSrc The audio name;
    */
   resetMusic(objSrc) {
-    audio.music[objSrc].currentTime = 0;
+    this.music[objSrc].currentTime = 0;
   }
 }

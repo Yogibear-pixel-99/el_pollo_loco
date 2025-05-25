@@ -79,7 +79,7 @@ function returnOnlyLettersAndNumbers(id) {
 function unblurInput(event, element) {
   if (event.key === "Enter") {
     element.blur();
-     audio.playSound('menuClick');
+     audio.playSoundClone('menuClick');
   }
 }
 

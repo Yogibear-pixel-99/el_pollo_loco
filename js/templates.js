@@ -7,7 +7,7 @@ function getStoryTemp() {
   return `<div class="story-text">
                 <div class="flex-ctr-spbtw">
                 <p>Welcome to the world of Pepe!</p>
-                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSound('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                 </div>
                 <p>Last night, there was a crumbling
                  voice in the air. The next morning,
@@ -31,7 +31,7 @@ function getControlsTemp() {
   return `<div class="controls-settings">
             <div class="flex-ctr-spbtw">
                 <h2 class="controls-header">Control Pepe</h2>
-                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSound('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                 </div>
                     <table>
                         <tr>
@@ -92,25 +92,25 @@ function getPointsTemp(element) {
  */
 function getSoundOptionsTemp() {
   return `<div class="sound-settings">
-            <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSound('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+            <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
             <div class="sound-wrapper" onclick="">
-                <div class="sound-text-wrapper" onclick="toggleSoundsOnOff(); audio.playSound('menuClick')">
+                <div class="sound-text-wrapper" onclick="toggleSoundsOnOff(); audio.playSoundClone('menuClick')">
                     <span>Sounds</span>
                     <span id="sound-on" class="not-selected">On</span>
                     <span>/</span>
                     <span id="sound-off" class="not-selected">Off</span>
                 </div>
-                <input id="menu-sound-vol" onchange="audio.playSound('menuClick')" oninput="setVolume()" type="range" value="5" min="1" max="10">
+                <input id="menu-sound-vol" onchange="audio.playSoundClone('menuClick')" oninput="setVolume()" type="range" value="5" min="1" max="10">
             </div>
 
-            <div class="sound-wrapper" onclick="audio.playSound('menuClick')">
+            <div class="sound-wrapper" onclick="audio.playSoundClone('menuClick')">
                 <div class="sound-text-wrapper" onclick="toggleMusicOnOff()">
                     <span>Music</span>
                     <span id="music-on" class="not-selected">On</span>
                     <span>/</span>
                     <span id="music-off" class="not-selected">Off</span>
                 </div>
-                <input id="menu-music-vol" onchange="audio.playSound('menuClick')" oninput="setVolume()" type="range" value="5" min="1" max="10">
+                <input id="menu-music-vol" onchange="audio.playSoundClone('menuClick')" oninput="setVolume()" type="range" value="5" min="1" max="10">
             </div>
         `;
 }

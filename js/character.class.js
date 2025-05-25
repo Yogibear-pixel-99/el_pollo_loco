@@ -110,18 +110,23 @@ class Character extends MovableObject {
         if (audio.sfx.pepeWalk.currentTime > 3.7) {
           audio.sfx.pepeWalk.currentTime = 0;
         }
-        audio.sfx.pepeWalk.play();
+        audio.playSound('pepeWalk');
+        // audio.sfx.pepeWalk.play();
       } else {
-        audio.sfx.pepeWalk.pause();
+        audio.pauseSound('pepeWalk')
+        // audio.sfx.pepeWalk.pause();
       }
       if (jump && !this.aboveGround()) {
-        audio.sfx.pepeJump.play();
+        audio.playSound('pepeJump');
+        // audio.sfx.pepeJump.play();
       }
       if (this.speedY < 0 && !this.aboveGround()) {
-        audio.sfx.pepeLanding.play();
+        audio.playSoundClone('pepeLanding')
+        // audio.sfx.pepeLanding.play();
       }
       if (this.isHurt()) {
-        audio.sfx.pepeHurt.play();
+        audio.playSound('pepeHurt');
+        // audio.sfx.pepeHurt.play();
       }
     }, 1000 / 60);
   }
@@ -199,18 +204,20 @@ class Character extends MovableObject {
       this.playAnimation(this.IDLE_ANIMATION);
     } else {
       this.playAnimation(this.IDLE_LONG_ANIMATION);
-      audio.sfx.pepeLongIdle.play();
+      audio.playSound('pepeLongIdle');
+      // audio.sfx.pepeLongIdle.play();
     }
     this.idleCount++;
   }
 
-  resetIdle() {
-    if (!this.characterIdle()) {
-      this.idleCount = 0;
-      audio.sfx.pepeLongIdle.pause();
-      audio.sfx.pepeLongIdle.currentTime = 0;
-    }
-  }
+  // resetIdle() {
+  //   if (!this.characterIdle()) {
+  //     this.idleCount = 0;
+  //     audio.pauseSound('pepeLongIdle');
+  //     // audio.sfx.pepeLongIdle.pause();
+  //     audio.sfx.pepeLongIdle.currentTime = 0;
+  //   }
+  // }
 
   animateJump() {
     if (!this.isJumping) {
@@ -239,7 +246,8 @@ class Character extends MovableObject {
   }
 
   resetIdleAudio() {
-    audio.sfx.pepeLongIdle.pause();
+    audio.pauseAudio('pepeLongIdle');
+    // audio.sfx.pepeLongIdle.pause();
     audio.sfx.pepeLongIdle.currentTime = 0;
   }
 

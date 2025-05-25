@@ -52,8 +52,7 @@ class World {
   }
 
   playGameMusic() {
-    audio.sfx.gameAmbience.loop = true;
-    audio.sfx.gameAmbience.play();
+    audio.playMusicLoop('gameAmbience');
   }
 
   enemyMoveDirection() {
@@ -150,8 +149,8 @@ class World {
         this.animateBrokenBottle(bottle);
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
-          audio.playSound("bossHitted");
-          audio.playSound("bossCrys");
+          audio.playSoundClone("bossHitted");
+          audio.playSoundClone("bossCrys");
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
@@ -227,7 +226,7 @@ class World {
   checkCoinCollision() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) && coin.collected == false) {
-        audio.playSound("collectCoin");
+        audio.playSoundClone("collectCoin");
         this.character.collectCoin();
         this.character.coinHeal();
         coin.isCollectedAnimation();
@@ -292,9 +291,9 @@ class World {
           this.chickenNear = true;
         }
         if (this.chickenNear === true) {
-          this.audio.sfx.cluckern.play();
+          audio.playSound('cluckern');
         } else {
-          this.audio.sfx.cluckern.pause();
+          audio.pauseSound('cluckern');
         }
       });
     }, 500);
@@ -400,9 +399,9 @@ class World {
   gameOver() {
     if (this.gameWon) {
       this.addPointsToPlayerScore("endbossKilled");
-      this.audio.sfx.gameWon.play();
+      audio.playSound('gameWon');
     } else {
-      this.audio.sfx.gameLost.play();
+      audio.playSound('gameLost');
     }
     cancelAnimationFrame(this.drawInterval);
     document.body.style.cursor = 'url("./img/cursor.png"), auto';
@@ -410,7 +409,7 @@ class World {
     audio.stopMusic("normalModeMusic");
     this.showGameOverScreen();
     checkFullscreenMode();
-    this.audio.sfx.cluckern.pause();
+    audio.pauseSound('cluckern');
     this.stopAllGameIntervals();
     saveScore();
   }

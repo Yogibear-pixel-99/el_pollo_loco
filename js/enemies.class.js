@@ -54,7 +54,7 @@ class Enemies extends MovableObject {
   }
 
   runAway() {
-    audio.playSound('chickenRun');
+    audio.playSoundClone('chickenRun');
     let activeDirection = this.otherDirection;
     let count = 0;
     let interval = setInterval(() => {
