@@ -34,13 +34,13 @@ function configNormalMode() {
     audio,
     level,
   );
-  world.level.endboss.energy = 20;
+  world.level.endboss.energy = 100;
     chickenSpawnInterval = setInterval(() => {
   world.level.enemies.push(
     new Minichicken(world.character.x + canvasWidth * 1),
     new Chicken(world.character.x + canvasWidth * 2)
   )
-  }, 12000);
+  }, 10000);
 
   audio.resetMusic('normalModeMusic');
   audio.playMusicLoop('normalModeMusic');

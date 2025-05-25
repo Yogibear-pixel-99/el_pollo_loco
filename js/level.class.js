@@ -1,6 +1,7 @@
 class Level {
   coins;
   bottles;
+  healBottles;
   enemies;
   endboss;
   skyObjects;
@@ -11,6 +12,7 @@ class Level {
   constructor(
     coins,
     bottles,
+    healBottles,
     enemies,
     endboss,
     clouds,
@@ -19,6 +21,7 @@ class Level {
   ) {
     this.coins = coins;
     this.bottles = bottles;
+    this.healBottles = healBottles;
     this.enemies = enemies;
     this.endboss = endboss;
     this.skyObjects = clouds;
@@ -119,6 +122,6 @@ class Level {
     return Math.random() * (canvasHeight - 158 - 130) + 130;
   }
 
-  
+
 }
 // PROBLEM WITH THE PUSH FUNCTION

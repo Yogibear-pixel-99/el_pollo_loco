@@ -51,6 +51,7 @@ class World {
       this.checkBottleCollision();
       this.checkBossCollision();
       this.checkThrownBottleCollision();
+      this.checkHealBottleCollision();
     }, 25);
   }
 
@@ -216,15 +217,25 @@ class World {
       if (this.character.isColliding(coin) && coin.collected == false) {
         audio.playSoundClone("collectCoin");
         this.character.collectCoin();
-        this.character.coinHeal();
         coin.isCollectedAnimation();
         coin.collected = true;
         this.coinbar.updateCoinBar();
-        this.healthbar.updateHealthbar();
-        this.addPointsToPlayerScore(coin.itemName);
-        if (this.character.coins === 1 && gameMode != "chickenRush") {
+        if (this.character.coins === 10 && gameMode != "chickenRush") {
           this.level.endboss.startBossFight();
         }
+      }
+    });
+  }
+
+  checkHealBottleCollision() {
+    this.level.healBottles.forEach((bottle) => {
+      console.log('test')
+      if (this.character.isColliding(bottle) && this.character.energy < 100) {
+        audio.playSoundClone("bottleHeal");
+        bottle.isCollected();
+        this.character.bottleHeal();
+        this.healthbar.updateHealthbar();
+        this.addPointsToPlayerScore(bottle.itemName);
       }
     });
   }
@@ -302,6 +313,7 @@ class World {
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
     this.addObjectsToCanvas(this.level.bottles);
+    this.addObjectsToCanvas(this.level.healBottles);
     this.addObjectsToCanvas(this.thrownBottles);
     this.addObjToCanvas(this.level.endboss);
     // this.drawBossHeadHitbox(this.ctx);

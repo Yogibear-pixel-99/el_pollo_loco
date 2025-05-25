@@ -47,6 +47,7 @@ class Audiofiles {
       new Audio("./audio/items/bottles/glass-bottle-clink-90671.mp3"),
       new Audio("./audio/items/bottles/glass-clink-6-188126.mp3"),
     ],
+    bottleHeal : new Audio("./audio/pepe/health-pickup-6860.mp3"),
 
     bossHitted: new Audio("./audio/boss/lighting-a-fire-14421.mp3"),
     bossCrys: new Audio("./audio/boss/gatre-101240.mp3"),
