@@ -116,6 +116,16 @@ class Audiofiles {
   }
 
   /**
+   * Plays the audio object in a loop.
+   *
+   * @param {string} objSrc The audio name.
+   */
+  playSoundLoop(objSrc) {
+    this.sfx[objSrc].loop = true;
+    this.sfx[objSrc].play();
+  }
+
+  /**
    * Pause the audio object.
    *
    * @param {string} objSrc The audio name.

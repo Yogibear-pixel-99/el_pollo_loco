@@ -9,7 +9,7 @@ function startGameIntervals () {
 
 
 function configChickenRushMode () {
-   audio.stopMusic('menuMusic');
+   audio.pauseMusic('menuMusic');
     let level = initChickenRushLevel();
   world = new World(
     canvas,
@@ -25,7 +25,7 @@ function configChickenRushMode () {
 }
 
 function configNormalMode() {
-   audio.stopMusic('menuMusic');
+   audio.pauseMusic('menuMusic');
   let level = initNormalLevel();
   world = new World(
     canvas,
@@ -47,7 +47,7 @@ function configNormalMode() {
 }
 
 function configHardMode() {
-   audio.stopMusic('menuMusic');
+   audio.pauseMusic('menuMusic');
   let level = initHardLevel();
   world = new World(
     canvas,

@@ -40,7 +40,7 @@ class Endboss extends Enemies {
     };
   }
 
-  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval", "gravityInterval", "moveDirectionInterval"];
+  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
   animationCycle = 170;
   moveCycle = 30;
 
@@ -188,16 +188,19 @@ class Endboss extends Enemies {
    * Calls a random jump attack.
    */
   jumpAttack() {
-    if (this.isDead()) return;
     let attackAnimationNr = Math.ceil(Math.random() * 3) * 5 + 10;
     let attackCount = 0;
     this.animationCount = 0;
     this.jumpAttackInterval = setInterval(() => {
-      if (!this.bossIsHurt()) {
+      if (this.isDead()) {
+        clearInterval(this.jumpAttackInterval);
+        this.animate();
+        return;
+      } else if (!this.bossIsHurt()) {
         if (attackCount < 8) {
           this.playAnimation(this.ALERT_ANIMATION);
         } else if (attackCount >= 8 && attackCount <= 10) {
-          if (attackCount === 8 && !this.isDead()) {
+          if (attackCount === 8) {
             this.animationCount = 0;
           }
           this.playAnimation(this.BOSS_ATTACK_ALERT_ANIMATION);
@@ -206,13 +209,13 @@ class Endboss extends Enemies {
           attackCount <= attackAnimationNr &&
           !this.isDead()
         ) {
-          if (attackCount === 11 && !this.isDead()) {
+          if (attackCount === 11) {
             this.animationCount = 0;
           }
           this.playAnimation(this.BOSS_ATTACK_JUMP_ANIMATION);
           audio.playSound("bossAttacks");
           this.bossAttackMovement(attackAnimationNr);
-        } else if (attackCount > attackAnimationNr && !this.isDead()) {
+        } else if (attackCount > attackAnimationNr) {
           this.animationCount = 0;
           clearInterval(this.jumpAttackInterval);
           this.startBossIntervals();
@@ -271,7 +274,7 @@ class Endboss extends Enemies {
   }
 
   applyGravity() {
-    gravityInterval = setInterval(() => {
+    this.gravityInterval = setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;

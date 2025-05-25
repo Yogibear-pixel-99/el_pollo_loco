@@ -55,7 +55,7 @@ class World {
   }
 
   playGameMusic() {
-    audio.playMusicLoop("gameAmbience");
+    audio.playSoundLoop("gameAmbience");
   }
 
   enemyMoveDirection() {
@@ -281,7 +281,7 @@ class World {
         enemy.x > this.character.x - 150 &&
         enemy.x < this.character.x + 320
       ) {
-        enemy.clearAllEnemyIntervalls();
+        enemy.stopAllEnemyIntervalls();
         enemy.runAway();
       }
     });
@@ -393,6 +393,7 @@ class World {
       enemy.stopAllEnemyIntervalls();
     });
     world.level.endboss.stopAllBossIntervals();
+    clearInterval(world.level.endboss.moveDirectionInterval);
     clearInterval(this.collisionInterval);
     clearInterval(this.worldInterval);
     clearInterval(this.chickenSpawnInterval);
@@ -409,8 +410,8 @@ class World {
   }
 
   stopGameMusic() {
-    audio.stopMusic("chickenRushMusic");
-    audio.stopMusic("normalModeMusic");
+    audio.pauseMusic("chickenRushMusic");
+    audio.pauseMusic("normalModeMusic");
     audio.pauseSound("cluckern");
     audio.pauseSound("gameAmbience");
   }
