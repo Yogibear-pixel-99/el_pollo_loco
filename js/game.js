@@ -275,7 +275,7 @@ document.addEventListener('click', () => {
   playMusicOnStart = true;
 })
 
-
+// update health bar on coin collect
 // ladebildschirm
 // boss animation
 // reset idle check

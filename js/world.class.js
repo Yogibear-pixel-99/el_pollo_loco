@@ -297,7 +297,7 @@ class World {
 
   enemyRunAwayOnCharJump() {
     this.level.enemies.forEach((enemy) => {
-      let rndRun = Math.ceil(Math.random() * 4);
+      let rndRun = Math.ceil(Math.random() * 6);
       if (
         rndRun === 1 &&
         enemy.lives &&
