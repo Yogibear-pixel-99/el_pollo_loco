@@ -25,7 +25,7 @@ function configChickenRushMode () {
   );
   world.level.endboss.x = 720 * 6;
   audio.resetMusic('chickenRushMusic');
-  audio.playMusicOnce('chickenRushMusic');
+  audio.playMusicLoop('chickenRushMusic');
 }
 
 function configNormalMode() {
@@ -38,7 +38,7 @@ function configNormalMode() {
     audio,
     level,
   );
-  world.level.endboss.energy = 10;
+  world.level.endboss.energy = 20;
     chickenSpawnInterval = setInterval(() => {
   world.level.enemies.push(
     new Minichicken(world.character.x + canvasWidth * 1),
@@ -47,7 +47,7 @@ function configNormalMode() {
   }, 12000);
 
   audio.resetMusic('normalModeMusic');
-  audio.playMusicOnce('normalModeMusic');
+  audio.playMusicLoop('normalModeMusic');
 }
 
 function configHardMode() {
@@ -69,7 +69,7 @@ function configHardMode() {
   )
   }, 4000);
   audio.resetMusic('normalModeMusic');
-  audio.playMusicOnce('normalModeMusic');
+  audio.playMusicLoop('normalModeMusic');
 }
 
 // KEEP IT ALL IN THE LEVELS JS AS WELL

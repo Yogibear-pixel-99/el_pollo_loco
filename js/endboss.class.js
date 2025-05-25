@@ -39,11 +39,7 @@ class Endboss extends Enemies {
     };
   }
 
-  allBossIntervals = [
-    "moveInterval",
-    "animateInterval",
-    "jumpAttackInterval",
-  ];
+  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
   animationCycle = 170;
   moveCycle = 30;
 
@@ -101,7 +97,6 @@ class Endboss extends Enemies {
     this.loadImagesArray(this.BOSS_ATTACK_ALERT_ANIMATION);
     this.loadImagesArray(this.BOSS_ATTACK_JUMP_ANIMATION);
     this.applyGravity();
-    this.animate();
   }
 
   /**
@@ -109,11 +104,16 @@ class Endboss extends Enemies {
    */
   startBossFight() {
     // audio.sfx.bossIsTriggerd.play();
-    audio.playSound('bossIsTriggerd');
+    audio.playSound("bossIsTriggerd");
     this.isTriggered = true;
     this.bossMoveDirection();
+    this.startBossIntervals();
+  }
+
+  startBossIntervals() {
     this.attack();
     this.move();
+    this.animate();
   }
 
   /**
@@ -122,6 +122,7 @@ class Endboss extends Enemies {
   animate() {
     this.animateInterval = setInterval(() => {
       if (this.isDead()) {
+        clearInterval(this.moveInterval);
         // this.stopAllBossIntervals();
         this.endBossDead();
       } else if (this.bossIsHurt()) {
@@ -133,18 +134,18 @@ class Endboss extends Enemies {
   }
 
   endBossDead() {
-    audio.playSound('bossDied');
+    audio.playSound("bossDied");
     // audio.sfx.bossDied.play();
     // let interval = setInterval(() => {
-      if (this.deadAnimationCount < 9) {
-        this.playAnimation(this.BOSS_DEAD_ANIMATION);
-      } else {
-        // clearInterval(interval);
-        // clearInterval(this.animateInterval);
-        this.stopAllBossIntervals();
-        this.img = this.animatedImages[this.BOSS_DEAD_ANIMATION[2]];
-      }
-      this.deadAnimationCount++;
+    if (this.deadAnimationCount < 9) {
+      this.playAnimation(this.BOSS_DEAD_ANIMATION);
+    } else {
+      // clearInterval(interval);
+      // clearInterval(this.animateInterval);
+      this.stopAllBossIntervals();
+      this.img = this.animatedImages[this.BOSS_DEAD_ANIMATION[2]];
+    }
+    this.deadAnimationCount++;
     // }, 100);
   }
 
@@ -153,8 +154,7 @@ class Endboss extends Enemies {
    */
   move() {
     this.moveInterval = setInterval(() => {
-      if (!this.isDead()) {
-      }
+      if (this.isDead()) return;
       if (this.otherDirection) {
         this.bossMoveRight();
       } else {
@@ -182,17 +182,19 @@ class Endboss extends Enemies {
    */
   attack() {
     if (!world.checkGameEnd()) {
-    let attackDelay = Math.round(Math.random() * (4500 - 2500) + 2500);
-    setTimeout(() => {
-      this.stopAllBossIntervals();
-      this.jumpAttack();
-    }, attackDelay);
-  }}
+      let attackDelay = Math.round(Math.random() * (4500 - 2500) + 2500);
+      setTimeout(() => {
+        this.stopAllBossIntervals();
+        this.jumpAttack();
+      }, attackDelay);
+    }
+  }
 
   /**
    * Calls a random jump attack.
    */
   jumpAttack() {
+    if (this.isDead()) return;
     let attackAnimationNr = Math.ceil(Math.random() * 3) * 5 + 10;
     let attackCount = 0;
     this.animationCount = 0;
@@ -214,14 +216,12 @@ class Endboss extends Enemies {
             this.animationCount = 0;
           }
           this.playAnimation(this.BOSS_ATTACK_JUMP_ANIMATION);
-          audio.sfx.bossAttacks.play();
+          audio.playSound("bossAttacks");
           this.bossAttackMovement(attackAnimationNr);
         } else if (attackCount > attackAnimationNr && !this.isDead()) {
           this.animationCount = 0;
           clearInterval(this.jumpAttackInterval);
-          this.animate();
-          this.move();
-          this.attack();
+          this.startBossIntervals();
         } else if (this.isDead()) {
           clearInterval(this.jumpAttackInterval);
           this.animate();

@@ -246,7 +246,7 @@ class Character extends MovableObject {
   }
 
   resetIdleAudio() {
-    audio.pauseAudio('pepeLongIdle');
+    audio.pauseSound('pepeLongIdle');
     // audio.sfx.pepeLongIdle.pause();
     audio.sfx.pepeLongIdle.currentTime = 0;
   }

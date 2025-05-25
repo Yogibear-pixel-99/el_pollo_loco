@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("click", () => {
-  if (!playMusicOnStart) audio.playMusicOnce("menuMusic");
+  if (!playMusicOnStart) audio.playMusicLoop("menuMusic");
   playMusicOnStart = true;
 });
 
@@ -316,6 +316,7 @@ document.addEventListener("click", () => {
 
 // CALL QUESTIONS - ANSWERES
 // parallax mode
+// Attack animation verkürzen???
 
 // INTERVALLS:
 
