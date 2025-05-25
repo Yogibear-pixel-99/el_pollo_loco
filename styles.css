@@ -20,6 +20,7 @@ html {
   --settings-bg-hover: rgb(247, 200, 73);
   --settings-bg-active: rgb(219, 179, 68);
   --settings-text-active: rgb(255, 231, 163);
+  --spinner-bg: #411E0F;
 }
 
 body {
@@ -79,6 +80,7 @@ body {
 }
 
 canvas {
+  position: relative;
   /* background-image: url("img/9_intro_outro_screens/start/startscreen_2.png"); */
   background-color: black;
   background-size: 100% 100%;
@@ -93,6 +95,39 @@ canvas {
   inset: 0;
   z-index: 150;
   border-radius: 20px;
+  
+}
+
+.loading-spinner-container {
+  position: absolute;
+  inset: 0;
+  background-color: var(--spinner-bg);
+  border-radius: 20px;
+  gap: 40px;
+}
+
+.loading-spinner-container span {
+  font-size: 28px;
+  color: var(--score-bg);
+  letter-spacing: 2px;
+}
+
+.loading-spinner-container img {
+  height: 25%;
+  animation-name: spinner-bottle;
+  animation-duration: 1400ms;
+  animation-iteration-count: infinite;
+  transform: rotate(0deg);
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+@keyframes spinner-bottle {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+  /* 50% {transform: rotate(180deg);}
+  75% {transform: rotate(270deg);}
+  100% {transform: rotate(360deg);} */
 }
 
 .canvas-won-container,

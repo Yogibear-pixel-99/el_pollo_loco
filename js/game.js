@@ -32,6 +32,7 @@ function startGame() {
   if (checkNameInput()) {
     deactivateMenu();
     checkFullscreenMode();
+    showLoadingScreen();
     switch (gameMode) {
       case "normal":
         configNormalMode();
@@ -51,6 +52,14 @@ function startGame() {
     addErrorAnimation('start-game-text', 'shake-error');
     addErrorAnimation('name-error-text', 'shake-error');
   }
+}
+
+function showLoadingScreen(){
+getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
+showSingleContainerById("canvas-option-container");
+setTimeout(() => {
+  hideSingleContainerById("canvas-option-container");
+}, 4000);
 }
 
 function checkFullscreenMode(){
@@ -277,7 +286,6 @@ document.addEventListener('click', () => {
 
 // ladebildschirm
 // boss animation
-// kurez immunität nach hit.
 
 
 

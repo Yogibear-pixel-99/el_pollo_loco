@@ -114,3 +114,11 @@ function getSoundOptionsTemp() {
             </div>
         `;
 }
+
+function getLoadingSpinnerTemp(){
+    return `<div class="loading-spinner-container flex-ctr-ctr flex-col">
+                <img src="./img/icons/graphic-3578420_1280.png" alt="loading spinner">
+                <span>. . . loading . . .</span>
+            </div>
+            `
+}
