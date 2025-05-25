@@ -287,7 +287,13 @@ class Character extends MovableObject {
   }
 
   coinHeal (){
+    if (this.energy < 100) { 
     this.energy += 10;
+      if (this.energy > 100) {
+        this.energy = 100;
+      }
+    }
+    
   }
 }
 
