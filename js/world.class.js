@@ -230,6 +230,7 @@ class World {
         coin.isCollectedAnimation();
         coin.collected = true;
         this.coinbar.updateCoinBar();
+        this.healthbar.updateHealthbar();
         this.addPointsToPlayerScore(coin.itemName);
         if (this.character.coins === 1 && gameMode != "chickenRush") {
           this.level.endboss.startBossFight();
@@ -237,6 +238,7 @@ class World {
       }
     });
   }
+
 
   checkBottleCollision() {
     this.level.bottles.forEach((bottle) => {

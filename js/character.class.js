@@ -287,7 +287,7 @@ class Character extends MovableObject {
   }
 
   coinHeal (){
-    this.energy + 10;
+    this.energy += 10;
   }
 }
 

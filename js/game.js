@@ -282,7 +282,7 @@ document.addEventListener('click', () => {
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation
-
+// kurez immunität nach hit.
 
 // ebenso clucker intervall
 // Sounds alle zusammenfassen und in die enemies stecken bzw. in die boss klasse.

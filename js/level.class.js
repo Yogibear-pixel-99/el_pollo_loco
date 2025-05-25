@@ -23,9 +23,9 @@ class Level {
     this.endboss = endboss;
     this.skyObjects = clouds;
     this.backgrounds = backgrounds;
+    this.level_end_x = level_end_x;
     this.setBackgrounds();
     this.addCoins();
-    this.level_end_x = level_end_x;
   }
 
   setBackgrounds() {
@@ -96,7 +96,7 @@ class Level {
   }
 
   addCoins() {
-    for (let lvlIndex = 0; lvlIndex < this.level_size; lvlIndex++) {
+    for (let lvlIndex = 0; lvlIndex < this.level_size - 1; lvlIndex++) {
       this.coins.push(
         new Coin(this.getXForCoins(lvlIndex), this.getYForCoins()),
         new Coin(this.getXForCoins(lvlIndex), this.getYForCoins())
@@ -108,13 +108,11 @@ class Level {
     let x =
       Math.random() * (canvasWidth * (lvlIndex + 1) - canvasWidth * lvlIndex) +
       canvasWidth * lvlIndex;
-    if (
-      x > this.level_end_x ||
-      (x > 100 && x < 300)
-    ) {
-      x = this.getXForCoins(lvlIndex);
+    if (x > this.level_end_x || (x > 100 && x < 300)) {
+      return this.getXForCoins(lvlIndex);
+    } else {
+      return x;
     }
-    return x;
   }
 
   getYForCoins() {
