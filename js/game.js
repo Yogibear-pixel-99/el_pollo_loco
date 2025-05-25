@@ -276,9 +276,9 @@ document.addEventListener('click', () => {
 })
 
 
-
-
-
+// ladebildschirm
+// boss animation
+// reset idle check
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation
@@ -311,6 +311,7 @@ document.addEventListener('click', () => {
 // collect all intervals and reduce them.
 
 // Shorten all functions
+// intevalle reduzieren auf ein minimum.
 
 // CALL QUESTIONS - ANSWERES
   // parallax mode
