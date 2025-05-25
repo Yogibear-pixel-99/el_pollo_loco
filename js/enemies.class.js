@@ -16,7 +16,10 @@ class Enemies extends MovableObject {
 
 
 
-
+  startEnemy(){
+    this.moveEnemies();
+    this.animateWalk();
+  }
 
   animateWalk() {
     this.walkAnimationInterval = setInterval(() => {
@@ -33,14 +36,14 @@ class Enemies extends MovableObject {
     }, 700);
   }
 
-  
+
 
   clearAllEnemyIntervalls() {
     clearInterval(this.walkAnimationInterval);
     clearInterval(this.moveInterval);
   }
 
-      moveEnemies() {
+      moveEnemy() {
     this.moveInterval = setInterval(() => {
       if (this.otherDirection) {
         this.moveRight();
@@ -75,9 +78,20 @@ class Enemies extends MovableObject {
       clearInterval(interval);
       this.otherDirection = activeDirection;
       this.animateWalk();
-      this.moveEnemies();
+      this.moveEnemy();
     }
     }, 20)
+  }
+
+    getChickenForRushMode(){
+    if (gameMode === 'chickenRush') {
+      let size = Math.ceil(Math.random() * 40 + 40);
+      let speed = parseFloat((Math.random() * 2.0).toFixed(1));
+      this.width = size;
+      this.height = size;
+      this.walkingSpeed = speed;
+      this.y = this.floorPosition() - (Math.random() * 8 - 1);
+    }
   }
 
 }

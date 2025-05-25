@@ -85,12 +85,15 @@ class World {
           if (this.level.endboss.energy <= 0) {
             this.gameWon = true;
           }
-          if (gameHasStarted) {
+          if (this.checkGameEnd()) {
           this.gameOver();
           }
         }, 3000);
       }
     }, 500);
+  }
+  runWorldIntervals(){
+
   }
 
   runCollisions() {
@@ -402,7 +405,6 @@ class World {
       this.audio.sfx.gameLost.play();
     }
     cancelAnimationFrame(this.drawInterval);
-    gameHasStarted = false;
     document.body.style.cursor = 'url("./img/cursor.png"), auto';
     audio.stopMusic("chickenRushMusic");
     audio.stopMusic("normalModeMusic");

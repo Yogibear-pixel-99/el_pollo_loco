@@ -86,6 +86,17 @@ class Audiofiles {
    * @param {string} objSrc The audio name.
    */
   playSound(objSrc) {
+    sound.muted = sfxMute;
+    sound.volume = sfxVolume;
+    let sound = audio.sfx[objSrc].play();
+  }
+
+  /**
+   * Plays a sound clone of the audio object.
+   *
+   * @param {string} objSrc The audio name.
+   */
+  playSoundClone(objSrc) {
     let sound = audio.sfx[objSrc].cloneNode();
     sound.muted = sfxMute;
     sound.volume = sfxVolume;

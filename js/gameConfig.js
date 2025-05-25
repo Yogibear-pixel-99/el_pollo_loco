@@ -4,9 +4,10 @@ let chickenSpawnInterval;
 
 function startGameIntervals () {
   world.character.startChar();
-  // start all enemies
-  // start boss
-  
+  world.level.enemies.forEach((enemy) => {
+    enemy.animateWalk();
+    enemy.moveEnemy();
+})
 }
 
 
@@ -37,7 +38,7 @@ function configNormalMode() {
     audio,
     level,
   );
-  world.level.endboss.energy = 50;
+  world.level.endboss.energy = 10;
     chickenSpawnInterval = setInterval(() => {
   world.level.enemies.push(
     new Minichicken(world.character.x + canvasWidth * 1),

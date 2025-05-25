@@ -12,19 +12,18 @@ let floorHeight = 58;
 let playMusicOnStart = false;
 let fullScreen = false;
 let gameHasStarted;
-let gameMode = 'normal';
+let gameMode = "normal";
 const MAIN_URL =
   "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
 
 let highscores = {};
-
 
 function init() {
   canvas = document.getElementById("gamecanvas");
   getSoundSettings();
   assignSoundSettings();
   getActiveHighscores();
-   renderGamePointsTable();
+  renderGamePointsTable();
 }
 
 function startGame() {
@@ -33,11 +32,12 @@ function startGame() {
     deactivateMenu();
     checkFullscreenMode();
     showLoadingScreen();
+    setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
+    setTimeout(() => startGameIntervals(), 3000);
     switch (gameMode) {
       case "normal":
         configNormalMode();
-        setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
-        setTimeout(() => startGameIntervals(), 3000);
+
         break;
 
       case "chickenRush":
@@ -50,34 +50,32 @@ function startGame() {
     }
   } else {
     playerNameError();
-    audio.playSound('menuError');
-    addErrorAnimation('start-game-text', 'shake-error');
-    addErrorAnimation('name-error-text', 'shake-error');
+    audio.playSound("menuError");
+    addErrorAnimation("start-game-text", "shake-error");
+    addErrorAnimation("name-error-text", "shake-error");
   }
 }
 
-function showLoadingScreen(){
-getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
-showSingleContainerById("canvas-option-container");
-
+function showLoadingScreen() {
+  getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
+  showSingleContainerById("canvas-option-container");
 }
 
-function checkFullscreenMode(){
+function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     canvas.requestFullscreen();
     // canvas.webkitRequestFullscreen();
     // canvas.msRequestFullscreen();
-  }
-   else if (fullScreen && !gameHasStarted) {
+  } else if (fullScreen && !gameHasStarted) {
     document.exitFullscreen();
     // canvas.webkitExitFullscreen();
     // canvas.msExitFullscreen();
   }
-};
+}
 
-function addErrorAnimation(id, className){
+function addErrorAnimation(id, className) {
   let ref = document.getElementById(id);
-      ref.classList.add(className);
+  ref.classList.add(className);
   setTimeout(() => ref.classList.remove(className), 1000);
 }
 
@@ -109,28 +107,28 @@ function removeErrorMessage(id) {
   ref.innerText = "";
 }
 
-function playAgain(){
+function playAgain() {
   startGame();
-  let lostRef = document.getElementById('canvas-lost-container');
-  let wonRef = document.getElementById('canvas-won-container');
-      lostRef.classList.add('d-none');
-      wonRef.classList.add('d-none');
+  let lostRef = document.getElementById("canvas-lost-container");
+  let wonRef = document.getElementById("canvas-won-container");
+  lostRef.classList.add("d-none");
+  wonRef.classList.add("d-none");
 }
 
-function goToMainMenu(){
-  let lostRef = document.getElementById('canvas-lost-container');
-  let wonRef = document.getElementById('canvas-won-container');
-      lostRef.classList.add('d-none');
-      wonRef.classList.add('d-none');
+function goToMainMenu() {
+  let lostRef = document.getElementById("canvas-lost-container");
+  let wonRef = document.getElementById("canvas-won-container");
+  lostRef.classList.add("d-none");
+  wonRef.classList.add("d-none");
 }
 
-function resetCanvas(){
-  let ctx = canvas.getContext('2d');
+function resetCanvas() {
+  let ctx = canvas.getContext("2d");
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function deactivateMenu() {
-  document.body.style.cursor = 'none';
+  document.body.style.cursor = "none";
   showSingleContainerById("game-mask");
   hideSingleContainerById("canvas-option-container");
   const startBlinkRef = document.getElementById("start-game-text");
@@ -156,37 +154,36 @@ function renderGamePointsTable() {
   ref.innerHTML = data;
 }
 
-
 function toggleGameMode() {
-    let ref = document.getElementById("game-mode-txt");
+  let ref = document.getElementById("game-mode-txt");
   let expRef = document.getElementById("game-mode-exp");
   switch (gameMode) {
-    case 'normal': {
-      ref.innerText = 'Hard Mode';
-      expRef.innerText = 'More chickens, more boss health';
-      gameMode = 'hard';
-      getActiveHighscores();
-    }
+    case "normal":
+      {
+        ref.innerText = "Hard Mode";
+        expRef.innerText = "More chickens, more boss health";
+        gameMode = "hard";
+        getActiveHighscores();
+      }
       break;
-    case 'hard': {
-      ref.innerText = 'Chicken Rush';
-      expRef.innerText = 'Endless chickens, no boss';
-      gameMode = 'chickenRush';
-       getActiveHighscores();
-    }
+    case "hard":
+      {
+        ref.innerText = "Chicken Rush";
+        expRef.innerText = "Endless chickens, no boss";
+        gameMode = "chickenRush";
+        getActiveHighscores();
+      }
       break;
-    case 'chickenRush': {
-      ref.innerText = 'Normal Mode';
-      expRef.innerText = 'Collect 10 coins to trigger the boss';
-      gameMode = 'normal';
-       getActiveHighscores();
-    }
+    case "chickenRush":
+      {
+        ref.innerText = "Normal Mode";
+        expRef.innerText = "Collect 10 coins to trigger the boss";
+        gameMode = "normal";
+        getActiveHighscores();
+      }
       break;
-  
   }
 }
-
-
 
 window.addEventListener("keydown", (event) => {
   switch (event.key) {
@@ -260,8 +257,6 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousedown", () => {
     document.body.style.cursor = "url('./img/cursor-active.png'), auto";
@@ -270,24 +265,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.cursor = "url('./img/cursor.png'), auto";
   });
 
-  document.querySelectorAll('.opt-wrapper, .sound-wrapper, #player-name-input').forEach((element) => {
-    element.addEventListener('click', () => {
-
-      audio.playSound('menuClick');
-    })
-  })
+  document
+    .querySelectorAll(".opt-wrapper, .sound-wrapper, #player-name-input")
+    .forEach((element) => {
+      element.addEventListener("click", () => {
+        audio.playSound("menuClick");
+      });
+    });
 });
 
-document.addEventListener('click', () => {
-  if (!playMusicOnStart)
-  audio.playMusicOnce('menuMusic');
+document.addEventListener("click", () => {
+  if (!playMusicOnStart) audio.playMusicOnce("menuMusic");
   playMusicOnStart = true;
-})
+});
 
-// ladebildschirm
 // boss animation
 // bottles should not collide with char on start, same as coins function
-
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation
@@ -322,50 +315,48 @@ document.addEventListener('click', () => {
 // intevalle reduzieren auf ein minimum.
 
 // CALL QUESTIONS - ANSWERES
-  // parallax mode
+// parallax mode
 
+// INTERVALLS:
 
+// CHAR
+// SOUNDINTERVAL
+// ANIMATE INTERVAL
+// MOVEINTERVAL
+// IDLEINTERVAL
 
-  // INTERVALLS:
+// CLOUD FRAME INTERVALL
 
-    // CHAR
-      // SOUNDINTERVAL
-      // ANIMATE INTERVAL
-      // MOVEINTERVAL
-      // IDLEINTERVAL
+// COININTERVAL
 
-    // CLOUD FRAME INTERVALL
+// BOSS
+// ANIMATEINTERVAL
+// endboss dead interval - selfclearing
+// MOVEINTERVAL
+// JUMPATTACKINTERVAL
+// bossattackmovementinterval - selfclearing
+// APPLY GRAVITY INTERVALL - BOSS - not clearing
+// MOVEDIRECTIONINTERVAL
 
-    // COININTERVAL
+// ENEMIES
+// WALKANIMATIONINTERVAL
+// MOVEINTERVAL
+// runawayinterval - selclearing
 
-    // BOSS
-      // ANIMATEINTERVAL
-      // endboss dead interval - selfclearing
-      // MOVEINTERVAL
-      // JUMPATTACKINTERVAL
-      // bossattackmovementinterval - selfclearing
-      // APPLY GRAVITY INTERVALL - BOSS - not clearing
-      // MOVEDIRECTIONINTERVAL
+// GAMECONFIG
+// normal mode - CHICKENSPAWNINTERVAL
+// hard mode - CHICKENSPAWNINTERVAL
 
-    // ENEMIES
-      // WALKANIMATIONINTERVAL
-      // MOVEINTERVAL
-      // runawayinterval - selclearing
+// APPLY GRAVITY TO ALL MOVEABLE OBJECTS
 
-    // GAMECONFIG
-      // normal mode - CHICKENSPAWNINTERVAL
-      // hard mode - CHICKENSPAWNINTERVAL
+// THROWN BOTTLES
+// GRAVITY INTERVAL
 
-    // APPLY GRAVITY TO ALL MOVEABLE OBJECTS
-
-    // THROWN BOTTLES
-      // GRAVITY INTERVAL
-
-    // WORLD
-      // ENEMYMOVEDIRECTIONINTERVAL
-      // CHECKIFGAMEOVERINTERVAL - selfclearing
-      // COLLISIONINTERVAL
-      // bottlesplash - self clearing
-      // UPDATESCOREINTERVAL
-      // BACKGROUNDMOVEINTERVAL
-      // CLUCKERINTERVAL
+// WORLD
+// ENEMYMOVEDIRECTIONINTERVAL
+// CHECKIFGAMEOVERINTERVAL - selfclearing
+// COLLISIONINTERVAL
+// bottlesplash - self clearing
+// UPDATESCOREINTERVAL
+// BACKGROUNDMOVEINTERVAL
+// CLUCKERINTERVAL

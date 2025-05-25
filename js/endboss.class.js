@@ -5,12 +5,13 @@ class Endboss extends Enemies {
   scoreNameKilled = "endbossKilled";
   scoreNameBottle = "endbossBottleHit";
   // y = 480 - this.height - 58 + 15;
-  // x = 800;
-  x = 719 * 6;
+  x = 800;
+  // x = 719 * 6;
   // energy = 50;
   energy;
   acceleration = 2.5;
   isTriggered = false;
+  deadAnimationCount = 0;
 
   animateInterval;
   moveInterval;
@@ -19,7 +20,7 @@ class Endboss extends Enemies {
 
   isWalking = false;
   lives = true;
-  attackedTime;
+  // attackedTime;
 
   offset = {
     width: 250,
@@ -121,7 +122,7 @@ class Endboss extends Enemies {
   animate() {
     this.animateInterval = setInterval(() => {
       if (this.isDead()) {
-        this.stopAllBossIntervals();
+        // this.stopAllBossIntervals();
         this.endBossDead();
       } else if (!this.isTriggered) {
         this.playAnimation(this.ALERT_ANIMATION);
@@ -134,18 +135,19 @@ class Endboss extends Enemies {
   }
 
   endBossDead() {
-    let count = 0;
-    audio.sfx.bossDied.play();
-    let interval = setInterval(() => {
-      if (count < 9) {
+    audio.playSound('bossDied');
+    // audio.sfx.bossDied.play();
+    // let interval = setInterval(() => {
+      if (this.deadAnimationCount < 9) {
         this.playAnimation(this.BOSS_DEAD_ANIMATION);
       } else {
-        clearInterval(interval);
-
-        this.img.src = this.BOSS_DEAD_ANIMATION[2];
+        // clearInterval(interval);
+        // clearInterval(this.animateInterval);
+        this.stopAllBossIntervals();
+        this.img = this.animatedImages[this.BOSS_DEAD_ANIMATION[2]];
       }
-      count++;
-    }, 100);
+      this.deadAnimationCount++;
+    // }, 100);
   }
 
   /**
