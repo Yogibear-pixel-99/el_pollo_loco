@@ -7,11 +7,7 @@ class Character extends MovableObject {
   animateInterval;
   soundInterval;
   moveInterval;
-  allIntervals = [
-    "animateInterval",
-    "soundInterval",
-    "moveInterval",
-  ];
+  allIntervals = ["animateInterval", "soundInterval", "moveInterval"];
 
   isIdle = false;
   idleCount = 0;
@@ -129,6 +125,11 @@ class Character extends MovableObject {
 
   animate() {
     this.animateInterval = setInterval(() => {
+      if (!this.characterIdle()) {
+        this.idleCount = 0;
+        this.resetIdleAudio();
+      }
+
       if (this.isDead()) {
         this.animateDead();
       } else if (this.isHurt()) {
@@ -197,18 +198,15 @@ class Character extends MovableObject {
       this.playAnimation(this.IDLE_LONG_ANIMATION);
       audio.sfx.pepeLongIdle.play();
     }
-
     this.idleCount++;
-
-    if (!this.characterIdle()) {
-      this.idleCount = 0;
-      this.resetIdleAudio();
-    }
   }
 
-  resetIdleAudio() {
-    audio.sfx.pepeLongIdle.pause();
-    audio.sfx.pepeLongIdle.currentTime = 0;
+  resetIdle() {
+    if (!this.characterIdle()) {
+      this.idleCount = 0;
+      audio.sfx.pepeLongIdle.pause();
+      audio.sfx.pepeLongIdle.currentTime = 0;
+    }
   }
 
   animateJump() {
@@ -286,14 +284,13 @@ class Character extends MovableObject {
     });
   }
 
-  coinHeal (){
-    if (this.energy < 100) { 
-    this.energy += 10;
+  coinHeal() {
+    if (this.energy < 100) {
+      this.energy += 10;
       if (this.energy > 100) {
         this.energy = 100;
       }
     }
-    
   }
 }
 
