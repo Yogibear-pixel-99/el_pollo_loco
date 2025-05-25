@@ -137,7 +137,7 @@ class Endboss extends Enemies {
     audio.playSound("bossDied");
     // audio.sfx.bossDied.play();
     // let interval = setInterval(() => {
-    if (this.deadAnimationCount < 9) {
+    if (this.deadAnimationCount < 6) {
       this.playAnimation(this.BOSS_DEAD_ANIMATION);
     } else {
       // clearInterval(interval);

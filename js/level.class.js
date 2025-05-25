@@ -118,5 +118,7 @@ class Level {
   getYForCoins() {
     return Math.random() * (canvasHeight - 158 - 130) + 130;
   }
+
+  
 }
 // PROBLEM WITH THE PUSH FUNCTION

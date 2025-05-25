@@ -42,7 +42,11 @@ class Bottle extends DrawableObject {
    * @returns 
    */
   calculateNewPosition() {
-    return Math.random() * canvasWidth * 5;
+    let x = Math.random() * canvasWidth * 5;
+     if (x < 350 && x > 50) {
+      return this.calculateNewPosition();
+     }
+     return x;
   }
 
   isCollected() {
