@@ -121,7 +121,7 @@ class Character extends MovableObject {
         // audio.sfx.pepeJump.play();
       }
       if (this.speedY < 0 && !this.aboveGround()) {
-        audio.playSoundClone('pepeLanding')
+        audio.playSound('pepeLanding')
         // audio.sfx.pepeLanding.play();
       }
       if (this.isHurt()) {

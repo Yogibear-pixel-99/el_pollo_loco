@@ -39,7 +39,9 @@ class Audiofiles {
       "./audio/items/coins/coin-collision-sound-342335.mp3"
     ),
 
- 
+    gameAmbience: new Audio(
+      "./audio/level/semi-desert-insects-ravens-birds-quiet-with-bad-mic-noise-badlands-ab-190818-7028.mp3"
+    ),
 
     collectBottle: [
       new Audio("./audio/items/bottles/glass-bottle-clink-90671.mp3"),
@@ -61,10 +63,6 @@ class Audiofiles {
     ),
     normalModeMusic: new Audio("./audio/level/little-village-251736.mp3"),
     chickenRushMusic: new Audio("./audio/level/fiesta-forever-165168.mp3"),
-
-       gameAmbience: new Audio(
-      "./audio/level/semi-desert-insects-ravens-birds-quiet-with-bad-mic-noise-badlands-ab-190818-7028.mp3"
-    ),
   };
 
   constructor() {}
@@ -103,8 +101,8 @@ class Audiofiles {
     sound.play();
   }
 
-  pauseSound(objSrc){
-  this.sfx[objSrc].pause();
+  pauseSound(objSrc) {
+    this.sfx[objSrc].pause();
   }
 
   /**
@@ -122,7 +120,7 @@ class Audiofiles {
    *
    * @param {string} objSrc The audio name.
    */
-  stopMusic(objSrc) {
+  pauseMusic(objSrc) {
     this.music[objSrc].pause();
   }
 

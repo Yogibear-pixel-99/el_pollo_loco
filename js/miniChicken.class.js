@@ -31,6 +31,7 @@ class Minichicken extends Enemies {
     }
     this.x = x;
     this.loadImagesArray(this.WALKING_ANIMATION);
+    this.startEnemy();
   }
 
 

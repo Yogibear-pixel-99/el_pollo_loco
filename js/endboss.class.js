@@ -16,6 +16,7 @@ class Endboss extends Enemies {
   moveInterval;
   jumpAttackInterval;
   moveDirectionInterval;
+  gravityInterval;
 
   isWalking = false;
   lives = true;
@@ -39,7 +40,7 @@ class Endboss extends Enemies {
     };
   }
 
-  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
+  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval", "gravityInterval", "moveDirectionInterval"];
   animationCycle = 170;
   moveCycle = 30;
 
@@ -103,7 +104,6 @@ class Endboss extends Enemies {
    * Starts the boss fight by calling the movement, attacking and animate intervall.
    */
   startBossFight() {
-    // audio.sfx.bossIsTriggerd.play();
     audio.playSound("bossIsTriggerd");
     this.isTriggered = true;
     this.bossMoveDirection();
@@ -123,7 +123,6 @@ class Endboss extends Enemies {
     this.animateInterval = setInterval(() => {
       if (this.isDead()) {
         clearInterval(this.moveInterval);
-        // this.stopAllBossIntervals();
         this.endBossDead();
       } else if (this.bossIsHurt()) {
         this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
@@ -135,18 +134,13 @@ class Endboss extends Enemies {
 
   endBossDead() {
     audio.playSound("bossDied");
-    // audio.sfx.bossDied.play();
-    // let interval = setInterval(() => {
-    if (this.deadAnimationCount < 6) {
+    if (this.deadAnimationCount < 9) {
       this.playAnimation(this.BOSS_DEAD_ANIMATION);
     } else {
-      // clearInterval(interval);
-      // clearInterval(this.animateInterval);
       this.stopAllBossIntervals();
       this.img = this.animatedImages[this.BOSS_DEAD_ANIMATION[2]];
     }
     this.deadAnimationCount++;
-    // }, 100);
   }
 
   /**
@@ -203,7 +197,7 @@ class Endboss extends Enemies {
         if (attackCount < 8) {
           this.playAnimation(this.ALERT_ANIMATION);
         } else if (attackCount >= 8 && attackCount <= 10) {
-          if (attackCount === 8) {
+          if (attackCount === 8 && !this.isDead()) {
             this.animationCount = 0;
           }
           this.playAnimation(this.BOSS_ATTACK_ALERT_ANIMATION);
@@ -212,7 +206,7 @@ class Endboss extends Enemies {
           attackCount <= attackAnimationNr &&
           !this.isDead()
         ) {
-          if (attackCount === 11) {
+          if (attackCount === 11 && !this.isDead()) {
             this.animationCount = 0;
           }
           this.playAnimation(this.BOSS_ATTACK_JUMP_ANIMATION);
@@ -272,12 +266,12 @@ class Endboss extends Enemies {
    */
   bossIsHurt() {
     let timePassed = new Date().getTime() - this.lastHit;
-    timePassed = timePassed / 1000; // millisec / 1000 = sec.
+    timePassed = timePassed / 1000;
     return timePassed < 1.5;
   }
 
   applyGravity() {
-    setInterval(() => {
+    gravityInterval = setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;

@@ -13,20 +13,8 @@ class World {
   chickenNear = false;
   level;
   score = 0;
-  allWorldIntervals = [
-    "collisionInterval",
-    "cluckerInterval",
-    "updateScoreInterval",
-    "backgroundMoveInterval",
-    "enemyMoveDirectionInterval",
-    "checkGameOverInterval"
-  ];
   collisionInterval;
-  cluckerInterval;
-  updateScoreInterval;
-  backgroundMoveInterval;
-  enemyMoveDirectionInterval;
-  checkGameOverInterval;
+  worldInterval;
   canvas;
   ctx;
   keyboard;
@@ -43,29 +31,42 @@ class World {
     this.draw();
     this.setWorld();
     this.runCollisions();
-    this.moveBackground();
-    this.updatePlayerScore();
-    this.checkIfGameIsOver();
+    this.runWorldIntervals();
     this.playGameMusic();
-    this.checkCluckerSound();
-    this.enemyMoveDirection();
+  }
+
+  runWorldIntervals() {
+    this.worldInterval = setInterval(() => {
+      this.moveBackground();
+      this.checkIfGameIsOver();
+      this.checkCluckerSound();
+      this.enemyMoveDirection();
+    }, 50);
+  }
+
+  runCollisions() {
+    this.collisionInterval = setInterval(() => {
+      this.checkEnemyCollisions();
+      this.checkCoinCollision();
+      this.checkBottleCollision();
+      this.checkBossCollision();
+      this.checkThrownBottleCollision();
+    }, 25);
   }
 
   playGameMusic() {
-    audio.playMusicLoop('gameAmbience');
+    audio.playMusicLoop("gameAmbience");
   }
 
   enemyMoveDirection() {
-    this.enemyMoveDirectionInterval = setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (enemy.x < this.character.x - canvasWidth) {
-          enemy.otherDirection = true;
-        }
-        if (enemy.x > this.character.x + canvasWidth) {
-          enemy.otherDirection = false;
-        }
-      });
-    }, 500);
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.x < this.character.x - canvasWidth) {
+        enemy.otherDirection = true;
+      }
+      if (enemy.x > this.character.x + canvasWidth) {
+        enemy.otherDirection = false;
+      }
+    });
   }
 
   setWorld() {
@@ -77,32 +78,18 @@ class World {
   }
 
   checkIfGameIsOver() {
-    let interval = setInterval(() => {
-      if (this.checkGameEnd()) {
-        clearInterval(interval);
-        setTimeout(() => {
-          if (this.level.endboss.energy <= 0) {
-            this.gameWon = true;
-          }
-          if (this.checkGameEnd()) {
+    if (this.checkGameEnd()) {
+      clearInterval(this.worldInterval);
+      setTimeout(() => {
+        if (this.level.endboss.energy <= 0) {
+          this.addPointsToPlayerScore("endbossKilled");
+          this.gameWon = true;
+        }
+        if (this.checkGameEnd()) {
           this.gameOver();
-          }
-        }, 3000);
-      }
-    }, 500);
-  }
-  runWorldIntervals(){
-
-  }
-
-  runCollisions() {
-    this.collisionInterval = setInterval(() => {
-      this.checkEnemyCollisions();
-      this.checkCoinCollision();
-      this.checkBottleCollision();
-      this.checkBossCollision();
-      this.checkThrownBottleCollision();
-    }, 25);
+        }
+      }, 3000);
+    }
   }
 
   checkEnemyCollisions() {
@@ -214,9 +201,10 @@ class World {
     }, 100);
   }
 
-  updatePlayerScore() {
-      let ref = document.getElementById("player-score");
-      ref.innerText = this.playerscore;
+  addPointsToPlayerScore(scoreTypeName) {
+    this.playerscore += this.pointTable[scoreTypeName].points;
+    let ref = document.getElementById("player-score");
+    ref.innerText = this.playerscore;
   }
 
   floorPosition(obj) {
@@ -241,7 +229,6 @@ class World {
     });
   }
 
-
   checkBottleCollision() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
@@ -256,47 +243,33 @@ class World {
     });
   }
 
-  addPointsToPlayerScore(scoreTypeName) {
-    this.playerscore += this.pointTable[scoreTypeName].points;
-    this.updatePlayerScore();
-  }
-
   moveBackground() {
-    this.backgroundMoveInterval = setInterval(() => {
-      this.level.backgrounds.forEach((bg) => {
-        if (world.keyboard.KEY_LEFT && this.character.x > -200) {
-          bg.x = bg.x + bg.xFactor;
-        }
-        if ( world.keyboard.KEY_RIGHT &&
-          this.character.x < world.level.level_end_x) {
-             bg.x = bg.x - bg.xFactor;
-          }
-      });
-    }, 100);
+    this.level.backgrounds.forEach((bg) => {
+      if (world.keyboard.KEY_LEFT && this.character.x > -200) {
+        bg.x = bg.x + bg.xFactor;
+      }
+      if (
+        world.keyboard.KEY_RIGHT &&
+        this.character.x < world.level.level_end_x
+      ) {
+        bg.x = bg.x - bg.xFactor;
+      }
+    });
   }
-
-      logBgs(){
-        for (let index = 0; index < world.level.backgrounds.length; index++) {
-            console.log(world.level.backgrounds[index].img.currentSrc);
-            
-        }
-    }
 
   checkCluckerSound() {
-    this.cluckerInterval = setInterval(() => {
-      let charX = this.character.x;
-      this.chickenNear = false;
-      this.level.enemies.forEach((enemy) => {
-        if (enemy.x > charX - 200 && enemy.x < charX + 450) {
-          this.chickenNear = true;
-        }
-        if (this.chickenNear === true) {
-          audio.playSound('cluckern');
-        } else {
-          audio.pauseSound('cluckern');
-        }
-      });
-    }, 500);
+    let charX = this.character.x;
+    this.chickenNear = false;
+    this.level.enemies.forEach((enemy) => {
+      if (enemy.x > charX - 200 && enemy.x < charX + 450) {
+        this.chickenNear = true;
+      }
+      if (this.chickenNear === true) {
+        audio.playSound("cluckern");
+      } else {
+        audio.pauseSound("cluckern");
+      }
+    });
   }
 
   enemyRunAwayOnCharJump() {
@@ -397,21 +370,15 @@ class World {
   }
 
   gameOver() {
-    if (this.gameWon) {
-      this.addPointsToPlayerScore("endbossKilled");
-      audio.playSound('gameWon');
-    } else {
-      audio.playSound('gameLost');
-    }
-    cancelAnimationFrame(this.drawInterval);
-    document.body.style.cursor = 'url("./img/cursor.png"), auto';
-    audio.stopMusic("chickenRushMusic");
-    audio.stopMusic("normalModeMusic");
-    this.showGameOverScreen();
-    checkFullscreenMode();
-    audio.pauseSound('cluckern');
+    gameHasStarted = false;
     this.stopAllGameIntervals();
+    this.showEndScreen();
+    this.stopGameMusic();
+    this.showGameOverScreen();
     saveScore();
+    checkFullscreenMode();
+    document.body.style.cursor = 'url("./img/cursor.png"), auto';
+    // exit fullscreenmode bzw. show game overscreen in fullscreen mode
   }
 
   showGameOverScreen() {
@@ -421,31 +388,30 @@ class World {
   }
 
   stopAllGameIntervals() {
-    this.stopAllWorldIntervals();
-    this.stopEnemyIntervals();
-    this.level.endboss.stopAllBossIntervals();
-    this.character.stopAllCharIntervals();
-    this.stopAllCloudIntervals();
-    this.clearAllGameConfigIntervals();
-  }
-
-  stopAllCloudIntervals() {
+    world.character.stopAllCharIntervals();
+    world.level.enemies.forEach((enemy) => {
+      enemy.stopAllEnemyIntervalls();
+    });
+    world.level.endboss.stopAllBossIntervals();
+    clearInterval(this.collisionInterval);
+    clearInterval(this.worldInterval);
+    clearInterval(this.chickenSpawnInterval);
     this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
+    cancelAnimationFrame(this.drawInterval);
   }
 
-  stopAllWorldIntervals() {
-    this.allWorldIntervals.forEach((interval) => {
-      clearInterval(this[interval]);
-    });
+  showEndScreen() {
+    if (this.gameWon) {
+      audio.playSound("gameWon");
+    } else {
+      audio.playSound("gameLost");
+    }
   }
 
-  stopEnemyIntervals() {
-    this.level.enemies.forEach((enemy) => {
-      enemy.clearAllEnemyIntervalls();
-    });
-  }
-
-  clearAllGameConfigIntervals() {
-    clearInterval(chickenSpawnInterval);
+  stopGameMusic() {
+    audio.stopMusic("chickenRushMusic");
+    audio.stopMusic("normalModeMusic");
+    audio.pauseSound("cluckern");
+    audio.pauseSound("gameAmbience");
   }
 }

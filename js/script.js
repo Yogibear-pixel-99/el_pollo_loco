@@ -23,3 +23,8 @@ function hideSingleContainerById(containerId) {
 }
 
 
+async function timeDelay(ms){
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), ms)
+  })
+}

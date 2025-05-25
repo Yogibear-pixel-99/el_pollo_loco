@@ -30,10 +30,10 @@ function startGame() {
   gameHasStarted = true;
   if (checkNameInput()) {
     deactivateMenu();
-    checkFullscreenMode();
     showLoadingScreen();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
+    setTimeout(() =>  checkFullscreenMode(), 3000);
     switch (gameMode) {
       case "normal":
         configNormalMode();
@@ -136,7 +136,6 @@ function deactivateMenu() {
 }
 
 function activateMenu() {
-  gameHasStarted = false;
   resetCanvas();
   hideSingleContainerById("game-mask");
   hideSingleContainerById("canvas-option-container");
@@ -279,11 +278,16 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
-// boss animation
-// bottles should not collide with char on start, same as coins function
+
+
+
+
+
+
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation
+
 
 // ebenso clucker intervall
 // Sounds alle zusammenfassen und in die enemies stecken bzw. in die boss klasse.

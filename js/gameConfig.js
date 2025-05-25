@@ -4,10 +4,6 @@ let chickenSpawnInterval;
 
 function startGameIntervals () {
   world.character.startChar();
-  world.level.enemies.forEach((enemy) => {
-    enemy.animateWalk();
-    enemy.moveEnemy();
-})
 }
 
 

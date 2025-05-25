@@ -17,7 +17,7 @@ class Enemies extends MovableObject {
 
 
   startEnemy(){
-    this.moveEnemies();
+    this.moveEnemy();
     this.animateWalk();
   }
 
@@ -28,7 +28,7 @@ class Enemies extends MovableObject {
   }
 
   isKilled() {
-    this.clearAllEnemyIntervalls();
+    this.stopAllEnemyIntervalls();
     this.img.src = this.deadPic;
     setTimeout(() => {
       let index = world.level.enemies.indexOf(this);
@@ -38,7 +38,7 @@ class Enemies extends MovableObject {
 
 
 
-  clearAllEnemyIntervalls() {
+  stopAllEnemyIntervalls() {
     clearInterval(this.walkAnimationInterval);
     clearInterval(this.moveInterval);
   }
