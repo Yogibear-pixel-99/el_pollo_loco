@@ -8,6 +8,7 @@ class Endboss extends Enemies {
   // x = 800;
   x = 719 * 6;
   // energy = 50;
+  maxEnergy;
   energy;
   acceleration = 2.5;
   deadAnimationCount = 0;
@@ -99,6 +100,8 @@ class Endboss extends Enemies {
     this.loadImagesArray(this.BOSS_ATTACK_JUMP_ANIMATION);
     this.applyGravity();
   }
+
+
 
   /**
    * Starts the boss fight by calling the movement, attacking and animate intervall.
@@ -292,7 +295,6 @@ class Endboss extends Enemies {
 
   bossMoveDirection() {
     this.moveDirectionInterval = setInterval(() => {
-      console.log(this.otherDirection);
       if (this.x < world.character.x - canvasWidth) {
         this.otherDirection = true;
       }

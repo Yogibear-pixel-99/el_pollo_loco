@@ -18,19 +18,20 @@ class Bosshealthbar extends Statusbar {
   }
 
 updateBossHealthbar(){
-    const energy = world.level.endboss.energy;
+    const maxEnergy = world.level.endboss.maxEnergy;
+    const energy = world.level.endboss.energy ;
 
-        if (energy === 50) {
+        if (energy === maxEnergy) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[5]];
-    } else if (energy >= 40) {
+    } else if (energy >= maxEnergy / 10 * 8) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[4]];
-    } else if (energy >= 30) {
+    } else if (energy >= maxEnergy / 10 * 6) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[3]];
-    } else if (energy >= 20) {
+    } else if (energy >= maxEnergy / 10 * 4) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[2]];
-    } else if (energy >= 10) {
+    } else if (energy >= maxEnergy / 10 * 2) {
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[1]];
-    } else if (energy == 0){
+    } else if (energy === 0){
       this.img = this.animatedImages[this.HEALTH_BAR_IMAGES[0]];
     }
 }

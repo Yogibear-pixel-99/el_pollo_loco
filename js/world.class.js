@@ -33,6 +33,7 @@ class World {
     this.runCollisions();
     this.runWorldIntervals();
     this.playGameMusic();
+    this.debug();
   }
 
   runWorldIntervals() {
@@ -53,6 +54,12 @@ class World {
       this.checkThrownBottleCollision();
       this.checkHealBottleCollision();
     }, 25);
+  }
+
+   debug(){
+    setInterval(() => {
+      console.log(world.level.coins.length);
+    }, 1500);
   }
 
   playGameMusic() {
@@ -229,7 +236,6 @@ class World {
 
   checkHealBottleCollision() {
     this.level.healBottles.forEach((bottle) => {
-      console.log('test')
       if (this.character.isColliding(bottle) && this.character.energy < 100) {
         audio.playSoundClone("bottleHeal");
         bottle.isCollected();

@@ -48,6 +48,8 @@ class Coin extends DrawableObject {
     this.animate();
   }
 
+ 
+
   animate() {
     this.coinInterval = setInterval(() => {
       if (!this.collected) {
@@ -65,7 +67,7 @@ class Coin extends DrawableObject {
     const index = world.level.coins.indexOf(this);
     setTimeout(() => {
       world.level.coins.splice(index, 1);
-    }, 1200);
+    }, 1000);
   }
 }
 

@@ -56,7 +56,7 @@ class Level {
   }
 
   addClouds(firstLayer, secondLayer) {
-    for (let lvlIndex = 0; lvlIndex < this.level_size; lvlIndex++) {
+    for (let lvlIndex = 0; lvlIndex < 5; lvlIndex++) {
       this.skyObjects.push(
         new Clouds(firstLayer, 0.1, (lvlIndex * 2 - 1) * (canvasWidth - 1)),
         new Clouds(secondLayer, 0.2, lvlIndex * 2 * (canvasWidth - 1))
@@ -111,7 +111,7 @@ class Level {
     let x =
       Math.random() * (canvasWidth * (lvlIndex + 1) - canvasWidth * lvlIndex) +
       canvasWidth * lvlIndex;
-    if (x > this.level_end_x || (x > 100 && x < 300)) {
+    if ((x > this.level_end_x || (x > 100 && x < 300)) || (x < -100 || x > this.level_end_x)) {
       return this.getXForCoins(lvlIndex);
     } else {
       return x;
