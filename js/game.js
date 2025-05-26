@@ -63,12 +63,14 @@ function showLoadingScreen() {
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     canvas.requestFullscreen();
-    canvas.style.backgroundImage = "";
-    canvas.style.backgroundColor = "black";
+    canvas.style.backgroundImage = "none";
+    // canvas.width = "100%";
+    // canvas.style.backgroundColor = "black";
     // canvas.webkitRequestFullscreen();
     // canvas.msRequestFullscreen();
   } else if (fullScreen && !gameHasStarted) {
     document.exitFullscreen();
+    canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_2.png")';
     // canvas.webkitExitFullscreen();
     // canvas.msExitFullscreen();
   }
