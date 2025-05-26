@@ -83,15 +83,6 @@ class Enemies extends MovableObject {
     }, 20)
   }
 
-    getChickenForRushMode(){
-    if (gameMode === 'chickenRush') {
-      let size = Math.ceil(Math.random() * 40 + 40);
-      let speed = parseFloat((Math.random() * 2.0).toFixed(1));
-      this.width = size;
-      this.height = size;
-      this.walkingSpeed = speed;
-      this.y = this.floorPosition() - (Math.random() * 8 - 1);
-    }
-  }
+
 
 }

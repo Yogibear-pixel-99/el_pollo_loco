@@ -22,6 +22,7 @@ function configChickenRushMode () {
   world.level.endboss.x = 720 * 6;
   audio.resetMusic('chickenRushMusic');
   audio.playMusicLoop('chickenRushMusic');
+  world.level.coins.splice(0, world.level.coins.length);
 }
 
 function configNormalMode() {

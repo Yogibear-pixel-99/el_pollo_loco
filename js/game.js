@@ -37,7 +37,6 @@ function startGame() {
     switch (gameMode) {
       case "normal":
         configNormalMode();
-
         break;
 
       case "chickenRush":
@@ -64,6 +63,8 @@ function showLoadingScreen() {
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     canvas.requestFullscreen();
+    canvas.style.backgroundImage = "";
+    canvas.style.backgroundColor = "black";
     // canvas.webkitRequestFullscreen();
     // canvas.msRequestFullscreen();
   } else if (fullScreen && !gameHasStarted) {
@@ -314,6 +315,7 @@ document.addEventListener("click", () => {
 // check all object with console logs for undefined values
 
 // collect all intervals and reduce them.
+// coin verschiebt sich auf der y coord ungewollt.
 
 // Shorten all functions
 // intevalle reduzieren auf ein minimum.

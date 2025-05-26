@@ -326,7 +326,9 @@ class World {
     this.addObjToCanvas(this.character);
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
-    this.addObjToCanvas(this.coinbar);
+    if (gameMode != "chickenRush") {
+      this.addObjToCanvas(this.coinbar);
+    }
     this.addObjToCanvas(this.bottlebar);
     if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);

@@ -31,4 +31,15 @@ class Chicken extends Enemies {
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.startEnemy();
   }
+
+      getChickenForRushMode(){
+    if (gameMode === 'chickenRush') {
+      let size = Math.ceil(Math.random() * 30 + 40);
+      let speed = parseFloat((Math.random() * 2.0).toFixed(1));
+      this.width = size;
+      this.height = size;
+      this.walkingSpeed = speed;
+      this.y = this.floorPosition() - (Math.random() * 8 - 1);
+    }
+  }
 }

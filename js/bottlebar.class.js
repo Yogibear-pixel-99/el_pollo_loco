@@ -1,6 +1,6 @@
 class Bottlebar extends Statusbar {
   x = 20;
-  y = 90;
+  y = 50;
   BOTTLE_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png",
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png",
