@@ -116,17 +116,15 @@ class World {
   }
 
   checkEnemyCollisions() {
+    let deadEnemies = [];
     this.level.enemies = this.level.enemies.filter((enemy) => {
-      if (this.character.isColliding(enemy) && enemy.lives === true) {
-        if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
-          enemy.isKilled();
-          this.spawnNewChickensForRushMode(enemy);
-          audio.playRandomSound("deadChicken");
+      if (this.character.isColliding(enemy)) {
+        if (this.character.collisionFromAbove(enemy)) {
+          deadEnemies.push(enemy);
+          this.deadEnemyRoutine(enemy);
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
           this.level.deadEnemies.push(enemy);
-          this.deleteDeadEnemy();
-          enemy.lives = false;
           return false;
         } else {
           this.character.hit();
@@ -136,6 +134,7 @@ class World {
       }
       return true;
     });
+    deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
   deleteDeadEnemy(){
@@ -144,23 +143,14 @@ class World {
     }, 1000);
   }
 
-  // checkEnemyCollisions() {
-  //   this.level.enemies.forEach((enemy) => {
-  //     if (this.character.isColliding(enemy) && enemy.lives === true) {
-  //       if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
-  //         enemy.isKilled();
-  //         this.spawnNewChickensForRushMode(enemy);
-  //         audio.playRandomSound("deadChicken");
-  //         this.character.jumpOnEnemy();
-  //         this.addPointsToPlayerScore(enemy.scoreNameJump);
-  //         enemy.lives = false;
-  //       } else {
-  //         this.character.hit();
-  //         this.healthbar.updateHealthbar();
-  //       }
-  //     }
-  //   });
-  // }
+
+  deadEnemyRoutine(enemy){
+          enemy.isKilled();
+          audio.playRandomSound("deadChicken");
+          this.deleteDeadEnemy();
+          enemy.lives = false;
+  }
+
 
   checkBossCollision() {
     if (
@@ -173,6 +163,7 @@ class World {
   }
 
   checkThrownBottleCollision() {
+    let deadEnemies = [];
     this.thrownBottles.forEach((bottle) => {
       if (
         bottle.y === this.floorPosition(bottle) &&
@@ -193,20 +184,24 @@ class World {
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
-        this.level.enemies.forEach((enemy, index) => {
+        this.level.enemies = this.level.enemies.filter((enemy) => {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
-            this.spawnNewChickensForRushMode(enemy);
-            enemy.isKilled(index);
-            audio.playRandomSound("deadChicken");
+            deadEnemies.push(enemy);
+            this.deadEnemyRoutine(enemy);
             this.addPointsToPlayerScore(enemy.scoreNameBottle);
+            this.level.deadEnemies.push(enemy);
+            return false;
           }
+          return true;
         });
       }
     });
+    deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
   spawnNewChickensForRushMode(enemy) {
+    if (!enemy) return;
     if (gameMode === "chickenRush") {
       if (enemy instanceof Chicken) {
         this.level.enemies.push(
