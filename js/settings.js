@@ -30,18 +30,27 @@ function showSingleContainerById(containerId) {
 }
 
 function toggleOptionMenu(getTemp, settingsMenu) {
-      let ref = document.getElementById("canvas-option-container");
-      let template = getTemp();
-  if (sessionStorage.getItem('menu') === settingsMenu && !ref.classList.contains('d-none')) {
-    ref.classList.add("d-none");
+  if (screenHeightSmallerThan(830)) {
+    showResponsiveGameCanvas();
+  }
+  let ref = document.getElementById("canvas-option-container");
+  let template = getTemp();
+  if (
+    sessionStorage.getItem("menu") === settingsMenu &&
+    !ref.classList.contains("d-none")
+  ) {
+      if (screenHeightSmallerThan(830)) {
+      requestAnimationFrame(() => {hideResponsiveGameCanvas()});
+    }
+    setTimeout(() => {ref.classList.add("d-none")}, 300);
   } else {
     if (ref.classList.contains("d-none")) {
       showSingleContainerById("canvas-option-container");
       getTemplateToContent("canvas-option-container", template);
-      sessionStorage.setItem('menu', settingsMenu);
+      sessionStorage.setItem("menu", settingsMenu);
     } else {
       getTemplateToContent("canvas-option-container", template);
-      sessionStorage.setItem('menu', settingsMenu);
+      sessionStorage.setItem("menu", settingsMenu);
     }
   }
 }
@@ -56,18 +65,16 @@ function hideSingleContainerById(containerId) {
   content.classList.add("d-none");
 }
 
-function toggleFullScreen(){
-  let buttonRef = document.getElementById('full-screen-button');
+function toggleFullScreen() {
+  let buttonRef = document.getElementById("full-screen-button");
   if (fullScreen) {
-      buttonRef.classList.remove('full-screen-button');
-     fullScreen = false;
+    buttonRef.classList.remove("full-screen-button");
+    fullScreen = false;
   } else {
     fullScreen = true;
-    buttonRef.classList.add('full-screen-button');
+    buttonRef.classList.add("full-screen-button");
   }
 }
-
-
 
 function returnOnlyLettersAndNumbers(id) {
   let regex = /[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfA-Za-z0-9\s+]/g;
@@ -79,7 +86,7 @@ function returnOnlyLettersAndNumbers(id) {
 function unblurInput(event, element) {
   if (event.key === "Enter") {
     element.blur();
-     audio.playSoundClone('menuClick');
+    audio.playSoundClone("menuClick");
   }
 }
 

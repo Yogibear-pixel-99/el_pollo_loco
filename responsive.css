@@ -1,3 +1,32 @@
-@media (max-height: 1000px) {
-    
+@media (max-height: 950px) {
+   .settings-wrapper {
+    margin: auto auto 12px;
+   }
+
+   h1 {
+    margin: 0;
+   }
+
+   .header-wrapper {
+    margin-bottom: 12px;
+   }
+
+   .settings-wrapper {
+    margin-top: 12px;
+   }
+}
+
+@media (max-height: 830px) {
+    .canvas-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 100dvh);
+        display: none;
+        transition: transform ease-in-out 300ms;
+    }
+
+    .canvas-mobile-open {
+        transform: translate(-50%, -50%);
+    }
 }

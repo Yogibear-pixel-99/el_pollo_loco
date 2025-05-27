@@ -1,5 +1,8 @@
 html {
   margin: 0;
+}
+
+* {
   box-sizing: border-box;
 }
 
@@ -80,13 +83,11 @@ body {
 }
 
 canvas {
-  /* position: relative; */
   background-image: url("img/9_intro_outro_screens/start/startscreen_2.png");
   background-color: black;
   background-size: 100% 100%;
   background-position: center;
   border-radius: 20px;
-  /* z-index: 100; */
   }
 
 .canvas-menu-display {
@@ -188,12 +189,11 @@ canvas {
 
 h1 {
   text-align: center;
-  height: 90px;
-  font-size: 48px;
+  font-size: 40px;
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 32px;
   text-align: center;
   margin: 0;
 }
@@ -303,10 +303,10 @@ h2 {
   font-size: 24px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   overflow-y: auto;
   max-height: 620px;
-  height: 620px;
+  height: 480px;
   min-width: 350px;
 }
 
@@ -328,6 +328,10 @@ h2 {
   justify-content: space-between;
 }
 
+.score {
+  font-size: 22px;
+}
+
 .points-table {
   display: flex;
   justify-content: space-between;
@@ -335,11 +339,11 @@ h2 {
 }
 
 .highscore-player-name {
-  font-size: 26px;
+  font-size: 22px;
 }
 
 .player-score {
-  font-size: 40px;
+  font-size: 32px;
   text-align: center;
 }
 
@@ -349,11 +353,11 @@ h2 {
 }
 
 .item-name {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .item-points {
-  font-size: 28px;
+  font-size: 22px;
   padding-left: 14px;
 }
 
@@ -504,7 +508,6 @@ h2 {
   font-family: agudisplay;
   font-weight: 600;
   border-radius: 12px;
-  padding: 8px;
 }
 
 .player-name:hover {

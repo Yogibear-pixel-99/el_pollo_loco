@@ -11,6 +11,7 @@
       href="img/6_salsa_bottle/salsa_bottle.png" />
 
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="responsive.css" />
 
     <script src="./js/script.js"></script>
     <script src="./js/highscore.js"></script>
@@ -59,7 +60,7 @@
           <h1 id="game-mode-txt" class="top-game-header">Normal Mode</h1>
           <span id="game-mode-exp">Collect 10 coins to trigger the boss</span>
         </div>
-        <section class="canvas-wrapper">
+        <section id="canvas-wrapper" class="canvas-wrapper">
           <canvas id="gamecanvas" width="720" height="480"></canvas>
           <section
             id="canvas-option-container"
@@ -78,7 +79,7 @@
                 <img src="./img/icons/mask-306939_640.png" alt="" />
                 <div>Play again</div>
               </div>
-              <div class="won-lost-single-button-wrapper" onclick="activateMenu()">
+              <div class="won-lost-single-button-wrapper" onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -97,7 +98,7 @@
                 <img src="./img/icons/mask-306939_640.png" alt="" />
                 <div>Play again</div>
               </div>
-              <div class="won-lost-single-button-wrapper" onclick="activateMenu();  audio.playMusicLoop('menuMusic')">
+              <div class="won-lost-single-button-wrapper" onclick="activateMenu();  audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -122,7 +123,6 @@
           id="player-name-input"
           autocomplete="off"
           type="text"
-          value="Pepe"
           placeholder="Enter your name"
           oninput="returnOnlyLettersAndNumbers(this); removeNameError()"
           onkeydown="unblurInput(event, this)"

@@ -30,6 +30,7 @@ function startGame() {
   gameHasStarted = true;
   if (checkNameInput()) {
     deactivateMenu();
+    showResponsiveGameCanvas();
     showLoadingScreen();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
@@ -52,6 +53,28 @@ function startGame() {
     audio.playSoundClone("menuError");
     addErrorAnimation("start-game-text", "shake-error");
     addErrorAnimation("name-error-text", "shake-error");
+  }
+}
+
+function screenHeightSmallerThan(high) {
+  return window.innerHeight <= high;
+}
+
+function showResponsiveGameCanvas(){
+  if (screenHeightSmallerThan(830)) {
+    let ref = document.getElementById("canvas-wrapper");
+        ref.style.display = "block";
+        requestAnimationFrame(() => {
+          ref.classList.add("canvas-mobile-open")
+        })
+  }
+}
+
+function hideResponsiveGameCanvas(){
+    if (screenHeightSmallerThan(830)) {
+    let ref = document.getElementById("canvas-wrapper");
+    ref.classList.remove("canvas-mobile-open")
+    setTimeout(() => ref.style.display = "none", 300);
   }
 }
 
@@ -284,7 +307,6 @@ document.addEventListener("click", () => {
 
 
 
-// change this in level for coins and emenies and backgrounds
 
 // responsive for all screens
 // turn to landscape if in portrait mode
@@ -292,28 +314,27 @@ document.addEventListener("click", () => {
 
 // documenatation
 
-// Boss kill animation not smooth
-// boss attack sound interval still working after game end!
-// parallax is not workin
-// bottle throw is not normal triggerd
-// adding random spawn point
 
-// controll all intervals!!!! and stop them after game finished.
-// change the splice array method for scores to 100 from 10
+// show overlay onclick
+  // story
+  // controls
+  // sound on/off
 
-// parallax effect
+// hide overlay on click X in canvas option menu
+// hide on click on the same option button
 
-// check all object with console logs for undefined values
+// set zindex for canvas an game points tabel---or hide the left and rigth content --- show highscore in game
 
-// collect all intervals and reduce them.
-// coin verschiebt sich auf der y coord ungewollt.
+
 
 // Shorten all functions
-// intevalle reduzieren auf ein minimum.
 
 // CALL QUESTIONS - ANSWERES
 // parallax mode
 // Attack animation verkürzen???
+
+
+
 
 // INTERVALLS:
 
