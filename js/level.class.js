@@ -4,6 +4,7 @@ class Level {
   bottles;
   healBottles;
   enemies;
+  deadEnemies = [];
   endboss;
   skyObjects;
   backgrounds;

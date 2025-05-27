@@ -116,22 +116,51 @@ class World {
   }
 
   checkEnemyCollisions() {
-    this.level.enemies.forEach((enemy, index) => {
+    this.level.enemies = this.level.enemies.filter((enemy) => {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
-          enemy.isKilled(index);
+          enemy.isKilled();
           this.spawnNewChickensForRushMode(enemy);
           audio.playRandomSound("deadChicken");
           this.character.jumpOnEnemy();
           this.addPointsToPlayerScore(enemy.scoreNameJump);
+          this.level.deadEnemies.push(enemy);
+          this.deleteDeadEnemy();
           enemy.lives = false;
+          return false;
         } else {
           this.character.hit();
           this.healthbar.updateHealthbar();
+          return true;
         }
       }
+      return true;
     });
   }
+
+  deleteDeadEnemy(){
+        setTimeout(() => {
+      this.level.deadEnemies.splice(0, 1);
+    }, 1000);
+  }
+
+  // checkEnemyCollisions() {
+  //   this.level.enemies.forEach((enemy) => {
+  //     if (this.character.isColliding(enemy) && enemy.lives === true) {
+  //       if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
+  //         enemy.isKilled();
+  //         this.spawnNewChickensForRushMode(enemy);
+  //         audio.playRandomSound("deadChicken");
+  //         this.character.jumpOnEnemy();
+  //         this.addPointsToPlayerScore(enemy.scoreNameJump);
+  //         enemy.lives = false;
+  //       } else {
+  //         this.character.hit();
+  //         this.healthbar.updateHealthbar();
+  //       }
+  //     }
+  //   });
+  // }
 
   checkBossCollision() {
     if (
@@ -240,7 +269,6 @@ class World {
       audio.playSoundClone("collectCoin");
       this.character.collectCoin();
       coin.collected = true;
-      // coin.startAnimation();
       this.level.collectedCoins.push(coin);
       this.deleteCollectedCoin();
       this.coinbar.updateCoinBar();
@@ -341,6 +369,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToCanvas(this.level.backgrounds);
     this.addObjectsToCanvas(this.level.enemies);
+    this.addObjectsToCanvas(this.level.deadEnemies);
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
     this.addObjectsToCanvas(this.level.collectedCoins);

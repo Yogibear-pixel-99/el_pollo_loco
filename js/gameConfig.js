@@ -42,7 +42,7 @@ function configNormalMode() {
     new Minichicken(world.character.x + canvasWidth * 1),
     new Chicken(world.character.x + canvasWidth * 2)
   )
-  }, 10000);
+  }, 100000);
 
   audio.resetMusic('normalModeMusic');
   audio.playMusicLoop('normalModeMusic');

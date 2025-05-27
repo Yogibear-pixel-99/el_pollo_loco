@@ -56,21 +56,17 @@ class Coin extends DrawableObject {
         this.playAnimation(this.COIN_ANIMATION);
       } else {
         this.playAnimation(this.COLLECTED_COIN_ANIMATION);
-        this.y = this.y - 2;
+        this.collectMovement();
       }
     }, 30);
   }
 
 
 
-  // isCollected(index) {
-  //   setInterval(() => {
-  //     this.y = this.y - 2;
-  //   }, 20);
-  //   setTimeout(() => {
-  //     world.level.coins.splice(index, 1);
-  //   }, 1000);
-  // }
+  collectMovement() {
+      this.y = this.y - 2;
+
+  }
 }
 
 

@@ -284,7 +284,7 @@ document.addEventListener("click", () => {
 
 
 
-
+// rename jumpOnEnemy to bounce
 // endgame if pepe is killed, deactivate jumpkill
 // if endboss is killed, just play one sound not the hit sound additionally
 
