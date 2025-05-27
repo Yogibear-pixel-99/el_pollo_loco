@@ -325,18 +325,15 @@ class World {
   }
 
   checkCluckerSound() {
-    let charX = this.character.x;
-    this.chickenNear = false;
-    this.level.enemies.forEach((enemy) => {
-      if (enemy.x > charX - 200 && enemy.x < charX + 450) {
-        this.chickenNear = true;
-      }
-      if (this.chickenNear === true) {
-        audio.playSound("cluckern");
-      } else {
-        audio.pauseSound("cluckern");
-      }
-    });
+    const enemyNear = this.level.enemies.some((enemy) => {
+      return enemy.x > this.character.x - 200 && enemy.x < this.character.x + 450
+     });
+
+     if (enemyNear) {
+       audio.playSound("cluckern");
+     } else {
+       audio.pauseSound("cluckern");
+     }
   }
 
   enemyRunAwayOnCharJump() {

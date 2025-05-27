@@ -284,15 +284,6 @@ document.addEventListener("click", () => {
 
 
 
-// if endboss is killed, just play one sound not the hit sound additionally
-
-// set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
-// set coin collision to 10 after boss animation
-
-
-// ebenso clucker intervall
-// Sounds alle zusammenfassen und in die enemies stecken bzw. in die boss klasse.
-
 // change this in level for coins and emenies and backgrounds
 
 // responsive for all screens
