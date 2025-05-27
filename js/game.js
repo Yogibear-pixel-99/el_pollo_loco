@@ -305,8 +305,8 @@ document.addEventListener("click", () => {
 });
 
 
-
-
+// diffrent color to menu
+// if open options menu, darken background, deactivate and set close on click on background
 
 // responsive for all screens
 // turn to landscape if in portrait mode
