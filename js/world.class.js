@@ -119,7 +119,7 @@ class World {
     let deadEnemies = [];
     this.level.enemies = this.level.enemies.filter((enemy) => {
       if (this.character.isColliding(enemy)) {
-        if (this.character.collisionFromAbove(enemy)) {
+        if (this.character.collisionFromAbove(enemy) && !this.checkGameEnd()) {
           deadEnemies.push(enemy);
           this.deadEnemyRoutine(enemy);
           this.character.jumpOnEnemy();
@@ -180,7 +180,9 @@ class World {
         if (this.level.endboss.isTriggered) {
           this.level.endboss.hitBoss();
           audio.playSoundClone("bossHitted");
+          if (!this.checkGameEnd()) {
           audio.playSoundClone("bossCrys");
+          }
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {

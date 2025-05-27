@@ -4,10 +4,10 @@ class Endboss extends Enemies {
   walkingSpeed = 1.3;
   scoreNameKilled = "endbossKilled";
   scoreNameBottle = "endbossBottleHit";
-  // y = 480 - this.height - 58 + 15;
+  y = 480 - this.height - 58 + 15;
   // x = 800;
   x = 719 * 6;
-  // energy = 50;
+  energy = 50;
   maxEnergy;
   energy;
   acceleration = 2.5;
@@ -21,7 +21,6 @@ class Endboss extends Enemies {
 
   isWalking = false;
   lives = true;
-  // attackedTime;
 
   offset = {
     width: 250,
