@@ -285,8 +285,8 @@ document.addEventListener("click", () => {
 
 
 
-
-
+// endgame if pepe is killed, deactivate jumpkill
+// if endboss is killed, just play one sound not the hit sound additionally
 
 // set boss back and bottle to not infinite and boss energy to 100 and collect coins to 10
 // set coin collision to 10 after boss animation

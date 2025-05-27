@@ -56,19 +56,21 @@ class Coin extends DrawableObject {
         this.playAnimation(this.COIN_ANIMATION);
       } else {
         this.playAnimation(this.COLLECTED_COIN_ANIMATION);
+        this.y = this.y - 2;
       }
     }, 30);
   }
 
-  isCollectedAnimation() {
-    setInterval(() => {
-      this.y = this.y - 2;
-    }, 20);
-    const index = world.level.coins.indexOf(this);
-    setTimeout(() => {
-      world.level.coins.splice(index, 1);
-    }, 1000);
-  }
+
+
+  // isCollected(index) {
+  //   setInterval(() => {
+  //     this.y = this.y - 2;
+  //   }, 20);
+  //   setTimeout(() => {
+  //     world.level.coins.splice(index, 1);
+  //   }, 1000);
+  // }
 }
 
 

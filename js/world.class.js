@@ -34,6 +34,7 @@ class World {
     this.runWorldIntervals();
     this.playGameMusic();
     this.debug();
+    this.debug2();
   }
 
   runWorldIntervals() {
@@ -59,6 +60,20 @@ class World {
    debug(){
     setInterval(() => {
       console.log(world.level.coins.length);
+    }, 1500);
+  }
+
+   debug2(){
+    setInterval(() => {
+      world.level.coins.forEach((coin, index) => {
+        console.log("CoinIndex: " + index);
+        console.log("Coincoord: " + coin.y);
+        if (coin.y < 100) {
+          throw console.error(index + coin.y + "this is false");
+          debugger
+        }
+        
+      })
     }, 1500);
   }
 
@@ -101,10 +116,10 @@ class World {
   }
 
   checkEnemyCollisions() {
-    this.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy) && enemy.lives === true) {
         if (this.character.collisionFromAbove(enemy) && enemy.lives === true) {
-          enemy.isKilled();
+          enemy.isKilled(index);
           this.spawnNewChickensForRushMode(enemy);
           audio.playRandomSound("deadChicken");
           this.character.jumpOnEnemy();
@@ -149,11 +164,11 @@ class World {
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
       } else {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
           if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
             this.animateBrokenBottle(bottle);
             this.spawnNewChickensForRushMode(enemy);
-            enemy.isKilled();
+            enemy.isKilled(index);
             audio.playRandomSound("deadChicken");
             this.addPointsToPlayerScore(enemy.scoreNameBottle);
           }
@@ -220,18 +235,28 @@ class World {
   }
 
   checkCoinCollision() {
-    this.level.coins.forEach((coin) => {
-      if (this.character.isColliding(coin) && coin.collected == false) {
-        audio.playSoundClone("collectCoin");
-        this.character.collectCoin();
-        coin.isCollectedAnimation();
-        coin.collected = true;
-        this.coinbar.updateCoinBar();
-        if (this.character.coins === 10 && gameMode != "chickenRush") {
-          this.level.endboss.startBossFight();
-        }
+  this.level.coins = this.level.coins.filter((coin) => {
+    if (this.character.isColliding(coin) && !coin.collected) {
+      audio.playSoundClone("collectCoin");
+      this.character.collectCoin();
+      coin.collected = true;
+      // coin.startAnimation();
+      this.level.collectedCoins.push(coin);
+      this.deleteCollectedCoin();
+      this.coinbar.updateCoinBar();
+      if (this.character.coins === 10 && gameMode != "chickenRush") {
+        this.level.endboss.startBossFight();
       }
-    });
+      return false;
+    }
+    return true;
+  });
+}
+
+  deleteCollectedCoin(){
+    setTimeout(() => {
+      this.level.collectedCoins.splice(0, 1);
+    }, 1000);
   }
 
   checkHealBottleCollision() {
@@ -318,6 +343,7 @@ class World {
     this.addObjectsToCanvas(this.level.enemies);
     this.addObjectsToCanvas(this.level.skyObjects);
     this.addObjectsToCanvas(this.level.coins);
+    this.addObjectsToCanvas(this.level.collectedCoins);
     this.addObjectsToCanvas(this.level.bottles);
     this.addObjectsToCanvas(this.level.healBottles);
     this.addObjectsToCanvas(this.thrownBottles);

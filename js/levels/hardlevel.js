@@ -9,12 +9,6 @@ return new Level(
       new Bottle(),
       new Bottle(),
       new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
-      new Bottle(),
       new Bottle()
     ],
 

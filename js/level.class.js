@@ -1,5 +1,6 @@
 class Level {
   coins;
+  collectedCoins = [];
   bottles;
   healBottles;
   enemies;
