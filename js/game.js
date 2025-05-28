@@ -285,6 +285,10 @@ document.addEventListener("click", () => {
 });
 
 
+// change the get name field and the review of the name error depending onscreen width
+  // same to player score
+// score table color
+
 // diffrent color to menu
 // if open options menu, darken background, deactivate and set close on click on background
 

@@ -59,6 +59,11 @@ function toggleOptionMenu(getTemp, settingsMenu) {
 }
 
 function closeSettings() {
+  if (screenWidthTallerThan(1300)) {
+    document.getElementById("right-content").classList.remove("open-score-table");
+    document.getElementById("left-content").classList.remove("open-score-table");
+    activateMenu();
+  }
   if (screenHeightSmallerThan(830)){
      hideResponsiveGameCanvas();
      if (screenHeightSmallerThan(700)) {
@@ -68,8 +73,12 @@ function closeSettings() {
 }}
 
 
-function screenHeightSmallerThan(high) {
-  return window.innerHeight <= high;
+function screenHeightSmallerThan(value) {
+  return window.innerHeight <= value;
+}
+
+function screenWidthTallerThan(value) {
+  return window.innerWidth <= value;
 }
 
 function showResponsiveGameCanvas(){
@@ -88,6 +97,41 @@ function hideResponsiveGameCanvas(){
     ref.classList.remove("canvas-mobile-open")
     setTimeout(() => ref.style.display = "none", 300);
   }
+}
+
+function toggleResponsiveScoreTablePoints(id){
+
+  document.getElementById("left-content").classList.remove("open-score-table");
+  let ref = document.getElementById(id);
+      ref.classList.contains('open-score-table') ?
+        hideResponsiveScoreTable(id) :
+        showResponsiveScoreTable(id)
+}
+
+function toggleResponsiveScoreTableHighscore(id){
+  document.getElementById("right-content").classList.remove("open-score-table");
+  let ref = document.getElementById(id);
+      ref.classList.contains('open-score-table') ?
+        hideResponsiveScoreTable(id) :
+        showResponsiveScoreTable(id)
+}
+
+function showResponsiveScoreTable(id){
+  deactivateMenu();
+  let ref = document.getElementById(id);
+      ref.style.display = "block";
+      requestAnimationFrame(() => {
+        ref.classList.add('open-score-table');
+      })
+}
+
+function hideResponsiveScoreTable(id) {
+  activateMenu();
+  let ref = document.getElementById(id);
+      ref.classList.remove("open-score-table");
+      setTimeout(() => {
+        ref.style.display = "none";
+      }, 300);
 }
 
 /**

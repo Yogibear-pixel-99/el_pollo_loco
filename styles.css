@@ -20,8 +20,9 @@ html {
   --score-bg: rgba(233, 180, 33, 0.6);
   --score-name: rgba(179, 146, 55, 0.411);
   --settings-bg: rgb(255, 217, 112);
-  --settings-bg-hover: rgb(247, 200, 73);
-  --settings-bg-active: rgb(219, 179, 68);
+  /* --settings-bg-hover: rgb(247, 200, 73); */
+  --settings-bg-hover: rgb(233, 180, 33);
+  --settings-bg-active: rgb(233, 180, 33);
   --settings-text-active: rgb(255, 231, 163);
   --spinner-bg: #411E0F;
 }
@@ -306,6 +307,32 @@ h2 {
   100% {
     background-color: var(--score-bg);
   }
+}
+
+.open-highscore,
+.open-points-table {
+  margin-top: auto;
+  padding: 6px 10px 9px;
+  font-size: 22px;
+  font-family: agudisplay;
+  width: 120px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  background-color: var(--settings-bg);
+  display: none;
+}
+
+.open-highscore:hover,
+.open-points-table:hover {
+    cursor: url("./img/cursor.png"), auto;
+    background-color: var(--score-bg);
+}
+
+.open-highscore:active,
+.open-points-table:active {
+  transform: scale(95%);
+  filter: brightness(120%);
 }
 
 .left-content,
