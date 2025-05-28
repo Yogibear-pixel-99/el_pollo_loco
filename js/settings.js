@@ -267,3 +267,10 @@ function setVolume() {
   calculateVolumesForAssign();
   initSoundSettings();
 }
+
+function styleResponsiveNameInput(){
+  let ref = document.getElementById("player-name-input");
+    ref.value === "" ?
+    ref.classList.add("responsive-input-placeholder"):
+    ref.classList.remove("responsive-input-placeholder");
+}

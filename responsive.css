@@ -58,7 +58,6 @@
 
   .main-container {
     margin: auto auto 0;
-    justify-content: space-between;
   }
 
   .canvas-wrapper {
@@ -176,6 +175,11 @@
 .player-score {
     display: none;
 }
+
+.player-name-responsive {
+    display: inline;
+}
+
 }
 
 

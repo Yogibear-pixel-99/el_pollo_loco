@@ -215,6 +215,8 @@ h2 {
 
 .header-wrapper {
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 .header-wrapper span {
@@ -536,6 +538,39 @@ h2 {
 .settings-close-button:hover {
   background-color: var(--score-bg);
 }
+
+.player-name-responsive {
+  display: none;
+  align-self: center;
+  text-align: center;
+  width: 40%;
+  background-color: rgba(233, 180, 33, 0);
+  outline: none;
+  border: none;
+  font-size: 28px;
+  padding: 2px 0 4px;
+  font-family: agudisplay;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-top: 12px;
+}
+
+.player-name-responsive:hover {
+  background-color: var(--score-bg);
+}
+
+.player-name-responsive::placeholder{
+  color:  rgb(197, 72, 0);
+  font-size: 26px;
+}
+
+.responsive-input-placeholder {
+background-color: var(--settings-bg);
+}
+
+/* .responsive-input-placeholder::placeholder{
+
+} */
 
 .player-name {
   align-self: center;
