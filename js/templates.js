@@ -7,7 +7,7 @@ function getStoryTemp() {
   return `<div class="story-text">
                 <div class="flex-ctr-spbtw">
                 <p>Welcome to the world of Pepe!</p>
-                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                 </div>
                 <p>Last night, there was a crumbling
                  voice in the air. The next morning,
@@ -31,7 +31,7 @@ function getControlsTemp() {
   return `<div class="controls-settings">
             <div class="flex-ctr-spbtw">
                 <h2 class="controls-header">Control Pepe</h2>
-                <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                 </div>
                     <table>
                         <tr>
@@ -92,7 +92,7 @@ function getPointsTemp(element) {
  */
 function getSoundOptionsTemp() {
   return `<div class="sound-settings">
-            <img class="settings-close-button" onclick="hideSingleContainerById('canvas-option-container'); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+            <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
             <div class="sound-wrapper" onclick="">
                 <div class="sound-text-wrapper" onclick="toggleSoundsOnOff(); audio.playSoundClone('menuClick')">
                     <span>Sounds</span>

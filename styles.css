@@ -33,9 +33,11 @@ body {
   justify-content: center;
   width: 100dvw;
   height: 100dvh;
+  max-height: 100dvh;
   overflow: hidden;
   font-family: agudisplay;
   cursor: url("./img/cursor.png"), auto;
+  margin: 0;
 }
 
 .flex-ctr-spbtw {
@@ -80,9 +82,11 @@ body {
 
 .canvas-wrapper {
   position: relative;
+  z-index: 150;
 }
 
 canvas {
+  position: relative;
   background-image: url("img/9_intro_outro_screens/start/startscreen_2.png");
   background-color: black;
   background-size: 100% 100%;
@@ -306,7 +310,6 @@ h2 {
   gap: 20px;
   overflow-y: auto;
   max-height: 620px;
-  height: 480px;
   width: 320px;
 }
 

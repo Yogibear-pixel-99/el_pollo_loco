@@ -32,7 +32,11 @@ function showSingleContainerById(containerId) {
 function toggleOptionMenu(getTemp, settingsMenu) {
   if (screenHeightSmallerThan(830)) {
     showResponsiveGameCanvas();
-  }
+    if (screenHeightSmallerThan(700)) {
+      deactivateMenu();
+      document.getElementById('right-content').style.zIndex = "-10";
+    }}
+
   let ref = document.getElementById("canvas-option-container");
   let template = getTemp();
   if (
@@ -52,6 +56,38 @@ function toggleOptionMenu(getTemp, settingsMenu) {
       getTemplateToContent("canvas-option-container", template);
       sessionStorage.setItem("menu", settingsMenu);
     }
+  }
+}
+
+function closeSettings() {
+  if (screenHeightSmallerThan(830)){
+     hideResponsiveGameCanvas();
+     if (screenHeightSmallerThan(700)) {
+     activateMenu();
+  }} else {
+  hideSingleContainerById('canvas-option-container')
+}}
+
+
+function screenHeightSmallerThan(high) {
+  return window.innerHeight <= high;
+}
+
+function showResponsiveGameCanvas(){
+  if (screenHeightSmallerThan(830)) {
+    let ref = document.getElementById("canvas-wrapper");
+        ref.style.display = "block";
+        requestAnimationFrame(() => {
+          ref.classList.add("canvas-mobile-open")
+        })
+  }
+}
+
+function hideResponsiveGameCanvas(){
+    if (screenHeightSmallerThan(830)) {
+    let ref = document.getElementById("canvas-wrapper");
+    ref.classList.remove("canvas-mobile-open")
+    setTimeout(() => ref.style.display = "none", 300);
   }
 }
 

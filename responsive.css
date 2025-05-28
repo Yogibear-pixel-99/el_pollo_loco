@@ -57,5 +57,58 @@ body {
 
 
 @media (max-height: 700px) {
-    
+    .main-container {
+        margin: 12px;
+    }
+
+    .left-content,
+    .right-content {
+        margin: 12px;
+        max-height: calc(100dvh - 150px);
+    }
+
+    .canvas-wrapper {
+        /* width: 100dvw; */
+        /* height: 100dvh; */
+    }
+}
+
+@media (max-height: 500px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    h2,
+    .player-score {
+        font-size: 26px;
+    }
+
+    .player-name {
+        font-size: 24px;
+    }
+
+    .player-name::placeholder {
+         font-size: 24px;
+    }
+
+    .item-name {
+        font-size: 20px;
+    }
+
+    .item-point {
+        font-size: 20px;
+    }
+
+    .header-wrapper span {
+        font-size: 18px;
+    }
+
+    .opt-text {
+        font-size: 24px;
+    }
+
+    .settings-wrapper img {
+        width: 32px;
+        height: 32px;
+    }
 }

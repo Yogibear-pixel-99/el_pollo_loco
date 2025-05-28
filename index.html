@@ -55,7 +55,7 @@
         <div class="highscores" id="highscore"></div>
       </div>
       <div class="game-wrapper">
-        <section class="start-game-mask d-none" id="game-mask"></section>
+        <section class="start-game-mask d-none" id="game-mask" onclick="closeSettings()"></section>
         <div class="header-wrapper">
           <h1 id="game-mode-txt" class="top-game-header">Normal Mode</h1>
           <span id="game-mode-exp">Collect 10 coins to trigger the boss</span>
@@ -116,7 +116,7 @@
           <span id="name-error-text" class="name-error-text"></span>
         </div>
       </div>
-      <div class="right-content">
+      <div class="right-content" id="right-content">
         <input
           class="player-name"
           maxlength="20"

@@ -56,27 +56,7 @@ function startGame() {
   }
 }
 
-function screenHeightSmallerThan(high) {
-  return window.innerHeight <= high;
-}
 
-function showResponsiveGameCanvas(){
-  if (screenHeightSmallerThan(830)) {
-    let ref = document.getElementById("canvas-wrapper");
-        ref.style.display = "block";
-        requestAnimationFrame(() => {
-          ref.classList.add("canvas-mobile-open")
-        })
-  }
-}
-
-function hideResponsiveGameCanvas(){
-    if (screenHeightSmallerThan(830)) {
-    let ref = document.getElementById("canvas-wrapper");
-    ref.classList.remove("canvas-mobile-open")
-    setTimeout(() => ref.style.display = "none", 300);
-  }
-}
 
 function showLoadingScreen() {
   getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
@@ -164,7 +144,7 @@ function deactivateMenu() {
 function activateMenu() {
   resetCanvas();
   hideSingleContainerById("game-mask");
-  hideSingleContainerById("canvas-option-container");
+  // hideSingleContainerById("canvas-option-container");
   hideSingleContainerById("canvas-lost-container");
   hideSingleContainerById("canvas-won-container");
   document.getElementById("start-game-text").classList.add("start-game-text");
