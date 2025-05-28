@@ -284,6 +284,8 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
+// if game end and boss killed, score dont updates in canvas.
+// chicken spawn for hard mode same as normal
 // show highscore in game, if score table is unvisible
 // change the get name field and the review of the name error depending onscreen width
   // same to player score

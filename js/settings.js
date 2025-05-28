@@ -273,4 +273,4 @@ function styleResponsiveNameInput(){
     ref.value === "" ?
     ref.classList.add("responsive-input-placeholder"):
     ref.classList.remove("responsive-input-placeholder");
-}
+}  

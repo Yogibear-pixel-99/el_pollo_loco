@@ -38,11 +38,12 @@ function configNormalMode() {
   world.level.endboss.energy = 50;
   world.level.endboss.maxEnergy = 50;
     chickenSpawnInterval = setInterval(() => {
+      if (world.level.enemies.length  <= 10)
   world.level.enemies.push(
-    new Minichicken(world.character.x + canvasWidth * 1),
-    new Chicken(world.character.x + canvasWidth * 2)
+    new Minichicken(world.character.x + canvasWidth * Math.ceil((Math.random() + 1))),
+    new Chicken(world.character.x + canvasWidth * Math.ceil((Math.random() + 1)))
   )
-  }, 100000);
+  }, 14000);
 
   audio.resetMusic('normalModeMusic');
   audio.playMusicLoop('normalModeMusic');
