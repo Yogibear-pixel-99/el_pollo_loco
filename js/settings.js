@@ -34,7 +34,6 @@ function toggleOptionMenu(getTemp, settingsMenu) {
     showResponsiveGameCanvas();
     if (screenHeightSmallerThan(700)) {
       deactivateMenu();
-      document.getElementById('right-content').style.zIndex = "-10";
     }}
 
   let ref = document.getElementById("canvas-option-container");

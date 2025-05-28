@@ -60,6 +60,15 @@ body {
   transform: scale(110%);
 }
 
+.game-name-header {
+  font-size: 80px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-family: agudisplay, mansalva, sans-serif;
+  display: none;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
 
 .main-container {
   display: flex;
@@ -189,6 +198,7 @@ canvas {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 50;
 }
 
 h1 {
@@ -490,9 +500,9 @@ h2 {
   right: 20px;
   top: 20px;
   margin: 0 0 0 auto;
-  height: 28px;
-  width: 28px;
-  padding: 12px;
+  height: 34px;
+  width: 34px;
+  padding: 4px;
   border-radius: 50%;
 }
 
