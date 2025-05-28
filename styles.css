@@ -563,9 +563,9 @@ h2 {
   font-size: 26px;
 }
 
-.responsive-input {
+/* .player-name {
 background-color: var(--settings-bg);
-}
+} */
 
 /* .responsive-input-placeholder::placeholder{
 
@@ -594,7 +594,7 @@ background-color: var(--settings-bg);
 } */
 
 .name-error-text {
-  height: 36px;
+  height: 30px;
   font-weight: 700;
 }
 
