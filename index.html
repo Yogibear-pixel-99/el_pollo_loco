@@ -120,28 +120,18 @@
           </div>
           <span id="name-error-text" class="name-error-text"></span>
           <input
-          class="player-name-responsive responsive-input-placeholder"
+          class="player-name responsive-input-placeholder"
           maxlength="20"
           id="player-name-input"
           autocomplete="off"
           type="text"
-          placeholder="Enter your name"
+          placeholder="enter your name"
           oninput="returnOnlyLettersAndNumbers(this); removeNameError(); styleResponsiveNameInput()"
           onkeydown="unblurInput(event, this)"
           onblur="trimPlayerName(this)" />
         </div>
       </div>
       <div class="right-content" id="right-content">
-        <!-- <input
-          class="player-name"
-          maxlength="20"
-          id="player-name-input"
-          autocomplete="off"
-          type="text"
-          placeholder="Enter your name"
-          oninput="returnOnlyLettersAndNumbers(this); removeNameError()"
-          onkeydown="unblurInput(event, this)"
-          onblur="trimPlayerName(this)" /> -->
         <div class="player-score" id="player-score">000</div>
         <div class="points-table" id="game-points-table"></div>
       </div>

@@ -539,8 +539,7 @@ h2 {
   background-color: var(--score-bg);
 }
 
-.player-name-responsive {
-  display: none;
+.player-name {
   align-self: center;
   text-align: center;
   width: 40%;
@@ -555,23 +554,23 @@ h2 {
   margin-top: 12px;
 }
 
-.player-name-responsive:hover {
+.player-name:hover {
   background-color: var(--score-bg);
 }
 
-.player-name-responsive::placeholder{
-  color:  rgb(197, 72, 0);
+.player-name::placeholder{
+  color:  var(--settings-bg);
   font-size: 26px;
 }
 
-.responsive-input-placeholder {
+.responsive-input {
 background-color: var(--settings-bg);
 }
 
 /* .responsive-input-placeholder::placeholder{
 
 } */
-
+/* 
 .player-name {
   align-self: center;
   text-align: center;
@@ -592,7 +591,7 @@ background-color: var(--settings-bg);
 .player-name::placeholder {
   color: rgba(114, 42, 13, 0.7);
   font-size: 26px;
-}
+} */
 
 .name-error-text {
   height: 36px;

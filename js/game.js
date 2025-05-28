@@ -284,7 +284,7 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
-
+// show highscore in game, if score table is unvisible
 // change the get name field and the review of the name error depending onscreen width
   // same to player score
 // score table color

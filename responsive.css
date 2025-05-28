@@ -6,7 +6,6 @@
   body {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
 
   h1 {
@@ -20,11 +19,6 @@
   .settings-wrapper {
     margin-top: 12px;
   }
-
-  /* .controls-settings {
-    background-color: var(--spinner-bg);
-    color: var(--settings-bg);
-  } */
 }
 
 @media (max-height: 830px) {
@@ -175,11 +169,6 @@
 .player-score {
     display: none;
 }
-
-.player-name-responsive {
-    display: inline;
-}
-
 }
 
 
