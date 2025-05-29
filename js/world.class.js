@@ -245,7 +245,7 @@ class World {
         this.level.collectedCoins.push(coin);
         this.deleteCollectedCoin();
         this.coinbar.updateCoinBar();
-        if (this.character.coins === 10 && gameMode != "chickenRush") {
+        if (this.character.coins === 1 && gameMode != "chickenRush") {
           this.level.endboss.startBossFight();
         }
         return false;
@@ -419,22 +419,22 @@ class World {
     }
   }
 
-  gameOver() {
-    this.stopAllGameIntervals();
-    this.showEndScreen();
-    this.stopGameMusic();
-    this.showGameOverScreen();
-    saveScore();
-    checkFullscreenMode();
-    showCursor();
+  // gameOver() {
+    // this.stopAllGameIntervals();
+    // saveScore();
+    // this.stopGameMusic();
+    // checkFullscreenMode();
+    // showCursor();
+    // if (gamePaused) {
+    //   gamePaused = false;
+    //   return;
+    // }
+    // this.playEndAudio();
+    // this.showGameOverScreen();
     // exit fullscreenmode bzw. show game overscreen in fullscreen mode
-  }
+  // }
 
-  showGameOverScreen() {
-    this.gameWon
-      ? showSingleContainerById("canvas-won-container")
-      : showSingleContainerById("canvas-lost-container");
-  }
+
 
   stopAllGameIntervals() {
     cancelAnimationFrame(this.drawInterval);
@@ -461,21 +461,21 @@ class World {
     this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
   }
 
-  showEndScreen() {
-    if (this.gameWon) {
-      audio.playSound("gameWon");
-    } else {
-      console.trace();
-      audio.playSound("gameLost");
-    }
-  }
+  // playEndAudio() {
+  //   if (this.gameWon) {
+  //     audio.playSound("gameWon");
+  //   } else {
+  //     console.trace();
+  //     audio.playSound("gameLost");
+  //   }
+  // }
 
-  stopGameMusic() {
-    audio.pauseMusic("chickenRushMusic");
-    audio.pauseMusic("normalModeMusic");
-    audio.pauseSound("cluckern");
-    audio.pauseSound("gameAmbience");
-  }
+  // stopGameMusic() {
+  //   audio.pauseMusic("chickenRushMusic");
+  //   audio.pauseMusic("normalModeMusic");
+  //   audio.pauseSound("cluckern");
+  //   audio.pauseSound("gameAmbience");
+  // }
 
   continueGameIntervals() {
     this.draw();

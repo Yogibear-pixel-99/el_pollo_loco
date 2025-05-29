@@ -85,7 +85,7 @@
               </div>
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+                onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse();  checkFullscreenMode()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -106,7 +106,7 @@
               </div>
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="activateMenu();  audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+                onclick="activateMenu();  audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse(); checkFullscreenMode()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -115,10 +115,7 @@
           <section
             id="canvas-pause-container"
             class="canvas-pause-container flex-ctr-ctr flex-col d-none">
-            <img
-              src="./img/You won, you lost/You Won B.png"
-              class="game-won-img"
-              alt="game-won-img" />
+      
             <div class="won-lost-wrapper">
               <div
                 class="won-lost-single-button-wrapper"
@@ -128,7 +125,7 @@
               </div>
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="gameOver(); activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+                onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse(); checkFullscreenMode(); resetGame()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>

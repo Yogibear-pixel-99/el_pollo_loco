@@ -17,6 +17,10 @@ class Bosshealthbar extends Statusbar {
     this.loadImagesArray(this.HEALTH_BAR_IMAGES);
   }
 
+
+/**
+ * Displays the right boss healthbar, depending on boss energy.
+ */
 updateBossHealthbar(){
     const maxEnergy = world.level.endboss.maxEnergy;
     const energy = world.level.endboss.energy ;

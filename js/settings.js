@@ -313,6 +313,9 @@ function styleResponsiveNameInput() {
 }
 
 function pauseGame() {
+  if (fullScreen) {
+    hideFullscreen();
+  }
   showCursor();
   world.stopAllGameIntervals();
   gamePaused = true;
@@ -321,8 +324,26 @@ function pauseGame() {
 }
 
 function continueGame() {
+  if (fullScreen) {
+    showFullscreen();
+  }
   hideCursor();
   world.continueGameIntervals();
   gamePaused = false;
   hideSingleContainerById("canvas-pause-container");
+}
+
+function showFullscreen(){
+  if (!document.fullscreenElement) {
+  canvas.style.backgroundImage = "none";
+  canvas.requestFullscreen();
+  }
+}
+
+function hideFullscreen(){
+  if (document.fullscreenElement) {
+    canvas.style.backgroundImage =
+      'url("img/9_intro_outro_screens/start/startscreen_2.png")';
+    document.exitFullscreen();
+  }
 }

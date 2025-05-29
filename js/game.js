@@ -74,16 +74,14 @@ function showLoadingScreen() {
 
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
-    canvas.requestFullscreen();
-    canvas.style.backgroundImage = "none";
+    showFullscreen();
+    
     // canvas.width = "100%";
     // canvas.style.backgroundColor = "black";
     // canvas.webkitRequestFullscreen();
     // canvas.msRequestFullscreen();
   } else if (fullScreen && !gameHasStarted) {
-    document.exitFullscreen();
-    canvas.style.backgroundImage =
-      'url("img/9_intro_outro_screens/start/startscreen_2.png")';
+    hideFullscreen();
     // canvas.webkitExitFullscreen();
     // canvas.msExitFullscreen();
   }
@@ -163,11 +161,15 @@ function deactivateMenu() {
 }
 
 function activateMenu() {
+  // if (fullScreen) {
+  //   hideFullscreen();
+  // }
   resetCanvas();
   hideSingleContainerById("game-mask");
   // hideSingleContainerById("canvas-option-container");
   hideSingleContainerById("canvas-lost-container");
   hideSingleContainerById("canvas-won-container");
+  hideSingleContainerById("canvas-pause-container");
   document.getElementById("start-game-text").classList.add("start-game-text");
 }
 
@@ -329,12 +331,17 @@ document.addEventListener("click", () => {
 
  function gameOver() {
     world.stopAllGameIntervals();
-    world.showEndScreen();
-    world.showGameOverScreen();
-    stopGameMusic();
     saveScore();
+    stopGameMusic();
     checkFullscreenMode();
     showCursor();
+        if (gamePaused) {
+      gamePaused = false;
+      return;
+    }
+
+    playEndAudio();
+    showGameOverScreen();
     // exit fullscreenmode bzw. show game overscreen in fullscreen mode
   }
 
@@ -345,9 +352,23 @@ document.addEventListener("click", () => {
     audio.pauseSound("gameAmbience");
   }
 
+    function playEndAudio() {
+    if (world.gameWon) {
+      audio.playSound("gameWon");
+    } else {
+      console.trace();
+      audio.playSound("gameLost");
+    }
+  }
+
+   function showGameOverScreen() {
+    world.gameWon
+      ? showSingleContainerById("canvas-won-container")
+      : showSingleContainerById("canvas-lost-container");
+  }
 
 
-
+// on game end, disable fullscreen
 
   // game end, sound is playing twice
   // play again doesnt work animore - if i wait a few seconds... it works
