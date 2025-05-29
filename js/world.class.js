@@ -33,8 +33,6 @@ class World {
     this.runCollisions();
     this.runWorldIntervals();
     this.playGameMusic();
-    this.debug();
-    this.debug2();
   }
 
   runWorldIntervals() {
@@ -55,25 +53,6 @@ class World {
       this.checkThrownBottleCollision();
       this.checkHealBottleCollision();
     }, 25);
-  }
-
-  debug() {
-    setInterval(() => {
-      console.log(world.level.coins.length);
-    }, 1500);
-  }
-
-  debug2() {
-    setInterval(() => {
-      world.level.coins.forEach((coin, index) => {
-        console.log("CoinIndex: " + index);
-        console.log("Coincoord: " + coin.y);
-        if (coin.y < 100) {
-          throw console.error(index + coin.y + "this is false");
-          debugger;
-        }
-      });
-    }, 1500);
   }
 
   playGameMusic() {

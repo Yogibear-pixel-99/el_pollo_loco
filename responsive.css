@@ -43,7 +43,7 @@
     display: block;
   }
 
-    .canvas-wrapper {
+  .canvas-wrapper {
     top: 50%;
   }
 
@@ -253,7 +253,7 @@
     transition: transform ease-in-out 300ms;
   }
 
-    .game-name-header {
+  .game-name-header {
     display: block;
   }
 
@@ -278,14 +278,17 @@
     width: 80%;
   }
 
-  .controls-settings th,
-  .story-text,
-  .sound-settings {
+  .controls-settings th {
     font-size: 26px;
   }
 
-  .controls-settings th,
-  .not-selected .selected{
+  .sound-settings,
+  .story-text,
+  .controls-settings td {
+    font-size: 24px;
+  }
+
+  .not-selected .selected {
     font-size: 24px;
   }
 

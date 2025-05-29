@@ -507,6 +507,10 @@ h2 {
   font-size: 32px;
 }
 
+.controls-settings td {
+  font-size: 26px;
+}
+
 .controls-header {
   justify-self: center;
 }
