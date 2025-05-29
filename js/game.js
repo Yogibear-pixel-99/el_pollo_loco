@@ -368,11 +368,18 @@ document.addEventListener("click", () => {
   }
 
 
+  // Testing pause, resume, play again, go to menu in alle different sizes
+    // normal
+    // overlay
+    // fullscreen
+
 // on game end, disable fullscreen
 
   // game end, sound is playing twice
   // play again doesnt work animore - if i wait a few seconds... it works
   // get to main menu doesnt work
+
+// fullscreen for all browseres
 
 // Create pause menu
 // esc or "p"

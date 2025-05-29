@@ -44,12 +44,15 @@ class Bottle extends DrawableObject {
   calculateNewPosition() {
     let x = Math.random() * canvasWidth * 6;
     // let x = Math.random() * canvasWidth * 5;
-     if (x < -200 || x > 3600) {
+     if (x < -200 || x > 3600 && (x > - 200 && x < 200)) {
       return this.calculateNewPosition();
      }
      return x;
   }
 
+  /**
+   * Calls the calculate new x coord function, if character has les than 5 bottles.
+   */
   isCollected() {
     if (world.character.bottles < 5) this.x = this.calculateNewPosition();
   }

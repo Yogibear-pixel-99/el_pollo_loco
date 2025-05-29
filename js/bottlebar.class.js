@@ -16,7 +16,9 @@ class Bottlebar extends Statusbar {
     this.loadImagesArray(this.BOTTLE_BAR_IMAGES);
   }
 
-
+/**
+ * Displays the right bottle bar amount, depending on the bottles the character collected.
+ */
   updateBottleBar() {
     const bottles = world.character.bottles;
     if (bottles == 5) {

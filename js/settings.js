@@ -334,16 +334,26 @@ function continueGame() {
 }
 
 function showFullscreen(){
+  let ref = document.getElementById("canvas-wrapper");
   if (!document.fullscreenElement) {
   canvas.style.backgroundImage = "none";
-  canvas.requestFullscreen();
+  ref.style.width = "100dvw";
+  ref.style.height = "100dvh";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  ref.requestFullscreen();
   }
 }
 
 function hideFullscreen(){
+let ref = document.getElementById("canvas-wrapper");
   if (document.fullscreenElement) {
     canvas.style.backgroundImage =
       'url("img/9_intro_outro_screens/start/startscreen_2.png")';
-    document.exitFullscreen();
+        ref.style.width = "720px";
+  ref.style.height = "480px";    
+        ref.style.width = "720px";
+  ref.style.height = "480px";    
+      document.exitFullscreen();
   }
 }

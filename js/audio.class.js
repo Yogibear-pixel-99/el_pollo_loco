@@ -1,3 +1,7 @@
+/**
+ * The music and sound object for the game.
+ * Separated in sfx for sounds and music for the game music.
+ */
 class Audiofiles {
   sfx = {
     menuClick: new Audio("./audio/menu/toggle-button-off-166328.mp3"),
