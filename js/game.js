@@ -368,6 +368,19 @@ document.addEventListener("click", () => {
   }
 
 
+  // testing fullscreen
+    // on gamestart
+    // on gameend won
+    // on gameend lost
+    // on playagain
+    // on go to menu
+      // 3 times
+    // on pause menu while playing
+      // resume in diffrent situations
+      // go to menu from pause
+
+      
+
   // Testing pause, resume, play again, go to menu in alle different sizes
     // normal
     // overlay
