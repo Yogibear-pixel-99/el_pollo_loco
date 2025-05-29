@@ -51,7 +51,6 @@ function startGame() {
         configHardMode();
         break;
     }
-    hideWonLostPauseScreens();
   } else {
     playerNameError();
     audio.playSoundClone("menuError");
@@ -129,9 +128,9 @@ function removeErrorMessage(id) {
 }
 
 function playAgain() {
+  hideWonLostPauseScreens();
   resetCanvas();
   startGame();
-  hideWonLostPauseScreens();
 }
 
 function hideWonLostPauseScreens(){
@@ -351,7 +350,7 @@ document.addEventListener("click", () => {
 
 
   // game end, sound is playing twice
-  // play again doesnt work animore
+  // play again doesnt work animore - if i wait a few seconds... it works
   // get to main menu doesnt work
 
 // Create pause menu

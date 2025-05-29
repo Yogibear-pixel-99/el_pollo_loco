@@ -84,9 +84,9 @@ class World {
         this.addPointsToPlayerScore("endbossKilled");
         this.gameWon = true;
       }
-      // requestAnimationFrame(() => {
-      //   clearInterval(this.worldInterval);
-      // });
+      requestAnimationFrame(() => {
+        clearInterval(this.worldInterval);
+      });
       setTimeout(() => {
         gameOver();
       }, 3000);
@@ -442,9 +442,13 @@ class World {
     world.level.enemies.forEach((enemy) => {
       enemy.stopAllEnemyIntervalls();
     });
+
     world.level.endboss.stopAllBossIntervals();
+
     clearInterval(world.level.endboss.moveDirectionInterval);
     clearInterval(world.level.endboss.gravityInterval);
+
+
     this.thrownBottles.forEach((bottle) => {
       clearInterval(bottle.gravityInterval);
     });
@@ -461,6 +465,7 @@ class World {
     if (this.gameWon) {
       audio.playSound("gameWon");
     } else {
+      console.trace();
       audio.playSound("gameLost");
     }
   }
@@ -478,11 +483,15 @@ class World {
     world.level.enemies.forEach((enemy) => {
       enemy.startEnemy();
     });
+
+
     if (this.level.endboss.isTriggered) {
       this.level.endboss.startBossIntervals();
-      this.level.endboss.bossMoveDirection();
-      this.level.endboss.applyGravity();
     }
+    
+    
+    this.level.endboss.bossMoveDirection();
+    this.level.endboss.applyGravity();
     this.runCollisions();
     this.runWorldIntervals();
     this.level.skyObjects.forEach((cloud) => {
