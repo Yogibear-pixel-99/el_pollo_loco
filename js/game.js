@@ -24,7 +24,10 @@ function init() {
   assignSoundSettings();
   getActiveHighscores();
   renderGamePointsTable();
+  toggleFullScreen();
 }
+
+
 
 function startGame() {
   gameHasStarted = true;
@@ -284,7 +287,7 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
-
+// play click sound on score and points button / close button
 
 // Create a game mask for turn device
   // check with javascript or css if device height is more than 720 and width is smaller

@@ -30,7 +30,7 @@ function showSingleContainerById(containerId) {
 }
 
 function toggleOptionMenu(getTemp, settingsMenu) {
-  if (screenHeightSmallerThan(830)) {
+  if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
     showResponsiveGameCanvas();
     if (screenHeightSmallerThan(700)) {
       deactivateMenu();
@@ -42,7 +42,7 @@ function toggleOptionMenu(getTemp, settingsMenu) {
     sessionStorage.getItem("menu") === settingsMenu &&
     !ref.classList.contains("d-none")
   ) {
-      if (screenHeightSmallerThan(830)) {
+      if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
       requestAnimationFrame(() => {hideResponsiveGameCanvas()});
     }
     setTimeout(() => {ref.classList.add("d-none")}, 300);
@@ -59,12 +59,12 @@ function toggleOptionMenu(getTemp, settingsMenu) {
 }
 
 function closeSettings() {
-  if (screenWidthTallerThan(1300)) {
+  if (screenWidthSmallerThan(1300)) {
     document.getElementById("right-content").classList.remove("open-score-table");
     document.getElementById("left-content").classList.remove("open-score-table");
     activateMenu();
   }
-  if (screenHeightSmallerThan(830)){
+  if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
      hideResponsiveGameCanvas();
      if (screenHeightSmallerThan(700)) {
      activateMenu();
@@ -77,27 +77,24 @@ function screenHeightSmallerThan(value) {
   return window.innerHeight <= value;
 }
 
-function screenWidthTallerThan(value) {
+function screenWidthSmallerThan(value) {
   return window.innerWidth <= value;
 }
 
 function showResponsiveGameCanvas(){
-  if (screenHeightSmallerThan(830)) {
     let ref = document.getElementById("canvas-wrapper");
         ref.style.display = "block";
         requestAnimationFrame(() => {
           ref.classList.add("canvas-mobile-open")
         })
-  }
 }
 
 function hideResponsiveGameCanvas(){
-    if (screenHeightSmallerThan(830)) {
     let ref = document.getElementById("canvas-wrapper");
     ref.classList.remove("canvas-mobile-open")
     setTimeout(() => ref.style.display = "none", 300);
-  }
 }
+
 
 function toggleResponsiveScoreTablePoints(id){
 
@@ -146,7 +143,10 @@ function hideSingleContainerById(containerId) {
 
 function toggleFullScreen() {
   let buttonRef = document.getElementById("full-screen-button");
-  if (fullScreen) {
+  if (window.innerWidth <= 720 || window.innerHeight <= 480) {
+    fullScree = true;
+    buttonRef.classList.add("full-screen-button");
+  } else if (fullScreen) {
     buttonRef.classList.remove("full-screen-button");
     fullScreen = false;
   } else {
