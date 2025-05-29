@@ -51,6 +51,7 @@ function startGame() {
         configHardMode();
         break;
     }
+    hideWonLostPauseScreens();
   } else {
     playerNameError();
     audio.playSoundClone("menuError");
@@ -128,11 +129,18 @@ function removeErrorMessage(id) {
 }
 
 function playAgain() {
+  resetCanvas();
   startGame();
-  let lostRef = document.getElementById("canvas-lost-container");
+  hideWonLostPauseScreens();
+}
+
+function hideWonLostPauseScreens(){
+    let lostRef = document.getElementById("canvas-lost-container");
   let wonRef = document.getElementById("canvas-won-container");
+  let pauseRef = document.getElementById("canvas-pause-container");
   lostRef.classList.add("d-none");
   wonRef.classList.add("d-none");
+  pauseRef.classList.add("d-none");
 }
 
 function goToMainMenu() {
@@ -148,7 +156,7 @@ function resetCanvas() {
 }
 
 function deactivateMenu() {
-  document.body.style.cursor = "none";
+  hideCursor();
   showSingleContainerById("game-mask");
   hideSingleContainerById("canvas-option-container");
   const startBlinkRef = document.getElementById("start-game-text");
@@ -205,7 +213,6 @@ function toggleGameMode() {
 }
 
 window.addEventListener("keydown", (event) => {
-  console.log(event.key);
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = true;
@@ -239,13 +246,17 @@ window.addEventListener("keydown", (event) => {
       keyboard.KEY_SHOT = true;
       break;
 
+    case "D":
+      keyboard.KEY_SHOT = true;
+      break;
+
     default:
       break;
   }
 });
 
 window.addEventListener("keyup", (event) => {
-  if (gameHasStarted && (event.key === "Escape" || event.key === "p")) {
+  if (gameHasStarted && (event.key === "Escape" || event.key === "p") || event.key === "P") {
     gamePaused ? continueGame() : pauseGame();
   }});
 
@@ -284,6 +295,10 @@ window.addEventListener("keyup", (event) => {
       keyboard.KEY_SHOT = false;
       break;
 
+    case "D":
+      keyboard.KEY_SHOT = false;
+      break;
+
     default:
       break;
   }
@@ -291,10 +306,10 @@ window.addEventListener("keyup", (event) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousedown", () => {
-    document.body.style.cursor = "url('./img/cursor-active.png'), auto";
+    showActiveCursor()
   });
   document.addEventListener("mouseup", () => {
-    document.body.style.cursor = "url('./img/cursor.png'), auto";
+    showCursor();
   });
 
   document
@@ -312,6 +327,32 @@ document.addEventListener("click", () => {
   if (!playMusicOnStart) audio.playMusicLoop("menuMusic");
   playMusicOnStart = true;
 });
+
+ function gameOver() {
+    world.stopAllGameIntervals();
+    world.showEndScreen();
+    world.showGameOverScreen();
+    stopGameMusic();
+    saveScore();
+    checkFullscreenMode();
+    showCursor();
+    // exit fullscreenmode bzw. show game overscreen in fullscreen mode
+  }
+
+   function stopGameMusic() {
+    audio.pauseMusic("chickenRushMusic");
+    audio.pauseMusic("normalModeMusic");
+    audio.pauseSound("cluckern");
+    audio.pauseSound("gameAmbience");
+  }
+
+
+
+
+
+  // game end, sound is playing twice
+  // play again doesnt work animore
+  // get to main menu doesnt work
 
 // Create pause menu
 // esc or "p"

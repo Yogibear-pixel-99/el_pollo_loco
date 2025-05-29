@@ -49,14 +49,17 @@
     <main class="main-container">
       <div class="left-content" id="left-content">
         <div class="flex-ctr-ctr flex-col">
-        <h2>Highscore</h2>
-        <div>Top 30</div>
+          <h2>Highscore</h2>
+          <div>Top 30</div>
         </div>
         <div class="highscores" id="highscore"></div>
       </div>
       <div class="game-wrapper">
-          <h1 class="game-name-header">El Pollo Loco</h1>
-        <section class="start-game-mask d-none" id="game-mask" onclick="closeSettings()"></section>
+        <h1 class="game-name-header">El Pollo Loco</h1>
+        <section
+          class="start-game-mask d-none"
+          id="game-mask"
+          onclick="closeSettings()"></section>
         <div class="header-wrapper">
           <h1 id="game-mode-txt" class="top-game-header">Normal Mode</h1>
           <span id="game-mode-exp">Collect 10 coins to trigger the boss</span>
@@ -67,7 +70,6 @@
           <section
             id="canvas-option-container"
             class="canvas-menu-display d-none"></section>
-
 
           <section
             id="canvas-won-container"
@@ -81,7 +83,9 @@
                 <img src="./img/icons/mask-306939_640.png" alt="" />
                 <div>Play again</div>
               </div>
-              <div class="won-lost-single-button-wrapper" onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+              <div
+                class="won-lost-single-button-wrapper"
+                onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -100,7 +104,31 @@
                 <img src="./img/icons/mask-306939_640.png" alt="" />
                 <div>Play again</div>
               </div>
-              <div class="won-lost-single-button-wrapper" onclick="activateMenu();  audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+              <div
+                class="won-lost-single-button-wrapper"
+                onclick="activateMenu();  audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+                <img src="./img/icons/cactus-8142375_640.png" alt="" />
+                <div>Main Menu</div>
+              </div>
+            </div>
+          </section>
+          <section
+            id="canvas-pause-container"
+            class="canvas-pause-container flex-ctr-ctr flex-col d-none">
+            <img
+              src="./img/You won, you lost/You Won B.png"
+              class="game-won-img"
+              alt="game-won-img" />
+            <div class="won-lost-wrapper">
+              <div
+                class="won-lost-single-button-wrapper"
+                onclick="continueGame()">
+                <img src="./img/icons/mask-306939_640.png" alt="" />
+                <div>Resume</div>
+              </div>
+              <div
+                class="won-lost-single-button-wrapper"
+                onclick="gameOver(); activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -108,47 +136,36 @@
           </section>
         </section>
 
-                  <section
-            id="canvas-pause-container"
-            class="canvas-won-container flex-ctr-ctr flex-col d-none">
-            <img
-              src="./img/You won, you lost/You Won B.png"
-              class="game-won-img"
-              alt="game-won-img" />
-            <div class="won-lost-wrapper">
-              <div class="won-lost-single-button-wrapper" onclick="continueGame()">
-                <img src="./img/icons/mask-306939_640.png" alt="" />
-                <div>Continue</div>
-              </div>
-              <div class="won-lost-single-button-wrapper" onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
-                <img src="./img/icons/cactus-8142375_640.png" alt="" />
-                <div>Main Menu</div>
-              </div>
-            </div>
-          </section>
-
         <div class="header-wrapper">
           <div class="score-tables-wrapper">
-            <button class="open-highscore" onclick="toggleResponsiveScoreTableHighscore('left-content')">Highscore</button>
-          <h1
-            class="start-game-text top-game-header"
-            id="start-game-text"
-            onclick="startGame()">
-            Start
-          </h1>
-          <button class="open-points-table" onclick="toggleResponsiveScoreTablePoints('right-content')">Points</button>
+            <button
+              class="open-highscore"
+              onclick="toggleResponsiveScoreTableHighscore('left-content')">
+              Highscore
+            </button>
+            <h1
+              class="start-game-text top-game-header"
+              id="start-game-text"
+              onclick="startGame()">
+              Start
+            </h1>
+            <button
+              class="open-points-table"
+              onclick="toggleResponsiveScoreTablePoints('right-content')">
+              Points
+            </button>
           </div>
           <span id="name-error-text" class="name-error-text"></span>
           <input
-          class="player-name"
-          maxlength="20"
-          id="player-name-input"
-          autocomplete="off"
-          type="text"
-          placeholder="enter your name"
-          oninput="returnOnlyLettersAndNumbers(this); removeNameError(); styleResponsiveNameInput()"
-          onkeydown="unblurInput(event, this)"
-          onblur="trimPlayerName(this)" />
+            class="player-name"
+            maxlength="20"
+            id="player-name-input"
+            autocomplete="off"
+            type="text"
+            placeholder="enter your name"
+            oninput="returnOnlyLettersAndNumbers(this); removeNameError(); styleResponsiveNameInput()"
+            onkeydown="unblurInput(event, this)"
+            onblur="trimPlayerName(this)" />
         </div>
       </div>
       <div class="right-content" id="right-content">
@@ -157,8 +174,10 @@
       </div>
     </main>
     <footer class="settings-wrapper">
-      <div class="opt-wrapper" onclick="toggleOptionMenu(getStoryTemp, 'story')">
-      <!-- <div class="opt-wrapper" onclick="toggleStory()"> -->
+      <div
+        class="opt-wrapper"
+        onclick="toggleOptionMenu(getStoryTemp, 'story')">
+        <!-- <div class="opt-wrapper" onclick="toggleStory()"> -->
         <img
           class="settings-img"
           src="./img/icons/book-4109187_640.png"
@@ -166,7 +185,9 @@
           class="opt-img" />
         <span class="opt-text">Story</span>
       </div>
-      <div class="opt-wrapper" onclick="toggleOptionMenu(getControlsTemp, 'controls')">
+      <div
+        class="opt-wrapper"
+        onclick="toggleOptionMenu(getControlsTemp, 'controls')">
         <img
           class="settings-img"
           src="./img/icons/controller-3364881_640.png"
@@ -182,7 +203,9 @@
           class="opt-img" />
         <span class="opt-text">Gamemode</span>
       </div>
-      <div class="opt-wrapper" onclick="toggleOptionMenu(getSoundOptionsTemp, 'sounds'); initSoundSettings()">
+      <div
+        class="opt-wrapper"
+        onclick="toggleOptionMenu(getSoundOptionsTemp, 'sounds'); initSoundSettings()">
         <img
           class="settings-img"
           src="./img/icons/guitar-7288462_640.png"
@@ -190,7 +213,10 @@
           class="opt-img" />
         <span class="opt-text">Sound on/off</span>
       </div>
-      <div id="full-screen-button" class="opt-wrapper" onclick="toggleFullScreen()">
+      <div
+        id="full-screen-button"
+        class="opt-wrapper"
+        onclick="toggleFullScreen()">
         <img
           class="settings-img"
           src="./img/icons/basket-1296634_640.png"

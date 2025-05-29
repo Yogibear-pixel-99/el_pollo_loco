@@ -28,3 +28,15 @@ async function timeDelay(ms){
     setTimeout(() => resolve(), ms)
   })
 }
+
+function showCursor(){
+  document.body.style.cursor = "url('./img/cursor-active.png'), auto"
+}
+
+function hideCursor(){
+  document.body.style.cursor = "none";
+}
+
+function showActiveCursor(){
+  document.body.style.cursor = "url('./img/cursor-active.png'), auto";
+}

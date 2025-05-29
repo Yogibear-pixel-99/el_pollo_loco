@@ -33,8 +33,8 @@ function toggleOptionMenu(getTemp, settingsMenu) {
   if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
     showResponsiveGameCanvas();
 
-      deactivateMenu();
-    }
+    deactivateMenu();
+  }
   // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
   //   showResponsiveGameCanvas();
   //   if (screenHeightSmallerThan(700)) {
@@ -47,10 +47,14 @@ function toggleOptionMenu(getTemp, settingsMenu) {
     sessionStorage.getItem("menu") === settingsMenu &&
     !ref.classList.contains("d-none")
   ) {
-      if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
-      requestAnimationFrame(() => {hideResponsiveGameCanvas()});
+    if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
+      requestAnimationFrame(() => {
+        hideResponsiveGameCanvas();
+      });
     }
-    setTimeout(() => {ref.classList.add("d-none")}, 300);
+    setTimeout(() => {
+      ref.classList.add("d-none");
+    }, 300);
   } else {
     if (ref.classList.contains("d-none")) {
       showSingleContainerById("canvas-option-container");
@@ -66,22 +70,26 @@ function toggleOptionMenu(getTemp, settingsMenu) {
 function closeSettings() {
   if (gameHasStarted) return;
   if (screenWidthSmallerThan(1300)) {
-    document.getElementById("right-content").classList.remove("open-score-table");
-    document.getElementById("left-content").classList.remove("open-score-table");
+    document
+      .getElementById("right-content")
+      .classList.remove("open-score-table");
+    document
+      .getElementById("left-content")
+      .classList.remove("open-score-table");
     activateMenu();
   }
-  if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
-     hideResponsiveGameCanvas();
+  if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
+    hideResponsiveGameCanvas();
 
-     activateMenu();
-  // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
-  //    hideResponsiveGameCanvas();
-  //    if (screenHeightSmallerThan(700)) {
-  //    activateMenu();
+    activateMenu();
+    // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
+    //    hideResponsiveGameCanvas();
+    //    if (screenHeightSmallerThan(700)) {
+    //    activateMenu();
   } else {
-  hideSingleContainerById('canvas-option-container')
-}}
-
+    hideSingleContainerById("canvas-option-container");
+  }
+}
 
 function screenHeightSmallerThan(value) {
   return window.innerHeight <= value;
@@ -91,56 +99,58 @@ function screenWidthSmallerThan(value) {
   return window.innerWidth <= value;
 }
 
-function showResponsiveGameCanvas(){
+function showResponsiveGameCanvas() {
+  if (screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
     let ref = document.getElementById("canvas-wrapper");
-        ref.style.display = "block";
-        requestAnimationFrame(() => {
-          ref.classList.add("canvas-mobile-open")
-        })
+    ref.style.display = "block";
+    requestAnimationFrame(() => {
+      ref.classList.add("canvas-mobile-open");
+    });
+  }
 }
 
-function hideResponsiveGameCanvas(){
-  if(screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
+function hideResponsiveGameCanvas() {
+  if (screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
     let ref = document.getElementById("canvas-wrapper");
-    ref.classList.remove("canvas-mobile-open")
-    setTimeout(() => ref.style.display = "none", 300);
-}
+    ref.classList.remove("canvas-mobile-open");
+    setTimeout(() => (ref.style.display = "none"), 300);
+  }
 }
 
-function toggleResponsiveScoreTablePoints(id){
+function toggleResponsiveScoreTablePoints(id) {
   document.getElementById("left-content").classList.remove("open-score-table");
   let ref = document.getElementById(id);
-      ref.classList.contains('open-score-table') ?
-        hideResponsiveScoreTable(id) :
-        showResponsiveScoreTable(id)
+  ref.classList.contains("open-score-table")
+    ? hideResponsiveScoreTable(id)
+    : showResponsiveScoreTable(id);
 }
 
-function toggleResponsiveScoreTableHighscore(id){
+function toggleResponsiveScoreTableHighscore(id) {
   document.getElementById("right-content").classList.remove("open-score-table");
   let ref = document.getElementById(id);
-      ref.classList.contains('open-score-table') ?
-        hideResponsiveScoreTable(id) :
-        showResponsiveScoreTable(id)
+  ref.classList.contains("open-score-table")
+    ? hideResponsiveScoreTable(id)
+    : showResponsiveScoreTable(id);
 }
 
-function showResponsiveScoreTable(id){
+function showResponsiveScoreTable(id) {
   document.getElementById("canvas-wrapper").style.zIndex = "0";
   deactivateMenu();
   let ref = document.getElementById(id);
-      ref.style.display = "block";
-      requestAnimationFrame(() => {
-        ref.classList.add('open-score-table');
-      })
+  ref.style.display = "block";
+  requestAnimationFrame(() => {
+    ref.classList.add("open-score-table");
+  });
 }
 
 function hideResponsiveScoreTable(id) {
   document.getElementById("canvas-wrapper").style.zIndex = "150";
   activateMenu();
   let ref = document.getElementById(id);
-      ref.classList.remove("open-score-table");
-      setTimeout(() => {
-        ref.style.display = "none";
-      }, 300);
+  ref.classList.remove("open-score-table");
+  setTimeout(() => {
+    ref.style.display = "none";
+  }, 300);
 }
 
 /**
@@ -155,10 +165,10 @@ function hideSingleContainerById(containerId) {
 
 function checkScreensizeForFixFullscreen() {
   if (window.innerWidth <= 720 || window.innerHeight <= 480) {
-  let buttonRef = document.getElementById("full-screen-button");
+    let buttonRef = document.getElementById("full-screen-button");
     fullScreen = true;
     buttonRef.classList.add("full-screen-button");
-}
+  }
 }
 
 function toggleFullScreen() {
@@ -174,12 +184,12 @@ function toggleFullScreen() {
   }
 }
 
-function showJustFullscreenInfo(){
+function showJustFullscreenInfo() {
   let ref = document.getElementById("name-error-text");
-      ref.innerText = "Screen is to small, just fullscreen possible";
-      setTimeout(() => {
-        ref.innerText = ""
-      }, 10000);
+  ref.innerText = "Screen is to small, just fullscreen possible";
+  setTimeout(() => {
+    ref.innerText = "";
+  }, 10000);
 }
 
 function returnOnlyLettersAndNumbers(id) {
@@ -295,21 +305,23 @@ function setVolume() {
   initSoundSettings();
 }
 
-function styleResponsiveNameInput(){
+function styleResponsiveNameInput() {
   let ref = document.getElementById("player-name-input");
-    ref.value === "" ?
-    ref.classList.add("responsive-input-placeholder"):
-    ref.classList.remove("responsive-input-placeholder");
-} 
+  ref.value === ""
+    ? ref.classList.add("responsive-input-placeholder")
+    : ref.classList.remove("responsive-input-placeholder");
+}
 
-function pauseGame(){
+function pauseGame() {
+  showCursor();
   world.stopAllGameIntervals();
   gamePaused = true;
   showSingleContainerById("canvas-pause-container");
   audio.pauseSound("cluckern");
 }
 
-function continueGame(){
+function continueGame() {
+  hideCursor();
   world.continueGameIntervals();
   gamePaused = false;
   hideSingleContainerById("canvas-pause-container");

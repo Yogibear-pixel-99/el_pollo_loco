@@ -154,7 +154,8 @@ canvas {
 }
 
 .canvas-won-container,
-.canvas-lost-container {
+.canvas-lost-container,
+.canvas-pause-container {
   position: absolute;
   inset: 0 0 5px 0;
   padding: 20px;

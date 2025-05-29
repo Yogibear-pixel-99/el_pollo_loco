@@ -84,11 +84,11 @@ class World {
         this.addPointsToPlayerScore("endbossKilled");
         this.gameWon = true;
       }
-      requestAnimationFrame(() => {
-        clearInterval(this.worldInterval);
-      });
+      // requestAnimationFrame(() => {
+      //   clearInterval(this.worldInterval);
+      // });
       setTimeout(() => {
-        this.gameOver();
+        gameOver();
       }, 3000);
     }
   }
@@ -333,7 +333,6 @@ class World {
     this.score = document.getElementById("player-score").innerText;
     this.ctx.font = "30px agudisplay";
     this.ctx.fillText(this.score, canvasWidth - 220, 100);
-    console.log(this.score);
   }
 
   draw() {
@@ -427,7 +426,7 @@ class World {
     this.showGameOverScreen();
     saveScore();
     checkFullscreenMode();
-    document.body.style.cursor = 'url("./img/cursor.png"), auto';
+    showCursor();
     // exit fullscreenmode bzw. show game overscreen in fullscreen mode
   }
 
@@ -439,9 +438,7 @@ class World {
 
   stopAllGameIntervals() {
     cancelAnimationFrame(this.drawInterval);
-
     world.character.stopAllCharIntervals();
-
     world.level.enemies.forEach((enemy) => {
       enemy.stopAllEnemyIntervalls();
     });
