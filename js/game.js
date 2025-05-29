@@ -284,6 +284,12 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
+
+
+// Create a game mask for turn device
+  // check with javascript or css if device height is more than 720 and width is smaller
+  // game menu and footer are t centered
+
 // if game end and boss killed, score dont updates in canvas.
 // chicken spawn for hard mode same as normal
 // show highscore in game, if score table is unvisible

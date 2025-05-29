@@ -17,20 +17,24 @@
   }
 
   .settings-wrapper {
-    margin-top: 12px;
+    margin: auto auto 0;
   }
+
+  /* .settings-wrapper {
+    margin-top: 12px;
+  } */
 }
 
 @media (max-height: 830px) {
   .canvas-wrapper {
     position: absolute;
-    top: calc(50% - 62px);
+    /* top: calc(50% - 62px); */
     left: 50%;
     transform: translate(-50%, 100dvh);
     display: none;
     transition: transform ease-in-out 300ms;
   }
-  
+
   .canvas-mobile-open {
     transform: translate(-50%, -50%);
   }
@@ -46,9 +50,9 @@
     gap: 60px;
   }
 
-  .settings-wrapper {
+  /* .settings-wrapper {
     margin: auto auto 0;
-  }
+  } */
 
   .main-container {
     margin: auto auto 0;
@@ -56,8 +60,6 @@
 }
 
 @media (max-height: 700px) {
-
-
   .left-content,
   .right-content {
     margin: 12px;
@@ -70,14 +72,13 @@
 }
 
 @media (max-height: 600px) {
-    .game-wrapper {
-        gap: 10px;
-    }
+  .game-wrapper {
+    gap: 10px;
+  }
 
-      .game-name-header {
-        font-size: 60px;
-      }
-
+  .game-name-header {
+    font-size: 60px;
+  }
 }
 
 @media (max-height: 500px) {
@@ -94,9 +95,9 @@
     font-size: 26px;
   }
 
-      .game-wrapper {
-        gap: 0;
-    }
+  .game-wrapper {
+    gap: 0;
+  }
 
   .player-name {
     font-size: 24px;
@@ -126,9 +127,15 @@
     width: 32px;
     height: 32px;
   }
+
+  .canvas-wrapper,
+  #gamecanvas {
+    height: 100dvh;
+    overflow-y: auto;
+  }
 }
 
-@media (max-height: 400px){
+@media (max-height: 400px) {
   .game-name-header {
     font-size: 48px;
     /* margin: 0; */
@@ -140,7 +147,7 @@
   }
 
   .player-name::placeholder {
-font-size: 20px;
+    font-size: 20px;
   }
 
   h1 {
@@ -148,11 +155,11 @@ font-size: 20px;
   }
 
   .name-error-text {
-  height: 22px;
-}
+    height: 22px;
+  }
 }
 
-@media (max-height: 360px){
+@media (max-height: 360px) {
   .game-name-header {
     font-size: 36px;
     margin: 0;
@@ -160,36 +167,36 @@ font-size: 20px;
 }
 
 @media (max-width: 1460px) {
-    .item-name,
-    .item-points,
-    .highscore-player-name,
-    .score {
-        font-size: 18px;
-    }
+  .item-name,
+  .item-points,
+  .highscore-player-name,
+  .score {
+    font-size: 18px;
+  }
 
-    .player-name {
-        font-size: 24px;
-    }
+  .player-name {
+    font-size: 24px;
+  }
 
-    .player-name::placeholder {
-        font-size: 24px;
-    }
+  .player-name::placeholder {
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 1300px) {
-    .open-highscore,
-.open-points-table {
+  .open-highscore,
+  .open-points-table {
     display: block;
-}
+  }
 
-.score-tables-wrapper {
+  .score-tables-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+  }
 
-.left-content,
-.right-content {
+  .left-content,
+  .right-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -198,19 +205,19 @@ font-size: 20px;
     z-index: 300;
     display: none;
     max-height: 100dvh;
-}
+  }
 
-.open-score-table {
-        transform: translate(-50%, -70%);
-}
+  .open-score-table {
+    transform: translate(-50%, -70%);
+  }
 
-.player-score {
+  .player-score {
     display: none;
-}
+  }
 
-.settings-wrapper {
-  font-size: 24px;
-}
+  .settings-wrapper {
+    font-size: 24px;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -225,24 +232,29 @@ font-size: 20px;
     font-size: 18px;
   }
 
-    .settings-wrapper img {
-      width: 30px;
-      height: 30px;
-    }
+  .settings-wrapper img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media (max-width: 720px) {
-    .canvas-wrapper {
+  .canvas-wrapper {
     position: absolute;
-    top: calc(50% - 62px);
+    /* top: calc(50% - 62px); */
     left: 50%;
     transform: translate(-50%, 100dvh);
     display: none;
     transition: transform ease-in-out 300ms;
   }
-  
+
   .canvas-mobile-open {
     transform: translate(-50%, -50%);
+  }
+
+  .canvas-wrapper,
+  #gamecanvas {
+    width: 100dvw;
   }
 }
 
@@ -252,21 +264,42 @@ font-size: 20px;
   }
 }
 
-@media (max-width: 420px) {
-    .opt-text{
-      font-size: 10px;
-    }
+@media (max-width: 500px) {
+  .player-name {
+    width: 80%;
+  }
 
-        .settings-wrapper img {
-      width: 20px;
-      height: 20px;
-    }
+  .controls-settings th,
+  .story-text,
+  .sound-settings {
+    font-size: 26px;
+  }
+
+  .controls-settings th,
+  .not-selected .selected{
+    font-size: 24px;
+  }
+
+  .not-selected {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .opt-text {
+    font-size: 10px;
+  }
+
+  .settings-wrapper img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 1300px) and (max-height: 830px) {
-    .main-container {
-        justify-content: center;
-    }
+  .main-container {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 1300px) and (max-height: 1000px) {

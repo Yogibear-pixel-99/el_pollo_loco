@@ -90,6 +90,11 @@ body {
   z-index: -10;
 }
 
+#gamecanvas {
+  width: 720px;
+  height: 480px;
+}
+
 .canvas-wrapper {
   position: relative;
   z-index: 150;
@@ -110,7 +115,8 @@ canvas {
   inset: 0;
   z-index: 150;
   border-radius: 20px;
-  
+  background-color: var(--settings-bg);
+  overflow: auto;
 }
 
 .loading-spinner-container {
@@ -542,7 +548,7 @@ h2 {
 .player-name {
   align-self: center;
   text-align: center;
-  width: 40%;
+  width: 50%;
   background-color: rgba(233, 180, 33, 0);
   outline: none;
   border: none;
