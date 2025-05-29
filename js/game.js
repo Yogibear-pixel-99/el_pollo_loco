@@ -33,6 +33,7 @@ function startGame() {
   gameHasStarted = true;
   if (checkNameInput()) {
     deactivateMenu();
+    checkScoreBoardAppearance();
     showResponsiveGameCanvas();
     showLoadingScreen();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
@@ -59,7 +60,13 @@ function startGame() {
   }
 }
 
-
+function checkScoreBoardAppearance(){
+  if (screenWidthSmallerThan(1300) || screenHeightSmallerThan(830)) {
+    document.getElementById("right-content").style.zIndex = "0";
+  } else {
+      document.getElementById("right-content").style.zIndex = "100";
+  }
+}
 
 function showLoadingScreen() {
   getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
@@ -80,6 +87,10 @@ function checkFullscreenMode() {
     // canvas.webkitExitFullscreen();
     // canvas.msExitFullscreen();
   }
+}
+
+function gameStartFalse(){
+   gameHasStarted = false;
 }
 
 function addErrorAnimation(id, className) {
@@ -289,8 +300,6 @@ document.addEventListener("click", () => {
 
 
 
-// play click sound on score and points button / close button
-// darken background of gamecanvas or change z-index on open points or score overlay
 
 // Create a game mask for turn device
   // check with javascript or css if device height is more than 720 and width is smaller

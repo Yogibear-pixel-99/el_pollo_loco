@@ -64,6 +64,7 @@ function toggleOptionMenu(getTemp, settingsMenu) {
 }
 
 function closeSettings() {
+  if (gameHasStarted) return;
   if (screenWidthSmallerThan(1300)) {
     document.getElementById("right-content").classList.remove("open-score-table");
     document.getElementById("left-content").classList.remove("open-score-table");
@@ -106,7 +107,7 @@ function hideResponsiveGameCanvas(){
 
 
 function toggleResponsiveScoreTablePoints(id){
-
+  
   document.getElementById("left-content").classList.remove("open-score-table");
   let ref = document.getElementById(id);
       ref.classList.contains('open-score-table') ?
@@ -123,6 +124,7 @@ function toggleResponsiveScoreTableHighscore(id){
 }
 
 function showResponsiveScoreTable(id){
+  document.getElementById("canvas-wrapper").style.zIndex = "0";
   deactivateMenu();
   let ref = document.getElementById(id);
       ref.style.display = "block";
@@ -132,6 +134,7 @@ function showResponsiveScoreTable(id){
 }
 
 function hideResponsiveScoreTable(id) {
+  document.getElementById("canvas-wrapper").style.zIndex = "150";
   activateMenu();
   let ref = document.getElementById(id);
       ref.classList.remove("open-score-table");

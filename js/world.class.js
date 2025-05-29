@@ -57,23 +57,22 @@ class World {
     }, 25);
   }
 
-   debug(){
+  debug() {
     setInterval(() => {
       console.log(world.level.coins.length);
     }, 1500);
   }
 
-   debug2(){
+  debug2() {
     setInterval(() => {
       world.level.coins.forEach((coin, index) => {
         console.log("CoinIndex: " + index);
         console.log("Coincoord: " + coin.y);
         if (coin.y < 100) {
           throw console.error(index + coin.y + "this is false");
-          debugger
+          debugger;
         }
-        
-      })
+      });
     }, 1500);
   }
 
@@ -102,15 +101,15 @@ class World {
 
   checkIfGameIsOver() {
     if (this.checkGameEnd()) {
-      clearInterval(this.worldInterval);
+      if (this.level.endboss.energy <= 0) {
+        this.addPointsToPlayerScore("endbossKilled");
+        this.gameWon = true;
+      }
+      requestAnimationFrame(() => {
+        clearInterval(this.worldInterval);
+      });
       setTimeout(() => {
-        if (this.level.endboss.energy <= 0) {
-          this.addPointsToPlayerScore("endbossKilled");
-          this.gameWon = true;
-        }
-        if (this.checkGameEnd()) {
-          this.gameOver();
-        }
+        this.gameOver();
       }, 3000);
     }
   }
@@ -137,20 +136,18 @@ class World {
     deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
-  deleteDeadEnemy(){
-        setTimeout(() => {
+  deleteDeadEnemy() {
+    setTimeout(() => {
       this.level.deadEnemies.splice(0, 1);
     }, 1000);
   }
 
-
-  deadEnemyRoutine(enemy){
-          enemy.isKilled();
-          audio.playRandomSound("deadChicken");
-          this.deleteDeadEnemy();
-          enemy.lives = false;
+  deadEnemyRoutine(enemy) {
+    enemy.isKilled();
+    audio.playRandomSound("deadChicken");
+    this.deleteDeadEnemy();
+    enemy.lives = false;
   }
-
 
   checkBossCollision() {
     if (
@@ -181,7 +178,7 @@ class World {
           this.level.endboss.hitBoss();
           audio.playSoundClone("bossHitted");
           if (!this.checkGameEnd()) {
-          audio.playSoundClone("bossCrys");
+            audio.playSoundClone("bossCrys");
           }
           this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
         }
@@ -261,24 +258,24 @@ class World {
   }
 
   checkCoinCollision() {
-  this.level.coins = this.level.coins.filter((coin) => {
-    if (this.character.isColliding(coin) && !coin.collected) {
-      audio.playSoundClone("collectCoin");
-      this.character.collectCoin();
-      coin.collected = true;
-      this.level.collectedCoins.push(coin);
-      this.deleteCollectedCoin();
-      this.coinbar.updateCoinBar();
-      if (this.character.coins === 10 && gameMode != "chickenRush") {
-        this.level.endboss.startBossFight();
+    this.level.coins = this.level.coins.filter((coin) => {
+      if (this.character.isColliding(coin) && !coin.collected) {
+        audio.playSoundClone("collectCoin");
+        this.character.collectCoin();
+        coin.collected = true;
+        this.level.collectedCoins.push(coin);
+        this.deleteCollectedCoin();
+        this.coinbar.updateCoinBar();
+        if (this.character.coins === 10 && gameMode != "chickenRush") {
+          this.level.endboss.startBossFight();
+        }
+        return false;
       }
-      return false;
-    }
-    return true;
-  });
-}
+      return true;
+    });
+  }
 
-  deleteCollectedCoin(){
+  deleteCollectedCoin() {
     setTimeout(() => {
       this.level.collectedCoins.splice(0, 1);
     }, 1000);
@@ -326,14 +323,16 @@ class World {
 
   checkCluckerSound() {
     const enemyNear = this.level.enemies.some((enemy) => {
-      return enemy.x > this.character.x - 200 && enemy.x < this.character.x + 450
-     });
+      return (
+        enemy.x > this.character.x - 200 && enemy.x < this.character.x + 450
+      );
+    });
 
-     if (enemyNear) {
-       audio.playSound("cluckern");
-     } else {
-       audio.pauseSound("cluckern");
-     }
+    if (enemyNear) {
+      audio.playSound("cluckern");
+    } else {
+      audio.pauseSound("cluckern");
+    }
   }
 
   enemyRunAwayOnCharJump() {
@@ -382,7 +381,7 @@ class World {
     if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);
     }
-    if (fullScreen) {
+    if (fullScreen || screenWidthSmallerThan(1300) || screenHeightSmallerThan(830)) {
       this.getPlayerScore();
     }
     let self = this;
@@ -439,7 +438,6 @@ class World {
   }
 
   gameOver() {
-    gameHasStarted = false;
     this.stopAllGameIntervals();
     this.showEndScreen();
     this.stopGameMusic();
