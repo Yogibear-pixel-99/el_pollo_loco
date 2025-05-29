@@ -21,6 +21,7 @@ class Endboss extends Enemies {
 
   isWalking = false;
   lives = true;
+  isTriggered = false;
 
   offset = {
     width: 250,
@@ -190,6 +191,7 @@ class Endboss extends Enemies {
    * Calls a random jump attack.
    */
   jumpAttack() {
+    if (gamePaused) return;
     let attackAnimationNr = Math.ceil(Math.random() * 3) * 5 + 10;
     let attackCount = 0;
     this.animationCount = 0;
@@ -236,11 +238,13 @@ class Endboss extends Enemies {
    * The jump attack movement from the endboss, changes x with intervall and y by speedY with gravity function.
    */
   bossAttackMovement() {
+    if (gamePaused) return;
     let count = 0;
     let interval;
     if (!this.aboveGround()) {
       this.speedY = 22;
       interval = setInterval(() => {
+        if (gamePaused) return;
         if (count < 30) {
           if (this.otherDirection) {
             this.x = this.x + 6;

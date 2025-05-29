@@ -300,4 +300,17 @@ function styleResponsiveNameInput(){
     ref.value === "" ?
     ref.classList.add("responsive-input-placeholder"):
     ref.classList.remove("responsive-input-placeholder");
-}  
+} 
+
+function pauseGame(){
+  world.stopAllGameIntervals();
+  gamePaused = true;
+  showSingleContainerById("canvas-pause-container");
+  audio.pauseSound("cluckern");
+}
+
+function continueGame(){
+  world.continueGameIntervals();
+  gamePaused = false;
+  hideSingleContainerById("canvas-pause-container");
+}

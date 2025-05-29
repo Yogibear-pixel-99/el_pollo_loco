@@ -360,7 +360,11 @@ class World {
     if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);
     }
-    if (fullScreen || screenWidthSmallerThan(1300) || screenHeightSmallerThan(830)) {
+    if (
+      fullScreen ||
+      screenWidthSmallerThan(1300) ||
+      screenHeightSmallerThan(830)
+    ) {
       this.getPlayerScore();
     }
     let self = this;
@@ -434,17 +438,26 @@ class World {
   }
 
   stopAllGameIntervals() {
+    cancelAnimationFrame(this.drawInterval);
+
     world.character.stopAllCharIntervals();
+
     world.level.enemies.forEach((enemy) => {
       enemy.stopAllEnemyIntervalls();
     });
     world.level.endboss.stopAllBossIntervals();
     clearInterval(world.level.endboss.moveDirectionInterval);
+    clearInterval(world.level.endboss.gravityInterval);
+    this.thrownBottles.forEach((bottle) => {
+      clearInterval(bottle.gravityInterval);
+    });
+    this.level.coins.forEach((coin) => {
+      clearInterval(coin.coinInterval);
+    });
     clearInterval(this.collisionInterval);
     clearInterval(this.worldInterval);
-    clearInterval(this.chickenSpawnInterval);
+    clearInterval(chickenSpawnInterval);
     this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
-    cancelAnimationFrame(this.drawInterval);
   }
 
   showEndScreen() {
@@ -460,5 +473,29 @@ class World {
     audio.pauseMusic("normalModeMusic");
     audio.pauseSound("cluckern");
     audio.pauseSound("gameAmbience");
+  }
+
+  continueGameIntervals() {
+    this.draw();
+    this.character.startChar();
+    world.level.enemies.forEach((enemy) => {
+      enemy.startEnemy();
+    });
+    if (this.level.endboss.isTriggered) {
+      this.level.endboss.startBossIntervals();
+      this.level.endboss.bossMoveDirection();
+      this.level.endboss.applyGravity();
+    }
+    this.runCollisions();
+    this.runWorldIntervals();
+    this.level.skyObjects.forEach((cloud) => {
+      cloud.autoMoveLeft();
+    });
+    this.thrownBottles.forEach((bottle) => {
+      bottle.applyBottleGravity();
+    });
+    this.level.coins.forEach((coin) => {
+      coin.animate();
+    });
   }
 }

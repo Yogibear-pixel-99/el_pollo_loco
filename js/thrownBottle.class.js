@@ -93,6 +93,7 @@ class Thrownbottle extends MovableObject {
     this.x = world.character.x + 35;
     this.y = world.character.y + 50;
     this.moveBottleInterval_x = setInterval(() => {
+      if (gamePaused) return;
       if (this.y == this.floorPosition()) {
         return;
       } else {
@@ -108,6 +109,7 @@ class Thrownbottle extends MovableObject {
     this.x = world.character.x;
     this.y = world.character.y + 50;
     this.moveBottleInterval_x = setInterval(() => {
+      if (gamePaused) return;
       if (this.y == this.floorPosition()) {
         return;
       } else {

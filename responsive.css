@@ -40,6 +40,7 @@
   }
 
   .game-name-header {
+    font-size: 48px !important;
     display: block;
   }
 
@@ -51,7 +52,7 @@
     width: 500px;
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 20px;
   }
 
   /* .settings-wrapper {
@@ -240,6 +241,16 @@
     width: 30px;
     height: 30px;
   }
+
+  .opt-wrapper:hover .settings-img {
+  transform: translateY(30px);
+  transition: transform 300ms;
+}
+
+.opt-wrapper:hover .opt-text {
+  transform: translateY(-30px);
+  transition: transform 300ms;
+}
 }
 
 @media (max-width: 720px) {
@@ -305,6 +316,17 @@
   .settings-wrapper img {
     width: 20px;
     height: 20px;
+  }
+}
+
+@media (max-width: 350px) {
+  .start-game-text {
+    font-size: 32px !important;
+  }
+
+  .game-name-header {
+    margin: 0;
+    font-size: 32px !important;
   }
 }
 

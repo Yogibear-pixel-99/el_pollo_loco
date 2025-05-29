@@ -11,7 +11,8 @@ let canvasWidth = 720;
 let floorHeight = 58;
 let playMusicOnStart = false;
 let fullScreen = false;
-let gameHasStarted;
+let gameHasStarted = false;
+let gamePaused = false;
 let gameMode = "normal";
 const MAIN_URL =
   "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -27,8 +28,6 @@ function init() {
   checkScreensizeForFixFullscreen();
 }
 
-
-
 function startGame() {
   gameHasStarted = true;
   if (checkNameInput()) {
@@ -38,7 +37,7 @@ function startGame() {
     showLoadingScreen();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
-    setTimeout(() =>  checkFullscreenMode(), 3000);
+    setTimeout(() => checkFullscreenMode(), 3000);
     switch (gameMode) {
       case "normal":
         configNormalMode();
@@ -60,11 +59,11 @@ function startGame() {
   }
 }
 
-function checkScoreBoardAppearance(){
+function checkScoreBoardAppearance() {
   if (screenWidthSmallerThan(1300) || screenHeightSmallerThan(830)) {
     document.getElementById("right-content").style.zIndex = "0";
   } else {
-      document.getElementById("right-content").style.zIndex = "100";
+    document.getElementById("right-content").style.zIndex = "100";
   }
 }
 
@@ -83,14 +82,15 @@ function checkFullscreenMode() {
     // canvas.msRequestFullscreen();
   } else if (fullScreen && !gameHasStarted) {
     document.exitFullscreen();
-    canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_2.png")';
+    canvas.style.backgroundImage =
+      'url("img/9_intro_outro_screens/start/startscreen_2.png")';
     // canvas.webkitExitFullscreen();
     // canvas.msExitFullscreen();
   }
 }
 
-function gameStartFalse(){
-   gameHasStarted = false;
+function gameStartFalse() {
+  gameHasStarted = false;
 }
 
 function addErrorAnimation(id, className) {
@@ -205,34 +205,38 @@ function toggleGameMode() {
 }
 
 window.addEventListener("keydown", (event) => {
+  console.log(event.key);
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = true;
-
       break;
+
     case "ArrowLeft":
       keyboard.KEY_LEFT = true;
-
       break;
+
     case "ArrowUp":
       keyboard.KEY_UP = true;
-
       break;
+
     case "ArrowDown":
       keyboard.KEY_DOWN = true;
-
       break;
+
     case " ":
       keyboard.KEY_JUMP = true;
-
       break;
+
     case "Control":
       keyboard.KEY_SHOT = true;
-
       break;
+
     case "Alt":
       keyboard.KEY_SHOT = true;
+      break;
 
+    case "d":
+      keyboard.KEY_SHOT = true;
       break;
 
     default:
@@ -241,34 +245,43 @@ window.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("keyup", (event) => {
+  if (gameHasStarted && (event.key === "Escape" || event.key === "p")) {
+    gamePaused ? continueGame() : pauseGame();
+  }});
+
+
+window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "ArrowRight":
       keyboard.KEY_RIGHT = false;
-
       break;
+
     case "ArrowLeft":
       keyboard.KEY_LEFT = false;
-
       break;
+
     case "ArrowUp":
       keyboard.KEY_UP = false;
-
       break;
+
     case "ArrowDown":
       keyboard.KEY_DOWN = false;
-
       break;
+
     case " ":
       keyboard.KEY_SPACE = false;
-
       break;
+
     case "Control":
       keyboard.KEY_SHOT = false;
-
       break;
+
     case "Alt":
       keyboard.KEY_SHOT = false;
+      break;
 
+    case "d":
+      keyboard.KEY_SHOT = false;
       break;
 
     default:
@@ -285,7 +298,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document
-    .querySelectorAll(".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input")
+    .querySelectorAll(
+      ".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input"
+    )
     .forEach((element) => {
       element.addEventListener("click", () => {
         audio.playSoundClone("menuClick");
@@ -298,50 +313,24 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
-
-
+// Create pause menu
+// esc or "p"
+// stop all game intervalls
+// show pause menu with buttons "menu" - "continue"
 
 // Create a game mask for turn device
-  // check with javascript or css if device height is more than 720 and width is smaller
-  // game menu and footer are t centered
+// check with javascript or css if device height is more than 720 and width is smaller
 
-// if game end and boss killed, score dont updates in canvas.
-// chicken spawn for hard mode same as normal
-// show highscore in game, if score table is unvisible
-// change the get name field and the review of the name error depending onscreen width
-  // same to player score
-// score table color
-
-// diffrent color to menu
-// if open options menu, darken background, deactivate and set close on click on background
-
-// responsive for all screens
 // turn to landscape if in portrait mode
 // mobile controlling options
 
 // documenatation
-
-
-// show overlay onclick
-  // story
-  // controls
-  // sound on/off
-
-// hide overlay on click X in canvas option menu
-// hide on click on the same option button
-
-// set zindex for canvas an game points tabel---or hide the left and rigth content --- show highscore in game
-
-
 
 // Shorten all functions
 
 // CALL QUESTIONS - ANSWERES
 // parallax mode
 // Attack animation verkürzen???
-
-
-
 
 // INTERVALLS:
 

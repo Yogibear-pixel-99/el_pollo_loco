@@ -108,6 +108,25 @@
           </section>
         </section>
 
+                  <section
+            id="canvas-pause-container"
+            class="canvas-won-container flex-ctr-ctr flex-col d-none">
+            <img
+              src="./img/You won, you lost/You Won B.png"
+              class="game-won-img"
+              alt="game-won-img" />
+            <div class="won-lost-wrapper">
+              <div class="won-lost-single-button-wrapper" onclick="continueGame()">
+                <img src="./img/icons/mask-306939_640.png" alt="" />
+                <div>Continue</div>
+              </div>
+              <div class="won-lost-single-button-wrapper" onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse()">
+                <img src="./img/icons/cactus-8142375_640.png" alt="" />
+                <div>Main Menu</div>
+              </div>
+            </div>
+          </section>
+
         <div class="header-wrapper">
           <div class="score-tables-wrapper">
             <button class="open-highscore" onclick="toggleResponsiveScoreTableHighscore('left-content')">Highscore</button>

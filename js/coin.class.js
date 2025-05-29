@@ -4,6 +4,7 @@ class Coin extends DrawableObject {
   collected = false;
   itemName = 'collectCoin';
   coininterval;
+  fixed_y;
 
   offset = {
     top: 35,
@@ -42,6 +43,7 @@ class Coin extends DrawableObject {
     super();
     this.x = x;
     this.y = y;
+    this.fixed_y = y;
     this.loadImage("./img/8_coin/collected/coin_collect_2.png");
     this.loadImagesArray(this.COIN_ANIMATION);
     this.loadImagesArray(this.COLLECTED_COIN_ANIMATION);
@@ -65,7 +67,6 @@ class Coin extends DrawableObject {
 
   collectMovement() {
       this.y = this.y - 2;
-
   }
 }
 

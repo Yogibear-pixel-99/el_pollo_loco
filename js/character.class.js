@@ -7,7 +7,7 @@ class Character extends MovableObject {
   animateInterval;
   soundInterval;
   moveInterval;
-  allIntervals = ["animateInterval", "soundInterval", "moveInterval"];
+  allIntervals = ["animateInterval", "soundInterval", "moveInterval", "gravityInterval"];
 
   isIdle = false;
   idleCount = 0;
