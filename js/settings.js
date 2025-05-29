@@ -141,11 +141,18 @@ function hideSingleContainerById(containerId) {
   content.classList.add("d-none");
 }
 
+function checkScreensizeForFixFullscreen() {
+  if (window.innerWidth <= 720 || window.innerHeight <= 480) {
+  let buttonRef = document.getElementById("full-screen-button");
+    fullScreen = true;
+    buttonRef.classList.add("full-screen-button");
+}
+}
+
 function toggleFullScreen() {
   let buttonRef = document.getElementById("full-screen-button");
   if (window.innerWidth <= 720 || window.innerHeight <= 480) {
-    fullScree = true;
-    buttonRef.classList.add("full-screen-button");
+    showJustFullscreenInfo();
   } else if (fullScreen) {
     buttonRef.classList.remove("full-screen-button");
     fullScreen = false;
@@ -153,6 +160,14 @@ function toggleFullScreen() {
     fullScreen = true;
     buttonRef.classList.add("full-screen-button");
   }
+}
+
+function showJustFullscreenInfo(){
+  let ref = document.getElementById("name-error-text");
+      ref.innerText = "Screen is to small, just fullscreen possible";
+      setTimeout(() => {
+        ref.innerText = ""
+      }, 10000);
 }
 
 function returnOnlyLettersAndNumbers(id) {

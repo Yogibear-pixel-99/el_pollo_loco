@@ -24,7 +24,7 @@ function init() {
   assignSoundSettings();
   getActiveHighscores();
   renderGamePointsTable();
-  toggleFullScreen();
+  checkScreensizeForFixFullscreen();
 }
 
 
@@ -287,7 +287,10 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
+// solve fullscreen problem
+
 // play click sound on score and points button / close button
+// darken background of gamecanvas or change z-index on open points or score overlay
 
 // Create a game mask for turn device
   // check with javascript or css if device height is more than 720 and width is smaller

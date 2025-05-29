@@ -25,6 +25,7 @@ html {
   --settings-bg-active: rgb(233, 180, 33);
   --settings-text-active: rgb(255, 231, 163);
   --spinner-bg: #411E0F;
+  --error-message-txt-color: red;
 }
 
 body {
@@ -601,6 +602,7 @@ background-color: var(--settings-bg);
 .name-error-text {
   height: 30px;
   font-weight: 700;
+  color: var(--error-message-txt-color);
 }
 
 @keyframes start-error {
