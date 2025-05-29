@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document
-    .querySelectorAll(".opt-wrapper, .sound-wrapper, #player-name-input")
+    .querySelectorAll(".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input")
     .forEach((element) => {
       element.addEventListener("click", () => {
         audio.playSoundClone("menuClick");
@@ -287,7 +287,7 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
-// solve fullscreen problem
+
 
 // play click sound on score and points button / close button
 // darken background of gamecanvas or change z-index on open points or score overlay

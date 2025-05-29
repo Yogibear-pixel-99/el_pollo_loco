@@ -32,9 +32,14 @@ function showSingleContainerById(containerId) {
 function toggleOptionMenu(getTemp, settingsMenu) {
   if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
     showResponsiveGameCanvas();
-    if (screenHeightSmallerThan(700)) {
+
       deactivateMenu();
-    }}
+    }
+  // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
+  //   showResponsiveGameCanvas();
+  //   if (screenHeightSmallerThan(700)) {
+  //     deactivateMenu();
+  //   }}
 
   let ref = document.getElementById("canvas-option-container");
   let template = getTemp();
@@ -66,9 +71,13 @@ function closeSettings() {
   }
   if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
      hideResponsiveGameCanvas();
-     if (screenHeightSmallerThan(700)) {
+
      activateMenu();
-  }} else {
+  // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
+  //    hideResponsiveGameCanvas();
+  //    if (screenHeightSmallerThan(700)) {
+  //    activateMenu();
+  } else {
   hideSingleContainerById('canvas-option-container')
 }}
 

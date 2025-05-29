@@ -43,6 +43,10 @@
     display: block;
   }
 
+    .canvas-wrapper {
+    top: 50%;
+  }
+
   .game-wrapper {
     width: 500px;
     display: flex;
@@ -66,9 +70,9 @@
     max-height: calc(100dvh - 150px);
   }
 
-  .canvas-wrapper {
+  /* .canvas-wrapper {
     top: 50%;
-  }
+  } */
 }
 
 @media (max-height: 600px) {
@@ -241,7 +245,8 @@
 @media (max-width: 720px) {
   .canvas-wrapper {
     position: absolute;
-    top: calc(50% - 62px);
+    top: 50%;
+    /* top: calc(50% - 62px); */
     left: 50%;
     transform: translate(-50%, 100dvh);
     display: none;
