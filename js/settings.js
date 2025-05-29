@@ -100,14 +100,14 @@ function showResponsiveGameCanvas(){
 }
 
 function hideResponsiveGameCanvas(){
+  if(screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
     let ref = document.getElementById("canvas-wrapper");
     ref.classList.remove("canvas-mobile-open")
     setTimeout(() => ref.style.display = "none", 300);
 }
-
+}
 
 function toggleResponsiveScoreTablePoints(id){
-  
   document.getElementById("left-content").classList.remove("open-score-table");
   let ref = document.getElementById(id);
       ref.classList.contains('open-score-table') ?
