@@ -755,7 +755,7 @@ input[type=range]::-moz-range-thumb {
 
 .mobile-buttons {
  display: flex;
- gap: 20px;
+ gap: 6px;
 }
 
 .mobile-buttons div {
@@ -770,5 +770,4 @@ input[type=range]::-moz-range-thumb {
 
 .mobile-buttons-wrapper img {
   width: 40px;
-  /* padding: 12px; */
 }

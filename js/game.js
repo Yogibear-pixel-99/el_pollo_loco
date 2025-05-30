@@ -275,6 +275,8 @@ window.addEventListener("fullscreenchange", () => {
   }
 });
 
+
+
 window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "ArrowRight":
@@ -380,6 +382,8 @@ function showGameOverScreen() {
     ? showSingleContainerById("canvas-won-container")
     : showSingleContainerById("canvas-lost-container");
 }
+
+// move keyboard event listeners to keyboard object
 
 // check fullscreen in all browsere
 // check scrollbars in all browseres and container
