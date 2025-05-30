@@ -8,26 +8,38 @@ class Keyboard {
         this.startKeyboardTouchEvents();
     }
 
+    // creating prevent mobile buttons for hide popup menu
 
     startKeyboardTouchEvents(){
-        document.getElementById("mobile-jump").addEventListener("touchstart", (event) => {
-            event.preventDefault();
+        let ref1 = document.getElementById("mobile-jump")
+            ref1.oncontextmenu = (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                return false;
+            }
+            ref1.addEventListener("touchstart", () => {
             this.KEY_JUMP = true;
         })
-
+        let ref2
         document.getElementById("mobile-throw").addEventListener("touchstart", (event) => {
-            event.preventDefault();
+            // event.preventDefault();
             this.KEY_SHOT = true;
         })
-
+        let ref3
         document.getElementById("mobile-left").addEventListener("touchstart", (event) => {
-            event.preventDefault();
+            // event.preventDefault();
             this.KEY_LEFT = true;
         })
-
-        document.getElementById("mobile-right").addEventListener("touchstart", (event) => {
-            event.preventDefault();
-            event.preventDefault();
+        let ref4 = document.getElementById("mobile-right");
+            ref4.oncontextmenu = (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                return false;
+            }
+            ref4.addEventListener("touchstart", (event) => {
+            // event.preventDefault();
             this.KEY_RIGHT = true;
         })
 
@@ -48,6 +60,7 @@ class Keyboard {
         })
 
     }
+
 
 
 
