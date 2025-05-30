@@ -743,3 +743,32 @@ input[type=range]::-moz-range-thumb {
   background-color: var(--settings-bg-active);
   color: var(--settings-text-active);
 }
+
+.mobile-buttons-wrapper {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile-buttons {
+ display: flex;
+ gap: 20px;
+}
+
+.mobile-buttons div {
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;;
+}
+
+.mobile-buttons div:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-buttons-wrapper img {
+  width: 40px;
+  /* padding: 12px; */
+}
