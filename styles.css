@@ -625,7 +625,7 @@ background-color: var(--settings-bg);
 } */
 
 .name-error-text {
-  height: 30px;
+  height: 54px;
   font-weight: 700;
   color: var(--error-message-txt-color);
 }

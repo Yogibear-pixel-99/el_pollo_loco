@@ -91,10 +91,14 @@
     font-size: 26px;
   }
 
-      .score-table-close-button {
-  width: 28px;
-  height: 28px;
-}
+  .name-error-text {
+    height: 54px;
+  }
+
+  .score-table-close-button {
+    width: 28px;
+    height: 28px;
+  }
 
   .game-name-header {
     font-size: 56px;
@@ -148,7 +152,10 @@
 @media (max-height: 400px) {
   .game-name-header {
     font-size: 48px;
-    /* margin: 0; */
+  }
+
+  .main-container {
+    margin-top: 0 !important;
   }
 
   .player-name {
@@ -165,7 +172,8 @@
   }
 
   .name-error-text {
-    height: 22px;
+    height: 24px;
+    font-size: 14px !important;
   }
 }
 
@@ -199,8 +207,8 @@
     display: block;
   }
   .score-table-close-button {
-  display: block;
-}
+    display: block;
+  }
 
   .score-tables-wrapper {
     display: flex;
@@ -252,14 +260,14 @@
   }
 
   .opt-wrapper:hover .settings-img {
-  transform: translateY(30px);
-  transition: transform 300ms;
-}
+    transform: translateY(30px);
+    transition: transform 300ms;
+  }
 
-.opt-wrapper:hover .opt-text {
-  transform: translateY(-30px);
-  transition: transform 300ms;
-}
+  .opt-wrapper:hover .opt-text {
+    transform: translateY(-30px);
+    transition: transform 300ms;
+  }
 }
 
 @media (max-width: 720px) {
@@ -347,7 +355,7 @@
   .open-points-table,
   .open-highscore {
     padding: 2px 4px 4px;
-    font-size: 18px;;
+    font-size: 18px;
   }
 }
 

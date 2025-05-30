@@ -258,7 +258,7 @@ window.addEventListener("keydown", (event) => {
 
 window.addEventListener("keyup", (event) => {
   if (gameHasStarted && (event.key === "Escape" || event.key === "p") || event.key === "P") {
-    gamePaused ? continueGame() : pauseGame();
+    gamePaused ? resumeGame() : pauseGame();
   }});
 
 
@@ -367,6 +367,8 @@ document.addEventListener("click", () => {
       : showSingleContainerById("canvas-lost-container");
   }
 
+
+// responsive error message
 
   // testing fullscreen
     // on gamestart

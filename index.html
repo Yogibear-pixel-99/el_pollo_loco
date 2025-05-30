@@ -49,7 +49,7 @@
     <main class="main-container">
       <div class="left-content" id="left-content">
         <div class="flex-ctr-ctr flex-col">
-          <img class="score-table-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+          <img class="score-table-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
           <h2>Highscore</h2>
           <div class="m20bot">Top 30</div>
         </div>
@@ -60,7 +60,7 @@
         <section
           class="start-game-mask d-none"
           id="game-mask"
-          onclick="closeSettings(); audio.playSoundClone('menuClick')"></section>
+          onclick="closeSettings()"></section>
         <div class="header-wrapper">
           <h1 id="game-mode-txt" class="top-game-header">Normal Mode</h1>
           <span id="game-mode-exp">Collect 10 coins to trigger the boss</span>
@@ -86,7 +86,7 @@
               </div>
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse();  checkFullscreenMode()">
+                onclick="backToMainMenu()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -107,7 +107,7 @@
               </div>
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="activateMenu();  audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse(); checkFullscreenMode()">
+                onclick="backToMainMenu()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -120,13 +120,13 @@
             <div class="won-lost-wrapper">
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="continueGame()">
+                onclick="resumeGame();">
                 <img src="./img/icons/mask-306939_640.png" alt="" />
                 <div>Resume</div>
               </div>
               <div
                 class="won-lost-single-button-wrapper"
-                onclick="activateMenu(); audio.playMusicLoop('menuMusic'); hideResponsiveGameCanvas(); gameStartFalse(); checkFullscreenMode(); resetGame()">
+                onclick="backToMainMenu(); gameOver()">
                 <img src="./img/icons/cactus-8142375_640.png" alt="" />
                 <div>Main Menu</div>
               </div>
@@ -167,7 +167,7 @@
         </div>
       </div>
       <div class="right-content" id="right-content">
-        <img class="score-table-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+        <img class="score-table-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                   <h2 class="m20bot">Points Table</h2>
         <div class="player-score" id="player-score">000</div>
         <div class="points-table" id="game-points-table"></div>

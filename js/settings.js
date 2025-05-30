@@ -69,6 +69,7 @@ function toggleOptionMenu(getTemp, settingsMenu) {
 
 function closeSettings() {
   if (gameHasStarted) return;
+
   if (screenWidthSmallerThan(1300)) {
     document
       .getElementById("right-content")
@@ -89,6 +90,7 @@ function closeSettings() {
   } else {
     hideSingleContainerById("canvas-option-container");
   }
+   audio.playSoundClone('menuClick');
 }
 
 function screenHeightSmallerThan(value) {
@@ -313,9 +315,6 @@ function styleResponsiveNameInput() {
 }
 
 function pauseGame() {
-  if (fullScreen) {
-    hideFullscreen();
-  }
   showCursor();
   world.stopAllGameIntervals();
   gamePaused = true;
@@ -323,14 +322,12 @@ function pauseGame() {
   audio.pauseSound("cluckern");
 }
 
-function continueGame() {
-  if (fullScreen) {
-    showFullscreen();
-  }
+function resumeGame() {
   hideCursor();
   world.continueGameIntervals();
   gamePaused = false;
   hideSingleContainerById("canvas-pause-container");
+  audio.playSound('menuClick');
 }
 
 function showFullscreen(){
@@ -356,4 +353,17 @@ let ref = document.getElementById("canvas-wrapper");
   ref.style.height = "480px";    
       document.exitFullscreen();
   }
+}
+
+function resetGame(){
+  gameOver();
+}
+
+function backToMainMenu(){
+  activateMenu();
+  audio.playMusicLoop('menuMusic');
+  hideResponsiveGameCanvas();
+  gameStartFalse();
+  checkFullscreenMode();
+  audio.playSound("menuClick");
 }
