@@ -38,6 +38,7 @@ function startGame() {
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
     checkFullscreenMode();
+    document.getElementById("player-score").innerText = "0";
     // setTimeout(() => checkFullscreenMode(), 3000);
     switch (gameMode) {
       case "normal":

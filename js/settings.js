@@ -348,17 +348,28 @@ function showFullscreen() {
 }
 
 function resizeMobileButtons() {
-  let buttons = querySelectorAll(".mobile-game-button");
-  const size = window.innerHeight / 8;
-    buttons.forEach((button) => {
+  let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
+  let buttonImg = document.querySelectorAll(".mobile-game-button img");
+  const size = window.innerHeight / 8.5;
+    buttonsWrapper.forEach((button) => {
+      button.style.padding = `${size / 2}`;
       button.style.width = `${size}px`
       button.style.height = `${size}px`
+      // button.style.width = `${size}px`;
+      // button.style.height = `${size}px`;
+    })
+    buttonImg.forEach((img) => {
+      img.style.width = `${size / 2.5}px`;
+      img.style.height = `${size / 2.5}px`;
     })
 }
 
+// calculate position width for mobile buttons
+// calculate button size 
+
 function resizeDisplay() {
   const canvas = document.getElementById("gamecanvas");
-  const buttons = document.getElementById("mobile-buttons-wrapper");
+  const buttonsRef = document.getElementById("mobile-buttons-wrapper");
   const gameWidth = 720;
   const gameHeight = 480;
   const windowWidth = window.innerWidth;
@@ -373,8 +384,9 @@ function resizeDisplay() {
   canvas.style.height = `${scaledHeight}px`;
   canvas.style.left = `${(windowWidth - scaledWidth) / 2}px`;
   canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
-  buttons.style.width = `${scaledWidth}px`;
-  buttons.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`
+  buttonsRef.style.width = `${scaledWidth - 40}px`;
+  buttonsRef.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`
+  buttonsRef.width = `${windowWidth - 40}`;
 }
 
 function hideFullscreen() {
@@ -391,6 +403,23 @@ function hideFullscreen() {
   canvas.style.top = "0";
   canvas.style.backgroundImage =
     'url("img/9_intro_outro_screens/start/startscreen_2.png")';
+
+  const buttonsRef = document.getElementById("mobile-buttons-wrapper");
+  buttonsRef.style.width = '680px';
+  buttonsRef.style.bottom = '8px';
+  buttonsRef.width = '64px';
+
+  let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
+  let buttonImg = document.querySelectorAll(".mobile-game-button img");
+    buttonsWrapper.forEach((button) => {
+      button.style.padding = '12px';
+      button.style.width = '64px';
+      button.style.height =  '64px';
+    })
+    buttonImg.forEach((img) => {
+      img.style.width = '40px';
+      img.style.height = '40px';
+    })
 }
 
 function resetGame() {

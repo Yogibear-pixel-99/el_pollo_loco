@@ -747,27 +747,32 @@ input[type=range]::-moz-range-thumb {
 .mobile-buttons-wrapper {
   position: absolute;
   bottom: 8px;
-  left: 12px;
-  right: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
+  width: 680px;
+  /* display: none; */
 }
 
 .mobile-buttons {
  display: flex;
- gap: 6px;
-}
-
-.mobile-buttons div {
-  padding: 12px;
-  background-color: rgba(199, 0, 0, 0.2);
-  border-radius: 12px;;
+ gap: 24px;
 }
 
 .mobile-buttons div:active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .mobile-buttons-wrapper img {
   width: 40px;
+}
+
+.mobile-game-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 12px;;
 }

@@ -394,3 +394,9 @@
     display: block;
   }
 }
+
+/* @media (pointer: coarse) {
+  .mobile-buttons-wrapper {
+    display: flex;
+  }
+} */
