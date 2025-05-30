@@ -252,6 +252,10 @@ h2 {
   flex-direction: column;
 }
 
+.m20bot {
+  margin-bottom: 20px;
+}
+
 .start-game-text {
   /* display: inline-block; */
   /* animation-name: blink; */
@@ -358,12 +362,15 @@ h2 {
   overflow-y: auto;
   max-height: 620px;
   width: 320px;
-}
-
-.left-content {
-  border: solid 18px rgba(233, 180, 33, 0);
+  margin: 20px 0;
+   border: solid 18px rgba(233, 180, 33, 0);
   padding: 0;
 }
+
+/* .left-content {
+  border: solid 18px rgba(233, 180, 33, 0);
+  padding: 0;
+} */
 
 .left-content::-webkit-scrollbar {
   width: 5px;
@@ -545,6 +552,18 @@ h2 {
   width: 34px;
   padding: 4px;
   border-radius: 50%;
+}
+
+.score-table-close-button {
+    position: absolute;
+  margin: 0 0 0 auto;
+  height: 34px;
+  width: 34px;
+  padding: 4px;
+  border-radius: 50%;
+  display: none;
+  right: 0px;
+  top: 10px;
 }
 
 .settings-close-button:hover {

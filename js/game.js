@@ -379,7 +379,7 @@ document.addEventListener("click", () => {
       // resume in diffrent situations
       // go to menu from pause
 
-      
+
 
   // Testing pause, resume, play again, go to menu in alle different sizes
     // normal
@@ -391,6 +391,8 @@ document.addEventListener("click", () => {
   // game end, sound is playing twice
   // play again doesnt work animore - if i wait a few seconds... it works
   // get to main menu doesnt work
+
+  // highscore should display the position before the name
 
 // fullscreen for all browseres
 

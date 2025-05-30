@@ -49,8 +49,9 @@
     <main class="main-container">
       <div class="left-content" id="left-content">
         <div class="flex-ctr-ctr flex-col">
+          <img class="score-table-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
           <h2>Highscore</h2>
-          <div>Top 30</div>
+          <div class="m20bot">Top 30</div>
         </div>
         <div class="highscores" id="highscore"></div>
       </div>
@@ -59,7 +60,7 @@
         <section
           class="start-game-mask d-none"
           id="game-mask"
-          onclick="closeSettings()"></section>
+          onclick="closeSettings(); audio.playSoundClone('menuClick')"></section>
         <div class="header-wrapper">
           <h1 id="game-mode-txt" class="top-game-header">Normal Mode</h1>
           <span id="game-mode-exp">Collect 10 coins to trigger the boss</span>
@@ -166,6 +167,8 @@
         </div>
       </div>
       <div class="right-content" id="right-content">
+        <img class="score-table-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                  <h2 class="m20bot">Points Table</h2>
         <div class="player-score" id="player-score">000</div>
         <div class="points-table" id="game-points-table"></div>
       </div>

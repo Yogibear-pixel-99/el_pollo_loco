@@ -91,6 +91,11 @@
     font-size: 26px;
   }
 
+      .score-table-close-button {
+  width: 28px;
+  height: 28px;
+}
+
   .game-name-header {
     font-size: 56px;
   }
@@ -193,6 +198,9 @@
   .open-points-table {
     display: block;
   }
+  .score-table-close-button {
+  display: block;
+}
 
   .score-tables-wrapper {
     display: flex;
@@ -210,10 +218,11 @@
     z-index: 300;
     display: none;
     max-height: 100dvh;
+    margin: 0;
   }
 
   .open-score-table {
-    transform: translate(-50%, -70%);
+    transform: translate(-50%, -50%);
   }
 
   .player-score {
@@ -321,12 +330,24 @@
 
 @media (max-width: 350px) {
   .start-game-text {
-    font-size: 32px !important;
+    font-size: 26px !important;
   }
 
   .game-name-header {
     margin: 0;
     font-size: 32px !important;
+  }
+
+  .left-content,
+  .right-content {
+    width: 95dvw;
+    max-height: 98dvh;
+  }
+
+  .open-points-table,
+  .open-highscore {
+    padding: 2px 4px 4px;
+    font-size: 18px;;
   }
 }
 
