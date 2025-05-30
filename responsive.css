@@ -330,6 +330,18 @@
     font-size: 10px;
   }
 
+  .opt-wrapper:hover .settings-img,
+    .opt-wrapper:active .settings-img {
+  transform: translateY(16px);
+  transition: transform 300ms;
+}
+
+.opt-wrapper:hover .opt-text,
+.opt-wrapper:active .opt-text {
+  transform: translateY(-26px);
+  transition: transform 300ms;
+}
+
   .settings-wrapper img {
     width: 20px;
     height: 20px;

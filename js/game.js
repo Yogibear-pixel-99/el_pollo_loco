@@ -37,7 +37,8 @@ function startGame() {
     showLoadingScreen();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
-    setTimeout(() => checkFullscreenMode(), 3000);
+    checkFullscreenMode();
+    // setTimeout(() => checkFullscreenMode(), 3000);
     switch (gameMode) {
       case "normal":
         configNormalMode();
@@ -75,15 +76,8 @@ function showLoadingScreen() {
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     showFullscreen();
-    
-    // canvas.width = "100%";
-    // canvas.style.backgroundColor = "black";
-    // canvas.webkitRequestFullscreen();
-    // canvas.msRequestFullscreen();
   } else if (fullScreen && !gameHasStarted) {
     hideFullscreen();
-    // canvas.webkitExitFullscreen();
-    // canvas.msExitFullscreen();
   }
 }
 
@@ -131,8 +125,8 @@ function playAgain() {
   startGame();
 }
 
-function hideWonLostPauseScreens(){
-    let lostRef = document.getElementById("canvas-lost-container");
+function hideWonLostPauseScreens() {
+  let lostRef = document.getElementById("canvas-lost-container");
   let wonRef = document.getElementById("canvas-won-container");
   let pauseRef = document.getElementById("canvas-pause-container");
   lostRef.classList.add("d-none");
@@ -256,11 +250,30 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("keyup", (event) => {
-  if (gameHasStarted && (event.key === "Escape" || event.key === "p") || event.key === "P") {
+document.addEventListener("keyup", (event) => {
+  if (
+    (gameHasStarted && event.key === "p") ||
+    event.key === "P" ||
+    event.key === "Escape"
+  ) {
     gamePaused ? resumeGame() : pauseGame();
-  }});
+  }
 
+  // if (gameHasStarted && event.key === "Escape") {
+  //   pauseGame();
+  //   backToMainMenu();
+  //   gameOver();
+  // }
+});
+
+window.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement && gameHasStarted) {
+    // pauseGame();
+    backToMainMenu();
+    gameOver();
+    hideFullscreen();
+  }
+});
 
 window.addEventListener("keyup", (event) => {
   switch (event.key) {
@@ -307,7 +320,7 @@ window.addEventListener("keyup", (event) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousedown", () => {
-    showActiveCursor()
+    showActiveCursor();
   });
   document.addEventListener("mouseup", () => {
     showCursor();
@@ -329,72 +342,65 @@ document.addEventListener("click", () => {
   playMusicOnStart = true;
 });
 
- function gameOver() {
-    world.stopAllGameIntervals();
-    saveScore();
-    stopGameMusic();
-    checkFullscreenMode();
-    showCursor();
-        if (gamePaused) {
-      gamePaused = false;
-      return;
-    }
+function gameOver() {
+  world.stopAllGameIntervals();
+  saveScore();
+  stopGameMusic();
+  checkFullscreenMode();
+  showCursor();
+  if (gamePaused) {
+    gamePaused = false;
+    return;
+  }
 
-    playEndAudio();
+  playEndAudio();
+  if (world.checkGameEnd()) {
     showGameOverScreen();
-    // exit fullscreenmode bzw. show game overscreen in fullscreen mode
   }
+}
 
-   function stopGameMusic() {
-    audio.pauseMusic("chickenRushMusic");
-    audio.pauseMusic("normalModeMusic");
-    audio.pauseSound("cluckern");
-    audio.pauseSound("gameAmbience");
+function stopGameMusic() {
+  audio.pauseMusic("chickenRushMusic");
+  audio.pauseMusic("normalModeMusic");
+  audio.pauseSound("cluckern");
+  audio.pauseSound("gameAmbience");
+}
+
+function playEndAudio() {
+  if (world.gameWon) {
+    audio.playSound("gameWon");
+  } else {
+    console.trace();
+    audio.playSound("gameLost");
   }
+}
 
-    function playEndAudio() {
-    if (world.gameWon) {
-      audio.playSound("gameWon");
-    } else {
-      console.trace();
-      audio.playSound("gameLost");
-    }
-  }
+function showGameOverScreen() {
+  world.gameWon
+    ? showSingleContainerById("canvas-won-container")
+    : showSingleContainerById("canvas-lost-container");
+}
 
-   function showGameOverScreen() {
-    world.gameWon
-      ? showSingleContainerById("canvas-won-container")
-      : showSingleContainerById("canvas-lost-container");
-  }
+// check fullscreen in all browsere
+// check scrollbars in all browseres and container
+// points table
+// score table
 
+// Fix left fullscreen mode by hitting escape
+// fix fullscreen ratio
 
-// responsive error message
-
-  // testing fullscreen
-    // on gamestart
-    // on gameend won
-    // on gameend lost
-    // on playagain
-    // on go to menu
-      // 3 times
-    // on pause menu while playing
-      // resume in diffrent situations
-      // go to menu from pause
-
-
-
-  // Testing pause, resume, play again, go to menu in alle different sizes
-    // normal
-    // overlay
-    // fullscreen
+// Testing pause, resume, play again, go to menu in alle different sizes
+// normal
+// overlay
+// fullscreen
 
 // on game end, disable fullscreen
 
-  // game end, sound is playing twice
-  // play again doesnt work animore - if i wait a few seconds... it works
-  // get to main menu doesnt work
+// game end, sound is playing twice
+// play again doesnt work animore - if i wait a few seconds... it works
+// get to main menu doesnt work
 
-  // highscore should display the position before the name
+// highscore should display the position before the name
 
 // fullscreen for all browseres
 

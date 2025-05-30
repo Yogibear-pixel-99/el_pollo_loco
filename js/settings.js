@@ -330,29 +330,54 @@ function resumeGame() {
   audio.playSound('menuClick');
 }
 
-function showFullscreen(){
-  let ref = document.getElementById("canvas-wrapper");
-  if (!document.fullscreenElement) {
-  canvas.style.backgroundImage = "none";
-  ref.style.width = "100dvw";
-  ref.style.height = "100dvh";
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-  ref.requestFullscreen();
+function showFullscreen() {
+  const ref = document.getElementById("canvas-wrapper");
+  const canvas = document.getElementById("gamecanvas");
+  if (!document.fullscreenElement && fullScreen) {
+    if (ref.requestFullscreen) {
+      ref.requestFullscreen();
+    } else if (ref.webkitRequestFullscreen) {
+      ref.webkitRequestFullscreen();
+    } else if (ref.msRequestFullscreen) {
+      ref.msRequestFullscreen();
+    }
+    canvas.style.backgroundImage = "none";
+    requestAnimationFrame(scaleCanvasDisplay, 100);
   }
 }
 
+
+function scaleCanvasDisplay() {
+  const canvas = document.getElementById("gamecanvas");
+  const gameWidth = 720;
+  const gameHeight = 480;
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const scaleX = windowWidth / gameWidth;
+  const scaleY = windowHeight / gameHeight;
+  const scale = Math.min(scaleX, scaleY);
+  const scaledWidth = gameWidth * scale;
+  const scaledHeight = gameHeight * scale;
+
+  canvas.style.width = `${scaledWidth}px`;
+  canvas.style.height = `${scaledHeight}px`;
+  canvas.style.left = `${(windowWidth - scaledWidth) / 2}px`;
+  canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
+}
+
 function hideFullscreen(){
-let ref = document.getElementById("canvas-wrapper");
   if (document.fullscreenElement) {
-    canvas.style.backgroundImage =
-      'url("img/9_intro_outro_screens/start/startscreen_2.png")';
-        ref.style.width = "720px";
-  ref.style.height = "480px";    
-        ref.style.width = "720px";
-  ref.style.height = "480px";    
-      document.exitFullscreen();
+      if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
   }
+  }
+  canvas.style.width = "720px";
+  canvas.style.height = "480px";
+  canvas.style.left = "0";
+  canvas.style.top = "0";
+   canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_2.png")';
 }
 
 function resetGame(){
