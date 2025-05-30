@@ -15,15 +15,19 @@ class Keyboard {
             this.KEY_JUMP = true;
         })
 
-        document.getElementById("mobile-throw").addEventListener("touchstart", () => {
+        document.getElementById("mobile-throw").addEventListener("touchstart", (event) => {
+            event.preventDefault();
             this.KEY_SHOT = true;
         })
 
-        document.getElementById("mobile-left").addEventListener("touchstart", () => {
+        document.getElementById("mobile-left").addEventListener("touchstart", (event) => {
+            event.preventDefault();
             this.KEY_LEFT = true;
         })
 
         document.getElementById("mobile-right").addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            event.preventDefault();
             this.KEY_RIGHT = true;
         })
 

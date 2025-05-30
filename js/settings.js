@@ -348,7 +348,12 @@ function showFullscreen() {
 }
 
 function resizeMobileButtons() {
-  let buttons = getElementsByClassName("");
+  let buttons = querySelectorAll(".mobile-game-button");
+  const size = window.innerHeight / 8;
+    buttons.forEach((button) => {
+      button.style.width = `${size}px`
+      button.style.height = `${size}px`
+    })
 }
 
 function resizeDisplay() {
@@ -369,6 +374,7 @@ function resizeDisplay() {
   canvas.style.left = `${(windowWidth - scaledWidth) / 2}px`;
   canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
   buttons.style.width = `${scaledWidth}px`;
+  buttons.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`
 }
 
 function hideFullscreen() {
