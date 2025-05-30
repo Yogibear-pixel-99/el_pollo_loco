@@ -10,35 +10,36 @@ class Keyboard {
 
 
     startKeyboardTouchEvents(){
-        document.getElementById("").addEventListener("mousedown", () => {
+        document.getElementById("mobile-jump").addEventListener("touchstart", (event) => {
+            event.preventDefault();
             this.KEY_JUMP = true;
         })
 
-        document.getElementById("").addEventListener("touchstart", () => {
+        document.getElementById("mobile-throw").addEventListener("touchstart", () => {
             this.KEY_SHOT = true;
         })
 
-        document.getElementById("").addEventListener("touchstart", () => {
+        document.getElementById("mobile-left").addEventListener("touchstart", () => {
             this.KEY_LEFT = true;
         })
 
-        document.getElementById("").addEventListener("touchstart", () => {
+        document.getElementById("mobile-right").addEventListener("touchstart", (event) => {
             this.KEY_RIGHT = true;
         })
 
-        document.getElementById("").addEventListener("mouseup", () => {
+        document.getElementById("mobile-jump").addEventListener("touchend", () => {
             this.KEY_JUMP = false;
         })
 
-        document.getElementById("").addEventListener("touchend", () => {
+        document.getElementById("mobile-throw").addEventListener("touchend", () => {
             this.KEY_SHOT = false;
         })
 
-        document.getElementById("").addEventListener("touchend", () => {
+        document.getElementById("mobile-left").addEventListener("touchend", () => {
             this.KEY_LEFT = false;
         })
 
-        document.getElementById("").addEventListener("touchend", () => {
+        document.getElementById("mobile-right").addEventListener("touchend", () => {
             this.KEY_RIGHT = false;
         })
 

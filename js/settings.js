@@ -69,7 +69,7 @@ function toggleOptionMenu(getTemp, settingsMenu) {
 
 function closeSettings() {
   if (gameHasStarted) return;
-
+  document.getElementById("canvas-wrapper").style.zIndex = "150";
   if (screenWidthSmallerThan(1300)) {
     document
       .getElementById("right-content")
@@ -90,7 +90,7 @@ function closeSettings() {
   } else {
     hideSingleContainerById("canvas-option-container");
   }
-   audio.playSoundClone('menuClick');
+  audio.playSoundClone("menuClick");
 }
 
 function screenHeightSmallerThan(value) {
@@ -327,7 +327,7 @@ function resumeGame() {
   world.continueGameIntervals();
   gamePaused = false;
   hideSingleContainerById("canvas-pause-container");
-  audio.playSound('menuClick');
+  audio.playSound("menuClick");
 }
 
 function showFullscreen() {
@@ -342,13 +342,18 @@ function showFullscreen() {
       ref.msRequestFullscreen();
     }
     canvas.style.backgroundImage = "none";
-    requestAnimationFrame(scaleCanvasDisplay, 100);
+    setTimeout(resizeDisplay, 100);
+    setTimeout(resizeMobileButtons, 100);
   }
 }
 
+function resizeMobileButtons() {
+  let buttons = getElementsByClassName("");
+}
 
-function scaleCanvasDisplay() {
+function resizeDisplay() {
   const canvas = document.getElementById("gamecanvas");
+  const buttons = document.getElementById("mobile-buttons-wrapper");
   const gameWidth = 720;
   const gameHeight = 480;
   const windowWidth = window.innerWidth;
@@ -363,30 +368,33 @@ function scaleCanvasDisplay() {
   canvas.style.height = `${scaledHeight}px`;
   canvas.style.left = `${(windowWidth - scaledWidth) / 2}px`;
   canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
+  buttons.style.width = `${scaledWidth}px`;
 }
 
-function hideFullscreen(){
+function hideFullscreen() {
   if (document.fullscreenElement) {
-      if(document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if(document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  }
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
   }
   canvas.style.width = "720px";
   canvas.style.height = "480px";
   canvas.style.left = "0";
   canvas.style.top = "0";
-   canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_2.png")';
+  canvas.style.backgroundImage =
+    'url("img/9_intro_outro_screens/start/startscreen_2.png")';
 }
 
-function resetGame(){
+function resetGame() {
   gameOver();
 }
 
-function backToMainMenu(){
+function backToMainMenu() {
+  document.getElementById("right-content").style.zIndex = "150";
   activateMenu();
-  audio.playMusicLoop('menuMusic');
+  audio.playMusicLoop("menuMusic");
   hideResponsiveGameCanvas();
   gameStartFalse();
   checkFullscreenMode();

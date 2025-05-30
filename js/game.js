@@ -354,7 +354,7 @@ function gameOver() {
     gamePaused = false;
     return;
   }
-
+  document.getElementById("right-content").style.zIndex = "150";
   playEndAudio();
   if (world.checkGameEnd()) {
     showGameOverScreen();

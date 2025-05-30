@@ -245,7 +245,7 @@ class World {
         this.level.collectedCoins.push(coin);
         this.deleteCollectedCoin();
         this.coinbar.updateCoinBar();
-        if (this.character.coins === 1 && gameMode != "chickenRush") {
+        if (this.character.coins === 10 && gameMode != "chickenRush") {
           this.level.endboss.startBossFight();
         }
         return false;

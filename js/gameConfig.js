@@ -35,9 +35,9 @@ function configNormalMode() {
     audio,
     level,
   );
-  world.level.endboss.energy = 10;
+  world.level.endboss.energy = 50;
   world.level.endboss.maxEnergy = 50;
-  world.character.energy = 10;
+  world.character.energy = 100;
     chickenSpawnInterval = setInterval(() => {
       if (world.level.enemies.length  <= 10 && !gamePaused)
   world.level.enemies.push(
