@@ -749,10 +749,10 @@ input[type=range]::-moz-range-thumb {
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   width: 680px;
-  /* display: none; */
+  display: none;
 }
 
 .mobile-buttons {

@@ -32,6 +32,7 @@ function startGame() {
   gameHasStarted = true;
   if (checkNameInput()) {
     deactivateMenu();
+    showSingleContainerById("mobile-buttons-wrapper");
     checkScoreBoardAppearance();
     showResponsiveGameCanvas();
     showLoadingScreen();
@@ -259,17 +260,10 @@ document.addEventListener("keyup", (event) => {
   ) {
     gamePaused ? resumeGame() : pauseGame();
   }
-
-  // if (gameHasStarted && event.key === "Escape") {
-  //   pauseGame();
-  //   backToMainMenu();
-  //   gameOver();
-  // }
 });
 
 window.addEventListener("fullscreenchange", () => {
   if (!document.fullscreenElement && gameHasStarted) {
-    // pauseGame();
     backToMainMenu();
     gameOver();
     hideFullscreen();
@@ -346,6 +340,7 @@ document.addEventListener("click", () => {
 });
 
 function gameOver() {
+  hideSingleContainerById("mobile-buttons-wrapper");
   world.stopAllGameIntervals();
   saveScore();
   stopGameMusic();
@@ -383,6 +378,8 @@ function showGameOverScreen() {
     ? showSingleContainerById("canvas-won-container")
     : showSingleContainerById("canvas-lost-container");
 }
+
+// include a mobile pause button
 
 // move keyboard event listeners to keyboard object
 

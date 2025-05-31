@@ -395,8 +395,8 @@
   }
 }
 
-/* @media (pointer: coarse) {
+@media (pointer: coarse) {
   .mobile-buttons-wrapper {
     display: flex;
   }
-} */
+}
