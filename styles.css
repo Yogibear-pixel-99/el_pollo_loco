@@ -19,7 +19,7 @@ html {
 :root {
   --score-bg: rgba(233, 180, 33, 0.6);
   --score-name: rgba(179, 146, 55, 0.411);
-  --settings-bg: rgb(255, 217, 112);
+  --settings-bg: #ffd970;
   /* --settings-bg-hover: rgb(247, 200, 73); */
   --settings-bg-hover: rgb(233, 180, 33);
   --settings-bg-active: rgb(233, 180, 33);
@@ -41,6 +41,38 @@ body {
   font-family: agudisplay;
   cursor: url("./img/cursor.png"), auto;
   max-width: 1920px;
+}
+
+.turn-device-mask {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 400;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.turn-device-mask img {
+width: calc(100dvh / 8);
+height: calc(100dvh / 8);
+animation-name: turn-device;
+animation-duration: 2000ms;
+animation-iteration-count: infinite;
+}
+
+@keyframes turn-device {
+  0% {transform: rotate(-90deg);}
+  35% {transform: rotate(-180deg);}
+  100% {transform: rotate(-180deg);}
+}
+
+.turn-device-mask div {
+  font-family: mansalva, sans-serfi;
+  color: var(--settings-bg);
+  font-size: calc(100dvh / 20);
 }
 
 .flex-ctr-spbtw {
@@ -595,36 +627,6 @@ h2 {
   color: var(--settings-bg);
   font-size: 26px;
 }
-
-/* .player-name {
-background-color: var(--settings-bg);
-} */
-
-/* .responsive-input-placeholder::placeholder{
-
-} */
-/* 
-.player-name {
-  align-self: center;
-  text-align: center;
-  width: 80%;
-  background-color: rgba(233, 180, 33, 0);
-  outline: none;
-  border: none;
-  font-size: 32px;
-  font-family: agudisplay;
-  font-weight: 600;
-  border-radius: 12px;
-}
-
-.player-name:hover {
-  background-color: var(--score-bg);
-}
-
-.player-name::placeholder {
-  color: rgba(114, 42, 13, 0.7);
-  font-size: 26px;
-} */
 
 .name-error-text {
   height: 54px;

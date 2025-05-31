@@ -96,7 +96,7 @@ function renderHighscores() {
     index++
   ) {
     const element = highscores[gameMode][index];
-    data += highscoreTemp(element);
+    data += highscoreTemp(element, index);
   }
   ref.innerHTML = data;
 }
@@ -130,7 +130,7 @@ const pointConfig = {
   },
   bottleMissed: {
     name: "bottle missed",
-    points: -50,
+    points: -30,
   },
   endbossBottleHit: {
     name: "endboss hit",

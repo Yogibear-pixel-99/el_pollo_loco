@@ -356,17 +356,12 @@ function resizeMobileButtons() {
       button.style.padding = `${size / 2}`;
       button.style.width = `${size}px`
       button.style.height = `${size}px`
-      // button.style.width = `${size}px`;
-      // button.style.height = `${size}px`;
     })
     buttonImg.forEach((img) => {
       img.style.width = `${size / 2.5}px`;
       img.style.height = `${size / 2.5}px`;
     })
 }
-
-// calculate position width for mobile buttons
-// calculate button size 
 
 function resizeDisplay() {
   const canvas = document.getElementById("gamecanvas");

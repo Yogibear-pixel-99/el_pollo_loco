@@ -400,3 +400,9 @@
     display: flex;
   }
 }
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .turn-device-mask {
+    display: flex;
+  }
+}

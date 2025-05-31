@@ -64,9 +64,9 @@ function getControlsTemp() {
  * @param {Object} element - The player object with name and score.
  * @returns - A HTML template
  */
-function highscoreTemp(element) {
+function highscoreTemp(element, index) {
   return `<div class="score-wrapper">
-            <div class="highscore-player-name">${element.name}</div>
+            <div class="highscore-player-name"><span>${index + 1}. </span>${element.name}</div>
             <div class="score">${element.score}</div>          
           </div>`;
 }

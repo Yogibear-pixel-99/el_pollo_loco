@@ -29,6 +29,7 @@ function init() {
 }
 
 function startGame() {
+  hideCursor();
   gameHasStarted = true;
   if (checkNameInput()) {
     deactivateMenu();
@@ -149,7 +150,7 @@ function resetCanvas() {
 }
 
 function deactivateMenu() {
-  hideCursor();
+  // hideCursor();
   showSingleContainerById("game-mask");
   hideSingleContainerById("canvas-option-container");
   const startBlinkRef = document.getElementById("start-game-text");
@@ -210,8 +211,6 @@ function toggleGameMode() {
   }
 }
 
-
-
 document.addEventListener("keyup", (event) => {
   if (
     (gameHasStarted && event.key === "p") ||
@@ -223,31 +222,11 @@ document.addEventListener("keyup", (event) => {
 });
 
 window.addEventListener("fullscreenchange", () => {
-//   if (!document.fullscreenElement && gameHasStarted) {
-//     backToMainMenu();
-//     gameOver();
-//     hideFullscreen();
-//   }
   if (document.fullscreenElement) {
     resizeDisplay();
     resizeMobileButtons();
   }
 });
-// window.addEventListener("fullscreenchange", () => {
-//   if (!document.fullscreenElement && gameHasStarted) {
-//     backToMainMenu();
-//     gameOver();
-//     hideFullscreen();
-//   }
-//   // if (document.fullscreenElement) {
-//   //   resizeDisplay();
-//   //   resizeMobileButtons();
-//   // }
-// });
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousedown", () => {
@@ -313,39 +292,17 @@ function showGameOverScreen() {
     : showSingleContainerById("canvas-lost-container");
 }
 
-// from fullscreen in puase menu to main menu...overlay is not hidden.
 
-// mouse is hiding on settings click
 
-// check fullscreen in all browsere
+// check fullscreen in all browsere --- SAFARI IS MISSING and IPHONE OS
 // check scrollbars in all browseres and container
-// points table
-// score table
 
-// Fix left fullscreen mode by hitting escape
-// fix fullscreen ratio
 
-// Testing pause, resume, play again, go to menu in alle different sizes
-// normal
-// overlay
-// fullscreen
-
-// on game end, disable fullscreen
-
-// game end, sound is playing twice
-// play again doesnt work animore - if i wait a few seconds... it works
-// get to main menu doesnt work
-
-// highscore should display the position before the name
-
-// fullscreen for all browseres
-
-// Create pause menu
-// esc or "p"
-// stop all game intervalls
-// show pause menu with buttons "menu" - "continue"
 
 // Create a game mask for turn device
+
+// fonts fallback einbauen
+
 // check with javascript or css if device height is more than 720 and width is smaller
 
 // turn to landscape if in portrait mode
