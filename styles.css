@@ -617,6 +617,10 @@ h2 {
   border-radius: 50%;
 }
 
+.impressum-close {
+  right: 26px;
+}
+
 .score-table-close-button {
   position: absolute;
   margin: 0 0 0 auto;
@@ -651,7 +655,10 @@ h2 {
   font-family: agudisplay, sans-serif;
   font-weight: 600;
   border-radius: 12px;
-  margin-top: 12px;
+}
+
+#game-mode-exp {
+  font-size: 20px;
 }
 
 .player-name:hover {

@@ -240,6 +240,7 @@ class World {
     this.level.coins = this.level.coins.filter((coin) => {
       if (this.character.isColliding(coin) && !coin.collected) {
         audio.playSoundClone("collectCoin");
+        this.addPointsToPlayerScore("collectCoin");
         this.character.collectCoin();
         coin.collected = true;
         this.level.collectedCoins.push(coin);

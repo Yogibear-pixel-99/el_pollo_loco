@@ -7,7 +7,7 @@ function getStoryTemp() {
   return `<div class="story-text">
                 <div class="flex-ctr-spbtw">
                 <p>Welcome to the world of Pepe!</p>
-                <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                 </div>
                 <p>Last night, there was a crumbling
                  voice in the air. The next morning,
@@ -29,7 +29,7 @@ El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the 
  */
 function getControlsTemp() {
   return `<div class="controls-settings">
-                <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                     <table>
                         <tr>
                             <th>Action</th>
@@ -89,7 +89,7 @@ function getPointsTemp(element) {
  */
 function getSoundOptionsTemp() {
   return `<div class="sound-settings">
-            <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+            <img class="settings-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
             <div class="sound-wrapper" onclick="">
                 <div class="sound-text-wrapper" onclick="toggleSoundsOnOff(); audio.playSoundClone('menuClick')">
                     <span>Sounds</span>
@@ -112,6 +112,11 @@ function getSoundOptionsTemp() {
         `;
 }
 
+/**
+ * Creates a HTML element for the loading spinner.
+ * 
+ * @returns - A HTML template.
+ */
 function getLoadingSpinnerTemp(){
     return `<div class="loading-spinner-container flex-ctr-ctr flex-col">
                 <img src="./img/icons/graphic-3578420_1280.png" alt="loading spinner">
@@ -120,8 +125,14 @@ function getLoadingSpinnerTemp(){
             `
 }
 
+/**
+ * Creates a HTML element for the impressum.
+ * 
+ * @returns - A HTML template.
+ */
 function getImpressumTemp(){
     return `<div class="impressum-wrapper">
+            <img class="settings-close-button impressum-close" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
     <h4>Impressum</h4><p><b>Informationen und Offenlegung gemäß &sect;5 (1) ECG, &sect; 25 MedienG, &sect; 63 GewO und &sect; 14 UGB</b></p> <p><b>Webseitenbetreiber:</b> Joachim Puercher</p>
 <p><b>Anschrift:</b> Schöneringer Straße 12e, 407, 4073 Wilhering</p>
 <p><b>UID-Nr:</b>  <br> <b>Gewerbeaufsichtbehörde:</b>  <br> <b>Mitgliedschaften:</b></p>

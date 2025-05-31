@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document
     .querySelectorAll(
-      ".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input"
+      ".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input, .impressum-link"
     )
     .forEach((element) => {
       element.addEventListener("click", () => {
@@ -298,8 +298,6 @@ function showGameOverScreen() {
 // check scrollbars in all browseres and container
 
 
-// documenatation
+// documentation
 
 // Shorten all functions
-
-// impression

@@ -182,6 +182,23 @@
     font-size: 36px;
     margin: 0;
   }
+
+  .opt-wrapper {
+    padding: 4px;
+  }
+
+  .game-name-header {
+    font-size: 38px !important;
+  }
+
+  .top-game-header {
+    font-size: 18px;;
+  }
+
+  .open-highscore,
+  .open-points-table {
+    padding: 0;
+  }
 }
 
 @media (max-width: 1460px) {
@@ -327,6 +344,11 @@
 
   .not-selected {
     font-size: 20px;
+  }
+
+  .impressum-link,
+  .copyright-link {
+    font-size: 14px;
   }
 }
 

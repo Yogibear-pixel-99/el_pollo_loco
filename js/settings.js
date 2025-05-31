@@ -1,46 +1,25 @@
 /**
- * This function hides a html container. It adds the class d-none.
- *
- * @param {string} containerId - The id of the HTML container.
+ * Toggles the display of the settings option menu.
+ * 
+ * Retrieves the HTML template using the provided callback function.
+ * Displays the settings menu differently depending on the screen size.
+ * Hides the menu if it's already visible and matches the current menu state.
+ * 
+ * @param {Function} getTemp - A function that returns the settings HTML template (as a string or DOM element).
+ * @param {string} settingsMenu - The identifier of the settings menu to compare with the current session state.
  */
-function toggleSingleContainerById(containerId) {
-  let content = document.getElementById(containerId);
-  content.classList.toggle("d-none");
-}
-
-/**
- * Gets a HTML template and renders it in an HTML element.
- *
- * @param {string} id - The id of the HTML element to render the template.
- * @param {HTMLElement} template - The HTML template.
- */
-function getTemplateToContent(id, template) {
-  let ref = document.getElementById(id);
-  ref.innerHTML = template;
-}
-
-/**
- * This function shows a html container. It removes the class d-none.
- *
- * @param {string} containerId - The id of the HTML container.
- */
-function showSingleContainerById(containerId) {
-  let content = document.getElementById(containerId);
-  content.classList.remove("d-none");
-}
-
 function toggleOptionMenu(getTemp, settingsMenu) {
-  if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
+  const ref = document.getElementById("canvas-option-container");
+  const template = getTemp();
+  if (isSmallScreen()) {
     showResponsiveGameCanvas();
     deactivateMenu();
   }
-  let ref = document.getElementById("canvas-option-container");
-  let template = getTemp();
   if (
     sessionStorage.getItem("menu") === settingsMenu &&
     !ref.classList.contains("d-none")
   ) {
-    if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
+    if (isSmallScreen()) {
       requestAnimationFrame(() => {
         hideResponsiveGameCanvas();
       });
@@ -49,53 +28,58 @@ function toggleOptionMenu(getTemp, settingsMenu) {
       ref.classList.add("d-none");
     }, 300);
   } else {
-    if (ref.classList.contains("d-none")) {
-      showSingleContainerById("canvas-option-container");
-      getTemplateToContent("canvas-option-container", template);
-      sessionStorage.setItem("menu", settingsMenu);
-    } else {
-      getTemplateToContent("canvas-option-container", template);
-      sessionStorage.setItem("menu", settingsMenu);
-    }
+    showLargeScreenSizeSettingsMenu(template, settingsMenu);
   }
 }
 
+/**
+ * Displays the settings option menu on large screens.
+ * 
+ * Inserts the provided template into the container and updates the sessionStorage
+ * with the current menu identifier. If the container is hidden, it will be shown first.
+ * 
+ * @param {HTMLElement|string} template - The HTML content to display in the menu container.
+ * @param {string} settingsMenu - The identifier of the settings menu to store in sessionStorage.
+ */
+function showLargeScreenSizeSettingsMenu(template, settingsMenu) {
+  const ref = document.getElementById("canvas-option-container");
+  if (ref.classList.contains("d-none")) {
+    showSingleContainerById("canvas-option-container");
+  }
+    getTemplateToContent("canvas-option-container", template);
+    sessionStorage.setItem("menu", settingsMenu);
+}
+
+/**
+ * Closes the currently open settings menu unless the game has already started.
+ * 
+ * Closes the specified settings content, depending on the screensize and plays a click sound.
+ * 
+ * @returns {void}
+ */
 function closeSettings() {
+  const right = document.getElementById("right-content");
+  const left = document.getElementById("left-content");
   if (gameHasStarted) return;
   document.getElementById("canvas-wrapper").style.zIndex = "150";
   if (screenWidthSmallerThan(1300)) {
-    document
-      .getElementById("right-content")
-      .classList.remove("open-score-table");
-    document
-      .getElementById("left-content")
-      .classList.remove("open-score-table");
+    right.classList.remove("open-score-table");
+    left.classList.remove("open-score-table");
     activateMenu();
   }
-  if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
+  if (isSmallScreen()) {
     hideResponsiveGameCanvas();
-
     activateMenu();
-    // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)){
-    //    hideResponsiveGameCanvas();
-    //    if (screenHeightSmallerThan(700)) {
-    //    activateMenu();
   } else {
     hideSingleContainerById("canvas-option-container");
   }
   audio.playSoundClone("menuClick");
 }
 
-function screenHeightSmallerThan(value) {
-  return window.innerHeight <= value;
-}
 
-function screenWidthSmallerThan(value) {
-  return window.innerWidth <= value;
-}
 
 function showResponsiveGameCanvas() {
-  if (screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
+  if (isSmallScreen()) {
     let ref = document.getElementById("canvas-wrapper");
     ref.style.display = "block";
     requestAnimationFrame(() => {
@@ -105,7 +89,7 @@ function showResponsiveGameCanvas() {
 }
 
 function hideResponsiveGameCanvas() {
-  if (screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
+  if (isSmallScreen()) {
     let ref = document.getElementById("canvas-wrapper");
     ref.style.display = "none";
     ref.classList.remove("canvas-mobile-open");
@@ -345,15 +329,15 @@ function resizeMobileButtons() {
   let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
   let buttonImg = document.querySelectorAll(".mobile-game-button img");
   const size = window.innerHeight / 7;
-    buttonsWrapper.forEach((button) => {
-      button.style.padding = `${size / 2}`;
-      button.style.width = `${size * 1.5}px`
-      button.style.height = `${size}px`
-    })
-    buttonImg.forEach((img) => {
-      img.style.width = `${size / 2.5}px`;
-      img.style.height = `${size / 2.5}px`;
-    })
+  buttonsWrapper.forEach((button) => {
+    button.style.padding = `${size / 2}`;
+    button.style.width = `${size * 1.5}px`;
+    button.style.height = `${size}px`;
+  });
+  buttonImg.forEach((img) => {
+    img.style.width = `${size / 2.5}px`;
+    img.style.height = `${size / 2.5}px`;
+  });
 }
 
 function resizeDisplay() {
@@ -374,7 +358,7 @@ function resizeDisplay() {
   canvas.style.left = `${(windowWidth - scaledWidth) / 2}px`;
   canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
   buttonsRef.style.width = `${scaledWidth - 40}px`;
-  buttonsRef.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`
+  buttonsRef.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`;
   // buttonsRef.width = `${windowWidth - 40}`;
 }
 
@@ -394,21 +378,21 @@ function hideFullscreen() {
     'url("img/9_intro_outro_screens/start/startscreen_2.png")';
 
   const buttonsRef = document.getElementById("mobile-buttons-wrapper");
-  buttonsRef.style.width = '680px';
-  buttonsRef.style.bottom = '8px';
-  buttonsRef.width = '64px';
+  buttonsRef.style.width = "680px";
+  buttonsRef.style.bottom = "8px";
+  buttonsRef.width = "64px";
 
   let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
   let buttonImg = document.querySelectorAll(".mobile-game-button img");
-    buttonsWrapper.forEach((button) => {
-      button.style.padding = '12px';
-      button.style.width = '64px';
-      button.style.height =  '64px';
-    })
-    buttonImg.forEach((img) => {
-      img.style.width = '40px';
-      img.style.height = '40px';
-    })
+  buttonsWrapper.forEach((button) => {
+    button.style.padding = "12px";
+    button.style.width = "64px";
+    button.style.height = "64px";
+  });
+  buttonImg.forEach((img) => {
+    img.style.width = "40px";
+    img.style.height = "40px";
+  });
 }
 
 function resetGame() {
@@ -424,3 +408,4 @@ function backToMainMenu() {
   checkFullscreenMode();
   audio.playSound("menuClick");
 }
+
