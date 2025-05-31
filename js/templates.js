@@ -29,10 +29,7 @@ El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the 
  */
 function getControlsTemp() {
   return `<div class="controls-settings">
-            <div class="flex-ctr-spbtw">
-                <h2 class="controls-header">Control Pepe</h2>
                 <img class="settings-close-button" onclick="closeSettings(); audio.playSoundClone('menuClick')" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
-                </div>
                     <table>
                         <tr>
                             <th>Action</th>

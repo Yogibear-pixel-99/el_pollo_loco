@@ -292,7 +292,7 @@ function showGameOverScreen() {
     : showSingleContainerById("canvas-lost-container");
 }
 
-// manifest einbauen
+
 
 // check fullscreen in all browsere --- SAFARI IS MISSING and IPHONE OS
 // check scrollbars in all browseres and container

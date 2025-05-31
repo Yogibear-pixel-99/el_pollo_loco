@@ -132,6 +132,7 @@ animation-iteration-count: infinite;
 .canvas-wrapper {
   position: relative;
   z-index: 150;
+  overflow: hidden;
 }
 
 canvas {
@@ -546,10 +547,6 @@ h2 {
 
 .controls-settings td {
   font-size: 26px;
-}
-
-.controls-header {
-  justify-self: center;
 }
 
 .sound-settings {
