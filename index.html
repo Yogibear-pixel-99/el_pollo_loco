@@ -184,7 +184,6 @@
             id="player-name-input"
             autocomplete="off"
             type="text"
-            value="pepe"
             placeholder="enter your name"
             oninput="returnOnlyLettersAndNumbers(this); removeNameError(); styleResponsiveNameInput()"
             onkeydown="unblurInput(event, this)"
@@ -199,6 +198,7 @@
       </div>
     </main>
     <footer class="settings-wrapper">
+       <div class="copyright-link">(c) Joachim Pürcher</div>
       <div class="impressum-link" onclick="toggleOptionMenu(getImpressumTemp, 'impressum')">Impressum</div>
       <div
         class="opt-wrapper"
