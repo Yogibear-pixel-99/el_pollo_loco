@@ -533,6 +533,7 @@ h2 {
   background-color: var(--settings-bg);
   border-radius: 20px;
   align-items: center;
+  justify-content: center;
 }
 
 .controls-settings table {
@@ -562,10 +563,6 @@ h2 {
   font-size: 28px;
   background-color: var(--settings-bg);
   border-radius: 20px;
-}
-
-.sound-wrapper span:first-child {
-  margin-right: 40px;
 }
 
 .settings-close-button {
@@ -687,15 +684,20 @@ h2 {
 
 .sound-wrapper {
   margin-bottom: 30px;
+  width: 50%;
 }
 
 .sound-text-wrapper {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   color: black;
   margin-bottom: 10px;
   justify-content: center;
   font-family: mansalva, sans-serif;
+}
+
+.sound-text-wrapper span:first-child {
+  margin-right: 80px;
 }
 
 .sound-text-wrapper:hover span:first-child {
