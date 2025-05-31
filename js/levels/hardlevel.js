@@ -36,7 +36,6 @@ return new Level(
 
   719 * 5 + 50,
 
-  6
 
 );
 }

@@ -10,6 +10,7 @@ class Level {
   backgrounds;
   level_end_x;
   level_size = 6;
+  level_end_cactus;
 
   constructor(
     coins,
@@ -19,7 +20,8 @@ class Level {
     endboss,
     clouds,
     backgrounds,
-    level_end_x
+    level_end_x,
+    level_end_cactus,
   ) {
     this.coins = coins;
     this.bottles = bottles;
@@ -29,6 +31,7 @@ class Level {
     this.skyObjects = clouds;
     this.backgrounds = backgrounds;
     this.level_end_x = level_end_x;
+    this.level_end_cactus = level_end_cactus;
     this.setBackgrounds();
     this.addCoins();
   }

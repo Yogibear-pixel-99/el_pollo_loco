@@ -293,7 +293,7 @@ class World {
       }
       if (
         world.keyboard.KEY_RIGHT &&
-        this.character.x < world.level.level_end_x
+        this.character.x < world.level.level_end_x - 30
       ) {
         bg.x = bg.x - bg.xFactor;
       }
@@ -346,6 +346,7 @@ class World {
     this.addObjectsToCanvas(this.level.collectedCoins);
     this.addObjectsToCanvas(this.level.bottles);
     this.addObjectsToCanvas(this.level.healBottles);
+    this.addObjectsToCanvas(this.level.level_end_cactus);
     this.addObjectsToCanvas(this.thrownBottles);
     this.addObjToCanvas(this.level.endboss);
     // this.drawBossHeadHitbox(this.ctx);

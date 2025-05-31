@@ -161,13 +161,13 @@ class Character extends MovableObject {
         }
         if (
           this.world.keyboard.KEY_RIGHT === true &&
-          this.x < this.world.level.level_end_x
+          this.x < this.world.level.level_end_x - 30
         ) {
           this.moveRight();
           this.world.camera_x = 200 - this.x;
           this.otherDirection = false;
         }
-        if (this.world.keyboard.KEY_LEFT === true && this.x > -200) {
+        if (this.world.keyboard.KEY_LEFT === true && this.x > -290) {
           this.moveLeft();
           this.world.camera_x = 200 - this.x;
           this.otherDirection = true;
