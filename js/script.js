@@ -30,7 +30,7 @@ async function timeDelay(ms){
 }
 
 function showCursor(){
-  document.body.style.cursor = "url('./img/cursor-active.png'), auto"
+  document.body.style.cursor = "url('./img/cursor.png'), auto"
 }
 
 function hideCursor(){

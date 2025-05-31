@@ -114,6 +114,7 @@ function showResponsiveGameCanvas() {
 function hideResponsiveGameCanvas() {
   if (screenWidthSmallerThan(720) || screenHeightSmallerThan(830)) {
     let ref = document.getElementById("canvas-wrapper");
+    ref.style.display = "none";
     ref.classList.remove("canvas-mobile-open");
     setTimeout(() => (ref.style.display = "none"), 300);
   }
