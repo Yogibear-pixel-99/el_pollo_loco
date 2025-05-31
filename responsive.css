@@ -67,7 +67,7 @@
 @media (max-height: 700px) {
   .left-content,
   .right-content {
-    margin: 12px;
+    margin: 60px;
     max-height: calc(100dvh - 150px);
   }
 
@@ -206,9 +206,14 @@
   .open-points-table {
     display: block;
   }
+
   .score-table-close-button {
     display: block;
   }
+
+  .right-content h2 {
+  margin-bottom: 20px;
+}
 
   .score-tables-wrapper {
     display: flex;

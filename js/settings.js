@@ -32,15 +32,8 @@ function showSingleContainerById(containerId) {
 function toggleOptionMenu(getTemp, settingsMenu) {
   if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
     showResponsiveGameCanvas();
-
     deactivateMenu();
   }
-  // if (screenHeightSmallerThan(830) || screenWidthSmallerThan(720)) {
-  //   showResponsiveGameCanvas();
-  //   if (screenHeightSmallerThan(700)) {
-  //     deactivateMenu();
-  //   }}
-
   let ref = document.getElementById("canvas-option-container");
   let template = getTemp();
   if (

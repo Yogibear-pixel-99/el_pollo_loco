@@ -56,17 +56,23 @@ body {
 }
 
 .turn-device-mask img {
-width: calc(100dvh / 8);
-height: calc(100dvh / 8);
-animation-name: turn-device;
-animation-duration: 2000ms;
-animation-iteration-count: infinite;
+  width: calc(100dvh / 8);
+  height: calc(100dvh / 8);
+  animation-name: turn-device;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
 }
 
 @keyframes turn-device {
-  0% {transform: rotate(-90deg);}
-  35% {transform: rotate(-180deg);}
-  100% {transform: rotate(-180deg);}
+  0% {
+    transform: rotate(-90deg);
+  }
+  35% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
 }
 
 .turn-device-mask div {
@@ -132,7 +138,6 @@ animation-iteration-count: infinite;
 .canvas-wrapper {
   position: relative;
   z-index: 150;
-  overflow: hidden;
 }
 
 canvas {
@@ -151,7 +156,7 @@ canvas {
   z-index: 150;
   border-radius: 20px;
   background-color: var(--settings-bg);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .loading-spinner-container {
@@ -376,13 +381,15 @@ h2 {
 }
 
 .open-highscore:hover,
-.open-points-table:hover {
+.open-points-table:hover,
+.impressum-link:hover {
   cursor: url("./img/cursor.png"), auto;
   background-color: var(--score-bg);
 }
 
 .open-highscore:active,
-.open-points-table:active {
+.open-points-table:active,
+.impressum-link:active {
   transform: scale(95%);
   filter: brightness(120%);
 }
@@ -397,17 +404,21 @@ h2 {
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
-  max-height: 620px;
+  max-height: 520px;
   width: 320px;
-  margin: 20px 0;
+  margin: 40px 0;
   border: solid 18px rgba(233, 180, 33, 0);
   padding: 0;
   scrollbar-width: thin;
-  scrollbar-color: #722A0D #FACC8D;
+  scrollbar-color: #722a0d #facc8d;
 }
 
 .right-content {
   z-index: 100;
+}
+
+.right-content h2 {
+  margin: 0;
 }
 
 .score-wrapper {
@@ -432,6 +443,7 @@ h2 {
 .player-score {
   font-size: 32px;
   text-align: center;
+  margin: 12px;
 }
 
 .item-point-wrapper {
@@ -449,6 +461,7 @@ h2 {
 }
 
 .settings-wrapper {
+  position: relative;
   border-radius: 8px;
   width: 80%;
   /* position: absolute;
@@ -469,6 +482,24 @@ h2 {
   width: 40px;
   height: 40px;
   object-fit: contain;
+}
+
+.impressum-link {
+  position: absolute;
+  right: 0;
+  top: -50px;
+  background-color: var(--settings-bg);
+  border-radius: 8px;
+  font-size: 24px;
+  padding: 4px;
+}
+
+.impressum-wrapper {
+  border: 20px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  scrollbar-color: #722a0d #facc8d;
+  height: 100%;
 }
 
 .opt-wrapper {
@@ -783,5 +814,3 @@ input[type="range"]::-moz-range-thumb {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 40px;
 }
-
-
