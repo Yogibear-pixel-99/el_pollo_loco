@@ -21,28 +21,32 @@ class Keyboard {
     };
     ref1.addEventListener("touchstart", () => {
       this.KEY_JUMP = true;
+      ref1.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
     let ref2 = document.getElementById("mobile-throw");
     ref2.oncontextmenu = (event) => {
       event.preventDefault();
-      event.stopProgapagtion();
+      event.stopPropagation();
       event.stopImmediatePropagation();
       return false;
     };
-    ref2.addEventListener("touchstart", (event) => {
+    ref2.addEventListener("touchstart", () => {
       this.KEY_SHOT = true;
+      ref2.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
     let ref3 = document.getElementById("mobile-left");
-    ref2.oncontextmenu = (event) => {
+    ref3.oncontextmenu = (event) => {
       event.preventDefault();
-      event.stopProgapagtion();
+      event.stopPropagation();
       event.stopImmediatePropagation();
+
       return false;
     };
-    ref3.addEventListener("touchstart", (event) => {
+    ref3.addEventListener("touchstart", () => {
       this.KEY_LEFT = true;
+      ref3.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
     let ref4 = document.getElementById("mobile-right");
@@ -52,8 +56,9 @@ class Keyboard {
       event.stopImmediatePropagation();
       return false;
     };
-    ref4.addEventListener("touchstart", (event) => {
+    ref4.addEventListener("touchstart", () => {
       this.KEY_RIGHT = true;
+      ref4.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
     document.getElementById("mobile-pause").addEventListener("touchstart", () => {

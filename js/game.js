@@ -292,70 +292,13 @@ function showGameOverScreen() {
     : showSingleContainerById("canvas-lost-container");
 }
 
-
+// manifest einbauen
 
 // check fullscreen in all browsere --- SAFARI IS MISSING and IPHONE OS
 // check scrollbars in all browseres and container
 
 
-
-// Create a game mask for turn device
-
-// fonts fallback einbauen
-
-// check with javascript or css if device height is more than 720 and width is smaller
-
-// turn to landscape if in portrait mode
-// mobile controlling options
-
 // documenatation
 
 // Shorten all functions
 
-// CALL QUESTIONS - ANSWERES
-// parallax mode
-// Attack animation verkürzen???
-
-// INTERVALLS:
-
-// CHAR
-// SOUNDINTERVAL
-// ANIMATE INTERVAL
-// MOVEINTERVAL
-// IDLEINTERVAL
-
-// CLOUD FRAME INTERVALL
-
-// COININTERVAL
-
-// BOSS
-// ANIMATEINTERVAL
-// endboss dead interval - selfclearing
-// MOVEINTERVAL
-// JUMPATTACKINTERVAL
-// bossattackmovementinterval - selfclearing
-// APPLY GRAVITY INTERVALL - BOSS - not clearing
-// MOVEDIRECTIONINTERVAL
-
-// ENEMIES
-// WALKANIMATIONINTERVAL
-// MOVEINTERVAL
-// runawayinterval - selclearing
-
-// GAMECONFIG
-// normal mode - CHICKENSPAWNINTERVAL
-// hard mode - CHICKENSPAWNINTERVAL
-
-// APPLY GRAVITY TO ALL MOVEABLE OBJECTS
-
-// THROWN BOTTLES
-// GRAVITY INTERVAL
-
-// WORLD
-// ENEMYMOVEDIRECTIONINTERVAL
-// CHECKIFGAMEOVERINTERVAL - selfclearing
-// COLLISIONINTERVAL
-// bottlesplash - self clearing
-// UPDATESCOREINTERVAL
-// BACKGROUNDMOVEINTERVAL
-// CLUCKERINTERVAL

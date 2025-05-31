@@ -351,7 +351,7 @@ function showFullscreen() {
 function resizeMobileButtons() {
   let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
   let buttonImg = document.querySelectorAll(".mobile-game-button img");
-  const size = window.innerHeight / 8.5;
+  const size = window.innerHeight / 6.5;
     buttonsWrapper.forEach((button) => {
       button.style.padding = `${size / 2}`;
       button.style.width = `${size}px`
@@ -382,7 +382,7 @@ function resizeDisplay() {
   canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
   buttonsRef.style.width = `${scaledWidth - 40}px`;
   buttonsRef.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`
-  buttonsRef.width = `${windowWidth - 40}`;
+  // buttonsRef.width = `${windowWidth - 40}`;
 }
 
 function hideFullscreen() {
