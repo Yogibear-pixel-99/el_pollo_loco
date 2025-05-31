@@ -222,17 +222,17 @@ document.addEventListener("keyup", (event) => {
   }
 });
 
-// window.addEventListener("fullscreenchange", () => {
+window.addEventListener("fullscreenchange", () => {
 //   if (!document.fullscreenElement && gameHasStarted) {
 //     backToMainMenu();
 //     gameOver();
 //     hideFullscreen();
 //   }
-  // if (document.fullscreenElement) {
-  //   resizeDisplay();
-  //   resizeMobileButtons();
-  // }
-// });
+  if (document.fullscreenElement) {
+    resizeDisplay();
+    resizeMobileButtons();
+  }
+});
 // window.addEventListener("fullscreenchange", () => {
 //   if (!document.fullscreenElement && gameHasStarted) {
 //     backToMainMenu();
