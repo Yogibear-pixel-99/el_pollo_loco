@@ -301,3 +301,5 @@ function showGameOverScreen() {
 // documentation
 
 // Shorten all functions
+
+// 730 height and larger than 1300 width - responsive not correct

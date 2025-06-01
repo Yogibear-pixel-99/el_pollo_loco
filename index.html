@@ -162,7 +162,7 @@
           <div class="score-tables-wrapper">
             <button
               class="open-highscore"
-              onclick="toggleResponsiveScoreTableHighscore('left-content')">
+              onclick="toggleResponsiveScoreTableHighscore()">
               Highscore
             </button>
             <h1
@@ -173,7 +173,7 @@
             </h1>
             <button
               class="open-points-table"
-              onclick="toggleResponsiveScoreTablePoints('right-content')">
+              onclick="toggleResponsiveScoreTablePoints()">
               Points
             </button>
           </div>
@@ -186,7 +186,7 @@
             type="text"
             placeholder="enter your name"
             oninput="returnOnlyLettersAndNumbers(this); removeNameError(); styleResponsiveNameInput()"
-            onkeydown="unblurInput(event, this)"
+            onkeydown="blurInput(event, this)"
             onblur="trimPlayerName(this)" />
         </div>
       </div>

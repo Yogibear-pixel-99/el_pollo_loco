@@ -22,7 +22,6 @@ function hideSingleContainerById(containerId) {
   content.classList.add("d-none");
 }
 
-
 async function timeDelay(ms){
   return new Promise((resolve) => {
     setTimeout(() => resolve(), ms)
@@ -82,4 +81,16 @@ function screenWidthSmallerThan(value) {
 
 function isSmallScreen(){
   return screenHeightSmallerThan(830) || screenWidthSmallerThan(720);
+}
+
+/**
+ * Replaces every input in the input field exept letters and numbers.
+ * 
+ * @param {HTML Element} id - The HTML input element to check.
+ */
+function returnOnlyLettersAndNumbers(id) {
+  let regex = /[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfA-Za-z0-9\s+]/g;
+  let userInput = id.value;
+  userInput = userInput.replace(regex, "");
+  id.value = userInput;
 }

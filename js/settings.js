@@ -77,7 +77,9 @@ function closeSettings() {
 }
 
 
-
+/**
+ * Shows the gamecanvas and settings menu overlay on smaller screens.
+ */
 function showResponsiveGameCanvas() {
   if (isSmallScreen()) {
     let ref = document.getElementById("canvas-wrapper");
@@ -88,6 +90,9 @@ function showResponsiveGameCanvas() {
   }
 }
 
+/**
+ * Hides the gamecanvas and settings menu overlay on smaller screens.
+ */
 function hideResponsiveGameCanvas() {
   if (isSmallScreen()) {
     let ref = document.getElementById("canvas-wrapper");
@@ -97,22 +102,30 @@ function hideResponsiveGameCanvas() {
   }
 }
 
-function toggleResponsiveScoreTablePoints(id) {
-  document.getElementById("left-content").classList.remove("open-score-table");
-  let ref = document.getElementById(id);
-  ref.classList.contains("open-score-table")
-    ? hideResponsiveScoreTable(id)
-    : showResponsiveScoreTable(id);
+/**
+ * Checks if the points table overlay is opened and calls a show or hide function.
+ */
+function toggleResponsiveScoreTablePoints() {
+  document.getElementById("right-content").classList.contains("open-score-table")
+    ? hideResponsiveScoreTable("right-content")
+    : showResponsiveScoreTable("right-content");
 }
 
-function toggleResponsiveScoreTableHighscore(id) {
-  document.getElementById("right-content").classList.remove("open-score-table");
-  let ref = document.getElementById(id);
-  ref.classList.contains("open-score-table")
-    ? hideResponsiveScoreTable(id)
-    : showResponsiveScoreTable(id);
+/**
+ * Checks if the score table overlay is opened and calls a show or hide function.
+ */
+function toggleResponsiveScoreTableHighscore() {
+  document.getElementById("left-content").classList.contains("open-score-table")
+    ? hideResponsiveScoreTable("left-content")
+    : showResponsiveScoreTable("left-content");
 }
 
+/**
+ * Shows the score or pointstable overlay by adding display block.
+ * Darkens the game canvas by setting it behind the game mask with z index.
+ * 
+ * @param {string} id - The id of the right (points table) or left (score table) HTML element.
+ */
 function showResponsiveScoreTable(id) {
   document.getElementById("canvas-wrapper").style.zIndex = "0";
   deactivateMenu();
@@ -123,6 +136,12 @@ function showResponsiveScoreTable(id) {
   });
 }
 
+/**
+ * Hiddes the score or pointstable overlay by adding display block.
+ * Darkens the game canvas by setting it behind the game mask with z index.
+ * 
+ * @param {string} id - The id of the right (points table) or left (score table) HTML element.
+ */
 function hideResponsiveScoreTable(id) {
   document.getElementById("canvas-wrapper").style.zIndex = "150";
   activateMenu();
@@ -134,15 +153,10 @@ function hideResponsiveScoreTable(id) {
 }
 
 /**
- * This function hides a html container. It adds the class d-none.
- *
- * @param {string} containerId - The id of the HTML container.
+ * In case that the screen size is to small for the game overlay, the fullscreen mode on is set
+ * permanent.
+ * 
  */
-function hideSingleContainerById(containerId) {
-  let content = document.getElementById(containerId);
-  content.classList.add("d-none");
-}
-
 function checkScreensizeForFixFullscreen() {
   if (window.innerWidth <= 720 || window.innerHeight <= 480) {
     let buttonRef = document.getElementById("full-screen-button");
@@ -151,6 +165,10 @@ function checkScreensizeForFixFullscreen() {
   }
 }
 
+/**
+ * In case that the screen is large enough for a game overlay, the fullscreen button can be toggled.
+ * In case the screen is to small, an error message appears that only fullscreen is possible.
+ */
 function toggleFullScreen() {
   let buttonRef = document.getElementById("full-screen-button");
   if (window.innerWidth <= 720 || window.innerHeight <= 480) {
@@ -164,6 +182,9 @@ function toggleFullScreen() {
   }
 }
 
+/**
+ * The error message, that appears if just fullscreen is possible.
+ */
 function showJustFullscreenInfo() {
   let ref = document.getElementById("name-error-text");
   ref.innerText = "Screen is to small, just fullscreen possible";
@@ -172,55 +193,82 @@ function showJustFullscreenInfo() {
   }, 10000);
 }
 
-function returnOnlyLettersAndNumbers(id) {
-  let regex = /[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfA-Za-z0-9\s+]/g;
-  let userInput = id.value;
-  userInput = userInput.replace(regex, "");
-  id.value = userInput;
-}
-
-function unblurInput(event, element) {
+/**
+ * Blurs the input field after pressing enter and plays the standard click sound.
+ * 
+ * @param {KeyboardEvent} event - The standard event from the input field.
+ * @param {HTMLElement} element - The HTML input field to blur.
+ */
+function blurInput(event, element) {
   if (event.key === "Enter") {
     element.blur();
     audio.playSoundClone("menuClick");
   }
 }
 
+/**
+ * Trims the input string.
+ * 
+ * @param {HTMLElement} element - The HTML input field to trim.
+ */
 function trimPlayerName(element) {
   element.value = element.value.trim();
 }
 
+/**
+ * Gets the volume settings from the local storage.
+ * Sets a standard volume to the audio files, if local storage is null.
+ */
 function getSoundSettings() {
   sfxMute = localStorage.getItem("sfxMute") === "true";
-  console.log(sfxMute);
   musicMute = localStorage.getItem("musicMute") === "true";
-  console.log(musicMute);
   sfxVolume = localStorage.getItem("sfxVolume");
   musicVolume = localStorage.getItem("musicVolume");
 
-  if (sfxMute === null) sfxMute = false;
-  if (musicMute === null) musicMute = false;
   if (sfxVolume === null) sfxVolume = 7;
   if (musicVolume === null) musicVolume = 4;
 }
 
+/**
+ * Applies the current volume and mute settings to all audio elements.
+ * 
+ * First calculates the effective volume levels, then assigns the
+ * mute state and volume values for both sound effects and music.
+ */
 function assignSoundSettings() {
   calculateVolumesForAssign();
   assignMuteAndVolume("sfx", sfxMute, sfxVolume);
   assignMuteAndVolume("music", musicMute, musicVolume);
 }
 
+/**
+ * Calculaters the effective volume levels.
+ */
 function calculateVolumesForAssign() {
   sfxVolume === 10 ? (sfxVolume = 1) : (sfxVolume = sfxVolume / 10);
   musicVolume === 10 ? (musicVolume = 1) : (musicVolume = musicVolume / 10);
 }
 
+/**
+ * Assigns the calculated volume to the specified audio elements in the audio object.
+ * 
+ * @param {string} src - The category of the soundfiles - sfx or music.
+ * @param {boolean} mute - A boolean to mute or unmute the audio elements.
+ * @param {number} vol - The effective sound volume for the audio elements (0 - 1).
+ */
 function assignMuteAndVolume(src, mute, vol) {
   Object.values(audio[src]).forEach((audio) => {
     checkArrayAndSetMuteAndVol(audio, mute, vol);
   });
 }
 
+/**
+ * An algorythmus to itterate through the audio object and sets the effective volume and mute settings.
+ * 
+* @param {HTMLAudioElement|Array} audio - A single audio element or a nested array of audio elements.
+ * @param {boolean} mute - A boolean to mute or unmute the audio elements.
+ * @param {number} vol - The effective sound volume for the audio elements (0 - 1).
+ */
 function checkArrayAndSetMuteAndVol(audio, mute, vol) {
   if (Array.isArray(audio)) {
     audio.forEach((audio) => {
@@ -231,6 +279,7 @@ function checkArrayAndSetMuteAndVol(audio, mute, vol) {
     audio.volume = vol;
   }
 }
+
 
 function toggleSoundsOnOff() {
   sfxMute ? (sfxMute = false) : (sfxMute = true);
