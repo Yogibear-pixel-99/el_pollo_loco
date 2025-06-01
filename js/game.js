@@ -253,9 +253,11 @@ document.addEventListener("click", () => {
 });
 
 function gameOver() {
+  if (!gamePaused) {
+    saveScore();
+  }
   hideSingleContainerById("mobile-buttons-wrapper");
   world.stopAllGameIntervals();
-  saveScore();
   stopGameMusic();
   checkFullscreenMode();
   showCursor();

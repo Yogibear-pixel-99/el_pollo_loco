@@ -3,7 +3,7 @@
   "short_name": "El Pollo Loco",
     "icons": [
     {
-      "src": "/img/6_salsa_bottle/salsa_bottle.png",
+      "src": "./img/6_salsa_bottle/salsa_bottle.png",
       "sizes": "512x512",
       "type": "image/png"
     }
