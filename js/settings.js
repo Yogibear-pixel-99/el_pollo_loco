@@ -96,7 +96,6 @@ function showResponsiveGameCanvas() {
 function hideResponsiveGameCanvas() {
   if (isSmallScreen()) {
     let ref = document.getElementById("canvas-wrapper");
-    ref.style.display = "none";
     ref.classList.remove("canvas-mobile-open");
     setTimeout(() => (ref.style.display = "none"), 300);
   }
@@ -376,16 +375,16 @@ function showFullscreen() {
 
 function resizeMobileButtons() {
   let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
-  let buttonImg = document.querySelectorAll(".mobile-game-button img");
+  let buttonSvg = document.querySelectorAll(".mobile-game-button svg");
   const size = window.innerHeight / 7;
   buttonsWrapper.forEach((button) => {
     button.style.padding = `${size / 2}`;
     button.style.width = `${size * 1.5}px`;
     button.style.height = `${size}px`;
   });
-  buttonImg.forEach((img) => {
-    img.style.width = `${size / 2.5}px`;
-    img.style.height = `${size / 2.5}px`;
+  buttonSvg.forEach((svg) => {
+    svg.style.width = `${size / 2.5}px`;
+    svg.style.height = `${size / 2.5}px`;
   });
 }
 

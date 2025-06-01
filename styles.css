@@ -804,7 +804,6 @@ input[type="range"]::-moz-range-thumb {
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  /* display: flex; */
   justify-content: space-between;
   width: 680px;
   display: none;
@@ -815,12 +814,9 @@ input[type="range"]::-moz-range-thumb {
   gap: 12px;
 }
 
-.mobile-buttons div:active {
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-.mobile-buttons-wrapper img {
+.mobile-game-button svg {
   width: 40px;
+   touch-action: none;
 }
 
 .mobile-game-button {
@@ -830,4 +826,13 @@ input[type="range"]::-moz-range-thumb {
   padding: 12px;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 40px;
+  touch-action: none;
+}
+
+.mobile-game-button:active {
+   background-color: rgba(255, 255, 255, 0.6);
+}
+
+.mobile-game-button svg:active .mobile-game-button {
+     background-color: rgba(255, 255, 255, 0.6);
 }

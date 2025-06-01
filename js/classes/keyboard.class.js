@@ -9,56 +9,22 @@ class Keyboard {
     this.startKeyControlEvents();
   }
 
-  // creating prevent mobile buttons for hide popup menu
 
   startKeyboardTouchEvents() {
-    let ref1 = document.getElementById("mobile-jump");
-    ref1.oncontextmenu = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      return false;
-    };
-    ref1.addEventListener("touchstart", () => {
+    document.getElementById("mobile-jump").addEventListener("touchstart", () => {
       this.KEY_JUMP = true;
-      ref1.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
-    let ref2 = document.getElementById("mobile-throw");
-    ref2.oncontextmenu = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      return false;
-    };
-    ref2.addEventListener("touchstart", () => {
+    document.getElementById("mobile-throw").addEventListener("touchstart", () => {
       this.KEY_SHOT = true;
-      ref2.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
-    let ref3 = document.getElementById("mobile-left");
-    ref3.oncontextmenu = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-
-      return false;
-    };
-    ref3.addEventListener("touchstart", () => {
+    document.getElementById("mobile-left").addEventListener("touchstart", () => {
       this.KEY_LEFT = true;
-      ref3.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
-    let ref4 = document.getElementById("mobile-right");
-    ref4.oncontextmenu = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      return false;
-    };
-    ref4.addEventListener("touchstart", () => {
+    document.getElementById("mobile-right").addEventListener("touchstart", () => {
       this.KEY_RIGHT = true;
-      ref4.addEventListener("touchstart", (element) => element.preventDefault(), { passive: false });
     });
 
     document.getElementById("mobile-pause").addEventListener("touchstart", () => {
@@ -87,39 +53,39 @@ class Keyboard {
     window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowRight":
-      keyboard.KEY_RIGHT = true;
+      this.KEY_RIGHT = true;
       break;
 
     case "ArrowLeft":
-      keyboard.KEY_LEFT = true;
+      this.KEY_LEFT = true;
       break;
 
     case "ArrowUp":
-      keyboard.KEY_UP = true;
+      this.KEY_UP = true;
       break;
 
     case "ArrowDown":
-      keyboard.KEY_DOWN = true;
+      this.KEY_DOWN = true;
       break;
 
     case " ":
-      keyboard.KEY_JUMP = true;
+      this.KEY_JUMP = true;
       break;
 
     case "Control":
-      keyboard.KEY_SHOT = true;
+      this.KEY_SHOT = true;
       break;
 
     case "Alt":
-      keyboard.KEY_SHOT = true;
+      this.KEY_SHOT = true;
       break;
 
     case "d":
-      keyboard.KEY_SHOT = true;
+      this.KEY_SHOT = true;
       break;
 
     case "D":
-      keyboard.KEY_SHOT = true;
+      this.KEY_SHOT = true;
       break;
 
     default:
@@ -130,39 +96,39 @@ class Keyboard {
 window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "ArrowRight":
-      keyboard.KEY_RIGHT = false;
+      this.KEY_RIGHT = false;
       break;
 
     case "ArrowLeft":
-      keyboard.KEY_LEFT = false;
+      this.KEY_LEFT = false;
       break;
 
     case "ArrowUp":
-      keyboard.KEY_UP = false;
+      this.KEY_UP = false;
       break;
 
     case "ArrowDown":
-      keyboard.KEY_DOWN = false;
+      this.KEY_DOWN = false;
       break;
 
     case " ":
-      keyboard.KEY_SPACE = false;
+      this.KEY_SPACE = false;
       break;
 
     case "Control":
-      keyboard.KEY_SHOT = false;
+      this.KEY_SHOT = false;
       break;
 
     case "Alt":
-      keyboard.KEY_SHOT = false;
+      this.KEY_SHOT = false;
       break;
 
     case "d":
-      keyboard.KEY_SHOT = false;
+      this.KEY_SHOT = false;
       break;
 
     case "D":
-      keyboard.KEY_SHOT = false;
+      this.KEY_SHOT = false;
       break;
 
     default:

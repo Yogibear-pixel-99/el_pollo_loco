@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Document</title>
 
     <link
@@ -51,7 +53,11 @@
     <main class="main-container">
       <div class="left-content" id="left-content">
         <div class="flex-ctr-ctr flex-col">
-          <img class="score-table-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+          <img
+            class="score-table-close-button"
+            onclick="closeSettings()"
+            src="./img/icons/close-svgrepo-com.svg"
+            alt="close-icon" />
           <h2>Highscore</h2>
           <div class="m20bot">Top 30</div>
         </div>
@@ -69,26 +75,97 @@
         </div>
         <section id="canvas-wrapper" class="canvas-wrapper">
           <canvas id="gamecanvas" width="720" height="480"></canvas>
-          <section class="mobile-buttons-wrapper d-none" id="mobile-buttons-wrapper">
+          <section
+            class="mobile-buttons-wrapper d-none"
+            id="mobile-buttons-wrapper">
             <div class="mobile-buttons">
               <div id="mobile-jump" class="mobile-game-button">
-                <img src="./img/icons/mobile/up-svgrepo-com.svg" alt="jump arrow">
+            
+                <svg
+                  width="800px"
+                  height="800px"
+                  viewBox="0 0 1024 1024"
+                  class="icon"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M989.44 684.16a36.8 36.8 0 0 1-6.72 10.56 32 32 0 0 1-45.44 0 36.8 36.8 0 0 1-6.72-10.56A26.56 26.56 0 0 1 928 672a32 32 0 1 1 64 0 32 32 0 0 1-2.56 12.16zM844.16 621.76l-96-75.52a32 32 0 0 1 39.68-50.24l96 75.52a32 32 0 0 1-39.68 50.24zM652.16 470.72L512 360.64 83.84 697.28a32 32 0 0 1-39.68-50.24l448-352a32 32 0 0 1 39.68 0l160 125.76a32 32 0 0 1-39.68 50.24z"
+                    fill="#231815" />
+                </svg>
               </div>
               <div id="mobile-throw" class="mobile-game-button">
-                <img src="./img/icons/mobile/bottle-wine-svgrepo-com.svg" alt="bottle throw">
+             
+                <svg
+                  fill="#000000"
+                  width="800px"
+                  height="800px"
+                  viewBox="-41.39 0 122.88 122.88"
+                  version="1.1"
+                  id="Layer_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  style="enable-background: new 0 0 40.1 122.88"
+                  xml:space="preserve">
+                  <style type="text/css">
+                    .st0 {
+                      fill-rule: evenodd;
+                      clip-rule: evenodd;
+                    }
+                  </style>
+                  <g>
+                    <path
+                      class="st0"
+                      d="M30.6,32.25c-0.99,0.01-1.71-0.43-2.23-1.22c-0.98-1.5-0.89-3.13-0.89-4.83V0.93c0-0.51-0.42-0.93-0.93-0.93 h-13.1c-0.51,0-0.93,0.42-0.93,0.93v23.19v2.4c0,1.54,0.09,2.67-0.74,4.08c-0.58,0.97-1.44,1.65-2.55,2.09 c-2.38,1-4.32,2.48-5.84,4.44c-1.57,2.02-2.68,4.55-3.37,7.55v45.87v24.9c-0.15,3.52,1.02,5.79,3.47,6.85 c1.43,0.61,2.32,0.56,3.81,0.56h22.3c1.65,0,3.19,0.07,4.82-0.22c4.11-0.73,5.6-2.9,5.68-6.64V45.87 C39.67,38.75,35.55,35.11,30.6,32.25L30.6,32.25z M9.07,52.98h21.96c1.59,0,2.89,1.3,2.89,2.89v35.44c0,1.59-1.3,2.89-2.89,2.89 H9.07c-1.59,0-2.89-1.3-2.89-2.89V55.87C6.18,54.28,7.48,52.98,9.07,52.98L9.07,52.98z" />
+                  </g>
+                </svg>
               </div>
             </div>
             <div class="mobile-buttons">
-              <div id="mobile-pause"  class="mobile-game-button">
-                <img src="./img/icons/mobile/pause-svgrepo-com.svg" alt="left arrow">
+              <div id="mobile-pause" class="mobile-game-button">
+              
+                <svg
+                  width="800px"
+                  height="800px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M15 16V18M15 6V12M9 6V18"
+                    stroke="#000000"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
               </div>
             </div>
             <div class="mobile-buttons">
-              <div id="mobile-left"  class="mobile-game-button">
-                <img src="./img/icons/mobile/left-svgrepo-com.svg" alt="left arrow">
+              <div id="mobile-left" class="mobile-game-button">
+               
+                <svg
+                  width="800px"
+                  height="800px"
+                  viewBox="0 0 1024 1024"
+                  class="icon"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M700.16 34.56a36.8 36.8 0 0 1 10.56 6.72 32 32 0 0 1 0 45.44 36.8 36.8 0 0 1-10.56 6.72 26.56 26.56 0 0 1-12.16 2.56 32 32 0 0 1-22.72-9.28A33.6 33.6 0 0 1 656 64a33.6 33.6 0 0 1 9.28-22.72A33.6 33.6 0 0 1 688 32a32 32 0 0 1 12.16 2.56zM637.76 179.84l-75.52 96A32 32 0 0 1 512 236.16l75.52-96a32 32 0 0 1 50.24 39.68zM486.72 371.84L376.64 512l336.64 428.16a32 32 0 0 1-50.24 39.68l-352-448a32 32 0 0 1 0-39.68l125.76-160a32 32 0 1 1 50.24 39.68z"
+                    fill="#231815" />
+                </svg>
               </div>
               <div id="mobile-right" class="mobile-game-button">
-                <img src="./img/icons/mobile/to-the-right-svgrepo-com.svg" alt="right arrow">
+                
+                <svg
+                  width="800px"
+                  height="800px"
+                  viewBox="0 0 1024 1024"
+                  class="icon"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M323.84 34.56a36.8 36.8 0 0 0-10.56 6.72 32 32 0 0 0 0 45.44 36.8 36.8 0 0 0 10.56 6.72 26.56 26.56 0 0 0 12.16 2.56 32 32 0 0 0 22.72-9.28A33.6 33.6 0 0 0 368 64a33.6 33.6 0 0 0-9.28-22.72A33.6 33.6 0 0 0 336 32a32 32 0 0 0-12.16 2.56zM386.24 179.84l75.52 96A32 32 0 0 0 512 236.16l-75.52-96a32 32 0 0 0-50.24 39.68zM537.28 371.84L647.36 512 310.72 940.16a32 32 0 0 0 50.24 39.68l352-448a32 32 0 0 0 0-39.68l-125.76-160a32 32 0 1 0-50.24 39.68z"
+                    fill="#231815" />
+                </svg>
               </div>
             </div>
           </section>
@@ -140,7 +217,6 @@
           <section
             id="canvas-pause-container"
             class="canvas-pause-container flex-ctr-ctr flex-col d-none">
-      
             <div class="won-lost-wrapper">
               <div
                 class="won-lost-single-button-wrapper"
@@ -191,52 +267,56 @@
         </div>
       </div>
       <div class="right-content" id="right-content">
-        <img class="score-table-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
-                  <h2>Points Table</h2>
+        <img
+          class="score-table-close-button"
+          onclick="closeSettings()"
+          src="./img/icons/close-svgrepo-com.svg"
+          alt="close-icon" />
+        <h2>Points Table</h2>
         <div class="player-score" id="player-score">000</div>
         <div class="points-table" id="game-points-table"></div>
       </div>
     </main>
     <footer class="settings-wrapper">
-       <div class="copyright-link">(c) Joachim Pürcher</div>
-      <div class="impressum-link" onclick="toggleOptionMenu(getImpressumTemp, 'impressum')">Impressum</div>
+      <div class="copyright-link">(c) Joachim Pürcher</div>
+      <div
+        class="impressum-link"
+        onclick="toggleOptionMenu(getImpressumTemp, 'impressum')">
+        Impressum
+      </div>
       <div
         class="opt-wrapper"
         onclick="toggleOptionMenu(getStoryTemp, 'story')">
         <!-- <div class="opt-wrapper" onclick="toggleStory()"> -->
         <img
-          class="settings-img"
+          class="settings-img opt-img"
           src="./img/icons/book-4109187_640.png"
-          alt="story-icon"
-          cl/classesass="opt-img" />
+          alt="story-icon" />
         <span class="opt-text">Story</span>
       </div>
       <div
         class="opt-wrapper"
         onclick="toggleOptionMenu(getControlsTemp, 'controls')">
         <img
-          class="settings-img"
+          class="settings-img opt-img"
           src="./img/icons/controller-3364881_640.png"
-          alt="controls-icon"
-          class="opt-img" />
+          alt="controls-icon" />
         <span class="opt-text">Controls</span>
       </div>
       <div class="opt-wrapper" onclick="toggleGameMode()">
         <img
-          class="settings-img"
+          class="settings-img opt-img"
           src="./img/icons/rooster-47475_640.png"
-          alt="rooster-icon"
-          class="opt-img" />
+          alt="rooster-icon" />
         <span class="opt-text">Gamemode</span>
       </div>
       <div
         class="opt-wrapper"
         onclick="toggleOptionMenu(getSoundOptionsTemp, 'sounds'); initSoundSettings()">
         <img
-          class="settings-img"
+          class="settings-img opt-img"
           src="./img/icons/guitar-7288462_640.png"
-          alt="sound-icon"
-          class="opt-img" />
+          alt="sound-icon" />
         <span class="opt-text">Sound on/off</span>
       </div>
       <div
@@ -244,16 +324,15 @@
         class="opt-wrapper"
         onclick="toggleFullScreen()">
         <img
-          class="settings-img"
+          class="settings-img opt-img"
           src="./img/icons/basket-1296634_640.png"
-          alt="basket-icon"
-          class="opt-img" />
+          alt="basket-icon" />
         <span class="opt-text">Fullscreen</span>
       </div>
     </footer>
     <div class="main-background-img"></div>
     <section class="turn-device-mask">
-      <img src="./img/icons/mobile/rotate-device.svg" alt="turn device icon">
+      <img src="./img/icons/mobile/rotate-device.svg" alt="turn device icon" />
       <div>Turn your device</div>
     </section>
   </body>
