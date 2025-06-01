@@ -1,28 +1,70 @@
+/**
+ * The boss enemy in the game.
+ * Handles boss movement, animation, attack, dead and soundeffects.
+ * Extends the Enemies class.
+ */
 class Endboss extends Enemies {
+  /** The height of the boss sprite in pixels. */
   height = 300;
+
+  /** The width of the boss sprite in pixels. */
   width = 250;
+
+  /** The walking speed. */
   walkingSpeed = 1.3;
+
+  /** Score identifier when the boss is killed. */
   scoreNameKilled = "endbossKilled";
+
+  /** Score identifier when the boss is hit by a bottle. */
   scoreNameBottle = "endbossBottleHit";
+
+  /** Vertical position based on floor and sprite height. */
   y = 480 - this.height - 58 + 15;
-  // x = 800;
+
+  /** Horizontal position where the boss starts. */
   x = 719 * 6;
+
+  /** Health of the boss. */
   energy = 50;
+
+  /** Maximum health of the boss. */
   maxEnergy;
-  energy;
+
+  /** Gravity acceleration used in jumping and falling. */
   acceleration = 2.5;
+
+  /** Counter for dead animation cycles. */
   deadAnimationCount = 0;
 
+  /** Interval ID for the boss animation loop. */
   animateInterval;
+
+  /** Interval ID for boss movement loop. */
   moveInterval;
+
+  /** Interval ID for the jump attack loop. */
   jumpAttackInterval;
+
+  /** Interval ID for checking movement direction. */
   moveDirectionInterval;
+
+  /** Interval ID for gravity simulation. */
   gravityInterval;
 
+  /** Indicates if the boss is currently walking. */
   isWalking = false;
+
+  /** Indicates if the boss is still alive. */
   lives = true;
+
+  /** True when the boss fight has been triggered. */
   isTriggered = false;
 
+  /**
+   * Offsets for the boss hitbox used in collision detection.
+   * @type {{width: number, height: number, top: number, right: number, bottom: number, left: number}}
+   */
   offset = {
     width: 250,
     height: 300,
@@ -32,6 +74,10 @@ class Endboss extends Enemies {
     left: 50,
   };
 
+  /**
+   * Returns the boss's head hitbox (e.g. for detecting headshots).
+   * @returns {{width: number, height: number, x: number, y: number}} The bounding box of the boss's head.
+   */
   get offsetHead() {
     return {
       width: 70,
@@ -41,10 +87,16 @@ class Endboss extends Enemies {
     };
   }
 
+  /** Names of all interval for normal movement and animation. */
   allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
+
+  /** Animation cycle duration for switching frames. */
   animationCycle = 170;
+
+  /** Interval cycle for boss movement logic. */
   moveCycle = 30;
 
+  /** Image frames for the boss's walking animation. */
   WALKING_ANIMATION = [
     "./img/4_enemie_boss_chicken/1_walk/G1.png",
     "./img/4_enemie_boss_chicken/1_walk/G2.png",
@@ -52,6 +104,7 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/1_walk/G4.png",
   ];
 
+  /** Image frames shown when the boss is alert. */
   ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
     "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -63,24 +116,28 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
+  /** Image frames shown when the boss gets hit by a bottle. */
   BOSS_BOTTLE_HIT_ANIMATION = [
     "./img/4_enemie_boss_chicken/4_hurt/G21.png",
     "./img/4_enemie_boss_chicken/4_hurt/G22.png",
     "./img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
+  /** Image frames shown during the boss’s death. */
   BOSS_DEAD_ANIMATION = [
     "./img/4_enemie_boss_chicken/5_dead/G24.png",
     "./img/4_enemie_boss_chicken/5_dead/G25.png",
     "./img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  /** Image frames shown just before the boss jumps. */
   BOSS_ATTACK_ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/3_attack/G13.png",
     "./img/4_enemie_boss_chicken/3_attack/G14.png",
     "./img/4_enemie_boss_chicken/3_attack/G15.png",
   ];
 
+  /** Image frames shown during the boss's jump attack. */
   BOSS_ATTACK_JUMP_ANIMATION = [
     "./img/4_enemie_boss_chicken/3_attack/G16.png",
     "./img/4_enemie_boss_chicken/3_attack/G17.png",
@@ -89,6 +146,11 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
+  /**
+   * Creates an instance of the Endboss.
+   * Loads all relevant animation frames.
+   * Sets the initial image to the first alert animation frame.
+   */
   constructor() {
     super();
     this.loadImage(this.ALERT_ANIMATION[0]);
@@ -98,21 +160,26 @@ class Endboss extends Enemies {
     this.loadImagesArray(this.BOSS_DEAD_ANIMATION);
     this.loadImagesArray(this.BOSS_ATTACK_ALERT_ANIMATION);
     this.loadImagesArray(this.BOSS_ATTACK_JUMP_ANIMATION);
-    this.applyGravity();
   }
 
-
-
   /**
-   * Starts the boss fight by calling the movement, attacking and animate intervall.
+   * Starts the boss fight by calling the boss intrvals.
+   * Plays a soundeffect when the boss is triggerd and sets isTriggerd to true;
    */
   startBossFight() {
     audio.playSound("bossIsTriggerd");
     this.isTriggered = true;
     this.bossMoveDirection();
     this.startBossIntervals();
+    this.applyGravity();
   }
 
+  /**
+   * Start three boss intervals.
+   * First for the attack movement.
+   * Second for the normal movement.
+   * Third for the boss animation.
+   */
   startBossIntervals() {
     this.attack();
     this.move();
@@ -135,6 +202,10 @@ class Endboss extends Enemies {
     }, 130);
   }
 
+  /**
+   * Plays a sound at the boss dead animation.
+   * Plays two diffrent dead animations in a row.
+   */
   endBossDead() {
     audio.playSound("bossDied");
     if (this.deadAnimationCount < 9) {
@@ -147,7 +218,7 @@ class Endboss extends Enemies {
   }
 
   /**
-   *
+   *  Sets a movement intervall, direction depending on the otherDirection variable.
    */
   move() {
     this.moveInterval = setInterval(() => {
@@ -188,8 +259,13 @@ class Endboss extends Enemies {
   }
 
   /**
-   * Calls a random jump attack.
+   * Executes a random jump attack sequence for the boss.
+   * The attack consists of multiple animation phases: alert, attack warning, and jump attack.
+   * A random attack duration is selected to vary the number of jump frames.
+   * If the boss is hurt or dead, the attack is interrupted.
+   * Also triggers movement and sound effects during the attack phase.
    */
+
   jumpAttack() {
     if (gamePaused) return;
     let attackAnimationNr = Math.ceil(Math.random() * 3) * 5 + 10;
@@ -197,9 +273,7 @@ class Endboss extends Enemies {
     this.animationCount = 0;
     this.jumpAttackInterval = setInterval(() => {
       if (this.isDead()) {
-        clearInterval(this.jumpAttackInterval);
-        this.animate();
-        return;
+        this.clearJumpAttack();
       } else if (!this.bossIsHurt()) {
         if (attackCount < 8) {
           this.playAnimation(this.ALERT_ANIMATION);
@@ -223,15 +297,23 @@ class Endboss extends Enemies {
           this.animationCount = 0;
           clearInterval(this.jumpAttackInterval);
           this.startBossIntervals();
-        } else if (this.isDead()) {
-          clearInterval(this.jumpAttackInterval);
-          this.animate();
         }
         attackCount++;
       } else {
         this.playAnimation(this.BOSS_BOTTLE_HIT_ANIMATION);
       }
     }, 150);
+  }
+
+  /**
+   * Clears the jump attack interval and set the normal animate interval.
+   * 
+   * @returns {void}
+   */
+  clearJumpAttack() {
+    clearInterval(this.jumpAttackInterval);
+    this.animate();
+    return;
   }
 
   /**
@@ -279,6 +361,9 @@ class Endboss extends Enemies {
     return timePassed < 1.5;
   }
 
+  /**
+   * Applys a gravity to the boss, if the boss is more than 15 pixels above the floor.
+   */
   applyGravity() {
     this.gravityInterval = setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {
@@ -290,12 +375,18 @@ class Endboss extends Enemies {
     }, 1000 / 25);
   }
 
+  /**
+   * Stops all boss intervals in the "allBossIntervals" array.
+   */
   stopAllBossIntervals() {
     this.allBossIntervals.forEach((interval) => {
       clearInterval(this[interval]);
     });
   }
 
+  /**
+   * Checks if the boss is on the left or right side of the character and sets the other direction variable.
+   */
   bossMoveDirection() {
     this.moveDirectionInterval = setInterval(() => {
       if (this.x < world.character.x - 200) {
