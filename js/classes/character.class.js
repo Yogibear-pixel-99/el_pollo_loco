@@ -88,7 +88,7 @@ class Character extends MovableObject {
 
   /**
    * The offset from the character sprite for the collision detection.
-   * @type {top: number, right: number, bottom: number, left: number}
+   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 90,

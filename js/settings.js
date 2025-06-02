@@ -279,7 +279,9 @@ function checkArrayAndSetMuteAndVol(audio, mute, vol) {
   }
 }
 
-
+/**
+ * Toggles sound effects on or off and updates settings.
+ */
 function toggleSoundsOnOff() {
   sfxMute ? (sfxMute = false) : (sfxMute = true);
   console.log(sfxMute);
@@ -288,6 +290,9 @@ function toggleSoundsOnOff() {
   initSoundSettings();
 }
 
+/**
+ * Toggles music on or off and updates settings.
+ */
 function toggleMusicOnOff() {
   musicMute ? (musicMute = false) : (musicMute = true);
   assignMuteAndVolume("music", musicMute, musicVolume);
@@ -295,6 +300,9 @@ function toggleMusicOnOff() {
   initSoundSettings();
 }
 
+/**
+ * Initializes the sound and music UI settings and applies volume/mute state.
+ */
 function initSoundSettings() {
   let soundOnRef = document.getElementById("sound-on");
   let soundOffRef = document.getElementById("sound-off");
@@ -322,6 +330,9 @@ function initSoundSettings() {
   assignMuteAndVolume("music", musicMute, musicVolume);
 }
 
+/**
+ * Sets the music and sound effects volume from the UI sliders and stores the values.
+ */
 function setVolume() {
   let musicInputRef = document.getElementById("menu-music-vol");
   musicVolume = musicInputRef.value;
@@ -333,6 +344,9 @@ function setVolume() {
   initSoundSettings();
 }
 
+/**
+ * Styles the name input field on small screens by toggling a placeholder class.
+ */
 function styleResponsiveNameInput() {
   let ref = document.getElementById("player-name-input");
   ref.value === ""
@@ -340,6 +354,9 @@ function styleResponsiveNameInput() {
     : ref.classList.remove("responsive-input-placeholder");
 }
 
+/**
+ * Pauses the game and shows the pause screen.
+ */
 function pauseGame() {
   showCursor();
   world.stopAllGameIntervals();
@@ -348,6 +365,9 @@ function pauseGame() {
   audio.pauseSound("cluckern");
 }
 
+/**
+ * Resumes the game from pause state.
+ */
 function resumeGame() {
   hideCursor();
   world.continueGameIntervals();
@@ -356,6 +376,9 @@ function resumeGame() {
   audio.playSound("menuClick");
 }
 
+/**
+ * Enters fullscreen mode and resizes the canvas and buttons.
+ */
 function showFullscreen() {
   const ref = document.getElementById("canvas-wrapper");
   const canvas = document.getElementById("gamecanvas");
@@ -373,6 +396,9 @@ function showFullscreen() {
   }
 }
 
+/**
+ * Resizes mobile game control buttons based on window height.
+ */
 function resizeMobileButtons() {
   let buttonsWrapper = document.querySelectorAll(".mobile-game-button");
   let buttonSvg = document.querySelectorAll(".mobile-game-button svg");
@@ -388,6 +414,9 @@ function resizeMobileButtons() {
   });
 }
 
+/**
+ * Resizes the game canvas and buttons responsively based on the window size.
+ */
 function resizeDisplay() {
   const canvas = document.getElementById("gamecanvas");
   const buttonsRef = document.getElementById("mobile-buttons-wrapper");
@@ -407,9 +436,11 @@ function resizeDisplay() {
   canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
   buttonsRef.style.width = `${scaledWidth - 40}px`;
   buttonsRef.style.bottom = `${(windowHeight - scaledHeight) / 2 + 8}px`;
-  // buttonsRef.width = `${windowWidth - 40}`;
 }
 
+/**
+ * Exits fullscreen mode and restores the original canvas and button styles.
+ */
 function hideFullscreen() {
   if (document.fullscreenElement) {
     if (document.exitFullscreen) {
@@ -443,10 +474,16 @@ function hideFullscreen() {
   });
 }
 
+/**
+ * Ends the current game session.
+ */
 function resetGame() {
   gameOver();
 }
 
+/**
+ * Returns the game to the main menu and resets relevant states and UI.
+ */
 function backToMainMenu() {
   document.getElementById("right-content").style.zIndex = "150";
   activateMenu();
@@ -456,4 +493,3 @@ function backToMainMenu() {
   checkFullscreenMode();
   audio.playSound("menuClick");
 }
-

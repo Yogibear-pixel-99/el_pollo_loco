@@ -1,11 +1,20 @@
-
-
+/**
+ * Initializes and returns a new Level instance configured for the Chicken Rush game mode.
+ * 
+ * The level includes:
+ * - An empty coins array.
+ * - Seven Bottle objects to collect.
+ * - Two Healbottle objects to collect.
+ * - Two enemies: one Chicken and one Minichicken, positioned randomly within a range.
+ * - One Endboss Object.
+ * - Empty arrays for dead enemies and sky objects.
+ * - The level end position calculated.
+ * 
+ * @returns {Level} A new Level instance configured specifically for Chicken Rush mode.
+ */
 function initChickenRushLevel() {
-return new Level(
-
-
-
-  [],
+  return new Level(
+    [],
 
     [
       new Bottle(),
@@ -22,21 +31,17 @@ return new Level(
       new Healbottle()
     ],
 
-  [
-    new Chicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
-    new Minichicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
+    [
+      new Chicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
+      new Minichicken(Math.random() * ((719 * 2) - (719 * 1)) + 719 * 1),
+    ],
 
-  ],
+    new Endboss(),
 
-  new Endboss(),
+    [],
 
-  [],
+    [],
 
-  [],
-  
-  719 * 5 + 50,
-  
-
-
-);
+    719 * 5 + 50,
+  );
 }

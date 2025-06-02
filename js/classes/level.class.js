@@ -81,14 +81,14 @@ class Level {
   /**
    * Constructs a new level with the provided parameters.
    * @param {Coin[]} coins - Initial coin objects.
-   * @param {ThrowableObject[]} bottles - Collectable throwing bottles.
+   * @param {Bottle[]} bottles - Collectable throwing bottles.
    * @param {Healbottle[]} healBottles - Health-restoring bottles.
    * @param {Enemies[]} enemies - List of enemy objects.
    * @param {Endboss} endboss - The final boss enemy.
    * @param {Clouds[]} clouds - Cloud layer objects.
    * @param {BackgroundLayer[]} backgrounds - Background layers.
    * @param {number} level_end_x - X-position where the level ends.
-   * @param {any} level_end_cactus - Final cactus/marker at beginning and end.
+   * @param {Cactus} level_end_cactus - Final cactus/marker at beginning and end.
    */
   constructor(
     coins,

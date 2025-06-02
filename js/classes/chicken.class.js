@@ -42,7 +42,7 @@ class Chicken extends Enemies {
 
   /**
    * The offset from the sprite for the collision detection.
-   * @type {top: number, right: number, bottom: number, left: number}
+   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 8,

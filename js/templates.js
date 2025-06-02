@@ -1,7 +1,7 @@
 /**
- * Creates the HTMLElement for the story.
+ * Returns the HTML structure for the story section.
  *
- * @returns - The story template.
+ * @returns {string} HTML string containing the story content.
  */
 function getStoryTemp() {
   return `<div class="story-text">
@@ -23,9 +23,9 @@ El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the 
 }
 
 /**
- * Creates the HTMLElement for the controls.
+ * Returns the HTML structure for the controls/settings section.
  *
- * @returns - The controls template.
+ * @returns {string} HTML string containing the control instructions.
  */
 function getControlsTemp() {
   return `<div class="controls-settings">
@@ -56,10 +56,11 @@ function getControlsTemp() {
 }
 
 /**
- * Creates a HTML element to display the players score.
- * 
- * @param {Object} element - The player object with name and score.
- * @returns - A HTML template
+ * Generates a single highscore entry as HTML.
+ *
+ * @param {Object} element - The player object containing `name` and `score`.
+ * @param {number} index - The player's position in the highscore list.
+ * @returns {string} HTML string representing one highscore entry.
  */
 function highscoreTemp(element, index) {
   return `<div class="score-wrapper">
@@ -69,10 +70,10 @@ function highscoreTemp(element, index) {
 }
 
 /**
- * Creates a HTML element to display the score board.
- * 
- * @param {Object} element - The score object with name and points.
- * @returns - A HTML template
+ * Generates an HTML element for a score item in the score board.
+ *
+ * @param {Object} element - A key-value pair [id, { name, points }].
+ * @returns {string} HTML string representing a score item.
  */
 function getPointsTemp(element) {
   return `<div class="item-point-wrapper">
@@ -83,9 +84,9 @@ function getPointsTemp(element) {
 }
 
 /**
- * Creates a HTML element for the sound settings.
- * 
- * @returns - A HTML template.
+ * Returns the HTML structure for the sound settings section.
+ *
+ * @returns {string} HTML string for the sound and music settings UI.
  */
 function getSoundOptionsTemp() {
   return `<div class="sound-settings">
@@ -113,9 +114,9 @@ function getSoundOptionsTemp() {
 }
 
 /**
- * Creates a HTML element for the loading spinner.
- * 
- * @returns - A HTML template.
+ * Returns the HTML for the loading spinner.
+ *
+ * @returns {string} HTML string showing a loading indicator.
  */
 function getLoadingSpinnerTemp(){
     return `<div class="loading-spinner-container flex-ctr-ctr flex-col">
@@ -126,9 +127,9 @@ function getLoadingSpinnerTemp(){
 }
 
 /**
- * Creates a HTML element for the impressum.
- * 
- * @returns - A HTML template.
+ * Returns the HTML structure for the legal 'Impressum' information.
+ *
+ * @returns {string} HTML string containing legal and contact information.
  */
 function getImpressumTemp(){
     return `<div class="impressum-wrapper">

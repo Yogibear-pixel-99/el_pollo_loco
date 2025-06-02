@@ -148,7 +148,7 @@ class World {
     this.setWorld();
     this.runCollisions();
     this.runWorldIntervals();
-    playGameMusic();
+    audio.playSoundLoop("gameAmbience");
   }
 
   /**
