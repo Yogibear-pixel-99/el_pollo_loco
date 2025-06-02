@@ -129,6 +129,22 @@ class World {
    */
   drawInterval;
 
+    /**
+   * A config array, to draw all objects from the level to the canvas.
+   * @type {String[]}
+   */
+  allLevelObjectsConfig = [
+    "backgrounds",
+    "enemies",
+    "deadEnemies",
+    "skyObjects",
+    "coins",
+    "collectedCoins",
+    "bottles",
+    "healBottles",
+    "level_end_cactus",
+  ];
+
   /**
    * Creates an instance of the game world.
    * @param {HTMLCanvasElement} canvas - The canvas element to render to.
@@ -288,28 +304,36 @@ class World {
    * Handles collisions for thrown bottles against enemies and boss.
    */
   checkThrownBottleCollision() {
-   
     this.thrownBottles.forEach((bottle) => {
       if (this.bottleHittetFloor(bottle)) {
         this.animateBrokenBottle(bottle);
         this.addPointsToPlayerScore(bottle.itemName);
       } else {
         this.checkThrownBottleBossCollision(bottle);
-        this.checkThrownBottleEnemyCollision(bottle)
+        this.checkThrownBottleEnemyCollision(bottle);
       }
     });
   }
 
+  /**
+   * Handles the collision for thrown bottles against the boss.
+   * @param {Object} bottle - The thrown bottle.
+   */
   checkThrownBottleBossCollision(bottle) {
     if (this.bottleHittetBoss(bottle)) {
-        this.animateBrokenBottle(bottle);
-        this.level.endboss.hitBoss();
-        audio.playSoundClone("bossHitted");
-        this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
-  }}
+      this.animateBrokenBottle(bottle);
+      this.level.endboss.hitBoss();
+      audio.playSoundClone("bossHitted");
+      this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+    }
+  }
 
+  /**
+   * Handles the collision for thrown bottles against the enemies.
+   * @param {Object} bottle - The thrown bottle.
+   */
   checkThrownBottleEnemyCollision(bottle) {
-     let deadEnemies = [];
+    let deadEnemies = [];
     this.level.enemies = this.level.enemies.filter((enemy) => {
       if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
         this.animateBrokenBottle(bottle);
@@ -321,17 +345,31 @@ class World {
       }
       return true;
     });
-     deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
+    deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
+  /**
+   * Checks if the bottle has already hittet and hittet the floor.
+   * @param {Object} bottle - The thrown bottle.
+   * @returns {boolean}
+   */
   bottleHittetFloor(bottle) {
-    return bottle.y === this.floorPosition(bottle) && bottle.alreadyHittet === false;
+    return (
+      bottle.y === this.floorPosition(bottle) && bottle.alreadyHittet === false
+    );
   }
 
+  /**
+   * Checks if the bottle has already hittet and hittet the boss.
+   * @param {Object} bottle - The thrown bottle.
+   * @returns {boolean}
+   */
   bottleHittetBoss(bottle) {
-    return (bottle.isColliding(this.level.endboss) ||
+    return (
+      (bottle.isColliding(this.level.endboss) ||
         bottle.isCollidingHead(this.level.endboss)) &&
-      bottle.alreadyHittet === false;
+      bottle.alreadyHittet === false
+    );
   }
 
   /**
@@ -547,15 +585,9 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToCanvas(this.level.backgrounds);
-    this.addObjectsToCanvas(this.level.enemies);
-    this.addObjectsToCanvas(this.level.deadEnemies);
-    this.addObjectsToCanvas(this.level.skyObjects);
-    this.addObjectsToCanvas(this.level.coins);
-    this.addObjectsToCanvas(this.level.collectedCoins);
-    this.addObjectsToCanvas(this.level.bottles);
-    this.addObjectsToCanvas(this.level.healBottles);
-    this.addObjectsToCanvas(this.level.level_end_cactus);
+    this.allLevelObjectsConfig.forEach((obj) => {
+      this.addObjectsToCanvas(this.level[obj]);
+    });
     this.addObjectsToCanvas(this.thrownBottles);
     this.addObjToCanvas(this.level.endboss);
     this.addObjToCanvas(this.character);
@@ -568,11 +600,7 @@ class World {
     if (this.level.endboss.isTriggered) {
       this.addObjToCanvas(this.bossHealthbar);
     }
-    if (
-      fullScreen ||
-      screenWidthSmallerThan(1300) ||
-      screenHeightSmallerThan(830)
-    ) {
+    if (fullScreen || isSmallScreen()) {
       this.getPlayerScore();
     }
     let self = this;
@@ -662,17 +690,16 @@ class World {
   continueGameIntervals() {
     this.draw();
     this.character.startChar();
-    world.level.enemies.forEach((enemy) => {
-      enemy.startEnemy();
-    });
-
-    if (this.level.endboss.isTriggered) {
-      this.level.endboss.startBossIntervals();
-    }
     this.level.endboss.bossMoveDirection();
     this.level.endboss.applyGravity();
     this.runCollisions();
     this.runWorldIntervals();
+    world.level.enemies.forEach((enemy) => {
+      enemy.startEnemy();
+    });
+    if (this.level.endboss.isTriggered) {
+      this.level.endboss.startBossIntervals();
+    }
     this.level.skyObjects.forEach((cloud) => {
       cloud.autoMoveLeft();
     });

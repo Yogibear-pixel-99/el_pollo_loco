@@ -148,4 +148,26 @@ class Audiofiles {
   resetMusic(objSrc) {
     this.music[objSrc].currentTime = 0;
   }
+
+  /**
+ * Plays the appropriate end game audio depending on win/loss.
+ */
+playEndAudio() {
+  if (world.gameWon) {
+    this.playSound("gameWon");
+  } else {
+    console.trace();
+    this.playSound("gameLost");
+  }
+}
+
+/**
+ * Stops all game-related music and sounds.
+ */
+stopGameMusic() {
+  this.pauseMusic("chickenRushMusic");
+  this.pauseMusic("normalModeMusic");
+  this.pauseSound("cluckern");
+  this.pauseSound("gameAmbience");
+}
 }

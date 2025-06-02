@@ -377,6 +377,18 @@ function resumeGame() {
 }
 
 /**
+ * Handles fullscreen mode display based on current state.
+ * Shows fullscreen UI if enabled and game started, hides otherwise.
+ */
+function checkFullscreenMode() {
+  if (fullScreen && gameHasStarted) {
+    showFullscreen();
+  } else if (fullScreen && !gameHasStarted) {
+    hideFullscreen();
+  }
+}
+
+/**
  * Enters fullscreen mode and resizes the canvas and buttons.
  */
 function showFullscreen() {

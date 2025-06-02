@@ -131,18 +131,18 @@ function init() {
  * Plays error animations and sounds if name input is invalid.
  */
 function startGame() {
-  hideCursor();
   gameHasStarted = true;
+  hideCursor();
   if (checkNameInput()) {
     deactivateMenu();
     showSingleContainerById("mobile-buttons-wrapper");
     checkScoreBoardAppearance();
     showResponsiveGameCanvas();
     showLoadingScreen();
+    checkFullscreenMode();
+    resetScore();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
-    checkFullscreenMode();
-    document.getElementById("player-score").innerText = "0";
 
     switch (gameMode) {
       case "normal":
@@ -161,6 +161,10 @@ function startGame() {
     addErrorAnimation("start-game-text", "shake-error");
     addErrorAnimation("name-error-text", "shake-error");
   }
+}
+
+function resetScore () {
+     document.getElementById("player-score").innerText = "0";
 }
 
 /**
@@ -183,17 +187,6 @@ function showLoadingScreen() {
   showSingleContainerById("canvas-option-container");
 }
 
-/**
- * Handles fullscreen mode display based on current state.
- * Shows fullscreen UI if enabled and game started, hides otherwise.
- */
-function checkFullscreenMode() {
-  if (fullScreen && gameHasStarted) {
-    showFullscreen();
-  } else if (fullScreen && !gameHasStarted) {
-    hideFullscreen();
-  }
-}
 
 /**
  * Sets the flag indicating the game has not started.
@@ -304,18 +297,6 @@ function activateMenu() {
 }
 
 /**
- * Renders the game points table based on configuration data.
- */
-function renderGamePointsTable() {
-  let ref = document.getElementById("game-points-table");
-  let data = "";
-  Object.entries(pointConfig).forEach((element) => {
-    data += getPointsTemp(element);
-  });
-  ref.innerHTML = data;
-}
-
-/**
  * Cycles through the available game modes and updates UI accordingly.
  * Also fetches active highscores for the selected mode.
  */
@@ -327,21 +308,19 @@ function toggleGameMode() {
       ref.innerText = "Hard Mode";
       expRef.innerText = "More chickens, more boss health";
       gameMode = "hard";
-      getActiveHighscores();
       break;
     case "hard":
       ref.innerText = "Chicken Rush";
       expRef.innerText = "Endless chickens, no boss";
       gameMode = "chickenRush";
-      getActiveHighscores();
       break;
     case "chickenRush":
       ref.innerText = "Normal Mode";
       expRef.innerText = "Collect 10 coins to trigger the boss";
       gameMode = "normal";
-      getActiveHighscores();
       break;
   }
+  getActiveHighscores();
 }
 
 /**
@@ -408,7 +387,7 @@ function gameOver() {
   }
   hideSingleContainerById("mobile-buttons-wrapper");
   world.stopAllGameIntervals();
-  stopGameMusic();
+  audio.stopGameMusic();
   checkFullscreenMode();
   showCursor();
   if (gamePaused) {
@@ -416,31 +395,9 @@ function gameOver() {
     return;
   }
   document.getElementById("right-content").style.zIndex = "150";
-  playEndAudio();
+  audio.playEndAudio();
   if (world.checkGameEnd()) {
     showGameOverScreen();
-  }
-}
-
-/**
- * Stops all game-related music and sounds.
- */
-function stopGameMusic() {
-  audio.pauseMusic("chickenRushMusic");
-  audio.pauseMusic("normalModeMusic");
-  audio.pauseSound("cluckern");
-  audio.pauseSound("gameAmbience");
-}
-
-/**
- * Plays the appropriate end game audio depending on win/loss.
- */
-function playEndAudio() {
-  if (world.gameWon) {
-    audio.playSound("gameWon");
-  } else {
-    console.trace();
-    audio.playSound("gameLost");
   }
 }
 

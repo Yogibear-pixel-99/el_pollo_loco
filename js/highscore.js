@@ -131,6 +131,18 @@ function renderHighscores() {
 }
 
 /**
+ * Renders the game points table based on configuration data.
+ */
+function renderGamePointsTable() {
+  let ref = document.getElementById("game-points-table");
+  let data = "";
+  Object.entries(pointConfig).forEach((element) => {
+    data += getPointsTemp(element);
+  });
+  ref.innerHTML = data;
+}
+
+/**
  * Configuration object for score values assigned to various game actions.
  * @typedef {Object} pointConfig
  */
