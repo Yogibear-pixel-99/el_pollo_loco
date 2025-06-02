@@ -1,4 +1,12 @@
+/**
+ * The bottlebar to show how many bottles are collected in the game.
+ * Handels appearance of the bar.
+ */
 class Bottlebar extends Statusbar {
+
+  /**
+   * 
+   */
   x = 20;
   y = 50;
   BOTTLE_BAR_IMAGES = [

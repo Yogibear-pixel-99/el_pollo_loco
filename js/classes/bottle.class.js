@@ -1,8 +1,28 @@
+/**
+ * The collectable and throwable bottles in the game.
+ * Handles appearance in the game.
+ */
 class Bottle extends DrawableObject {
+
+  /** The height of the bottle img in pixels 
+   * @type {number}
+  */
   height = 55;
+
+    /** The width of the bottle img in pixels
+     * @type {number}
+     */
   width = 55;
+
+  /** The score identifier name
+   * @type {string}
+   */
   itemName = 'collectBottle';
 
+    /**
+   * Offsets for the bottle hitbox used in collision detection.
+   * @type {{top: number, right: number, bottom: number, left: number}}
+   */
   offset = {
     top: 10,
     right: 10,
@@ -10,9 +30,13 @@ class Bottle extends DrawableObject {
     left: 20,
   };
 
+  /**
+   * Creates an instance of a collectable bottle.
+   * Calculates a new horizintal position.
+   * Loads the img of the bottle
+   */
   constructor() {
     super();
-
     this.x = this.calculateNewPosition();
     this.y = this.floorPosition();
     this.loadImage(this.getBottleImg());

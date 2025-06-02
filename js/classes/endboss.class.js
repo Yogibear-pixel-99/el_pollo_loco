@@ -1,153 +1,239 @@
 /**
  * The boss enemy in the game.
- * Handles boss movement, animation, attack, dead and soundeffects.
+ * Handles boss movement, animation, attack, death, and sound effects.
  * Extends the Enemies class.
  */
 class Endboss extends Enemies {
-  /** The height of the boss sprite in pixels. */
-  height = 300;
+/**
+ * The height of the boss sprite in pixels.
+ * @type {number}
+ */
+height = 300;
 
-  /** The width of the boss sprite in pixels. */
-  width = 250;
+/**
+ * The width of the boss sprite in pixels.
+ * @type {number}
+ */
+width = 250;
 
-  /** The walking speed. */
-  walkingSpeed = 1.3;
+/**
+ * The walking speed.
+ * @type {number}
+ */
+walkingSpeed = 1.3;
 
-  /** Score identifier when the boss is killed. */
-  scoreNameKilled = "endbossKilled";
+/**
+ * Score identifier when the boss is killed.
+ * @type {string}
+ */
+scoreNameKilled = "endbossKilled";
 
-  /** Score identifier when the boss is hit by a bottle. */
-  scoreNameBottle = "endbossBottleHit";
+/**
+ * Score identifier when the boss is hit by a bottle.
+ * @type {string}
+ */
+scoreNameBottle = "endbossBottleHit";
 
-  /** Vertical position based on floor and sprite height. */
-  y = 480 - this.height - 58 + 15;
+/**
+ * Vertical position based on floor and sprite height.
+ * @type {number}
+ */
+y = 480 - this.height - 58 + 15;
 
-  /** Horizontal position where the boss starts. */
-  x = 719 * 6;
+/**
+ * Horizontal position where the boss starts.
+ * @type {number}
+ */
+x = 719 * 6;
 
-  /** Health of the boss. */
-  energy = 50;
+/**
+ * Health of the boss.
+ * @type {number}
+ */
+energy = 50;
 
-  /** Maximum health of the boss. */
-  maxEnergy;
+/**
+ * Maximum health of the boss.
+ * @type {number}
+ */
+maxEnergy;
 
-  /** Gravity acceleration used in jumping and falling. */
-  acceleration = 2.5;
+/**
+ * Gravity acceleration used in jumping and falling.
+ * @type {number}
+ */
+acceleration = 2.5;
 
-  /** Counter for dead animation cycles. */
-  deadAnimationCount = 0;
+/**
+ * Counter for dead animation cycles.
+ * @type {number}
+ */
+deadAnimationCount = 0;
 
-  /** Interval ID for the boss animation loop. */
-  animateInterval;
+/**
+ * Interval ID for the boss animation loop.
+ * @type {number}
+ */
+animateInterval;
 
-  /** Interval ID for boss movement loop. */
-  moveInterval;
+/**
+ * Interval ID for boss movement loop.
+ * @type {number}
+ */
+moveInterval;
 
-  /** Interval ID for the jump attack loop. */
-  jumpAttackInterval;
+/**
+ * Interval ID for the jump attack loop.
+ * @type {number}
+ */
+jumpAttackInterval;
 
-  /** Interval ID for checking movement direction. */
-  moveDirectionInterval;
+/**
+ * Interval ID for checking movement direction.
+ * @type {number}
+ */
+moveDirectionInterval;
 
-  /** Interval ID for gravity simulation. */
-  gravityInterval;
+/**
+ * Interval ID for gravity simulation.
+ * @type {number}
+ */
+gravityInterval;
 
-  /** Indicates if the boss is currently walking. */
-  isWalking = false;
+/**
+ * Indicates if the boss is currently walking.
+ * @type {boolean}
+ */
+isWalking = false;
 
-  /** Indicates if the boss is still alive. */
-  lives = true;
+/**
+ * Indicates if the boss is still alive.
+ * @type {boolean}
+ */
+lives = true;
 
-  /** True when the boss fight has been triggered. */
-  isTriggered = false;
+/**
+ * True when the boss fight has been triggered.
+ * @type {boolean}
+ */
+isTriggered = false;
 
-  /**
-   * Offsets for the boss hitbox used in collision detection.
-   * @type {{width: number, height: number, top: number, right: number, bottom: number, left: number}}
-   */
-  offset = {
-    width: 250,
-    height: 300,
-    top: 115,
-    right: 30,
-    bottom: 60,
-    left: 50,
+/**
+ * Offsets for the boss hitbox used in collision detection.
+ * @type {{width: number, height: number, top: number, right: number, bottom: number, left: number}}
+ */
+offset = {
+  width: 250,
+  height: 300,
+  top: 115,
+  right: 30,
+  bottom: 60,
+  left: 50,
+};
+
+/**
+ * Returns the boss's head hitbox.
+ * @returns {{width: number, height: number, x: number, y: number}} The bounding box of the boss's head.
+ */
+get offsetHead() {
+  return {
+    width: 70,
+    height: 100,
+    x: this.x + 28,
+    y: this.y + 45,
   };
+}
+
+/**
+ * Names of all intervals for normal movement and animation.
+ * @type {string[]}
+ */
+allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
+
+/**
+ * Animation cycle duration for switching frames (ms).
+ * @type {number}
+ */
+animationCycle = 170;
+
+/**
+ * Interval cycle for boss movement logic (ms).
+ * @type {number}
+ */
+moveCycle = 30;
+
+/**
+ * Image frames for the boss's walking animation.
+ * @type {string[]}
+ */
+WALKING_ANIMATION = [
+  "./img/4_enemie_boss_chicken/1_walk/G1.png",
+  "./img/4_enemie_boss_chicken/1_walk/G2.png",
+  "./img/4_enemie_boss_chicken/1_walk/G3.png",
+  "./img/4_enemie_boss_chicken/1_walk/G4.png",
+];
+
+/**
+ * Image frames shown when the boss is alert.
+ * @type {string[]}
+ */
+ALERT_ANIMATION = [
+  "./img/4_enemie_boss_chicken/2_alert/G5.png",
+  "./img/4_enemie_boss_chicken/2_alert/G6.png",
+  "./img/4_enemie_boss_chicken/2_alert/G7.png",
+  "./img/4_enemie_boss_chicken/2_alert/G8.png",
+  "./img/4_enemie_boss_chicken/2_alert/G9.png",
+  "./img/4_enemie_boss_chicken/2_alert/G10.png",
+  "./img/4_enemie_boss_chicken/2_alert/G11.png",
+  "./img/4_enemie_boss_chicken/2_alert/G12.png",
+];
+
+/**
+ * Image frames shown when the boss gets hit by a bottle.
+ * @type {string[]}
+ */
+BOSS_BOTTLE_HIT_ANIMATION = [
+  "./img/4_enemie_boss_chicken/4_hurt/G21.png",
+  "./img/4_enemie_boss_chicken/4_hurt/G22.png",
+  "./img/4_enemie_boss_chicken/4_hurt/G23.png",
+];
+
+/**
+ * Image frames shown during the boss’s death.
+ * @type {string[]}
+ */
+BOSS_DEAD_ANIMATION = [
+  "./img/4_enemie_boss_chicken/5_dead/G24.png",
+  "./img/4_enemie_boss_chicken/5_dead/G25.png",
+  "./img/4_enemie_boss_chicken/5_dead/G26.png",
+];
+
+/**
+ * Image frames shown just before the boss jumps.
+ * @type {string[]}
+ */
+BOSS_ATTACK_ALERT_ANIMATION = [
+  "./img/4_enemie_boss_chicken/3_attack/G13.png",
+  "./img/4_enemie_boss_chicken/3_attack/G14.png",
+  "./img/4_enemie_boss_chicken/3_attack/G15.png",
+];
+
+/**
+ * Image frames shown during the boss's jump attack.
+ * @type {string[]}
+ */
+BOSS_ATTACK_JUMP_ANIMATION = [
+  "./img/4_enemie_boss_chicken/3_attack/G16.png",
+  "./img/4_enemie_boss_chicken/3_attack/G17.png",
+  "./img/4_enemie_boss_chicken/3_attack/G18.png",
+  "./img/4_enemie_boss_chicken/3_attack/G19.png",
+  "./img/4_enemie_boss_chicken/3_attack/G20.png",
+];
+
+
 
   /**
-   * Returns the boss's head hitbox (e.g. for detecting headshots).
-   * @returns {{width: number, height: number, x: number, y: number}} The bounding box of the boss's head.
-   */
-  get offsetHead() {
-    return {
-      width: 70,
-      height: 100,
-      x: this.x + 28,
-      y: this.y + 45,
-    };
-  }
-
-  /** Names of all interval for normal movement and animation. */
-  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
-
-  /** Animation cycle duration for switching frames. */
-  animationCycle = 170;
-
-  /** Interval cycle for boss movement logic. */
-  moveCycle = 30;
-
-  /** Image frames for the boss's walking animation. */
-  WALKING_ANIMATION = [
-    "./img/4_enemie_boss_chicken/1_walk/G1.png",
-    "./img/4_enemie_boss_chicken/1_walk/G2.png",
-    "./img/4_enemie_boss_chicken/1_walk/G3.png",
-    "./img/4_enemie_boss_chicken/1_walk/G4.png",
-  ];
-
-  /** Image frames shown when the boss is alert. */
-  ALERT_ANIMATION = [
-    "./img/4_enemie_boss_chicken/2_alert/G5.png",
-    "./img/4_enemie_boss_chicken/2_alert/G6.png",
-    "./img/4_enemie_boss_chicken/2_alert/G7.png",
-    "./img/4_enemie_boss_chicken/2_alert/G8.png",
-    "./img/4_enemie_boss_chicken/2_alert/G9.png",
-    "./img/4_enemie_boss_chicken/2_alert/G10.png",
-    "./img/4_enemie_boss_chicken/2_alert/G11.png",
-    "./img/4_enemie_boss_chicken/2_alert/G12.png",
-  ];
-
-  /** Image frames shown when the boss gets hit by a bottle. */
-  BOSS_BOTTLE_HIT_ANIMATION = [
-    "./img/4_enemie_boss_chicken/4_hurt/G21.png",
-    "./img/4_enemie_boss_chicken/4_hurt/G22.png",
-    "./img/4_enemie_boss_chicken/4_hurt/G23.png",
-  ];
-
-  /** Image frames shown during the boss’s death. */
-  BOSS_DEAD_ANIMATION = [
-    "./img/4_enemie_boss_chicken/5_dead/G24.png",
-    "./img/4_enemie_boss_chicken/5_dead/G25.png",
-    "./img/4_enemie_boss_chicken/5_dead/G26.png",
-  ];
-
-  /** Image frames shown just before the boss jumps. */
-  BOSS_ATTACK_ALERT_ANIMATION = [
-    "./img/4_enemie_boss_chicken/3_attack/G13.png",
-    "./img/4_enemie_boss_chicken/3_attack/G14.png",
-    "./img/4_enemie_boss_chicken/3_attack/G15.png",
-  ];
-
-  /** Image frames shown during the boss's jump attack. */
-  BOSS_ATTACK_JUMP_ANIMATION = [
-    "./img/4_enemie_boss_chicken/3_attack/G16.png",
-    "./img/4_enemie_boss_chicken/3_attack/G17.png",
-    "./img/4_enemie_boss_chicken/3_attack/G18.png",
-    "./img/4_enemie_boss_chicken/3_attack/G19.png",
-    "./img/4_enemie_boss_chicken/3_attack/G20.png",
-  ];
-
-  /**
-   * Creates an instance of the Endboss.
+   * Creates an instance of the endboss.
    * Loads all relevant animation frames.
    * Sets the initial image to the first alert animation frame.
    */
@@ -307,7 +393,7 @@ class Endboss extends Enemies {
 
   /**
    * Clears the jump attack interval and set the normal animate interval.
-   * 
+   *
    * @returns {void}
    */
   clearJumpAttack() {

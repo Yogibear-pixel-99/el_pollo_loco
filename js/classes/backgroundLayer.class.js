@@ -11,14 +11,12 @@ class BackgroundLayer extends MovableObject {
 
   /**
    * The width of the background image.
-   * Typically matches the canvas width.
    * @type {number}
    */
   width = canvasWidth;
 
   /**
    * The height of the background image.
-   * Typically matches the canvas height.
    * @type {number}
    */
   height = canvasHeight;
