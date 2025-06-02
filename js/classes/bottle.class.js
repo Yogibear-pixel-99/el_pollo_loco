@@ -1,25 +1,25 @@
 /**
  * The collectable and throwable bottles in the game.
  * Handles appearance in the game.
+ * Inherits from {@link DrawableObject}.
  */
 class Bottle extends DrawableObject {
-
-  /** The height of the bottle img in pixels 
+  /** The height of the bottle img in pixels
    * @type {number}
-  */
+   */
   height = 55;
 
-    /** The width of the bottle img in pixels
-     * @type {number}
-     */
+  /** The width of the bottle img in pixels
+   * @type {number}
+   */
   width = 55;
 
   /** The score identifier name
    * @type {string}
    */
-  itemName = 'collectBottle';
+  itemName = "collectBottle";
 
-    /**
+  /**
    * Offsets for the bottle hitbox used in collision detection.
    * @type {{top: number, right: number, bottom: number, left: number}}
    */
@@ -44,7 +44,7 @@ class Bottle extends DrawableObject {
 
   /**
    * Chooses with a random number, the bottle img.
-   * 
+   *
    * @returns - The img src of the bottle to collect.
    */
   getBottleImg() {
@@ -62,16 +62,16 @@ class Bottle extends DrawableObject {
 
   /**
    * Calculates a new x position, depending on the canvas width.
-   * 
-   * @returns 
+   *
+   * @returns
    */
   calculateNewPosition() {
     let x = Math.random() * 3500;
     // let x = Math.random() * canvasWidth * 5;
-     if (x < 200) {
+    if (x < 200) {
       return this.calculateNewPosition();
-     }
-     return x;
+    }
+    return x;
   }
 
   /**

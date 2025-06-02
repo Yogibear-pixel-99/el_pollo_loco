@@ -1,14 +1,20 @@
 /**
- * The bottlebar to show how many bottles are collected in the game.
- * Handels appearance of the bar.
+ * The bottlebar to show how many bottles are collected.
+ * Handels appearance of the bottle bar.
+ * Inherits from {@link Statusbar}.
  */
 class Bottlebar extends Statusbar {
-
-  /**
-   * 
+  /** Horizontal position
+   * @type {number}
    */
   x = 20;
+
+  /** Vertical position
+   * @type {number}
+   */
   y = 50;
+
+  /** Image frames shown in the ui depending on character bottle collected. */
   BOTTLE_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png",
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png",
@@ -18,15 +24,20 @@ class Bottlebar extends Statusbar {
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
   ];
 
+  /**
+   * Creates an instance of the bottle UI bar.
+   * Loads all relevant animation frames.
+   * Sets the initial image to the first bottle bar images animation frame.
+   */
   constructor() {
     super();
     this.loadImage(this.BOTTLE_BAR_IMAGES[0]);
     this.loadImagesArray(this.BOTTLE_BAR_IMAGES);
   }
 
-/**
- * Displays the right bottle bar amount, depending on the bottles the character collected.
- */
+  /**
+   * Displays the right bottle bar amount, depending on the bottles the character collected.
+   */
   updateBottleBar() {
     const bottles = world.character.bottles;
     if (bottles == 5) {
@@ -44,4 +55,3 @@ class Bottlebar extends Statusbar {
     }
   }
 }
-

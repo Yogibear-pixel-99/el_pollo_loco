@@ -1,6 +1,7 @@
 /**
  * The boss healthbar in the game.
  * Handels appearance depending on the boss's health.
+ * Inherits from {@link Statusbar}.
  */
 class Bosshealthbar extends Statusbar {
   /** Horizontal position

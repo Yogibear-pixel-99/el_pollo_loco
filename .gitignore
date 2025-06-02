@@ -1,3 +1,6 @@
 
 audio/not_used
 assets/
+jsdoc.json
+package.json
+docs
