@@ -221,8 +221,8 @@ class Character extends MovableObject {
    * Start all char intervals. Animate, move, gravity and sound.
    */
   startChar() {
+    moveDetection(this);
     this.animate();
-    this.moveDetection();
     this.applyGravity();
     this.playSounds();
   }
@@ -271,42 +271,13 @@ class Character extends MovableObject {
       } else if (this.isHurt()) {
         this.animateHurt();
       } else if (this.aboveGround()) {
-        this.animateJump();
-      } else if (this.isWalking()) {
+        animateJump(this);
+      } else if (isWalking(this)) {
         this.animateWalk();
       } else {
         this.animateIdle();
       }
     }, 80);
-  }
-
-  /**
-   * Moves the character by setting the keyboard object varaibles on pressing the steering keys.
-   */
-  moveDetection() {
-    this.moveInterval = setInterval(() => {
-      if (!this.isDead()) {
-        if (this.world.keyboard.KEY_JUMP === true && !this.aboveGround()) {
-          this.jump();
-        }
-        if (
-          this.world.keyboard.KEY_RIGHT === true &&
-          this.x < this.world.level.level_end_x - 30
-        ) {
-          this.moveRight();
-          this.world.camera_x = 200 - this.x;
-          this.otherDirection = false;
-        }
-        if (this.world.keyboard.KEY_LEFT === true && this.x > -290) {
-          this.moveLeft();
-          this.world.camera_x = 200 - this.x;
-          this.otherDirection = true;
-        }
-        if (this.world.keyboard.KEY_SHOT === true) {
-          this.throwBottle();
-        }
-      }
-    }, 1000 / 60);
   }
 
   /**
@@ -354,37 +325,6 @@ class Character extends MovableObject {
   }
 
   /**
-   * Plays the jumping animation, depending on the vertical speed (speedY variable) to show the rising
-   * or falling animation. Updates the jump state (isJumping variable).
-   * @returns {void}
-   */
-  animateJump() {
-    if (!this.isJumping) {
-      this.img = this.animatedImages[this.JUMPING_ANIMATION[2]];
-      this.isJumping = true;
-      return;
-    }
-    this.loadImage(this.JUMPING_ANIMATION[2]);
-    if (this.speedY >= 0.5 && !this.isHurt()) {
-      this.img = this.animatedImages[this.JUMPING_ANIMATION[3]];
-    } else if (
-      this.speedY < 0.5 &&
-      this.speedY > -0.2 &&
-      !this.isHurt() &&
-      this.aboveGround()
-    ) {
-      this.img = this.animatedImages[this.JUMPING_ANIMATION[4]];
-    } else if (this.speedY >= -0.2 && this.speedY <= -0.6 && !this.isHurt()) {
-      this.img = this.animatedImages[this.JUMPING_ANIMATION[5]];
-    } else if (this.speedY < -0.6 && !this.isHurt() && this.aboveGround()) {
-      this.img = this.animatedImages[this.JUMPING_ANIMATION[6]];
-    } else {
-      this.img = this.animatedImages[this.JUMPING_ANIMATION[7]];
-      this.isJumping = false;
-    }
-  }
-
-  /**
    * Pauses the long idle audio file if the char is moving.
    * Sets the long idle audio file to the beginning.
    */
@@ -418,12 +358,10 @@ class Character extends MovableObject {
   }
 
   /**
-   * Sets the vertical speed for jumping by setting the speedY variable to a number.
-   * Triggers the enemies' reaction to the jump event.
+   * Adding a coin to the coins variable.
    */
-  jump() {
-    this.speedY = 22;
-    world.enemyRunAwayOnCharJump();
+  collectCoin() {
+    this.coins++;
   }
 
   /**
@@ -431,22 +369,6 @@ class Character extends MovableObject {
    */
   jumpOnEnemy() {
     this.speedY = 15;
-  }
-
-  /**
-   * Checks if the character is walking an returns a boolean.
-   *
-   * @returns {boolean}
-   */
-  isWalking() {
-    return this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT;
-  }
-
-  /**
-   * Adding a coin to the coins variable.
-   */
-  collectCoin() {
-    this.coins++;
   }
 
   /**
