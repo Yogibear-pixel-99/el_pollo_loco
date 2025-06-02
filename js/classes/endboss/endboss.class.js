@@ -351,6 +351,7 @@ class Endboss extends Enemies {
     this.energy -= 10;
     this.lastHit = new Date().getTime();
     world.bossHealthbar.updateBossHealthbar();
+    audio.playSoundClone("bossCrys");
   }
 
   /**

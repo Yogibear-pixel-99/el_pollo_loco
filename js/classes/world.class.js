@@ -288,43 +288,50 @@ class World {
    * Handles collisions for thrown bottles against enemies and boss.
    */
   checkThrownBottleCollision() {
-    let deadEnemies = [];
+   
     this.thrownBottles.forEach((bottle) => {
-      if (
-        bottle.y === this.floorPosition(bottle) &&
-        bottle.alreadyHittet === false
-      ) {
+      if (this.bottleHittetFloor(bottle)) {
         this.animateBrokenBottle(bottle);
         this.addPointsToPlayerScore(bottle.itemName);
-      } else if (
-        (bottle.isColliding(this.level.endboss) ||
-          bottle.isCollidingHead(this.level.endboss)) &&
-        bottle.alreadyHittet === false
-      ) {
-        this.animateBrokenBottle(bottle);
-        if (this.level.endboss.isTriggered) {
-          this.level.endboss.hitBoss();
-          audio.playSoundClone("bossHitted");
-          if (!this.checkGameEnd()) {
-            audio.playSoundClone("bossCrys");
-          }
-          this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
-        }
       } else {
-        this.level.enemies = this.level.enemies.filter((enemy) => {
-          if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
-            this.animateBrokenBottle(bottle);
-            deadEnemies.push(enemy);
-            this.deadEnemyRoutine(enemy);
-            this.addPointsToPlayerScore(enemy.scoreNameBottle);
-            this.level.deadEnemies.push(enemy);
-            return false;
-          }
-          return true;
-        });
+        this.checkThrownBottleBossCollision(bottle);
+        this.checkThrownBottleEnemyCollision(bottle)
       }
     });
-    deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
+  }
+
+  checkThrownBottleBossCollision(bottle) {
+    if (this.bottleHittetBoss(bottle)) {
+        this.animateBrokenBottle(bottle);
+        this.level.endboss.hitBoss();
+        audio.playSoundClone("bossHitted");
+        this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
+  }}
+
+  checkThrownBottleEnemyCollision(bottle) {
+     let deadEnemies = [];
+    this.level.enemies = this.level.enemies.filter((enemy) => {
+      if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
+        this.animateBrokenBottle(bottle);
+        deadEnemies.push(enemy);
+        this.deadEnemyRoutine(enemy);
+        this.addPointsToPlayerScore(enemy.scoreNameBottle);
+        this.level.deadEnemies.push(enemy);
+        return false;
+      }
+      return true;
+    });
+     deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
+  }
+
+  bottleHittetFloor(bottle) {
+    return bottle.y === this.floorPosition(bottle) && bottle.alreadyHittet === false;
+  }
+
+  bottleHittetBoss(bottle) {
+    return (bottle.isColliding(this.level.endboss) ||
+        bottle.isCollidingHead(this.level.endboss)) &&
+      bottle.alreadyHittet === false;
   }
 
   /**
@@ -332,7 +339,7 @@ class World {
    * @param {Enemy} enemy - The enemy that was killed.
    */
   spawnNewChickensForRushMode(enemy) {
-    if (!enemy) return;
+    console.log("type is: ", enemy.constructor.name);
     if (gameMode === "chickenRush") {
       if (enemy instanceof Chicken) {
         this.level.enemies.push(
@@ -615,16 +622,14 @@ class World {
   addObjectsToCanvas(array) {
     try {
       if (array.length > 0) {
-      array.forEach((element) => {
-        this.addObjToCanvas(element);
-      });
-    }
+        array.forEach((element) => {
+          this.addObjToCanvas(element);
+        });
+      }
     } catch (error) {
       console.log(error);
     }
-    
   }
-
 
   /**
    * Stops all game-related intervals and animation frames.
