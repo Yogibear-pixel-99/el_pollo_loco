@@ -28,6 +28,3 @@ class Clouds extends MovableObject {
     cancelAnimationFrame(this.cloudsAutoMove);
   }
 }
-
-
-// CLOUD ANIMATION FRAME
