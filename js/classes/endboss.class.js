@@ -1,7 +1,7 @@
 /**
  * The boss enemy in the game.
  * Handles boss movement, animation, attack, death, and sound effects.
- * Extends the Enemies class.
+ * Inherits from {@link Enemies}.
  */
 class Endboss extends Enemies {
 /**
@@ -120,7 +120,7 @@ isTriggered = false;
 
 /**
  * Offsets for the boss hitbox used in collision detection.
- * @type {{width: number, height: number, top: number, right: number, bottom: number, left: number}}
+ * @type {width: number, height: number, top: number, right: number, bottom: number, left: number}
  */
 offset = {
   width: 250,

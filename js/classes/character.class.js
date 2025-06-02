@@ -1,30 +1,119 @@
+/**
+ * The character in the game.
+ * Handles character movement, animation, death and sound effects.
+ * Inherits from {@link Enemies}.
+ */
 class Character extends MovableObject {
 
+  /**
+ * Horizontal position where the character starts.
+ * @type {number}
+ */
   x = 200;
+
+  /**
+ * The width of the character sprite in pixels.
+ * @type {number}
+ */
   width = 95;
+
+/**
+ * The height of the boss sprite in pixels.
+ * @type {number}
+ */
   height = 190;
+
+  /**
+   * Character has already killed an enemie by jumping on it.
+   * @type {boolean}
+   */
   jumpKill = false;
+
+  /**
+   * The character health.
+   * @type {number}
+   */
   energy = 100;
+
+  /**
+   * The animation interval.
+   * @type {number}
+   */
   animateInterval;
+
+  /**
+   * The sound interval.
+   * @type {number}
+   */
   soundInterval;
+
+  /**
+   * The move interval.
+   * @type {number}
+   */
   moveInterval;
+ 
+  /**
+   * An interval config array from all character intervals.
+   * @type {string[]}
+   */
   allIntervals = ["animateInterval", "soundInterval", "moveInterval", "gravityInterval"];
 
+  /**
+   * The character idle variable.
+   * @type {boolean}
+   */
   isIdle = false;
+
+  /**
+   * If the character is idle, this variable counts up to check if character is long idle.
+   * @type {number}
+   */
   idleCount = 0;
+
+  /**
+   * Sets true or false, if the character is jumping.
+   */
   isJumping = false;
 
+  /**
+   * The current timestamp.
+   * @type {number}
+   */
   timestamp;
+
+  /**
+   * The offset from the character sprite for the collision detection.
+   * @type {width: number, height: number, top: number, right: number, bottom: number, left: number}
+   */
   offset = {
     top: 90,
     right: 30,
     bottom: 10,
     left: 20,
   };
+
+  /**
+   * The collected coins.
+   * @type {number}
+   */
   coins = 0;
+
+  /**
+   * The collected bottles.
+   * @type {number}
+   */
   bottles = 0;
+
+  /**
+   * A boolean to check if a bottle is already thrown.
+   */
   bottleThrown = false;
 
+  /**
+   * Image frames shown when the character is walking.
+   * @type {string[]}
+   */
   WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
@@ -33,6 +122,11 @@ class Character extends MovableObject {
     "./img/2_character_pepe/2_walk/W-25.png",
     "./img/2_character_pepe/2_walk/W-26.png",
   ];
+
+    /**
+   * Image frames shown when the character is jumping.
+   * @type {string[]}
+   */
   JUMPING_ANIMATION = [
     "./img/2_character_pepe/3_jump/J-31.png",
     "./img/2_character_pepe/3_jump/J-32.png",
@@ -44,6 +138,11 @@ class Character extends MovableObject {
     "./img/2_character_pepe/3_jump/J-38.png",
     "./img/2_character_pepe/3_jump/J-39.png",
   ];
+
+    /**
+   * Image frames shown when the character is idle.
+   * @type {string[]}
+   */
   IDLE_ANIMATION = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
     "./img/2_character_pepe/1_idle/idle/I-2.png",
@@ -56,6 +155,11 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/idle/I-9.png",
     "./img/2_character_pepe/1_idle/idle/I-10.png",
   ];
+
+    /**
+   * Image frames shown when the character is long idle.
+   * @type {string[]}
+   */
   IDLE_LONG_ANIMATION = [
     "./img/2_character_pepe/1_idle/long_idle/I-11.png",
     "./img/2_character_pepe/1_idle/long_idle/I-12.png",
@@ -68,6 +172,11 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-19.png",
     "./img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
+
+    /**
+   * Image frames shown when the character is dead.
+   * @type {string[]}
+   */
   DEAD_ANIMATION = [
     "./img/2_character_pepe/5_dead/D-51.png",
     "./img/2_character_pepe/5_dead/D-52.png",
@@ -77,12 +186,23 @@ class Character extends MovableObject {
     "./img/2_character_pepe/5_dead/D-56.png",
     "./img/2_character_pepe/5_dead/D-57.png",
   ];
+
+    /**
+   * Image frames shown when the character is hurt.
+   * @type {string[]}
+   */
   HURT_ANIMATION = [
     "./img/2_character_pepe/4_hurt/H-41.png",
     "./img/2_character_pepe/4_hurt/H-42.png",
     "./img/2_character_pepe/4_hurt/H-43.png",
   ];
 
+  /**
+   * Creates an instance of the game character.
+   * Loads all animation frames to an object.
+   * Sets the vertical position to the floor.
+   * Sets the first image to a walking image.
+   */
   constructor() {
     super();
     this.loadImage("./img/2_character_pepe/2_walk/W-21.png");
@@ -95,6 +215,10 @@ class Character extends MovableObject {
     this.loadImagesArray(this.HURT_ANIMATION);
   }
 
+  /**
+   * Start all char intervals.
+   * Animate, move, gravity and sound.
+   */
   startChar() {
     this.animate();
     this.moveDetection();
@@ -102,6 +226,10 @@ class Character extends MovableObject {
     this.playSounds();
   }
 
+  /**
+   * The sound interval, to play the appropriate sound effects.
+   * Walking, jumping, landing, hurting.
+   */
   playSounds() {
     this.soundInterval = setInterval(() => {
       const right = world.keyboard.KEY_RIGHT;
@@ -112,33 +240,32 @@ class Character extends MovableObject {
           audio.sfx.pepeWalk.currentTime = 0;
         }
         audio.playSound('pepeWalk');
-        // audio.sfx.pepeWalk.play();
       } else {
         audio.pauseSound('pepeWalk')
-        // audio.sfx.pepeWalk.pause();
       }
       if (jump && !this.aboveGround()) {
         audio.playSound('pepeJump');
-        // audio.sfx.pepeJump.play();
       }
       if (this.speedY < 0 && !this.aboveGround()) {
         audio.playSound('pepeLanding')
-        // audio.sfx.pepeLanding.play();
       }
       if (this.isHurt()) {
         audio.playSound('pepeHurt');
-        // audio.sfx.pepeHurt.play();
       }
     }, 1000 / 60);
   }
 
+  /**
+   * The animation interval.
+   * Plays the appropriate animaten frames, depending on the characters condition.
+   * Idle, long idle, dead, hurt, jump.
+   */
   animate() {
     this.animateInterval = setInterval(() => {
       if (!this.characterIdle()) {
         this.idleCount = 0;
         this.resetIdleAudio();
       }
-
       if (this.isDead()) {
         this.animateDead();
       } else if (this.isHurt()) {
@@ -153,6 +280,10 @@ class Character extends MovableObject {
     }, 80);
   }
 
+  /**
+   * The move interval.
+   * Moves the character by setting the keyboard object varaibles on pressing the steering keys.
+   */
   moveDetection() {
     this.moveInterval = setInterval(() => {
       if (!this.isDead()) {
@@ -179,6 +310,10 @@ class Character extends MovableObject {
     }, 1000 / 60);
   }
 
+  /**
+   * Checks if no button is pressed and returns a boolean.
+   * @returns {boolean}
+   */
   characterIdle() {
     return (
       this.world.keyboard.KEY_RIGHT === false &&
@@ -189,10 +324,17 @@ class Character extends MovableObject {
     );
   }
 
+  /**
+   * Plays the walking animation.
+   */
   animateWalk() {
     this.playAnimation(this.WALKING_ANIMATION);
   }
 
+  /**
+   * Plays the hurting animation and bounces the character back by adding a number to speedY.
+   * Bounces left or right depending on the other direction variable and corrects the camera x position.
+   */
   animateHurt() {
     this.playAnimation(this.HURT_ANIMATION);
     this.speedY = 6;
@@ -200,26 +342,25 @@ class Character extends MovableObject {
     this.world.camera_x = 200 - this.x;
   }
 
+  /**
+   * Plays the idle or long idle animation.
+   * Plays a soundfile if the character is long idle.
+   */
   animateIdle() {
     if (this.idleCount < 50) {
       this.playAnimation(this.IDLE_ANIMATION);
     } else {
       this.playAnimation(this.IDLE_LONG_ANIMATION);
       audio.playSound('pepeLongIdle');
-      // audio.sfx.pepeLongIdle.play();
     }
     this.idleCount++;
   }
 
-  // resetIdle() {
-  //   if (!this.characterIdle()) {
-  //     this.idleCount = 0;
-  //     audio.pauseSound('pepeLongIdle');
-  //     // audio.sfx.pepeLongIdle.pause();
-  //     audio.sfx.pepeLongIdle.currentTime = 0;
-  //   }
-  // }
-
+  /**
+   * Plays the jumping animation, depending on the vertical speed (speedY variable) to show the rising
+   * or falling animation. Updates the jump state (isJumping variable).
+   * @returns {void}
+   */
   animateJump() {
     if (!this.isJumping) {
       this.img = this.animatedImages[this.JUMPING_ANIMATION[2]];
@@ -246,16 +387,28 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Pauses the long idle audio file if the char is moving.
+   * Sets the long idle audio file to the beginning.
+   */
   resetIdleAudio() {
     audio.pauseSound('pepeLongIdle');
-    // audio.sfx.pepeLongIdle.pause();
     audio.sfx.pepeLongIdle.currentTime = 0;
   }
 
+  /**
+   * Plays the dead animation.
+   */
   animateDead() {
     this.playAnimation(this.DEAD_ANIMATION);
   }
 
+  /**
+   * Pushes a new bottle class to the thrown bottles array.
+   * Sets the bottleThrown variable for two seconds on true.
+   * Removes on bottle from the bottles variable.
+   * Plays a throw sound.
+   */
   throwBottle() {
     if (!this.bottleThrown && this.bottles > 0) {
       this.world.thrownBottles.push(new Thrownbottle());
@@ -269,33 +422,57 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Sets the vertical speed for jumping by setting the speedY variable to a number.
+   * Triggers the enemies' reaction to the jump event.
+   */
   jump() {
     this.speedY = 22;
     world.enemyRunAwayOnCharJump();
   }
 
+  /**
+ * Makes the character bounce after jumping on an enemy by setting vertical speed.
+   */
   jumpOnEnemy() {
     this.speedY = 15;
   }
 
+  /**
+   * Checks if the character is walking an returns a boolean.
+   * 
+   * @returns {boolean}
+   */
   isWalking() {
     return this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT;
   }
 
+  /**
+   * Adding a coin to the coins variable.
+   */
   collectCoin() {
     this.coins++;
   }
 
+/**
+ * Increases the bottle count by one, up to a maximum of five.
+ */
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
   }
 
+  /**
+   * Stops all char intervals by using the all intervals config array.
+   */
   stopAllCharIntervals() {
     this.allIntervals.forEach((interval) => {
       clearInterval(this[interval]);
     });
   }
 
+  /**
+   * Increases the energy of the character, up to a maximum of 100.
+   */
  bottleHeal() {
     if (this.energy < 100) {
       this.energy += 15;
@@ -305,7 +482,3 @@ class Character extends MovableObject {
     }
   }
 }
-
-// SOUNDINTERVAL
-// ANIMATE INTERVAL
-// MOVEINTERVAL
