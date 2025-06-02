@@ -305,3 +305,5 @@ function showGameOverScreen() {
 // documentation
 
 // Shorten all functions
+
+// MOBILE BUTTONS HEIGHT IN OVERLAY MODE- NOT FULLSCREEN

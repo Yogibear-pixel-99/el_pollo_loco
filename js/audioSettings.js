@@ -1,0 +1,3 @@
+  playGameMusic() {
+    audio.playSoundLoop("gameAmbience");
+  }

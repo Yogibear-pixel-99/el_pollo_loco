@@ -1,26 +1,142 @@
+/**
+ * Main game world class.
+ * Manages the game state, objects, collisions, rendering, and game logic.
+ */
 class World {
+  /**
+   * The player character.
+   * @type {Character}
+   */
   character = new Character();
+
+  /**
+   * Health bar UI component.
+   * @type {Healthbar}
+   */
   healthbar = new Healthbar();
+
+  /**
+   * Coin bar UI component.
+   * @type {Coinbar}
+   */
   coinbar = new Coinbar();
+
+  /**
+   * Bottle bar UI component.
+   * @type {Bottlebar}
+   */
   bottlebar = new Bottlebar();
+
+  /**
+   * Boss health bar UI component.
+   * @type {Bosshealthbar}
+   */
   bossHealthbar = new Bosshealthbar();
+
+  /**
+   * Audio manager for game sounds.
+   * @type {object}
+   */
   audio;
+
+  /**
+   * Array of bottles that have been thrown.
+   * @type {Thrownbottle[]}
+   */
   thrownBottles = [];
+
+  /**
+   * Player's total score.
+   * @type {number}
+   */
   playerscore = 0;
+
+  /**
+   * Points table for scoring different actions.
+   * @type {object}
+   */
   pointTable;
+
+  /**
+   * Flag indicating if the game has been won.
+   * @type {boolean}
+   */
   gameWon = false;
+
+  /**
+   * Height of the floor in the game world.
+   * @type {number}
+   */
   floorHeight;
+
+  /**
+   * Flag if a chicken enemy is near the player.
+   * @type {boolean}
+   */
   chickenNear = false;
+
+  /**
+   * Current game level object.
+   * @type {Level}
+   */
   level;
+
+  /**
+   * Current score displayed on the screen.
+   * @type {number}
+   */
   score = 0;
+
+  /**
+   * Interval ID for collision checking loop.
+   * @type {number}
+   */
   collisionInterval;
+
+  /**
+   * Interval ID for world logic loop.
+   * @type {number}
+   */
   worldInterval;
+
+  /**
+   * Canvas HTML element for rendering.
+   * @type {HTMLCanvasElement}
+   */
   canvas;
+
+  /**
+   * 2D rendering context of the canvas.
+   * @type {CanvasRenderingContext2D}
+   */
   ctx;
+
+  /**
+   * Keyboard input handler.
+   * @type {Keyboard}
+   */
   keyboard;
+
+  /**
+   * Camera horizontal offset for scrolling.
+   * @type {number}
+   */
   camera_x = 0;
+
+  /**
+   * ID for the animation frame request.
+   * @type {number}
+   */
   drawInterval;
 
+  /**
+   * Creates an instance of the game world.
+   * @param {HTMLCanvasElement} canvas - The canvas element to render to.
+   * @param {Keyboard} keyboard - Keyboard input manager.
+   * @param {object} pointTable - Points configuration for scoring.
+   * @param {object} audio - Audio manager.
+   * @param {Level} level - The current game level.
+   */
   constructor(canvas, keyboard, pointTable, audio, level) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -32,9 +148,12 @@ class World {
     this.setWorld();
     this.runCollisions();
     this.runWorldIntervals();
-    this.playGameMusic();
+    playGameMusic();
   }
 
+  /**
+   * Starts the main world logic interval loop.
+   */
   runWorldIntervals() {
     this.worldInterval = setInterval(() => {
       this.moveBackground();
@@ -44,6 +163,9 @@ class World {
     }, 50);
   }
 
+  /**
+   * Starts the collision detection interval loop.
+   */
   runCollisions() {
     this.collisionInterval = setInterval(() => {
       this.checkEnemyCollisions();
@@ -55,10 +177,9 @@ class World {
     }, 25);
   }
 
-  playGameMusic() {
-    audio.playSoundLoop("gameAmbience");
-  }
-
+  /**
+   * Updates enemy direction based on player position.
+   */
   enemyMoveDirection() {
     this.level.enemies.forEach((enemy) => {
       if (enemy.x < this.character.x - canvasWidth) {
@@ -70,14 +191,24 @@ class World {
     });
   }
 
+  /**
+   * Assigns this world instance to the character.
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Checks if the game should end based on character or boss energy.
+   * @returns {boolean}
+   */
   checkGameEnd() {
     return this.character.energy <= 0 || this.level.endboss.energy <= 0;
   }
 
+  /**
+   * Checks and handles the game over state.
+   */
   checkIfGameIsOver() {
     if (this.checkGameEnd()) {
       if (this.level.endboss.energy <= 0) {
@@ -93,6 +224,10 @@ class World {
     }
   }
 
+  /**
+   * Handles collisions between player and enemies.
+   * Kills enemies if jumped on, otherwise damages player.
+   */
   checkEnemyCollisions() {
     let deadEnemies = [];
     this.level.enemies = this.level.enemies.filter((enemy) => {
@@ -115,12 +250,19 @@ class World {
     deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
+  /**
+   * Removes a dead enemy from the deadEnemies array after delay.
+   */
   deleteDeadEnemy() {
     setTimeout(() => {
       this.level.deadEnemies.splice(0, 1);
     }, 1000);
   }
 
+  /**
+   * Handles enemy death routine: stops enemy, plays sound, marks as dead.
+   * @param {Enemy} enemy - The enemy to handle.
+   */
   deadEnemyRoutine(enemy) {
     enemy.isKilled();
     audio.playRandomSound("deadChicken");
@@ -128,6 +270,10 @@ class World {
     enemy.lives = false;
   }
 
+  /**
+   * Checks collision between player and boss enemy.
+   * Damages player if collision detected.
+   */
   checkBossCollision() {
     if (
       this.character.isColliding(this.level.endboss) ||
@@ -138,6 +284,9 @@ class World {
     }
   }
 
+  /**
+   * Handles collisions for thrown bottles against enemies and boss.
+   */
   checkThrownBottleCollision() {
     let deadEnemies = [];
     this.thrownBottles.forEach((bottle) => {
@@ -178,6 +327,10 @@ class World {
     deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
+  /**
+   * Spawns new chickens in chickenRush mode after enemy death.
+   * @param {Enemy} enemy - The enemy that was killed.
+   */
   spawnNewChickensForRushMode(enemy) {
     if (!enemy) return;
     if (gameMode === "chickenRush") {
@@ -195,20 +348,30 @@ class World {
     }
   }
 
+  /**
+   * Animates the breaking of a thrown bottle and marks it as hit.
+   * @param {Thrownbottle} bottle - The bottle to animate.
+   */
   animateBrokenBottle(bottle) {
     bottle.alreadyHittet = true;
     this.clearBottleAnimation(bottle);
     this.bottleSplash(bottle);
   }
 
+  /**
+   * Clears all intervals related to a bottle's animation and movement.
+   * @param {Thrownbottle} bottle - The bottle to clear intervals for.
+   */
   clearBottleAnimation(bottle) {
-    {
-      clearInterval(bottle.throwInAnimationInterval);
-      clearInterval(bottle.gravityInterval);
-      clearInterval(bottle.moveBottleInterval_x);
-    }
+    clearInterval(bottle.throwInAnimationInterval);
+    clearInterval(bottle.gravityInterval);
+    clearInterval(bottle.moveBottleInterval_x);
   }
 
+  /**
+   * Plays the splash animation for a broken bottle and removes it after animation.
+   * @param {Thrownbottle} bottle - The bottle to animate splash.
+   */
   bottleSplash(bottle) {
     let bottleIndex = world.thrownBottles.indexOf(bottle);
     bottle.img = bottle.animatedImages[bottle.BOTTLE_SPLASH_ANIMATION[0]];
@@ -217,7 +380,6 @@ class World {
     let interval = setInterval(() => {
       if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
         bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
-
         count++;
       } else {
         world.thrownBottles.splice(bottleIndex, 1);
@@ -226,16 +388,29 @@ class World {
     }, 100);
   }
 
+  /**
+   * Adds points to the player score and updates the UI.
+   * @param {string} scoreTypeName - The score key to add points from pointTable.
+   */
   addPointsToPlayerScore(scoreTypeName) {
     this.playerscore += this.pointTable[scoreTypeName].points;
     let ref = document.getElementById("player-score");
     ref.innerText = this.playerscore;
   }
 
+  /**
+   * Calculates the floor position for a given object.
+   * @param {object} obj - The object to calculate floor position for.
+   * @returns {number} The y position on the floor.
+   */
   floorPosition(obj) {
     return canvasHeight - obj.height - floorHeight;
   }
 
+  /**
+   * Handles collisions between the player and coins.
+   * Collects coins and updates the UI and game state.
+   */
   checkCoinCollision() {
     this.level.coins = this.level.coins.filter((coin) => {
       if (this.character.isColliding(coin) && !coin.collected) {
@@ -255,12 +430,19 @@ class World {
     });
   }
 
+  /**
+   * Removes collected coins from the collectedCoins array after delay.
+   */
   deleteCollectedCoin() {
     setTimeout(() => {
       this.level.collectedCoins.splice(0, 1);
     }, 1000);
   }
 
+  /**
+   * Handles collisions between the player and healing bottles.
+   * Heals the player and updates the UI.
+   */
   checkHealBottleCollision() {
     this.level.healBottles.forEach((bottle) => {
       if (this.character.isColliding(bottle) && this.character.energy < 100) {
@@ -273,6 +455,9 @@ class World {
     });
   }
 
+  /**
+   * Handles collisions between the player and collectible bottles.
+   */
   checkBottleCollision() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
@@ -287,6 +472,9 @@ class World {
     });
   }
 
+  /**
+   * Moves the background layers based on player input for scrolling effect.
+   */
   moveBackground() {
     this.level.backgrounds.forEach((bg) => {
       if (world.keyboard.KEY_LEFT && this.character.x > -200) {
@@ -301,6 +489,9 @@ class World {
     });
   }
 
+  /**
+   * Plays or pauses the clucker sound based on proximity of enemies.
+   */
   checkCluckerSound() {
     const enemyNear = this.level.enemies.some((enemy) => {
       return (
@@ -315,6 +506,9 @@ class World {
     }
   }
 
+  /**
+   * Causes enemies to run away randomly when the player jumps near them.
+   */
   enemyRunAwayOnCharJump() {
     this.level.enemies.forEach((enemy) => {
       let rndRun = Math.ceil(Math.random() * 6);
@@ -330,12 +524,19 @@ class World {
     });
   }
 
+  /**
+   * Retrieves and displays the player's current score on the canvas.
+   */
   getPlayerScore() {
     this.score = document.getElementById("player-score").innerText;
     this.ctx.font = "30px agudisplay";
     this.ctx.fillText(this.score, canvasWidth - 220, 100);
   }
 
+  /**
+   * Main draw method called every animation frame.
+   * Clears canvas and draws all game objects with proper translations.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -350,7 +551,6 @@ class World {
     this.addObjectsToCanvas(this.level.level_end_cactus);
     this.addObjectsToCanvas(this.thrownBottles);
     this.addObjToCanvas(this.level.endboss);
-    // this.drawBossHeadHitbox(this.ctx);
     this.addObjToCanvas(this.character);
     this.ctx.translate(-this.camera_x, 0);
     this.addObjToCanvas(this.healthbar);
@@ -374,33 +574,24 @@ class World {
     });
   }
 
-  // drawBossHeadHitbox(ctx) {
-  //   ctx.beginPath();
-  //   ctx.lineWidth = "3";
-  //   ctx.strokeStyle = "green";
-  //   ctx.rect(
-  //     this.level.endboss.offsetHead.x,
-  //     this.level.endboss.offsetHead.y,
-  //     this.level.endboss.offsetHead.width,
-  //     this.level.endboss.offsetHead.height
-  //   );
-  //   ctx.stroke();
-  // }
-
+  /**
+   * Adds a single game object to the canvas, flipping if needed.
+   * @param {Drawable} obj - The object to draw.
+   */
   addObjToCanvas(obj) {
     if (obj.otherDirection) {
       this.flipImage(obj);
     }
-
     obj.draw(this.ctx);
-    // obj.drawFrame(this.ctx);
-    // obj.drawOffsetFrame(this.ctx);
-
     if (obj.otherDirection) {
       this.flipImageBack(obj);
     }
   }
 
+  /**
+   * Flips the canvas context horizontally for drawing mirrored images.
+   * @param {Drawable} obj - Object whose image to flip.
+   */
   flipImage(obj) {
     this.ctx.save();
     this.ctx.translate(obj.width, 0);
@@ -408,11 +599,19 @@ class World {
     obj.x = obj.x * -1;
   }
 
+  /**
+   * Restores the canvas context and flips the object back.
+   * @param {Drawable} obj - Object to flip back.
+   */
   flipImageBack(obj) {
     obj.x = obj.x * -1;
     this.ctx.restore();
   }
 
+  /**
+   * Adds multiple game objects from an array to the canvas.
+   * @param {Drawable[]} array - Array of drawable objects.
+   */
   addObjectsToCanvas(array) {
     if (array.length > 0) {
       array.forEach((element) => {
@@ -421,36 +620,19 @@ class World {
     }
   }
 
-  // gameOver() {
-    // this.stopAllGameIntervals();
-    // saveScore();
-    // this.stopGameMusic();
-    // checkFullscreenMode();
-    // showCursor();
-    // if (gamePaused) {
-    //   gamePaused = false;
-    //   return;
-    // }
-    // this.playEndAudio();
-    // this.showGameOverScreen();
-    // exit fullscreenmode bzw. show game overscreen in fullscreen mode
-  // }
-
-
-
+  /**
+   * Stops all game-related intervals and animation frames.
+   * Used for pausing or ending the game.
+   */
   stopAllGameIntervals() {
     cancelAnimationFrame(this.drawInterval);
     world.character.stopAllCharIntervals();
     world.level.enemies.forEach((enemy) => {
       enemy.stopAllEnemyIntervals();
     });
-
     world.level.endboss.stopAllBossIntervals();
-
     clearInterval(world.level.endboss.moveDirectionInterval);
     clearInterval(world.level.endboss.gravityInterval);
-
-
     this.thrownBottles.forEach((bottle) => {
       clearInterval(bottle.gravityInterval);
     });
@@ -463,22 +645,9 @@ class World {
     this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
   }
 
-  // playEndAudio() {
-  //   if (this.gameWon) {
-  //     audio.playSound("gameWon");
-  //   } else {
-  //     console.trace();
-  //     audio.playSound("gameLost");
-  //   }
-  // }
-
-  // stopGameMusic() {
-  //   audio.pauseMusic("chickenRushMusic");
-  //   audio.pauseMusic("normalModeMusic");
-  //   audio.pauseSound("cluckern");
-  //   audio.pauseSound("gameAmbience");
-  // }
-
+  /**
+   * Continues game intervals after a pause or resume.
+   */
   continueGameIntervals() {
     this.draw();
     this.character.startChar();
@@ -486,12 +655,9 @@ class World {
       enemy.startEnemy();
     });
 
-
     if (this.level.endboss.isTriggered) {
       this.level.endboss.startBossIntervals();
     }
-    
-    
     this.level.endboss.bossMoveDirection();
     this.level.endboss.applyGravity();
     this.runCollisions();

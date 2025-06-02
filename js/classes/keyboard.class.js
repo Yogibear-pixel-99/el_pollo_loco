@@ -1,15 +1,44 @@
+/**
+ * Handles keyboard and touch input for controlling the character.
+ * Manages movement, jumping, and throwing actions on both desktop and mobile.
+ */
 class Keyboard {
+  /**
+   * Indicates whether the right movement key is pressed.
+   * @type {boolean}
+   */
   KEY_RIGHT = false;
+
+  /**
+   * Indicates whether the left movement key is pressed.
+   * @type {boolean}
+   */
   KEY_LEFT = false;
+
+  /**
+   * Indicates whether the jump key is pressed.
+   * @type {boolean}
+   */
   KEY_JUMP = false;
+
+  /**
+   * Indicates whether the shot key is pressed.
+   * @type {boolean}
+   */
   KEY_SHOT = false;
 
+  /**
+   * Initializes the keyboard by setting up event listeners for touch and key controls.
+   */
   constructor() {
     this.startKeyboardTouchEvents();
     this.startKeyControlEvents();
   }
 
-
+  /**
+   * Sets up touch event listeners for mobile controls.
+   * Updates internal key variables based on touch start/end events.
+   */
   startKeyboardTouchEvents() {
     document.getElementById("mobile-jump").addEventListener("touchstart", () => {
       this.KEY_JUMP = true;
@@ -28,7 +57,7 @@ class Keyboard {
     });
 
     document.getElementById("mobile-pause").addEventListener("touchstart", () => {
-        if (gameHasStarted) pauseGame();
+      if (gameHasStarted) pauseGame();
     });
 
     document.getElementById("mobile-jump").addEventListener("touchend", () => {
@@ -48,94 +77,61 @@ class Keyboard {
     });
   }
 
-
-  startKeyControlEvents(){
+  /**
+   * Sets up keyboard event listeners for desktop controls.
+   * Updates internal key variables based on keydown/keyup events.
+   */
+  startKeyControlEvents() {
     window.addEventListener("keydown", (event) => {
-  switch (event.key) {
-    case "ArrowRight":
-      this.KEY_RIGHT = true;
-      break;
+      switch (event.key) {
+        case "ArrowRight":
+          this.KEY_RIGHT = true;
+          break;
+        case "ArrowLeft":
+          this.KEY_LEFT = true;
+          break;
+        case "ArrowUp":
+          this.KEY_UP = true;
+          break;
+        case "ArrowDown":
+          this.KEY_DOWN = true;
+          break;
+        case " ":
+          this.KEY_JUMP = true;
+          break;
+        case "Control":
+        case "Alt":
+        case "d":
+        case "D":
+          this.KEY_SHOT = true;
+          break;
+      }
+    });
 
-    case "ArrowLeft":
-      this.KEY_LEFT = true;
-      break;
-
-    case "ArrowUp":
-      this.KEY_UP = true;
-      break;
-
-    case "ArrowDown":
-      this.KEY_DOWN = true;
-      break;
-
-    case " ":
-      this.KEY_JUMP = true;
-      break;
-
-    case "Control":
-      this.KEY_SHOT = true;
-      break;
-
-    case "Alt":
-      this.KEY_SHOT = true;
-      break;
-
-    case "d":
-      this.KEY_SHOT = true;
-      break;
-
-    case "D":
-      this.KEY_SHOT = true;
-      break;
-
-    default:
-      break;
-  }
-});
-
-window.addEventListener("keyup", (event) => {
-  switch (event.key) {
-    case "ArrowRight":
-      this.KEY_RIGHT = false;
-      break;
-
-    case "ArrowLeft":
-      this.KEY_LEFT = false;
-      break;
-
-    case "ArrowUp":
-      this.KEY_UP = false;
-      break;
-
-    case "ArrowDown":
-      this.KEY_DOWN = false;
-      break;
-
-    case " ":
-      this.KEY_SPACE = false;
-      break;
-
-    case "Control":
-      this.KEY_SHOT = false;
-      break;
-
-    case "Alt":
-      this.KEY_SHOT = false;
-      break;
-
-    case "d":
-      this.KEY_SHOT = false;
-      break;
-
-    case "D":
-      this.KEY_SHOT = false;
-      break;
-
-    default:
-      break;
-  }
-});
-
+    window.addEventListener("keyup", (event) => {
+      switch (event.key) {
+        case "ArrowRight":
+          this.KEY_RIGHT = false;
+          break;
+        case "ArrowLeft":
+          this.KEY_LEFT = false;
+          break;
+        case "ArrowUp":
+          this.KEY_UP = false;
+          break;
+        case "ArrowDown":
+          this.KEY_DOWN = false;
+          break;
+        case " ":
+          this.KEY_SPACE = false;
+          break;
+        case "Control":
+        case "Alt":
+        case "d":
+        case "D":
+          this.KEY_SHOT = false;
+          break;
+      }
+    });
   }
 }
-
