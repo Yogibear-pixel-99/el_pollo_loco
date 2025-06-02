@@ -29,8 +29,7 @@ function configChickenRushMode() {
     keyboard,
     pointConfig,
     audio,
-    level,
-    1 // Difficulty or multiplier (assumed)
+    level
   );
   world.level.endboss.x = 720 * 6;
   audio.resetMusic('chickenRushMusic');
@@ -93,8 +92,7 @@ function configHardMode() {
     keyboard,
     pointConfig,
     audio,
-    level,
-    6
+    level
   );
   world.level.endboss.energy = 100;
   world.level.endboss.maxEnergy = 100;

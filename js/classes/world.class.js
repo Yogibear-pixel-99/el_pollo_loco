@@ -613,12 +613,18 @@ class World {
    * @param {Drawable[]} array - Array of drawable objects.
    */
   addObjectsToCanvas(array) {
-    if (array.length > 0) {
+    try {
+      if (array.length > 0) {
       array.forEach((element) => {
         this.addObjToCanvas(element);
       });
     }
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
+
 
   /**
    * Stops all game-related intervals and animation frames.

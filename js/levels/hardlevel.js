@@ -27,7 +27,6 @@ return new Level(
     ],
 
     [
-      new Healbottle(),
       new Healbottle()
     ],
 
@@ -50,6 +49,9 @@ return new Level(
 
   719 * 5 + 50,
 
-
+    [
+    new Cactus(-300, 220),
+    new Cactus(719 * 5 + 80, 220)
+  ]
 );
 }

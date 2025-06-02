@@ -204,8 +204,6 @@ class Character extends MovableObject {
   /**
    * Creates an instance of the game character.
    * Loads all animation frames to an object.
-   * Sets the vertical position to the floor.
-   * Sets the first image to a walking image.
    */
   constructor() {
     super();
@@ -220,8 +218,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Start all char intervals.
-   * Animate, move, gravity and sound.
+   * Start all char intervals. Animate, move, gravity and sound.
    */
   startChar() {
     this.animate();
@@ -262,7 +259,6 @@ class Character extends MovableObject {
   /**
    * The animation interval.
    * Plays the appropriate animaten frames, depending on the characters condition.
-   * Idle, long idle, dead, hurt, jump.
    */
   animate() {
     this.animateInterval = setInterval(() => {
@@ -285,7 +281,6 @@ class Character extends MovableObject {
   }
 
   /**
-   * The move interval.
    * Moves the character by setting the keyboard object varaibles on pressing the steering keys.
    */
   moveDetection() {
@@ -337,7 +332,6 @@ class Character extends MovableObject {
 
   /**
    * Plays the hurting animation and bounces the character back by adding a number to speedY.
-   * Bounces left or right depending on the other direction variable and corrects the camera x position.
    */
   animateHurt() {
     this.playAnimation(this.HURT_ANIMATION);
@@ -347,8 +341,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Plays the idle or long idle animation.
-   * Plays a soundfile if the character is long idle.
+   * Plays the idle or long idle animation. Plays a soundfile if the character is long idle.
    */
   animateIdle() {
     if (this.idleCount < 50) {
@@ -409,8 +402,6 @@ class Character extends MovableObject {
 
   /**
    * Pushes a new bottle class to the thrown bottles array.
-   * Sets the bottleThrown variable for two seconds on true.
-   * Removes on bottle from the bottles variable.
    * Plays a throw sound.
    */
   throwBottle() {
