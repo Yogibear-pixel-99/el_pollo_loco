@@ -4,17 +4,16 @@
  * Inherits from {@link Enemies}
  */
 class Chicken extends Enemies {
-
   /**
- * The height of the chicken sprite in pixels.
- * @type {number}
- */
+   * The height of the chicken sprite in pixels.
+   * @type {number}
+   */
   height = 50;
 
   /**
- * The width of the chicken sprite in pixels.
- * @type {number}
- */
+   * The width of the chicken sprite in pixels.
+   * @type {number}
+   */
   width = 50;
 
   /**
@@ -35,7 +34,7 @@ class Chicken extends Enemies {
    */
   scoreNameJump = "chickenJumpKill";
 
-    /**
+  /**
    * The bottle kill score name for the points table.
    * @type {string}
    */
@@ -62,15 +61,15 @@ class Chicken extends Enemies {
     "./img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
 
-/**
- * Creates an instance of Chicken.
- * In rush mode: randomizes size, speed, and vertical position.
- * Sets initial image and animation frames.
- * Ensures a horizontal start position beyond 400.
- * Starts enemy behavior and animations.
- * 
- * @param {number} x - Initial horizontal position.
- */
+  /**
+   * Creates an instance of Chicken.
+   * In rush mode: randomizes size, speed, and vertical position.
+   * Sets initial image and animation frames.
+   * Ensures a horizontal start position beyond 400.
+   * Starts enemy behavior and animations.
+   *
+   * @param {number} x - Initial horizontal position.
+   */
   constructor(x) {
     super();
     this.getChickenForRushMode();
@@ -87,8 +86,8 @@ class Chicken extends Enemies {
   /**
    * Randomizes size, speed, and vertical position.
    */
-      getChickenForRushMode(){
-    if (gameMode === 'chickenRush') {
+  getChickenForRushMode() {
+    if (gameMode === "chickenRush") {
       let size = Math.ceil(Math.random() * 30 + 40);
       let speed = parseFloat((Math.random() * 2.0).toFixed(1));
       this.width = size;

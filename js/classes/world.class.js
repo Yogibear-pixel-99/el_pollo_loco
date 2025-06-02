@@ -324,7 +324,7 @@ class World {
         enemy.x > this.character.x - 150 &&
         enemy.x < this.character.x + 320
       ) {
-        enemy.stopAllEnemyIntervalls();
+        enemy.stopAllEnemyIntervals();
         enemy.runAway();
       }
     });
@@ -442,7 +442,7 @@ class World {
     cancelAnimationFrame(this.drawInterval);
     world.character.stopAllCharIntervals();
     world.level.enemies.forEach((enemy) => {
-      enemy.stopAllEnemyIntervalls();
+      enemy.stopAllEnemyIntervals();
     });
 
     world.level.endboss.stopAllBossIntervals();

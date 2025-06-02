@@ -1,6 +1,24 @@
+/**
+ * Displays the coin collection status bar.
+ * Extends {@link Statusbar}.
+ */
 class Coinbar extends Statusbar {
+  /**
+   * Horizontal position of the coin bar on screen.
+   * @type {number}
+   */
   x = 20;
+
+  /**
+   * Vertical position of the coin bar on screen.
+   * @type {number}
+   */
   y = 90;
+
+  /**
+   * Image frames representing different coin collection levels.
+   * @type {string[]}
+   */
   COIN_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",
@@ -10,15 +28,24 @@ class Coinbar extends Statusbar {
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png",
   ];
 
+  /**
+   * Creates an instance of the coin bar.
+   * Loads the initial coin bar image and all coin bar frames.
+   */
   constructor() {
     super();
     this.loadImage(this.COIN_BAR_IMAGES[0]);
     this.loadImagesArray(this.COIN_BAR_IMAGES);
   }
 
+  /**
+   * Updates the coin bar image based on the current number of coins collected.
+   * Reflects the progress visually by changing the displayed coin bar frame.
+   */
   updateCoinBar() {
     const coins = world.character.coins;
-    if (coins == 10) {
+
+    if (coins === 10) {
       this.img = this.animatedImages[this.COIN_BAR_IMAGES[5]];
     } else if (coins >= 9) {
       this.img = this.animatedImages[this.COIN_BAR_IMAGES[4]];
@@ -28,7 +55,7 @@ class Coinbar extends Statusbar {
       this.img = this.animatedImages[this.COIN_BAR_IMAGES[2]];
     } else if (coins >= 1) {
       this.img = this.animatedImages[this.COIN_BAR_IMAGES[1]];
-    } else if (coins == 0) {
+    } else if (coins === 0) {
       this.img = this.animatedImages[this.COIN_BAR_IMAGES[0]];
     }
   }

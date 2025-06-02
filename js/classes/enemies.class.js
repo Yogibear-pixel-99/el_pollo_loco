@@ -1,46 +1,114 @@
+/**
+ * Base class for enemy characters.
+ * Handles enemy movement, animation, and death.
+ * Inherits from {@link MovableObject}.
+ */
 class Enemies extends MovableObject {
+  /**
+   * Image path used when the enemy is killed.
+   * @type {string}
+   */
   deadPic;
+
+  /**
+   * Interval ID for movement logic.
+   * @type {number}
+   */
   moveInterval;
+
+  /**
+   * Interval ID for walking animation.
+   * @type {number}
+   */
   walkAnimationInterval;
+
+  /**
+   * Indicates if the enemy was hit.
+   * @type {boolean}
+   */
   wasHittet = false;
+
+  /**
+   * Walking speed of the enemy.
+   * @type {number}
+   */
   walkingSpeed;
+
+  /**
+   * Gravity acceleration value.
+   * @type {number}
+   */
   acceleration = 2;
+
+  /**
+   * Vertical speed used in gravity and jump movement.
+   * @type {number}
+   */
   speedY = 0;
+
+  /**
+   * Indicates if the enemy is alive.
+   * @type {boolean}
+   */
   lives = true;
+
+  /**
+   * Indicates direction of movement.
+   * True if facing left.
+   * @type {boolean}
+   */
   otherDirection = false;
+
+  /**
+   * Reference to the character in the game world.
+   * @type {object}
+   */
   character;
 
+  /**
+   * Creates an instance of Enemies.
+   */
   constructor() {
     super();
   }
 
-
-
-  startEnemy(){
+  /**
+   * Starts enemy movement and animation.
+   */
+  startEnemy() {
     this.moveEnemy();
     this.animateWalk();
   }
 
+  /**
+   * Starts walking animation in a loop.
+   */
   animateWalk() {
     this.walkAnimationInterval = setInterval(() => {
       this.playAnimation(this.WALKING_ANIMATION);
     }, this.animationCycle);
   }
 
+  /**
+   * Triggers the enemy death image and stops all intervals.
+   */
   isKilled() {
-    this.stopAllEnemyIntervalls();
+    this.stopAllEnemyIntervals();
     this.img.src = this.deadPic;
-
   }
 
-
-
-  stopAllEnemyIntervalls() {
+  /**
+   * Stops all animation and movement intervals for the enemy.
+   */
+  stopAllEnemyIntervals() {
     clearInterval(this.walkAnimationInterval);
     clearInterval(this.moveInterval);
   }
 
-      moveEnemy() {
+  /**
+   * Moves the enemy in its current direction in an interval.
+   */
+  moveEnemy() {
     this.moveInterval = setInterval(() => {
       if (this.otherDirection) {
         this.moveRight();
@@ -50,36 +118,37 @@ class Enemies extends MovableObject {
     }, this.moveCycle);
   }
 
+  /**
+   * Makes the enemy flee from the character for a short period.
+   * Plays sound and interrupts normal movement temporarily.
+   */
   runAway() {
-    audio.playSoundClone('chickenRun');
+    audio.playSoundClone("chickenRun");
     let activeDirection = this.otherDirection;
     let count = 0;
     let interval = setInterval(() => {
       if (count < 20) {
-      this.playAnimation(this.WALKING_ANIMATION);
+        this.playAnimation(this.WALKING_ANIMATION);
 
-      if (this.x < world.character.x) {
-        this.otherDirection = false;
-        this.x -= this.walkingSpeed + 5;
+        if (this.x < world.character.x) {
+          this.otherDirection = false;
+          this.x -= this.walkingSpeed + 5;
+        } else {
+          this.otherDirection = true;
+          this.x += this.walkingSpeed + 5;
+        }
+        count++;
       } else {
-        this.otherDirection = true;
-        this.x += this.walkingSpeed + 5;
+        if (this.x > world.character.x) {
+          this.otherDirection = false;
+        } else {
+          this.otherDirection = true;
+        }
+        clearInterval(interval);
+        this.otherDirection = activeDirection;
+        this.animateWalk();
+        this.moveEnemy();
       }
-      count++;
-    } else {
-      if (this.x > world.character.x) {
-        this.otherDirection = false;
-      } else {
-        this.otherDirection = true;
-      }
-      clearInterval(interval);
-      this.otherDirection = activeDirection;
-      this.animateWalk();
-      this.moveEnemy();
-    }
-    }, 20)
+    }, 20);
   }
-
-
-
 }

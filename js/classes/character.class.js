@@ -4,23 +4,22 @@
  * Inherits from {@link Enemies}.
  */
 class Character extends MovableObject {
-
   /**
- * Horizontal position where the character starts.
- * @type {number}
- */
+   * Horizontal position where the character starts.
+   * @type {number}
+   */
   x = 200;
 
   /**
- * The width of the character sprite in pixels.
- * @type {number}
- */
+   * The width of the character sprite in pixels.
+   * @type {number}
+   */
   width = 95;
 
-/**
- * The height of the boss sprite in pixels.
- * @type {number}
- */
+  /**
+   * The height of the boss sprite in pixels.
+   * @type {number}
+   */
   height = 190;
 
   /**
@@ -52,12 +51,17 @@ class Character extends MovableObject {
    * @type {number}
    */
   moveInterval;
- 
+
   /**
    * An interval config array from all character intervals.
    * @type {string[]}
    */
-  allIntervals = ["animateInterval", "soundInterval", "moveInterval", "gravityInterval"];
+  allIntervals = [
+    "animateInterval",
+    "soundInterval",
+    "moveInterval",
+    "gravityInterval",
+  ];
 
   /**
    * The character idle variable.
@@ -123,7 +127,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/2_walk/W-26.png",
   ];
 
-    /**
+  /**
    * Image frames shown when the character is jumping.
    * @type {string[]}
    */
@@ -139,7 +143,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/3_jump/J-39.png",
   ];
 
-    /**
+  /**
    * Image frames shown when the character is idle.
    * @type {string[]}
    */
@@ -156,7 +160,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
-    /**
+  /**
    * Image frames shown when the character is long idle.
    * @type {string[]}
    */
@@ -173,7 +177,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
-    /**
+  /**
    * Image frames shown when the character is dead.
    * @type {string[]}
    */
@@ -187,7 +191,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/5_dead/D-57.png",
   ];
 
-    /**
+  /**
    * Image frames shown when the character is hurt.
    * @type {string[]}
    */
@@ -239,18 +243,18 @@ class Character extends MovableObject {
         if (audio.sfx.pepeWalk.currentTime > 3.7) {
           audio.sfx.pepeWalk.currentTime = 0;
         }
-        audio.playSound('pepeWalk');
+        audio.playSound("pepeWalk");
       } else {
-        audio.pauseSound('pepeWalk')
+        audio.pauseSound("pepeWalk");
       }
       if (jump && !this.aboveGround()) {
-        audio.playSound('pepeJump');
+        audio.playSound("pepeJump");
       }
       if (this.speedY < 0 && !this.aboveGround()) {
-        audio.playSound('pepeLanding')
+        audio.playSound("pepeLanding");
       }
       if (this.isHurt()) {
-        audio.playSound('pepeHurt');
+        audio.playSound("pepeHurt");
       }
     }, 1000 / 60);
   }
@@ -351,7 +355,7 @@ class Character extends MovableObject {
       this.playAnimation(this.IDLE_ANIMATION);
     } else {
       this.playAnimation(this.IDLE_LONG_ANIMATION);
-      audio.playSound('pepeLongIdle');
+      audio.playSound("pepeLongIdle");
     }
     this.idleCount++;
   }
@@ -392,7 +396,7 @@ class Character extends MovableObject {
    * Sets the long idle audio file to the beginning.
    */
   resetIdleAudio() {
-    audio.pauseSound('pepeLongIdle');
+    audio.pauseSound("pepeLongIdle");
     audio.sfx.pepeLongIdle.currentTime = 0;
   }
 
@@ -432,7 +436,7 @@ class Character extends MovableObject {
   }
 
   /**
- * Makes the character bounce after jumping on an enemy by setting vertical speed.
+   * Makes the character bounce after jumping on an enemy by setting vertical speed.
    */
   jumpOnEnemy() {
     this.speedY = 15;
@@ -440,7 +444,7 @@ class Character extends MovableObject {
 
   /**
    * Checks if the character is walking an returns a boolean.
-   * 
+   *
    * @returns {boolean}
    */
   isWalking() {
@@ -454,9 +458,9 @@ class Character extends MovableObject {
     this.coins++;
   }
 
-/**
- * Increases the bottle count by one, up to a maximum of five.
- */
+  /**
+   * Increases the bottle count by one, up to a maximum of five.
+   */
   collectBottle() {
     if (this.bottles < 5) this.bottles++;
   }
@@ -473,7 +477,7 @@ class Character extends MovableObject {
   /**
    * Increases the energy of the character, up to a maximum of 100.
    */
- bottleHeal() {
+  bottleHeal() {
     if (this.energy < 100) {
       this.energy += 15;
       if (this.energy > 100) {
