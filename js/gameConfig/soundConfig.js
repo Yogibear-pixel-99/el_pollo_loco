@@ -11,12 +11,14 @@ document.addEventListener("click", () => {
  * Sets a standard volume to the audio files, if local storage is null.
  */
 function getSoundSettings() {
-  sfxMute = localStorage.getItem("sfxMute") === "true";
-  musicMute = localStorage.getItem("musicMute") === "true";
+  sfxMuteUser = localStorage.getItem("sfxMute") === "true";
+  musicMuteUser = localStorage.getItem("musicMute") === "true";
   sfxVolumeUser = localStorage.getItem("sfxVolume");
   musicVolumeUser = localStorage.getItem("musicVolume");
   sfxVolume = sfxVolumeUser ?? 7;
   musicVolume = musicVolumeUser ?? 4;
+  sfxMute = sfxMuteUser ?? false;
+  musicMute = musicMuteUser ?? false;
 }
 
 /**
@@ -25,8 +27,10 @@ function getSoundSettings() {
  * First calculates the effective volume levels, then assigns the
  * mute state and volume values for both sound effects and music.
  */
-function assignSoundSettings() {
-  calculateVolumesForAssign();
+async function assignSoundSettings() {
+  await calculateVolumesForAssign();
+  let now = new Date().getTime();
+  console.log("time passed: " + ((now - time) / 1000))
   assignMuteAndVolume("sfx", sfxMute, sfxVolume);
   assignMuteAndVolume("music", musicMute, musicVolume);
 }
@@ -35,8 +39,11 @@ function assignSoundSettings() {
  * Calculaters the effective volume levels.
  */
 function calculateVolumesForAssign() {
+return new Promise ((resolve) => {
   sfxVolume === 10 ? (sfxVolume = 1) : (sfxVolume = sfxVolume / 10);
   musicVolume === 10 ? (musicVolume = 1) : (musicVolume = musicVolume / 10);
+  resolve();
+});
 }
 
 /**

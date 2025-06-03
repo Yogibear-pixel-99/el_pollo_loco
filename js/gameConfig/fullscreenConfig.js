@@ -103,16 +103,6 @@ function setGameCanvasToDefaultSize(){
 }
 
 /**
- * Listens to fullscreen changes and adjusts display and controls accordingly.
- */
-window.addEventListener("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    resizeDisplay();
-    setMobileGameButtonSize();
-  }
-});
-
-/**
  * In case that the screen size is to small for the game overlay, the fullscreen mode on is set
  * permanent.
  *
@@ -141,3 +131,19 @@ function toggleFullScreen() {
     buttonRef.classList.add("full-screen-button");
   }
 }
+
+/**
+ * Listens to fullscreen changes and adjusts display and controls accordingly.
+ */
+window.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    resizeDisplay();
+    setMobileGameButtonSize();
+  }
+});
+
+window.addEventListener("visibilitychange", () => {
+  if (!document.hidden && gameHasStarted && isSmallScreen()) {
+    showFullscreen();
+  }
+});

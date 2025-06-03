@@ -108,6 +108,8 @@ const MAIN_URL =
  */
 let highscores = {};
 
+let time = new Date().getTime();
+
 /**
  * Initializes the game setup:
  * - Sets the canvas element.
@@ -341,6 +343,8 @@ document.addEventListener("keyup", (event) => {
  * Manages cursor appearance and plays UI click sounds.
  */
 document.addEventListener("DOMContentLoaded", () => {
+  init();
+
   document.addEventListener("mousedown", () => {
     showActiveCursor();
   });
@@ -410,3 +414,5 @@ function showGameOverScreen() {
 // MOBILE BUTTONS HEIGHT IN OVERLAY MODE- NOT FULLSCREEN
 
 // shorten functions and JS files
+
+// character neu docu jsdoc
