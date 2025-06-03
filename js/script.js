@@ -73,16 +73,6 @@ function getTemplateToContent(id, template) {
 }
 
 /**
- * This function shows a html container. It removes the class d-none.
- *
- * @param {string} containerId - The id of the HTML container.
- */
-function showSingleContainerById(containerId) {
-  let content = document.getElementById(containerId);
-  content.classList.remove("d-none");
-}
-
-/**
  * Checks if the screen height is smaller than the given value.
  *
  * @param {number} value - The height threshold to compare with.
@@ -114,7 +104,7 @@ function isSmallScreen() {
 /**
  * Replaces every input in the input field exept letters and numbers.
  *
- * @param {HTML Element} id - The HTML input element to check.
+ * @param {HTMLInputElement} id - The HTML input element to check.
  */
 function returnOnlyLettersAndNumbers(id) {
   let regex = /[^\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00dfA-Za-z0-9\s+]/g;

@@ -30,7 +30,9 @@ class Minichicken extends Enemies {
     left: 2,
   };
 
-  /** @type {string[]} Animation frames for walking */
+  /** The frames of the walking animation.
+   * @type {string[]}
+   */
   WALKING_ANIMATION = [
     "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "./img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
@@ -64,7 +66,7 @@ class Minichicken extends Enemies {
    * Applies random size and walking speed, and recalculates floor Y position.
    */
   getChickenForRushMode() {
-    if (gameMode === 'chickenRush') {
+    if (gameMode === "chickenRush") {
       let size = Math.ceil(Math.random() * 15 + 35);
       let speed = parseFloat((Math.random() * 2.0).toFixed(1));
       this.width = size;

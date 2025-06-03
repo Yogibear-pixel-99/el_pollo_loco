@@ -63,7 +63,7 @@ class Bottle extends DrawableObject {
   /**
    * Calculates a new x position, depending on the canvas width.
    *
-   * @returns
+   * @returns {number} - The new x coordinate.
    */
   calculateNewPosition() {
     let x = Math.random() * 3500;

@@ -142,14 +142,9 @@ window.addEventListener("fullscreenchange", () => {
   }
 });
 
-// window.addEventListener("visibilitychange", () => {
-//   if (!document.hidden && gameHasStarted && isSmallScreen()) {
-//     canvas.style.backgroundImage = "none";
-//     resizeDisplay();
-//     setMobileGameButtonSize();
-//   }
-// });
-
+/**
+ * Sets the screen back to fullscreen mode, if the browser tab is changed.
+ */
 window.addEventListener("visibilitychange", () => {
   if (!document.hidden && gameHasStarted && isSmallScreen()) {
     if (fullScreen && !document.fullscreenElement) {
@@ -164,6 +159,9 @@ window.addEventListener("visibilitychange", () => {
   }
 });
 
+/**
+ * Sets the screen back to fullscreen mode, if the browser tab is changed back to the game.
+ */
 window.addEventListener("focus", () => {
   if (gameHasStarted && fullScreen && !document.fullscreenElement) {
       showFullscreen();

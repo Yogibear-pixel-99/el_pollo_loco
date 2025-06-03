@@ -68,7 +68,7 @@ function configNormalMode() {
         new Chicken(world.character.x + canvasWidth * Math.ceil((Math.random() + 1)))
       );
     }
-  }, 14000);
+  }, 10000);
 
   audio.resetMusic('normalModeMusic');
   audio.playMusicLoop('normalModeMusic');
