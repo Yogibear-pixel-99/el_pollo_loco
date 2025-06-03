@@ -17,7 +17,11 @@ function checkFullscreenMode() {
  */
 function showFullscreen() {
   const ref = document.getElementById("canvas-wrapper");
-  if (!navigator.userAgent.includes("iPhone") && fullScreen && !document.fullscreenElement) {
+  if (
+    !navigator.userAgent.includes("iPhone") &&
+    fullScreen &&
+    !document.fullscreenElement
+  ) {
     if (ref.requestFullscreen) {
       ref.requestFullscreen();
     } else if (ref.webkitRequestFullscreen) {
@@ -26,14 +30,23 @@ function showFullscreen() {
       ref.msRequestFullscreen();
     }
   }
-  setMobileButtons();
+  setGameCanvasSizeAndButtons();
 }
 
-function setMobileButtons(){
-    const canvas = document.getElementById("gamecanvas");
-    canvas.style.backgroundImage = "none";
-    setTimeout(resizeDisplay, 100);
-    setTimeout(setMobileGameButtonSize, 100);
+/**
+ * Calculates the canvas size and the buttons size depending on screenratio.
+ */
+function setGameCanvasSizeAndButtons() {
+  canvas.style.backgroundImage = "none";
+  setTimeout(resizeDisplay, 100);
+  setTimeout(setMobileGameButtonSize, 100);
+  if (fullScreen) {
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+  } else {
+    canvas.style.width = "720px";
+    canvas.style.height = "480px";
+  }
 }
 
 /**
@@ -53,7 +66,6 @@ function hideFullscreen() {
  * Resizes the game canvas and buttons responsively based on the window size.
  */
 function resizeDisplay() {
-  const canvas = document.getElementById("gamecanvas");
   const gameWidth = 720;
   const gameHeight = 480;
   const windowWidth = window.innerWidth;
@@ -66,25 +78,28 @@ function resizeDisplay() {
 
   canvas.style.width = `${scaledWidth}px`;
   canvas.style.height = `${scaledHeight}px`;
-  canvas.style.left = `${(windowWidth - scaledWidth) / 2}px`;
-  canvas.style.top = `${(windowHeight - scaledHeight) / 2}px`;
+  if (isSmallScreen()) {
+    canvas.style.left = "50%";
+    canvas.style.top = "50%";
+    canvas.style.transform = "translate(-50%, -50%)";
+  }
 }
 
-  /**
-   * Sets the mobile buttons to a new size, depending on actually screensize.
-   */
-  function setMobileGameButtonSize() {
+/**
+ * Sets the mobile buttons to a new size, depending on actually screensize.
+ */
+function setMobileGameButtonSize() {
   let buttonWrapper = document.getElementById("mobile-buttons-wrapper");
   let buttons = document.querySelectorAll(".mobile-game-button");
   let buttonImg = document.querySelectorAll(".mobile-game-button svg");
   const scaleX = window.innerWidth / 720; // 1
-  const scaleY = window.innerHeight / 480;  // 1
+  const scaleY = window.innerHeight / 480; // 1
   const scale = Math.min(scaleX, scaleY);
   buttonWrapper.style.width = `${scale * 700}px`;
   buttons.forEach((button) => {
     button.style.padding = `${scale * 10}px`;
-    button.style.width = `${scale * 64}px`;
-    button.style.height = `${scale * 64}px`;
+    button.style.width = `${scale * 70}px`;
+    button.style.height = `${scale * 70}px`;
   });
   buttonImg.forEach((img) => {
     img.style.width = `${scale * 26}px`;
@@ -96,8 +111,8 @@ function resizeDisplay() {
  * Sets the game canvas to the default size of 720 x 480 px.
  * Sets the default background.
  */
-function setGameCanvasToDefaultSize(){
-    canvas.style.width = "720px";
+function setGameCanvasToDefaultSize() {
+  canvas.style.width = "720px";
   canvas.style.height = "480px";
   canvas.style.left = "0";
   canvas.style.top = "0";
@@ -146,29 +161,12 @@ window.addEventListener("fullscreenchange", () => {
 });
 
 /**
- * Sets the screen back to fullscreen mode, if the browser tab is changed.
- */
-window.addEventListener("visibilitychange", () => {
-  if (!document.hidden && gameHasStarted && isSmallScreen()) {
-    if (fullScreen && !document.fullscreenElement) {
-        showFullscreen();
-        setTimeout(resizeDisplay, 100);
-        setTimeout(setMobileGameButtonSize, 100);
-    } else {
-      resizeDisplay();
-      setMobileGameButtonSize();
-    }
-    canvas.style.backgroundImage = "none";
-  }
-});
-
-/**
  * Sets the screen back to fullscreen mode, if the browser tab is changed back to the game.
  */
 window.addEventListener("focus", () => {
   if (gameHasStarted && fullScreen && !document.fullscreenElement) {
-      showFullscreen();
-      setTimeout(resizeDisplay, 100);
-      setTimeout(setMobileGameButtonSize, 100);
+    showFullscreen();
+    setTimeout(resizeDisplay, 100);
+    setTimeout(setMobileGameButtonSize, 100);
   }
 });

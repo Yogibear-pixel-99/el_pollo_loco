@@ -416,3 +416,5 @@ function showGameOverScreen() {
 // shorten functions and JS files
 
 // character neu docu jsdoc
+
+// still bottle problem at gamestart - is collected - xüpositon
