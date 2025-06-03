@@ -13,11 +13,10 @@ document.addEventListener("click", () => {
 function getSoundSettings() {
   sfxMute = localStorage.getItem("sfxMute") === "true";
   musicMute = localStorage.getItem("musicMute") === "true";
-  sfxVolume = localStorage.getItem("sfxVolume");
-  musicVolume = localStorage.getItem("musicVolume");
-
-  if (sfxVolume === null) sfxVolume = 7;
-  if (musicVolume === null) musicVolume = 4;
+  sfxVolumeUser = localStorage.getItem("sfxVolume");
+  musicVolumeUser = localStorage.getItem("musicVolume");
+  sfxVolume = sfxVolumeUser ?? 7;
+  musicVolume = musicVolumeUser ?? 4;
 }
 
 /**

@@ -26,13 +26,13 @@ let audio = new Audiofiles();
  * Current volume level for sound effects (0.0 to 1.0).
  * @type {number}
  */
-let sfxVolume;
+let sfxVolume = 7;
 
 /**
  * Current volume level for music (0.0 to 1.0).
  * @type {number}
  */
-let musicVolume;
+let musicVolume = 4;
 
 /**
  * Flag indicating whether sound effects are muted.

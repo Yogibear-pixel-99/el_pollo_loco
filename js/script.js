@@ -132,3 +132,6 @@ function removeClass(id, className) {
   const ref = document.getElementById(id);
   ref.classList.remove(className);
 }
+
+setInterval(() => console.log(sfxVolume), 500);
+setInterval(() => console.log(musicVolume), 500);
