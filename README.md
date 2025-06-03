@@ -20,9 +20,6 @@ https://github.com/user-attachments/assets/314c8f42-3857-44a1-b997-a1ca3b4c1569
 - CSS3
 - No external Frameworks
 
-## 🧪 Demo
-[Test the game](https://dein-github-benutzername.github.io/el-pollo-loco)
-
 ## 🕹️ Contros
 
 | Key            | Action              |
@@ -33,6 +30,8 @@ https://github.com/user-attachments/assets/314c8f42-3857-44a1-b997-a1ca3b4c1569
 | P/p            | Pause the game      |
 
 ## 🚀 Start the game
+https://www.joachim-puercher.developerakademie.net/loco/index.html
+
 ### Run localy
 1. Clone the project:
    ```bash
