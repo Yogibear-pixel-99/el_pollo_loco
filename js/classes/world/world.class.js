@@ -184,12 +184,12 @@ class World {
    */
   runCollisions() {
     this.collisionInterval = setInterval(() => {
-      this.checkEnemyCollisions();
+      checkEnemyCollisions();
       checkCoinCollision();
-      this.checkBottleCollision();
-      this.checkBossCollision();
-      this.checkThrownBottleCollision();
-      this.checkHealBottleCollision();
+      checkBottleCollision();
+      checkBossCollision();
+      checkThrownBottleCollision();
+      checkHealBottleCollision();
     }, 25);
   }
 
@@ -240,31 +240,7 @@ class World {
     }
   }
 
-  /**
-   * Handles collisions between player and enemies.
-   * Kills enemies if jumped on, otherwise damages player.
-   */
-  checkEnemyCollisions() {
-    let deadEnemies = [];
-    this.level.enemies = this.level.enemies.filter((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        if (this.character.collisionFromAbove(enemy) && !this.checkGameEnd()) {
-          deadEnemies.push(enemy);
-          this.deadEnemyRoutine(enemy);
-          this.character.jumpOnEnemy();
-          this.addPointsToPlayerScore(enemy.scoreNameJump);
-          this.level.deadEnemies.push(enemy);
-          return false;
-        } else {
-          this.character.hit();
-          this.healthbar.updateHealthbar();
-          return true;
-        }
-      }
-      return true;
-    });
-    deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
-  }
+
 
   /**
    * Removes a dead enemy from the deadEnemies array after delay.
@@ -287,35 +263,6 @@ class World {
   }
 
   /**
-   * Checks collision between player and boss enemy.
-   * Damages player if collision detected.
-   */
-  checkBossCollision() {
-    if (
-      this.character.isColliding(this.level.endboss) ||
-      this.character.isCollidingHead(this.level.endboss)
-    ) {
-      this.character.hit();
-      this.healthbar.updateHealthbar();
-    }
-  }
-
-  /**
-   * Handles collisions for thrown bottles against enemies and boss.
-   */
-  checkThrownBottleCollision() {
-    this.thrownBottles.forEach((bottle) => {
-      if (this.bottleHittetFloor(bottle)) {
-        this.animateBrokenBottle(bottle);
-        this.addPointsToPlayerScore(bottle.itemName);
-      } else {
-        this.checkThrownBottleBossCollision(bottle);
-        this.checkThrownBottleEnemyCollision(bottle);
-      }
-    });
-  }
-
-  /**
    * Handles the collision for thrown bottles against the boss.
    * @param {Object} bottle - The thrown bottle.
    */
@@ -326,26 +273,6 @@ class World {
       audio.playSoundClone("bossHitted");
       this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
     }
-  }
-
-  /**
-   * Handles the collision for thrown bottles against the enemies.
-   * @param {Object} bottle - The thrown bottle.
-   */
-  checkThrownBottleEnemyCollision(bottle) {
-    let deadEnemies = [];
-    this.level.enemies = this.level.enemies.filter((enemy) => {
-      if (bottle.isColliding(enemy) && bottle.alreadyHittet === false) {
-        this.animateBrokenBottle(bottle);
-        deadEnemies.push(enemy);
-        this.deadEnemyRoutine(enemy);
-        this.addPointsToPlayerScore(enemy.scoreNameBottle);
-        this.level.deadEnemies.push(enemy);
-        return false;
-      }
-      return true;
-    });
-    deadEnemies.forEach((enemy) => this.spawnNewChickensForRushMode(enemy));
   }
 
   /**
@@ -457,39 +384,6 @@ class World {
    */
   deleteCollectedCoin() {
       this.level.collectedCoins.splice(0, 1);
-  }
-
-  /**
-   * Handles collisions between the player and healing bottles.
-   * Heals the player and updates the UI.
-   */
-  checkHealBottleCollision() {
-    this.level.healBottles.forEach((bottle) => {
-      if (this.character.isColliding(bottle) && this.character.energy < 100) {
-        audio.playSoundClone("bottleHeal");
-        bottle.isCollected();
-        this.character.bottleHeal();
-        this.healthbar.updateHealthbar();
-        this.addPointsToPlayerScore(bottle.itemName);
-      }
-    });
-  }
-
-  /**
-   * Handles collisions between the player and collectible bottles.
-   */
-  checkBottleCollision() {
-    this.level.bottles.forEach((bottle) => {
-      if (this.character.isColliding(bottle)) {
-        if (world.character.bottles < 5) {
-          this.addPointsToPlayerScore(bottle.itemName);
-          audio.playRandomSound("collectBottle");
-        }
-        bottle.isCollected();
-        this.character.collectBottle();
-        this.bottlebar.updateBottleBar();
-      }
-    });
   }
 
   /**
