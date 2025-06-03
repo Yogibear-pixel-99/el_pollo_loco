@@ -73,7 +73,7 @@ function resizeDisplay() {
   function setMobileGameButtonSize() {
   let buttonWrapper = document.getElementById("mobile-buttons-wrapper");
   let buttons = document.querySelectorAll(".mobile-game-button");
-  let buttonImg = document.querySelectorAll(".mobile-game-button img");
+  let buttonImg = document.querySelectorAll(".mobile-game-button svg");
   const scaleX = window.innerWidth / 720; // 1
   const scaleY = window.innerHeight / 480;  // 1
   const scale = Math.min(scaleX, scaleY);
@@ -84,8 +84,8 @@ function resizeDisplay() {
     button.style.height = `${scale * 64}px`;
   });
   buttonImg.forEach((img) => {
-    img.style.width = `${scale * 34}px`;
-    img.style.height = `${scale * 34}px`;
+    img.style.width = `${scale * 26}px`;
+    img.style.height = `${scale * 26}px`;
   });
 }
 
