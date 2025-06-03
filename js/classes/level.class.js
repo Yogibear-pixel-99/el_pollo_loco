@@ -245,13 +245,13 @@ class Level {
     if (gameMode === "chickenRush") {
       if (enemy instanceof Chicken) {
         world.level.enemies.push(
-          new Chicken(this.character.x + 1400),
-          new Chicken(this.character.x - 1400)
+          new Chicken(world.character.x + 1400),
+          new Chicken(world.character.x - 1400)
         );
       } else {
         world.level.enemies.push(
-          new Minichicken(this.character.x + 1400),
-          new Minichicken(this.character.x - 1400)
+          new Minichicken(world.character.x + 1400),
+          new Minichicken(world.character.x - 1400)
         );
       }
     }

@@ -144,6 +144,8 @@ window.addEventListener("fullscreenchange", () => {
 
 window.addEventListener("visibilitychange", () => {
   if (!document.hidden && gameHasStarted && isSmallScreen()) {
-    showFullscreen();
+    canvas.style.backgroundImage = "none";
+    resizeDisplay();
+    setMobileGameButtonSize();
   }
 });

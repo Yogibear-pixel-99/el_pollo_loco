@@ -27,10 +27,8 @@ function getSoundSettings() {
  * First calculates the effective volume levels, then assigns the
  * mute state and volume values for both sound effects and music.
  */
-async function assignSoundSettings() {
-  await calculateVolumesForAssign();
-  let now = new Date().getTime();
-  console.log("time passed: " + ((now - time) / 1000))
+function assignSoundSettings() {
+  calculateVolumesForAssign();
   assignMuteAndVolume("sfx", sfxMute, sfxVolume);
   assignMuteAndVolume("music", musicMute, musicVolume);
 }
@@ -39,11 +37,8 @@ async function assignSoundSettings() {
  * Calculaters the effective volume levels.
  */
 function calculateVolumesForAssign() {
-return new Promise ((resolve) => {
   sfxVolume === 10 ? (sfxVolume = 1) : (sfxVolume = sfxVolume / 10);
   musicVolume === 10 ? (musicVolume = 1) : (musicVolume = musicVolume / 10);
-  resolve();
-});
 }
 
 /**
