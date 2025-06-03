@@ -175,6 +175,7 @@ function resetGame() {
  * Returns the game to the main menu and resets relevant states and UI.
  */
 function backToMainMenu() {
+  world.character.resetIdleAudio();
   document.getElementById("right-content").style.zIndex = "150";
   activateMenu();
   audio.playMusicLoop("menuMusic");

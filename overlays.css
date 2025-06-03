@@ -1,0 +1,156 @@
+.turn-device-mask {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 400;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.turn-device-mask img {
+  width: calc(100dvh / 8);
+  height: calc(100dvh / 8);
+  animation-name: turn-device;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+}
+
+@keyframes turn-device {
+  0% {
+    transform: rotate(-90deg);
+  }
+  35% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+.turn-device-mask div {
+  font-family: mansalva, sans-serif;
+  color: var(--settings-bg);
+  font-size: calc(100dvh / 20);
+}
+
+.loading-spinner-container {
+  position: absolute;
+  inset: 0;
+  background-color: var(--spinner-bg);
+  border-radius: 20px;
+  gap: 40px;
+}
+
+.loading-spinner-container span {
+  font-size: 28px;
+  color: var(--score-bg);
+  letter-spacing: 2px;
+}
+
+.loading-spinner-container img {
+  height: 25%;
+  animation-name: spinner-bottle;
+  animation-duration: 1400ms;
+  animation-iteration-count: infinite;
+  transform: rotate(0deg);
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+@keyframes spinner-bottle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.canvas-won-container,
+.canvas-lost-container,
+.canvas-pause-container {
+  position: absolute;
+  inset: 0 0 5px 0;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
+.won-lost-wrapper {
+  display: flex;
+  margin-top: 24px;
+  gap: 50px;
+  font-size: 32px;
+}
+
+.won-lost-wrapper img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.won-lost-single-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--settings-bg);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.won-lost-single-button-wrapper:hover {
+  filter: brightness(120%);
+  transform: scale(105%);
+}
+
+.won-lost-single-button-wrapper:active {
+  transform: scale(100%);
+  filter: brightness(80%);
+}
+
+.game-won-img {
+  width: 300px;
+}
+
+.game-lost-img {
+  width: 200px;
+}
+
+.start-game-mask {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 50;
+}
+
+.open-highscore,
+.open-points-table {
+  margin-top: auto;
+  padding: 6px 10px 9px;
+  font-size: 22px;
+  font-family: agudisplay, sans-serif;
+  width: 120px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  background-color: var(--settings-bg);
+  display: none;
+}
+
+.open-highscore:hover,
+.open-points-table:hover,
+.impressum-link:hover {
+  cursor: url("./img/cursor.png"), auto;
+  background-color: var(--score-bg);
+}
+
+.open-highscore:active,
+.open-points-table:active,
+.impressum-link:active {
+  transform: scale(95%);
+  filter: brightness(120%);
+}

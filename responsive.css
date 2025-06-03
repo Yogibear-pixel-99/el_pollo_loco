@@ -105,7 +105,7 @@
     font-size: 26px;
   }
 
-    .player-score {
+  .player-score {
     display: none;
   }
 
@@ -181,7 +181,7 @@
     font-size: 14px !important;
   }
 
-   .left-content,
+  .left-content,
   .right-content {
     margin-bottom: 44px;
   }
@@ -202,7 +202,7 @@
   }
 
   .top-game-header {
-    font-size: 18px;;
+    font-size: 18px;
   }
 
   .open-highscore,
@@ -239,8 +239,8 @@
   }
 
   .right-content h2 {
-  margin-bottom: 20px;
-}
+    margin-bottom: 20px;
+  }
 
   .score-tables-wrapper {
     display: flex;
@@ -368,16 +368,16 @@
   }
 
   .opt-wrapper:hover .settings-img,
-    .opt-wrapper:active .settings-img {
-  transform: translateY(16px);
-  transition: transform 300ms;
-}
+  .opt-wrapper:active .settings-img {
+    transform: translateY(16px);
+    transition: transform 300ms;
+  }
 
-.opt-wrapper:hover .opt-text,
-.opt-wrapper:active .opt-text {
-  transform: translateY(-26px);
-  transition: transform 300ms;
-}
+  .opt-wrapper:hover .opt-text,
+  .opt-wrapper:active .opt-text {
+    transform: translateY(-26px);
+    transition: transform 300ms;
+  }
 
   .settings-wrapper img {
     width: 20px;
