@@ -109,3 +109,4 @@ function configHardMode() {
   audio.resetMusic('normalModeMusic');
   audio.playMusicLoop('normalModeMusic');
 }
+

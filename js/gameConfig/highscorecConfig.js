@@ -184,3 +184,55 @@ const pointConfig = {
     points: 200,
   },
 };
+
+/**
+ * Checks if the points table overlay is opened and calls a show or hide function.
+ */
+function toggleResponsiveScoreTablePoints() {
+  document
+    .getElementById("right-content")
+    .classList.contains("open-score-table")
+    ? hideResponsiveScoreTable("right-content")
+    : showResponsiveScoreTable("right-content");
+}
+
+/**
+ * Checks if the score table overlay is opened and calls a show or hide function.
+ */
+function toggleResponsiveScoreTableHighscore() {
+  document.getElementById("left-content").classList.contains("open-score-table")
+    ? hideResponsiveScoreTable("left-content")
+    : showResponsiveScoreTable("left-content");
+}
+
+/**
+ * Shows the score or pointstable overlay by adding display block.
+ * Darkens the game canvas by setting it behind the game mask with z index.
+ *
+ * @param {string} id - The id of the right (points table) or left (score table) HTML element.
+ */
+function showResponsiveScoreTable(id) {
+  document.getElementById("canvas-wrapper").style.zIndex = "0";
+  deactivateMenu();
+  let ref = document.getElementById(id);
+  ref.style.display = "block";
+  requestAnimationFrame(() => {
+    ref.classList.add("open-score-table");
+  });
+}
+
+/**
+ * Hiddes the score or pointstable overlay by adding display block.
+ * Darkens the game canvas by setting it behind the game mask with z index.
+ *
+ * @param {string} id - The id of the right (points table) or left (score table) HTML element.
+ */
+function hideResponsiveScoreTable(id) {
+  document.getElementById("canvas-wrapper").style.zIndex = "150";
+  activateMenu();
+  let ref = document.getElementById(id);
+  ref.classList.remove("open-score-table");
+  setTimeout(() => {
+    ref.style.display = "none";
+  }, 300);
+}

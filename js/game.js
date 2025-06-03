@@ -337,16 +337,6 @@ document.addEventListener("keyup", (event) => {
 });
 
 /**
- * Listens to fullscreen changes and adjusts display and controls accordingly.
- */
-window.addEventListener("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    resizeDisplay();
-    resizeMobileButtons();
-  }
-});
-
-/**
  * Sets up event listeners for mouse and click events on DOMContentLoaded.
  * Manages cursor appearance and plays UI click sounds.
  */
@@ -369,13 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/**
- * Starts playing menu music once on the first click anywhere on the document.
- */
-document.addEventListener("click", () => {
-  if (!playMusicOnStart) audio.playMusicLoop("menuMusic");
-  playMusicOnStart = true;
-});
+
 
 /**
  * Ends the game by stopping intervals, hiding UI elements, saving scores,
@@ -424,3 +408,5 @@ function showGameOverScreen() {
 // Shorten all functions
 
 // MOBILE BUTTONS HEIGHT IN OVERLAY MODE- NOT FULLSCREEN
+
+// shorten functions and JS files

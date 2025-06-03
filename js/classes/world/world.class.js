@@ -174,7 +174,7 @@ class World {
     this.worldInterval = setInterval(() => {
       this.moveBackground();
       this.checkIfGameIsOver();
-      this.checkCluckerSound();
+      audio.checkCluckerSound();
       this.enemyMoveDirection();
     }, 50);
   }
@@ -185,7 +185,7 @@ class World {
   runCollisions() {
     this.collisionInterval = setInterval(() => {
       this.checkEnemyCollisions();
-      this.checkCoinCollision();
+      checkCoinCollision();
       this.checkBottleCollision();
       this.checkBossCollision();
       this.checkThrownBottleCollision();
@@ -453,35 +453,10 @@ class World {
   }
 
   /**
-   * Handles collisions between the player and coins.
-   * Collects coins and updates the UI and game state.
-   */
-  checkCoinCollision() {
-    this.level.coins = this.level.coins.filter((coin) => {
-      if (this.character.isColliding(coin) && !coin.collected) {
-        audio.playSoundClone("collectCoin");
-        this.addPointsToPlayerScore("collectCoin");
-        this.character.collectCoin();
-        coin.collected = true;
-        this.level.collectedCoins.push(coin);
-        this.deleteCollectedCoin();
-        this.coinbar.updateCoinBar();
-        if (this.character.coins === 10 && gameMode != "chickenRush") {
-          this.level.endboss.startBossFight();
-        }
-        return false;
-      }
-      return true;
-    });
-  }
-
-  /**
    * Removes collected coins from the collectedCoins array after delay.
    */
   deleteCollectedCoin() {
-    setTimeout(() => {
       this.level.collectedCoins.splice(0, 1);
-    }, 1000);
   }
 
   /**
@@ -532,23 +507,6 @@ class World {
         bg.x = bg.x - bg.xFactor;
       }
     });
-  }
-
-  /**
-   * Plays or pauses the clucker sound based on proximity of enemies.
-   */
-  checkCluckerSound() {
-    const enemyNear = this.level.enemies.some((enemy) => {
-      return (
-        enemy.x > this.character.x - 200 && enemy.x < this.character.x + 450
-      );
-    });
-
-    if (enemyNear) {
-      audio.playSound("cluckern");
-    } else {
-      audio.pauseSound("cluckern");
-    }
   }
 
   /**

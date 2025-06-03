@@ -170,4 +170,21 @@ stopGameMusic() {
   this.pauseSound("cluckern");
   this.pauseSound("gameAmbience");
 }
+
+  /**
+   * Plays or pauses the clucker sound based on proximity of enemies.
+   */
+  checkCluckerSound() {
+    const enemyNear = world.level.enemies.some((enemy) => {
+      return (
+        enemy.x > world.character.x - 200 && enemy.x < world.character.x + 450
+      );
+    });
+
+    if (enemyNear) {
+      this.playSound("cluckern");
+    } else {
+      this.pauseSound("cluckern");
+    }
+  }
 }
