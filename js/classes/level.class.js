@@ -110,7 +110,6 @@ class Level {
     this.backgrounds = backgrounds;
     this.level_end_x = level_end_x;
     this.level_end_cactus = level_end_cactus;
-
     this.setBackgrounds();
     this.addCoins();
   }
@@ -236,5 +235,25 @@ class Level {
    */
   getYForCoins() {
     return Math.random() * (canvasHeight - 158 - 130) + 130;
+  }
+
+    /**
+   * Spawns new chickens in chickenRush mode after enemy death.
+   * @param {Enemy} enemy - The enemy that was killed.
+   */
+  spawnNewChickensForRushMode(enemy) {
+    if (gameMode === "chickenRush") {
+      if (enemy instanceof Chicken) {
+        world.level.enemies.push(
+          new Chicken(this.character.x + 1400),
+          new Chicken(this.character.x - 1400)
+        );
+      } else {
+        world.level.enemies.push(
+          new Minichicken(this.character.x + 1400),
+          new Minichicken(this.character.x - 1400)
+        );
+      }
+    }
   }
 }

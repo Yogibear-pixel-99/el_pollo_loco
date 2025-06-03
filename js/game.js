@@ -370,7 +370,7 @@ function gameOver() {
     saveScore();
   }
   hideSingleContainerById("mobile-buttons-wrapper");
-  world.stopAllGameIntervals();
+  stopAllGameIntervals();
   audio.stopGameMusic();
   checkFullscreenMode();
   showCursor();

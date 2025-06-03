@@ -172,10 +172,10 @@ class World {
    */
   runWorldIntervals() {
     this.worldInterval = setInterval(() => {
-      this.moveBackground();
-      this.checkIfGameIsOver();
+      moveBackground();
+      checkIfGameIsOver();
       audio.checkCluckerSound();
-      this.enemyMoveDirection();
+      enemyMoveDirection();
     }, 50);
   }
 
@@ -194,20 +194,6 @@ class World {
   }
 
   /**
-   * Updates enemy direction based on player position.
-   */
-  enemyMoveDirection() {
-    this.level.enemies.forEach((enemy) => {
-      if (enemy.x < this.character.x - canvasWidth) {
-        enemy.otherDirection = true;
-      }
-      if (enemy.x > this.character.x + canvasWidth) {
-        enemy.otherDirection = false;
-      }
-    });
-  }
-
-  /**
    * Assigns this world instance to the character.
    */
   setWorld() {
@@ -221,26 +207,6 @@ class World {
   checkGameEnd() {
     return this.character.energy <= 0 || this.level.endboss.energy <= 0;
   }
-
-  /**
-   * Checks and handles the game over state.
-   */
-  checkIfGameIsOver() {
-    if (this.checkGameEnd()) {
-      if (this.level.endboss.energy <= 0) {
-        this.addPointsToPlayerScore("endbossKilled");
-        this.gameWon = true;
-      }
-      requestAnimationFrame(() => {
-        clearInterval(this.worldInterval);
-      });
-      setTimeout(() => {
-        gameOver();
-      }, 3000);
-    }
-  }
-
-
 
   /**
    * Removes a dead enemy from the deadEnemies array after delay.
@@ -260,19 +226,6 @@ class World {
     audio.playRandomSound("deadChicken");
     this.deleteDeadEnemy();
     enemy.lives = false;
-  }
-
-  /**
-   * Handles the collision for thrown bottles against the boss.
-   * @param {Object} bottle - The thrown bottle.
-   */
-  checkThrownBottleBossCollision(bottle) {
-    if (this.bottleHittetBoss(bottle)) {
-      this.animateBrokenBottle(bottle);
-      this.level.endboss.hitBoss();
-      audio.playSoundClone("bossHitted");
-      this.addPointsToPlayerScore(this.level.endboss.scoreNameBottle);
-    }
   }
 
   /**
@@ -297,27 +250,6 @@ class World {
         bottle.isCollidingHead(this.level.endboss)) &&
       bottle.alreadyHittet === false
     );
-  }
-
-  /**
-   * Spawns new chickens in chickenRush mode after enemy death.
-   * @param {Enemy} enemy - The enemy that was killed.
-   */
-  spawnNewChickensForRushMode(enemy) {
-    console.log("type is: ", enemy.constructor.name);
-    if (gameMode === "chickenRush") {
-      if (enemy instanceof Chicken) {
-        this.level.enemies.push(
-          new Chicken(this.character.x + 1400),
-          new Chicken(this.character.x - 1400)
-        );
-      } else {
-        this.level.enemies.push(
-          new Minichicken(this.character.x + 1400),
-          new Minichicken(this.character.x - 1400)
-        );
-      }
-    }
   }
 
   /**
@@ -384,23 +316,6 @@ class World {
    */
   deleteCollectedCoin() {
       this.level.collectedCoins.splice(0, 1);
-  }
-
-  /**
-   * Moves the background layers based on player input for scrolling effect.
-   */
-  moveBackground() {
-    this.level.backgrounds.forEach((bg) => {
-      if (world.keyboard.KEY_LEFT && this.character.x > -200) {
-        bg.x = bg.x + bg.xFactor;
-      }
-      if (
-        world.keyboard.KEY_RIGHT &&
-        this.character.x < world.level.level_end_x - 30
-      ) {
-        bg.x = bg.x - bg.xFactor;
-      }
-    });
   }
 
   /**
@@ -509,57 +424,5 @@ class World {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  /**
-   * Stops all game-related intervals and animation frames.
-   * Used for pausing or ending the game.
-   */
-  stopAllGameIntervals() {
-    cancelAnimationFrame(this.drawInterval);
-    world.character.stopAllCharIntervals();
-    world.level.enemies.forEach((enemy) => {
-      enemy.stopAllEnemyIntervals();
-    });
-    world.level.endboss.stopAllBossIntervals();
-    clearInterval(world.level.endboss.moveDirectionInterval);
-    clearInterval(world.level.endboss.gravityInterval);
-    this.thrownBottles.forEach((bottle) => {
-      clearInterval(bottle.gravityInterval);
-    });
-    this.level.coins.forEach((coin) => {
-      clearInterval(coin.coinInterval);
-    });
-    clearInterval(this.collisionInterval);
-    clearInterval(this.worldInterval);
-    clearInterval(chickenSpawnInterval);
-    this.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
-  }
-
-  /**
-   * Continues game intervals after a pause or resume.
-   */
-  continueGameIntervals() {
-    this.draw();
-    this.character.startChar();
-    this.level.endboss.bossMoveDirection();
-    this.level.endboss.applyGravity();
-    this.runCollisions();
-    this.runWorldIntervals();
-    world.level.enemies.forEach((enemy) => {
-      enemy.startEnemy();
-    });
-    if (this.level.endboss.isTriggered) {
-      this.level.endboss.startBossIntervals();
-    }
-    this.level.skyObjects.forEach((cloud) => {
-      cloud.autoMoveLeft();
-    });
-    this.thrownBottles.forEach((bottle) => {
-      bottle.applyBottleGravity();
-    });
-    this.level.coins.forEach((coin) => {
-      coin.animate();
-    });
   }
 }
