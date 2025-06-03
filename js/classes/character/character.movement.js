@@ -1,5 +1,6 @@
 /**
  * Moves the character by setting the keyboard object varaibles on pressing the steering keys.
+ * @param {object} char - The character instance.
  */
 function moveDetection(char) {
   char.moveInterval = setInterval(() => {
@@ -30,7 +31,7 @@ function moveDetection(char) {
 /**
  * Plays the jumping animation, depending on the vertical speed (speedY variable) to show the rising
  * or falling animation. Updates the jump state (isJumping variable).
- * @returns {void}
+ * @param {object} char - The character instance.
  */
 function animateJump(char) {
   if (!char.isJumping) {
@@ -55,6 +56,7 @@ function animateJump(char) {
 
 /**
  * Checks if the character is on the highest jump point before falling.
+ * @param {object} char - The character instance.
  * @returns {boolean}
  */
 function jumpIsOnHighestPoint(char) {
@@ -69,6 +71,7 @@ function jumpIsOnHighestPoint(char) {
 /**
  * Sets the vertical speed for jumping by setting the speedY variable to a number.
  * Triggers the enemies' reaction to the jump event.
+ * @param {object} char - The character instance.
  */
 function jump(char) {
   char.speedY = 22;
@@ -79,6 +82,7 @@ function jump(char) {
  * Checks if the character is walking an returns a boolean.
  *
  * @returns {boolean}
+ * @param {object} char - The character instance.
  */
 function isWalking(char) {
   return char.world.keyboard.KEY_RIGHT || char.world.keyboard.KEY_LEFT;

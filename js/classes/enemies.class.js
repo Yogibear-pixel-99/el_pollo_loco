@@ -66,6 +66,11 @@ class Enemies extends MovableObject {
   character;
 
   /**
+   * Interval to check if the enemies run away from the char.
+   */
+  runAwayInterval;
+
+  /**
    * Creates an instance of Enemies.
    */
   constructor() {
@@ -103,6 +108,7 @@ class Enemies extends MovableObject {
   stopAllEnemyIntervals() {
     clearInterval(this.walkAnimationInterval);
     clearInterval(this.moveInterval);
+    clearInterval(this.runAwayInterval);
   }
 
   /**
@@ -126,29 +132,45 @@ class Enemies extends MovableObject {
     audio.playSoundClone("chickenRun");
     let activeDirection = this.otherDirection;
     let count = 0;
-    let interval = setInterval(() => {
+    this.runAwayInterval = setInterval(() => {
       if (count < 20) {
         this.playAnimation(this.WALKING_ANIMATION);
-
-        if (this.x < world.character.x) {
-          this.otherDirection = false;
-          this.x -= this.walkingSpeed + 5;
-        } else {
-          this.otherDirection = true;
-          this.x += this.walkingSpeed + 5;
-        }
+        this.runToLeftOrRight();
         count++;
       } else {
-        if (this.x > world.character.x) {
-          this.otherDirection = false;
-        } else {
-          this.otherDirection = true;
-        }
-        clearInterval(interval);
-        this.otherDirection = activeDirection;
-        this.animateWalk();
-        this.moveEnemy();
+        this.setEnemyToDefault(activeDirection);
       }
     }, 20);
+  }
+
+  /**
+   * Checks the position off the enemy in relation to the char.
+   * Moves the x axis depending on the char position.
+   */
+  runToLeftOrRight() {
+    if (this.x < world.character.x) {
+      this.otherDirection = false;
+      this.x -= this.walkingSpeed + 5;
+    } else {
+      this.otherDirection = true;
+      this.x += this.walkingSpeed + 5;
+    }
+  }
+
+  /**
+   * Sets the enemy to the default movement.
+   * 
+   * @param {boolean} activeDirection - The other direction boolean before the run away move starts.
+   */
+  setEnemyToDefault(activeDirection) {
+    clearInterval(this.runAwayInterval);
+    this.otherDirection = activeDirection;
+    this.animateWalk();
+    this.moveEnemy();
+    if (this.x > world.character.x) {
+      this.otherDirection = false;
+    } else {
+      this.otherDirection = true;
+    }
   }
 }

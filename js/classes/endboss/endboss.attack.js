@@ -2,7 +2,6 @@
  * Starts a random attack mode for the boss if the game is not ended.
  *
  * @param {object} boss - The boss instance executing the attack.
- * @returns {void}
  */
 function attack(boss) {
   if (!world.checkGameEnd() && gamesHasStarted && !gamePaused) {
@@ -47,7 +46,6 @@ function jumpAttack(boss) {
  * Plays the alert animation for the first 8 frames.
  *
  * @param {object} boss - The boss instance.
- * @returns {void}
  */
 function attackJumpPhaseOne(boss) {
   if (boss.attackCount < 8) {
@@ -61,7 +59,6 @@ function attackJumpPhaseOne(boss) {
  * Resets animation counter at frame 8.
  *
  * @param {object} boss - The boss instance.
- * @returns {void}
  */
 function attackJumpPhaseTwo(boss) {
   if (boss.attackCount >= 8 && boss.attackCount <= 10) {
@@ -79,7 +76,6 @@ function attackJumpPhaseTwo(boss) {
  * Resets animation counter at frame 11.
  *
  * @param {object} boss - The boss instance.
- * @returns {void}
  */
 function attackJumpPhaseThree(boss) {
   if (
@@ -102,7 +98,6 @@ function attackJumpPhaseThree(boss) {
  * Triggered when the current frame exceeds the attack animation length.
  *
  * @param {object} boss - The boss instance.
- * @returns {void}
  */
 function attackJumpReset(boss) {
   if (boss.attackCount > boss.attackAnimationNr) {
@@ -116,7 +111,6 @@ function attackJumpReset(boss) {
  * Clears the jump attack interval and resumes the boss animation loop.
  *
  * @param {object} boss - The boss instance.
- * @returns {void}
  */
 function clearJumpAttack(boss) {
   clearInterval(boss.jumpAttackInterval);

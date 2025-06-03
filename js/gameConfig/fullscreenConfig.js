@@ -142,10 +142,32 @@ window.addEventListener("fullscreenchange", () => {
   }
 });
 
+// window.addEventListener("visibilitychange", () => {
+//   if (!document.hidden && gameHasStarted && isSmallScreen()) {
+//     canvas.style.backgroundImage = "none";
+//     resizeDisplay();
+//     setMobileGameButtonSize();
+//   }
+// });
+
 window.addEventListener("visibilitychange", () => {
   if (!document.hidden && gameHasStarted && isSmallScreen()) {
+    if (fullScreen && !document.fullscreenElement) {
+        showFullscreen();
+        setTimeout(resizeDisplay, 100);
+        setTimeout(setMobileGameButtonSize, 100);
+    } else {
+      resizeDisplay();
+      setMobileGameButtonSize();
+    }
     canvas.style.backgroundImage = "none";
-    resizeDisplay();
-    setMobileGameButtonSize();
+  }
+});
+
+window.addEventListener("focus", () => {
+  if (gameHasStarted && fullScreen && !document.fullscreenElement) {
+      showFullscreen();
+      setTimeout(resizeDisplay, 100);
+      setTimeout(setMobileGameButtonSize, 100);
   }
 });
