@@ -4,7 +4,7 @@
  * @param {object} boss - The boss instance executing the attack.
  */
 function attack(boss) {
-  if (!world.checkGameEnd() && gamesHasStarted && !gamePaused) {
+  if (!world.checkGameEnd() && gameHasStarted && !gamePaused) {
     let attackDelay = Math.round(Math.random() * (4500 - 2500) + 2500);
     setTimeout(() => {
       boss.stopAllBossIntervals();

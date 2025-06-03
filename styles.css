@@ -435,11 +435,13 @@ input[type="range"]::-moz-range-thumb {
   justify-content: space-between;
   width: 700px;
   display: none;
+  touch-action: none;
 }
 
 .mobile-buttons {
   display: flex;
   gap: 12px;
+  touch-action: none;
 }
 
 .mobile-game-button svg {
@@ -454,9 +456,9 @@ input[type="range"]::-moz-range-thumb {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 40%;
-  touch-action: none;
   width: 80px;
   height: 70px;
+  touch-action: none;
 }
 
 .mobile-game-button:active {

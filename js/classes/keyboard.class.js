@@ -33,6 +33,7 @@ class Keyboard {
   constructor() {
     this.startKeyboardTouchEvents();
     this.startKeyControlEvents();
+    this.preventDefaultKeys();
   }
 
   /**
@@ -133,5 +134,17 @@ class Keyboard {
           break;
       }
     });
+  }
+
+  /**
+   * Prevents the default context menu on phones touch longpress.
+   */
+  preventDefaultKeys(){
+    document.querySelectorAll('.mobile-game-button').forEach(button => {
+  button.addEventListener('contextmenu', (e) => e.preventDefault());
+  button.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+});
   }
 }

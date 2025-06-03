@@ -17,8 +17,7 @@ function checkFullscreenMode() {
  */
 function showFullscreen() {
   const ref = document.getElementById("canvas-wrapper");
-  const canvas = document.getElementById("gamecanvas");
-  if (!document.fullscreenElement && fullScreen) {
+  if (!navigator.userAgent.includes("iPhone") && fullScreen && !document.fullscreenElement) {
     if (ref.requestFullscreen) {
       ref.requestFullscreen();
     } else if (ref.webkitRequestFullscreen) {
@@ -26,11 +25,15 @@ function showFullscreen() {
     } else if (ref.msRequestFullscreen) {
       ref.msRequestFullscreen();
     }
+  }
+  setMobileButtons();
+}
+
+function setMobileButtons(){
+    const canvas = document.getElementById("gamecanvas");
     canvas.style.backgroundImage = "none";
     setTimeout(resizeDisplay, 100);
     setTimeout(setMobileGameButtonSize, 100);
-    // setTimeout(resizeMobileButtons, 100);
-  }
 }
 
 /**
