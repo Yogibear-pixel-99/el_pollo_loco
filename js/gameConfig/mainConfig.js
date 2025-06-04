@@ -83,7 +83,7 @@ function closeSettings() {
 function showResponsiveGameCanvas() {
   if (isSmallScreen()) {
     let ref = document.getElementById("canvas-wrapper");
-    ref.style.display = "block";
+    ref.style.display = "flex";
     requestAnimationFrame(() => {
       ref.classList.add("canvas-mobile-open");
     });
@@ -214,11 +214,3 @@ document.addEventListener("DOMContentLoaded", () => {
     showCursor();
   });
 });
-
-function setFullHeight() {
-  const height = window.innerHeight;
-  document.querySelector(".full-height").style.height = `${height}px`;
-}
-
-window.addEventListener("load", setFullHeight);
-window.addEventListener("resize", setFullHeight);
