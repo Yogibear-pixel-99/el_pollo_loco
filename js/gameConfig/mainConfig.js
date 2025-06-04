@@ -14,6 +14,7 @@ function toggleOptionMenu(getTemp, settingsMenu) {
   if (isSmallScreen()) {
     showResponsiveGameCanvas();
     deactivateMenu();
+    document.getElementById("right-content").style.zIndex = "40";
   }
   if (
     sessionStorage.getItem("menu") === settingsMenu &&
@@ -22,6 +23,7 @@ function toggleOptionMenu(getTemp, settingsMenu) {
   ) {
     requestAnimationFrame(() => {
       hideResponsiveGameCanvas();
+      document.getElementById("right-content").style.zIndex = "100";
     });
     setTimeout(() => {
       ref.classList.add("d-none");
@@ -135,10 +137,11 @@ function styleResponsiveNameInput() {
  * Pauses the game and shows the pause screen.
  */
 function pauseGame() {
-  showCursor();
   gamePaused = true;
+  showCursor();
   showSingleContainerById("canvas-pause-container");
   audio.pauseSound("cluckern");
+  audio.pauseSound("pepeLongIdle");
 }
 
 /**
@@ -165,16 +168,16 @@ function backToMainMenu() {
   world.character.resetIdleAudio();
   document.getElementById("right-content").style.zIndex = "150";
   activateMenu();
-  audio.playMusicLoop("menuMusic");
   hideResponsiveGameCanvas();
   gameStartFalse();
   checkFullscreenMode();
   audio.playSound("menuClick");
+  audio.playMusicLoop("menuMusic");
 }
 
 /**
  * Stops all game-related intervals and animation frames.
- * Used for pausing or ending the game.
+ * Used for ending the game.
  */
 function stopAllGameIntervals() {
   cancelAnimationFrame(world.drawInterval);
@@ -195,33 +198,6 @@ function stopAllGameIntervals() {
   clearInterval(world.worldInterval);
   clearInterval(chickenSpawnInterval);
   world.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
-}
-
-/**
- * Continues game intervals after a pause or resume.
- */
-function continueGameIntervals() {
-  world.draw();
-  world.character.startChar();
-  world.level.endboss.bossMoveDirection();
-  world.level.endboss.applyGravity();
-  world.runCollisions();
-  world.runWorldIntervals();
-  world.level.enemies.forEach((enemy) => {
-    enemy.startEnemy();
-  });
-  if (world.level.endboss.isTriggered) {
-    world.level.endboss.startBossIntervals();
-  }
-  world.level.skyObjects.forEach((cloud) => {
-    cloud.autoMoveLeft();
-  });
-  world.thrownBottles.forEach((bottle) => {
-    bottle.applyBottleGravity();
-  });
-  world.level.coins.forEach((coin) => {
-    coin.animate();
-  });
 }
 
 /**

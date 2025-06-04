@@ -164,16 +164,6 @@ function showJustFullscreenInfo() {
   }, 10000);
 }
 
-// /**
-//  * Listens to fullscreen changes and adjusts display and controls accordingly.
-//  */
-// // window.addEventListener("fullscreenchange", () => {
-// //   if (document.fullscreenElement) {
-// //     resizeDisplay();
-// //     setMobileGameButtonSize();
-// //   }
-// // });
-
 /**
  * Sets the screen back to fullscreen mode, if the browser tab is changed back to the game.
  */

@@ -394,10 +394,10 @@ class Endboss extends Enemies {
   bossMoveDirection() {
     this.moveDirectionInterval = setInterval(() => {
       if (gamePaused) return;
-      if (this.x < world.character.x - 200) {
+      if (this.x < world.character.x - 50) {
         this.otherDirection = true;
       }
-      if (this.x > world.character.x + 200) {
+      if (this.x > world.character.x + 20) {
         this.otherDirection = false;
       }
     }, 1000);

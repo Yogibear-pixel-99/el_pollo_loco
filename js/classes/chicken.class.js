@@ -89,7 +89,7 @@ class Chicken extends Enemies {
   getChickenForRushMode() {
     if (gameMode === "chickenRush") {
       let size = Math.ceil(Math.random() * 30 + 40);
-      let speed = parseFloat((Math.random() * 2.0).toFixed(1));
+      let speed = parseFloat((Math.random() * 1.8).toFixed(1) + 0.2);
       this.width = size;
       this.height = size;
       this.walkingSpeed = speed;

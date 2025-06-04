@@ -20,7 +20,7 @@ class Enemies extends MovableObject {
    * Walking speed of the enemy.
    * @type {number}
    */
-  walkingSpeed;
+  walkingSpeed = 1;
 
   /**
    * Gravity acceleration value.

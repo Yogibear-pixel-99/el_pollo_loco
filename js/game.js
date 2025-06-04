@@ -355,5 +355,3 @@ function showGameOverScreen() {
     ? showSingleContainerById("canvas-won-container")
     : showSingleContainerById("canvas-lost-container");
 }
-
-// overflow hidden for the canvas in game mode.
