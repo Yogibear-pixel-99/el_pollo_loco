@@ -5,10 +5,12 @@
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     showFullscreen();
-    setMobileGameButtonSize();
-  } else if (fullScreen && !gameHasStarted) {
+    // document.getElementById("canvas-wrapper").style.overflow = "hidden !important";
+    setGameCanvasSizeAndButtons();
+  } else {
     hideFullscreen();
     setGameCanvasToDefaultSize();
+    document.getElementById("canvas-wrapper").style.overflow = "auto";
   }
 }
 
@@ -30,7 +32,6 @@ function showFullscreen() {
       ref.msRequestFullscreen();
     }
   }
-  setGameCanvasSizeAndButtons();
 }
 
 /**
@@ -43,9 +44,11 @@ function setGameCanvasSizeAndButtons() {
   if (fullScreen) {
     canvas.style.width = "100%";
     canvas.style.height = "100%";
+
   } else {
     canvas.style.width = "720px";
     canvas.style.height = "480px";
+   
   }
 }
 
@@ -151,22 +154,33 @@ function toggleFullScreen() {
 }
 
 /**
- * Listens to fullscreen changes and adjusts display and controls accordingly.
+ * The error message, that appears if just fullscreen is possible.
  */
-window.addEventListener("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    resizeDisplay();
-    setMobileGameButtonSize();
-  }
-});
+function showJustFullscreenInfo() {
+  let ref = document.getElementById("name-error-text");
+  ref.innerText = "Screen is to small, just fullscreen possible";
+  setTimeout(() => {
+    ref.innerText = "";
+  }, 10000);
+}
+
+// /**
+//  * Listens to fullscreen changes and adjusts display and controls accordingly.
+//  */
+// // window.addEventListener("fullscreenchange", () => {
+// //   if (document.fullscreenElement) {
+// //     resizeDisplay();
+// //     setMobileGameButtonSize();
+// //   }
+// // });
 
 /**
  * Sets the screen back to fullscreen mode, if the browser tab is changed back to the game.
  */
-window.addEventListener("focus", () => {
-  if (gameHasStarted && fullScreen && !document.fullscreenElement) {
-    showFullscreen();
-    setTimeout(resizeDisplay, 100);
-    setTimeout(setMobileGameButtonSize, 100);
-  }
-});
+// window.addEventListener("focus", () => {
+//   if (gameHasStarted && fullScreen && !document.fullscreenElement) {
+//     showFullscreen();
+//     setTimeout(resizeDisplay, 100);
+//     setTimeout(setMobileGameButtonSize, 100);
+//   }
+// });

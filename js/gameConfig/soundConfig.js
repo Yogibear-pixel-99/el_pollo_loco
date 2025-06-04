@@ -147,3 +147,18 @@ function setVolume() {
   calculateVolumesForAssign();
   initSoundSettings();
 }
+
+/**
+ * Sets the click sound effect to the game buttons menu.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelectorAll(
+      ".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input, .impressum-link"
+    )
+    .forEach((element) => {
+      element.addEventListener("click", () => {
+        audio.playSoundClone("menuClick");
+      });
+    });
+});

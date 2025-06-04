@@ -34,6 +34,7 @@ class Keyboard {
     this.startKeyboardTouchEvents();
     this.startKeyControlEvents();
     this.preventDefaultKeys();
+    this.startPauseControlEvents();
   }
 
   /**
@@ -148,8 +149,13 @@ class Keyboard {
 
   /**
    * Prevents the default context menu on phones touch longpress.
+   * Prevents on iPhone the draggable option on longpress.
    */
   preventDefaultKeys() {
+    document.querySelectorAll("svg, img").forEach((element) => {
+      element.setAttribute("draggable", "false");
+    })
+
     document.querySelectorAll(".mobile-game-button").forEach((button) => {
       button.addEventListener("contextmenu", (e) => e.preventDefault());
       button.addEventListener(
@@ -159,6 +165,21 @@ class Keyboard {
         },
         { passive: false }
       );
+    });
+  }
+
+  /**
+   * Handles keyup events to toggle game pause/resume on 'p', 'P', or 'Escape' keys.
+   */
+  startPauseControlEvents() {
+    document.addEventListener("keyup", (event) => {
+      if (
+        (gameHasStarted && event.key === "p") ||
+        event.key === "P" ||
+        event.key === "Escape"
+      ) {
+        gamePaused ? resumeGame() : pauseGame();
+      }
     });
   }
 }

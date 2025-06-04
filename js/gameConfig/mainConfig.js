@@ -100,17 +100,6 @@ function hideResponsiveGameCanvas() {
 }
 
 /**
- * The error message, that appears if just fullscreen is possible.
- */
-function showJustFullscreenInfo() {
-  let ref = document.getElementById("name-error-text");
-  ref.innerText = "Screen is to small, just fullscreen possible";
-  setTimeout(() => {
-    ref.innerText = "";
-  }, 10000);
-}
-
-/**
  * Blurs the input field after pressing enter and plays the standard click sound.
  *
  * @param {KeyboardEvent} event - The standard event from the input field.
@@ -236,3 +225,18 @@ function continueGameIntervals() {
     coin.animate();
   });
 }
+
+/**
+ * Sets up event listeners for mouse and click events on DOMContentLoaded.
+ * Manages cursor appearance and plays UI click sounds.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  init();
+
+  document.addEventListener("mousedown", () => {
+    showActiveCursor();
+  });
+  document.addEventListener("mouseup", () => {
+    showCursor();
+  });
+});

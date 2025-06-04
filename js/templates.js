@@ -7,7 +7,7 @@ function getStoryTemp() {
   return `<div class="story-text">
                 <div class="flex-ctr-spbtw">
                 <p>Welcome to the world of Pepe!</p>
-                <img class="settings-close-button" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
+                <img class="settings-close-button story-close" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
                 </div>
                 <p>Last night, there was a crumbling
                  voice in the air. The next morning,

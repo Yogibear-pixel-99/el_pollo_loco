@@ -165,8 +165,8 @@ function startGame() {
   }
 }
 
-function resetScore () {
-     document.getElementById("player-score").innerText = "0";
+function resetScore() {
+  document.getElementById("player-score").innerText = "0";
 }
 
 /**
@@ -188,7 +188,6 @@ function showLoadingScreen() {
   getTemplateToContent("canvas-option-container", getLoadingSpinnerTemp());
   showSingleContainerById("canvas-option-container");
 }
-
 
 /**
  * Sets the flag indicating the game has not started.
@@ -235,7 +234,6 @@ function removeNameError() {
   removeClass("player-name-input", "error-blink");
   removeErrorMessage("name-error-text");
 }
-
 
 /**
  * Clears the inner text of an element identified by id.
@@ -324,46 +322,6 @@ function toggleGameMode() {
   }
   getActiveHighscores();
 }
-
-/**
- * Handles keyup events to toggle game pause/resume on 'p', 'P', or 'Escape' keys.
- */
-document.addEventListener("keyup", (event) => {
-  if (
-    (gameHasStarted && event.key === "p") ||
-    event.key === "P" ||
-    event.key === "Escape"
-  ) {
-    gamePaused ? resumeGame() : pauseGame();
-  }
-});
-
-/**
- * Sets up event listeners for mouse and click events on DOMContentLoaded.
- * Manages cursor appearance and plays UI click sounds.
- */
-document.addEventListener("DOMContentLoaded", () => {
-  init();
-
-  document.addEventListener("mousedown", () => {
-    showActiveCursor();
-  });
-  document.addEventListener("mouseup", () => {
-    showCursor();
-  });
-
-  document
-    .querySelectorAll(
-      ".opt-wrapper, .sound-wrapper, .open-points-table, .open-highscore, #player-name-input, .impressum-link"
-    )
-    .forEach((element) => {
-      element.addEventListener("click", () => {
-        audio.playSoundClone("menuClick");
-      });
-    });
-});
-
-
 
 /**
  * Ends the game by stopping intervals, hiding UI elements, saving scores,

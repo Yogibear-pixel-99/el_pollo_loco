@@ -73,7 +73,7 @@
 .canvas-lost-container,
 .canvas-pause-container {
   position: absolute;
-  inset: 0 0 5px 0;
+  inset: 0 0 0 0;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
