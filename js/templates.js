@@ -18,7 +18,9 @@ function getStoryTemp() {
                       toward the sound of that chicken...
                 </p>
                 <p>
-El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the boss fight (except "chicken rush mode"). Defeat the boss to finish the game.
+                El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger 
+                the boss fight (except "chicken rush mode"). Defeat the boss to finish the game.
+                Collect the green bottles for an energy boost.
             </p></div>`;
 }
 
@@ -64,7 +66,9 @@ function getControlsTemp() {
  */
 function highscoreTemp(element, index) {
   return `<div class="score-wrapper">
-            <div class="highscore-player-name"><span>${index + 1}. </span>${element.name}</div>
+            <div class="highscore-player-name"><span>${index + 1}. </span>${
+    element.name
+  }</div>
             <div class="score">${element.score}</div>          
           </div>`;
 }
@@ -118,12 +122,12 @@ function getSoundOptionsTemp() {
  *
  * @returns {string} HTML string showing a loading indicator.
  */
-function getLoadingSpinnerTemp(){
-    return `<div class="loading-spinner-container flex-ctr-ctr flex-col">
+function getLoadingSpinnerTemp() {
+  return `<div class="loading-spinner-container flex-ctr-ctr flex-col">
                 <img src="./img/icons/graphic-3578420_1280.png" alt="loading spinner">
                 <span>. . . loading . . .</span>
             </div>
-            `
+            `;
 }
 
 /**
@@ -131,8 +135,8 @@ function getLoadingSpinnerTemp(){
  *
  * @returns {string} HTML string containing legal and contact information.
  */
-function getImpressumTemp(){
-    return `<div class="impressum-wrapper">
+function getImpressumTemp() {
+  return `<div class="impressum-wrapper">
             <img class="settings-close-button impressum-close" onclick="closeSettings()" src="./img/icons/close-svgrepo-com.svg" alt="close-icon">
     <h4>Impressum</h4><p><b>Informationen und Offenlegung gemäß &sect;5 (1) ECG, &sect; 25 MedienG, &sect; 63 GewO und &sect; 14 UGB</b></p> <p><b>Webseitenbetreiber:</b> Joachim Puercher</p>
 <p><b>Anschrift:</b> Schöneringer Straße 12e, 407, 4073 Wilhering</p>
@@ -143,6 +147,5 @@ function getImpressumTemp(){
 <p><b>Online Streitbeilegung:</b> Verbraucher, welche in Österreich oder in einem sonstigen Vertragsstaat der ODR-VO niedergelassen sind, haben die Möglichkeit Probleme bezüglich dem entgeltlichen Kauf von Waren oder Dienstleistungen im Rahmen einer Online-Streitbeilegung (nach OS, AStG) zu lösen. Die Europäische Kommission stellt eine Plattform hierfür bereit: https://ec.europa.eu/consumers/odr</p>
 <p><b>Urheberrecht:</b> Die Inhalte dieser Webseite unterliegen, soweit dies rechtlich möglich ist, diversen Schutzrechten (z.B dem Urheberrecht). Jegliche Verwendung/Verbreitung von bereitgestelltem Material, welche urheberrechtlich untersagt ist, bedarf schriftlicher Zustimmung des Webseitenbetreibers.</p><p><b>Haftungsausschluss:</b> Trotz sorgfältiger inhaltlicher Kontrolle übernimmt der Webseitenbetreiber dieser Webseite keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich. Sollten Sie dennoch auf ausgehende Links aufmerksam werden, welche auf eine Webseite mit rechtswidriger Tätigkeit/Information verweisen, ersuchen wir um dementsprechenden Hinweis, um diese nach § 17 Abs. 2 ECG umgehend zu entfernen.<br>Die Urheberrechte Dritter werden vom Betreiber dieser Webseite mit größter Sorgfalt beachtet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden derartiger Rechtsverletzungen werden wir den betroffenen Inhalt umgehend entfernen.</p>
 <p>Quelle: <b><a href="https://www.fairesrecht.at/kostenlos-impressum-erstellen-generator.php">Impressum Generator Österreich</a></b></p>
-</div>`
+</div>`;
 }
-
