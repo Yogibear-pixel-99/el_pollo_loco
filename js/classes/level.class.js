@@ -12,7 +12,6 @@ class Level {
 
   /**
    * The coins that have been collected.
-   * @type {Coin[]}
    */
   collectedCoins = [];
 
@@ -36,7 +35,6 @@ class Level {
 
   /**
    * Enemies that have been killed.
-   * @type {Enemies[]}
    */
   deadEnemies = [];
 
@@ -66,7 +64,6 @@ class Level {
 
   /**
    * Size of the level.
-   * @type {number}
    */
   level_size = 6;
 

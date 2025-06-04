@@ -5,12 +5,10 @@
  */
 class Bosshealthbar extends Statusbar {
   /** Horizontal position
-   * @type {number}
    */
   x = 490;
 
   /** Vertical position
-   * @type {number}
    */
   y = 15;
 

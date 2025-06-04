@@ -5,7 +5,6 @@
 class DrawableObject {
   /**
    * Distance from the bottom of the canvas representing the floor height.
-   * @type {number}
    */
   floorHeight = 58;
 
@@ -29,7 +28,6 @@ class DrawableObject {
 
   /**
    * Counter for animation frame indexing.
-   * @type {number}
    */
   animationCount = 0;
 
@@ -41,7 +39,6 @@ class DrawableObject {
 
   /**
    * Offsets for collision detection.
-   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 0,
@@ -52,13 +49,11 @@ class DrawableObject {
 
   /**
    * Duration of each animation frame cycle in milliseconds.
-   * @type {number}
    */
   animationCycle = 120;
 
   /**
    * Flag indicating if the object is facing the opposite direction.
-   * @type {boolean}
    */
   otherDirection = false;
 
@@ -70,7 +65,6 @@ class DrawableObject {
 
   /**
    * Interval ID for movement loop.
-   * @type {number}
    */
   moveInterval;
 

@@ -6,25 +6,21 @@
 class Healbottle extends DrawableObject {
   /**
    * Height of the heal bottle sprite in pixels.
-   * @type {number}
    */
   height = 55;
 
   /**
    * Width of the heal bottle sprite in pixels.
-   * @type {number}
    */
   width = 55;
 
   /**
    * The score name for the points table.
-   * @type {string}
    */
   itemName = "collectBottle";
 
   /**
    * Offset values used for collision detection.
-   * @type {{ top: number, right: number, bottom: number, left: number }}
    */
   offset = {
     top: 10,
@@ -33,6 +29,9 @@ class Healbottle extends DrawableObject {
     left: 20,
   };
 
+  /**
+   * Image frames for the healing bottle.
+   */
   BOTTLE_IMAGES = [
     "./img/6_salsa_bottle/heal_bottle_2.png",
     "./img/6_salsa_bottle/heal_bottle_3.png",

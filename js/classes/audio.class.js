@@ -143,7 +143,7 @@ class Audiofiles {
   /**
    * Set the current play time of the audio object to zero.
    *
-   * @param {string} objSrc The audio name;
+   * @param {string} objSrc The audio name.
    */
   resetMusic(objSrc) {
     this.music[objSrc].currentTime = 0;

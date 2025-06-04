@@ -5,25 +5,21 @@
 class Keyboard {
   /**
    * Indicates whether the right movement key is pressed.
-   * @type {boolean}
    */
   KEY_RIGHT = false;
 
   /**
    * Indicates whether the left movement key is pressed.
-   * @type {boolean}
    */
   KEY_LEFT = false;
 
   /**
    * Indicates whether the jump key is pressed.
-   * @type {boolean}
    */
   KEY_JUMP = false;
 
   /**
    * Indicates whether the shot key is pressed.
-   * @type {boolean}
    */
   KEY_SHOT = false;
 
@@ -42,33 +38,27 @@ class Keyboard {
    * Updates internal key variables based on touch start/end events.
    */
   startKeyboardTouchEvents() {
-    document
-      .getElementById("mobile-jump")
-      .addEventListener("touchstart", () => {
+    document.getElementById("mobile-jump").addEventListener("touchstart", () => {
         this.KEY_JUMP = true;
       });
 
     document
-      .getElementById("mobile-throw")
-      .addEventListener("touchstart", () => {
+      .getElementById("mobile-throw").addEventListener("touchstart", () => {
         this.KEY_SHOT = true;
       });
 
     document
-      .getElementById("mobile-left")
-      .addEventListener("touchstart", () => {
+      .getElementById("mobile-left").addEventListener("touchstart", () => {
         this.KEY_LEFT = true;
       });
 
     document
-      .getElementById("mobile-right")
-      .addEventListener("touchstart", () => {
+      .getElementById("mobile-right").addEventListener("touchstart", () => {
         this.KEY_RIGHT = true;
       });
 
     document
-      .getElementById("mobile-pause")
-      .addEventListener("touchstart", () => {
+      .getElementById("mobile-pause").addEventListener("touchstart", () => {
         if (gameHasStarted) pauseGame();
       });
 
@@ -154,7 +144,7 @@ class Keyboard {
   preventDefaultKeys() {
     document.querySelectorAll("svg, img").forEach((element) => {
       element.setAttribute("draggable", "false");
-    })
+    });
 
     document.querySelectorAll(".mobile-game-button").forEach((button) => {
       button.addEventListener("contextmenu", (e) => e.preventDefault());

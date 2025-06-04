@@ -5,7 +5,6 @@
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     showFullscreen();
-    // document.getElementById("canvas-wrapper").style.overflow = "hidden !important";
     setGameCanvasSizeAndButtons();
   } else {
     hideFullscreen();
@@ -22,14 +21,19 @@ function showFullscreen() {
   if (
     !navigator.userAgent.includes("iPhone") &&
     fullScreen &&
-    !document.fullscreenElement
+    !document.fullscreenElement &&
+    !document.webkitFullscreenElement &&
+    !document.mozFullScreenElement &&
+    !document.msFullscreenElement
   ) {
     if (ref.requestFullscreen) {
       ref.requestFullscreen();
+    } else if (ref.mozRequestFullScreen) {
+      ref.mozRequestFullScreen(); // Firefox
     } else if (ref.webkitRequestFullscreen) {
-      ref.webkitRequestFullscreen();
+      ref.webkitRequestFullscreen(); // Safari, ältere Chrome-Versionen
     } else if (ref.msRequestFullscreen) {
-      ref.msRequestFullscreen();
+      ref.msRequestFullscreen(); // Internet Explorer, alte Edge-Versionen
     }
   }
 }
@@ -39,8 +43,8 @@ function showFullscreen() {
  */
 function setGameCanvasSizeAndButtons() {
   canvas.style.backgroundImage = "none";
-  setTimeout(resizeDisplay, 100);
-  setTimeout(setMobileGameButtonSize, 100);
+  setTimeout(resizeDisplay, 200);
+  setTimeout(setMobileGameButtonSize, 200);
   if (fullScreen) {
     canvas.style.width = "100%";
     canvas.style.height = "100%";
@@ -52,15 +56,43 @@ function setGameCanvasSizeAndButtons() {
   }
 }
 
+
+/**
+ * Sets the game canvas to the default size of 720 x 480 px.
+ * Sets the default background.
+ */
+function setGameCanvasToDefaultSize() {
+  if (window.innerWidth < 720 || window.innerHeight < 480) {
+      canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  } else {
+      canvas.style.width = "720px";
+  canvas.style.height = "480px";
+  canvas.style.left = "0";
+  canvas.style.top = "0";
+  }
+  canvas.style.backgroundImage =
+    'url("img/9_intro_outro_screens/start/startscreen_2.png")';
+}
+
 /**
  * Exits fullscreen mode and restores the original canvas and button styles.
  */
 function hideFullscreen() {
-  if (document.fullscreenElement) {
+  if (
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement
+  ) {
     if (document.exitFullscreen) {
       document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen(); // Firefox
     } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
+      document.webkitExitFullscreen(); // Safari, ältere Chrome-Versionen
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen(); // IE11, alte Edge-Versionen
     }
   }
 }
@@ -110,18 +142,6 @@ function setMobileGameButtonSize() {
   });
 }
 
-/**
- * Sets the game canvas to the default size of 720 x 480 px.
- * Sets the default background.
- */
-function setGameCanvasToDefaultSize() {
-  canvas.style.width = "720px";
-  canvas.style.height = "480px";
-  canvas.style.left = "0";
-  canvas.style.top = "0";
-  canvas.style.backgroundImage =
-    'url("img/9_intro_outro_screens/start/startscreen_2.png")';
-}
 
 /**
  * In case that the screen size is to small for the game overlay, the fullscreen mode on is set
@@ -129,10 +149,13 @@ function setGameCanvasToDefaultSize() {
  *
  */
 function checkScreensizeForFixFullscreen() {
+  let buttonRef = document.getElementById("full-screen-button");
   if (window.innerWidth <= 720 || window.innerHeight <= 480) {
-    let buttonRef = document.getElementById("full-screen-button");
     fullScreen = true;
     buttonRef.classList.add("full-screen-button");
+  } else {
+    fullScreen = false;
+    buttonRef.classList.remove("full-screen-button");
   }
 }
 
@@ -165,13 +188,23 @@ function showJustFullscreenInfo() {
 }
 
 /**
- * Sets the screen back to fullscreen mode, if the browser tab is changed back to the game.
+ * Listens to fullscreen changes and adjusts display and controls accordingly.
  */
-window.addEventListener("focus", () => {
-  if (gameHasStarted && fullScreen && !document.fullscreenElement) {
-    showFullscreen();
-    setTimeout(resizeDisplay, 100);
-    setTimeout(setMobileGameButtonSize, 100);
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) {
+    setTimeout(setGameCanvasToDefaultSize, 200);
+    document.getElementById("canvas-wrapper").style.overflow = "auto";
+    checkScreensizeForFixFullscreen();
   }
 });
 
+/**
+ * Listens to fullscreen changes and adjusts display and controls accordingly for Firefox.
+ */
+document.addEventListener("mozfullscreenchange", () => {
+  if (!document.mozFullScreenElement) {
+    setTimeout(setGameCanvasToDefaultSize, 200);
+    document.getElementById("canvas-wrapper").style.overflow = "auto";
+    checkScreensizeForFixFullscreen();
+  }
+});

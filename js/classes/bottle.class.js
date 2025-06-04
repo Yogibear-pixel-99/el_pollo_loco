@@ -4,24 +4,20 @@
  * Inherits from {@link DrawableObject}.
  */
 class Bottle extends DrawableObject {
-  /** The height of the bottle img in pixels
-   * @type {number}
+  /** The height of the bottle img in pixels.
    */
   height = 55;
 
-  /** The width of the bottle img in pixels
-   * @type {number}
+  /** The width of the bottle img in pixels.
    */
   width = 55;
 
-  /** The score identifier name
-   * @type {string}
+  /** The score identifier name.
    */
   itemName = "collectBottle";
 
   /**
    * Offsets for the bottle hitbox used in collision detection.
-   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 10,

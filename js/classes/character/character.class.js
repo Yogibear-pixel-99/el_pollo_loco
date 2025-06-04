@@ -6,56 +6,47 @@
 class Character extends MovableObject {
   /**
    * Horizontal position where the character starts.
-   * @type {number}
    */
   x = 200;
 
   /**
    * The width of the character sprite in pixels.
-   * @type {number}
    */
   width = 95;
 
   /**
    * The height of the boss sprite in pixels.
-   * @type {number}
    */
   height = 190;
 
   /**
    * The character health.
-   * @type {number}
    */
 
   energy = 100;
 
   /**
    * The collected coins.
-   * @type {number}
    */
   coins = 0;
 
   /**
    * The collected bottles.
-   * @type {number}
    */
   bottles = 0;
 
   /**
    * If the character is idle, this variable counts up to check if character is long idle.
-   * @type {number}
    */
   idleCount = 0;
 
   /**
    * The current timestamp.
-   * @type {number}
    */
   timestamp;
 
   /**
    * Character has already killed an enemie by jumping on it.
-   * @type {boolean}
    */
   jumpKill = false;
 
@@ -66,7 +57,6 @@ class Character extends MovableObject {
 
   /**
    * The character idle variable.
-   * @type {boolean}
    */
   isIdle = false;
 
@@ -77,25 +67,21 @@ class Character extends MovableObject {
 
   /**
    * The animation interval.
-   * @type {number}
    */
   animateInterval;
 
   /**
    * The sound interval.
-   * @type {number}
    */
   soundInterval;
 
   /**
    * The move interval.
-   * @type {number}
    */
   moveInterval;
 
   /**
    * The offset from the character sprite for the collision detection.
-   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 90,
@@ -106,7 +92,6 @@ class Character extends MovableObject {
 
   /**
    * An interval config array from all character intervals.
-   * @type {string[]}
    */
   allIntervals = [
     "animateInterval",
@@ -117,7 +102,6 @@ class Character extends MovableObject {
 
   /**
    * Image frames shown when the character is walking.
-   * @type {string[]}
    */
   WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
@@ -130,7 +114,6 @@ class Character extends MovableObject {
 
   /**
    * Image frames shown when the character is jumping.
-   * @type {string[]}
    */
   JUMPING_ANIMATION = [
     "./img/2_character_pepe/3_jump/J-31.png",
@@ -146,7 +129,6 @@ class Character extends MovableObject {
 
   /**
    * Image frames shown when the character is idle.
-   * @type {string[]}
    */
   IDLE_ANIMATION = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
@@ -163,7 +145,6 @@ class Character extends MovableObject {
 
   /**
    * Image frames shown when the character is long idle.
-   * @type {string[]}
    */
   IDLE_LONG_ANIMATION = [
     "./img/2_character_pepe/1_idle/long_idle/I-11.png",
@@ -180,7 +161,6 @@ class Character extends MovableObject {
 
   /**
    * Image frames shown when the character is dead.
-   * @type {string[]}
    */
   DEAD_ANIMATION = [
     "./img/2_character_pepe/5_dead/D-51.png",
@@ -194,7 +174,6 @@ class Character extends MovableObject {
 
   /**
    * Image frames shown when the character is hurt.
-   * @type {string[]}
    */
   HURT_ANIMATION = [
     "./img/2_character_pepe/4_hurt/H-41.png",

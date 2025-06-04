@@ -5,7 +5,6 @@
 class BackgroundLayer extends MovableObject {
   /**
    * The vertical position of the background layer.
-   * @type {number}
    */
   y = 0;
 

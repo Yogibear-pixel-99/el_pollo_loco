@@ -18,7 +18,7 @@ function getStoryTemp() {
                       toward the sound of that chicken...
                 </p>
                 <p>
-El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the boss fight. Defeat the boss to finish the game.
+El Pollo Loco is a 2D jump 'n' run platformer. Collect ten coins to trigger the boss fight (except "chicken rush mode"). Defeat the boss to finish the game.
             </p></div>`;
 }
 

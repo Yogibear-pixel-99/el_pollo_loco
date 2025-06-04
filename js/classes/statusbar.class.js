@@ -5,13 +5,11 @@
 class Statusbar extends DrawableObject {
   /**
    * Width of the status bar.
-   * @type {number}
    */
   width = 200;
 
   /**
    * Height of the status bar.
-   * @type {number}
    */
   height = 50;
 

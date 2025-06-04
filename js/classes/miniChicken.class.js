@@ -4,25 +4,39 @@
  * including random speed, size adjustments for game modes, and scoring identifiers.
  */
 class Minichicken extends Enemies {
-  /** @type {number} */
+    /**
+   * The height of the mini chicken sprite in pixels.
+   */
   height = 35;
 
-  /** @type {number} */
+  /**
+   * The width of the mini chicken sprite in pixels.
+   */
   width = 35;
 
-  /** @type {number} */
+  /**
+   * The walking speed, generated random between two numbers.
+   */
   walkingSpeed = Math.random() * (0.5 - 0.1) + 0.1;
 
-  /** @type {string} */
+  /**
+   * The dead sprite.
+   */
   deadPic = "./img/3_enemies_chicken/chicken_small/2_dead/dead.png";
 
-  /** Score identifier for jumping on this enemy */
+  /**
+   * The jump kill score name for the points table.
+   */
   scoreNameJump = "miniChickenJumpKill";
 
-  /** Score identifier for hitting with a bottle */
+  /**
+   * The bottle kill score name for the points table.
+   */
   scoreNameBottle = "miniChickenBottleHit";
 
-  /** @type {{ top: number, right: number, bottom: number, left: number }} */
+  /**
+   * The offset from the sprite for the collision detection.
+   */
   offset = {
     top: 8,
     right: 2,
@@ -31,7 +45,6 @@ class Minichicken extends Enemies {
   };
 
   /** The frames of the walking animation.
-   * @type {string[]}
    */
   WALKING_ANIMATION = [
     "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
@@ -40,22 +53,22 @@ class Minichicken extends Enemies {
   ];
 
   /**
-   * Constructs a new Minichicken enemy at a given x position.
-   * @param {number} x - The starting x position of the mini chicken.
+   * Creates an instance of miniChicken.
+   * In rush mode: randomizes size, speed, and vertical position.
+   * Sets initial image and animation frames.
+   * Ensures a horizontal start position beyond 400.
+   * Starts enemy behavior and animations.
+   *
+   * @param {number} x - Initial horizontal position.
    */
   constructor(x) {
     super();
     this.getChickenForRushMode();
     this.loadImage("./img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
-
-    // Set random vertical placement slightly above the floor
     this.y = this.floorPosition() - (Math.random() * 8 - 1);
-
-    // Shift chickens right if spawning too early
     if (x < 400) {
       x = x + 700;
     }
-
     this.x = x;
     this.loadImagesArray(this.WALKING_ANIMATION);
     this.startEnemy();
@@ -72,8 +85,6 @@ class Minichicken extends Enemies {
       this.width = size;
       this.height = size;
       this.walkingSpeed = speed;
-
-      // Update Y position after size change
       this.y = this.floorPosition() - (Math.random() * 8 - 1);
     }
   }

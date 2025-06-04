@@ -5,22 +5,18 @@
  */
 class Thrownbottle extends MovableObject {
   /** Width of the thrown bottle.
-   * @type {number}
    */
   width = 80;
 
   /** Height of the thrown bottle.
-   * @type {number}
    */
   height = 80;
 
   /** Vertical speed for gravity effects.
-   * @type {number}
    */
   speedY = 20;
 
   /** Horizontal speed when thrown.
-   * @type {number}
    */
   throwSpeedX = 3.7;
 
@@ -30,32 +26,26 @@ class Thrownbottle extends MovableObject {
   walkingSpeed = this.walkingSpeed;
 
   /** Indicates if the bottle has already hit something.
-   * @type {number}
    */
   alreadyHittet = false;
 
   /** Interval ID for gravity application.
-   * @type {number}
    */
   gravityInterval;
 
   /** Interval ID for horizontal movement.
-   * @type {number}
    */
   moveBottleInterval_x;
 
   /** Interval ID for throwing animation.
-   * @type {number}
    */
   throwInAnimationInterval;
 
   /** The bottle missed score name for the points table.
-   * @type {string}
    */
   itemName = "bottleMissed";
 
   /** Collision box offset.
-   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 20,
@@ -66,7 +56,6 @@ class Thrownbottle extends MovableObject {
 
   /**
    * Image frames for the bottle throw right animation.
-   * @type {string[]}
    */
   BOTTLE_THROW_ANIMATION_RIGHT = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_1.png",
@@ -81,7 +70,6 @@ class Thrownbottle extends MovableObject {
 
   /**
    * Image frames for the bottle throw left animation.
-   * @type {string[]}
    */
   BOTTLE_THROW_ANIMATION_LEFT = [
     "./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation_New_8.png",
@@ -96,7 +84,6 @@ class Thrownbottle extends MovableObject {
 
   /**
    * Image frames for the bottle splash animation.
-   * @type {string[]}
    */
   BOTTLE_SPLASH_ANIMATION = [
     "./img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",

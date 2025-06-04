@@ -12,38 +12,32 @@ class Enemies extends MovableObject {
 
   /**
    * Indicates if the enemy was hit.
-   * @type {boolean}
    */
   wasHittet = false;
 
   /**
    * Walking speed of the enemy.
-   * @type {number}
    */
   walkingSpeed = 1;
 
   /**
    * Gravity acceleration value.
-   * @type {number}
    */
   acceleration = 2;
 
   /**
    * Vertical speed used in gravity and jump movement.
-   * @type {number}
    */
   speedY = 0;
 
   /**
    * Indicates if the enemy is alive.
-   * @type {boolean}
    */
   lives = true;
 
   /**
    * Indicates direction of movement.
    * True if facing left.
-   * @type {boolean}
    */
   otherDirection = false;
 
@@ -60,13 +54,11 @@ class Enemies extends MovableObject {
 
   /**
    * Interval ID for movement logic.
-   * @type {number}
    */
   moveInterval;
 
   /**
    * Interval ID for walking animation.
-   * @type {number}
    */
   walkAnimationInterval;
 

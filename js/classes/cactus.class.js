@@ -4,22 +4,20 @@
  * Inherits from {@link DrawableObject}.
  */
 class Cactus extends DrawableObject {
-  /** The height of the cactus img in pixels
-   * @type {number}
+  /** The height of the cactus img in pixels.
    */
   height = 200;
 
-  /** The width of the cactus img in pixels
-   * @type {number}
+  /** The width of the cactus img in pixels.
    */
   width = 50;
 
-  /** Horizontal position
+  /** Horizontal position.
    * @type {number}
    */
   x;
 
-  /** Vertical position
+  /** Vertical position.
    * @type {number}
    */
   y;

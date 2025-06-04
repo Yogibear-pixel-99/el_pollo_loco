@@ -5,25 +5,21 @@
 class Coin extends DrawableObject {
   /**
    * Height of the coin sprite in pixels.
-   * @type {number}
    */
   height = 100;
 
   /**
    * Width of the coin sprite in pixels.
-   * @type {number}
    */
   width = 100;
 
   /**
    * Indicates if the coin has been collected.
-   * @type {boolean}
    */
   collected = false;
 
   /**
    * Name used for scoring or event handling when collected.
-   * @type {string}
    */
   itemName = "collectCoin";
 
@@ -41,7 +37,6 @@ class Coin extends DrawableObject {
 
   /**
    * Offset values for collision detection.
-   * @type {{top: number, right: number, bottom: number, left: number}}
    */
   offset = {
     top: 35,
@@ -52,7 +47,6 @@ class Coin extends DrawableObject {
 
   /**
    * Image frames for the rotating coin animation.
-   * @type {string[]}
    */
   COIN_ANIMATION = [
     "./img/8_coin/coin_1.png",
@@ -73,7 +67,6 @@ class Coin extends DrawableObject {
 
   /**
    * Image frames shown when the coin is collected.
-   * @type {string[]}
    */
   COLLECTED_COIN_ANIMATION = [
     "./img/8_coin/collected/coin_collect_2.png",

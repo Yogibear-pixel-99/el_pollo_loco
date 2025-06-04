@@ -4,17 +4,17 @@
  * Inherits from {@link Statusbar}.
  */
 class Bottlebar extends Statusbar {
-  /** Horizontal position
-   * @type {number}
+  /** Horizontal position.
    */
   x = 20;
 
-  /** Vertical position
-   * @type {number}
+  /** Vertical position.
    */
   y = 50;
 
-  /** Image frames shown in the ui depending on character bottle collected. */
+  /**
+   *  Image frames shown in the ui depending on character bottle collected. 
+   */
   BOTTLE_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png",
     "./img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png",

@@ -306,12 +306,12 @@ function toggleGameMode() {
   switch (gameMode) {
     case "normal":
       ref.innerText = "Hard Mode";
-      expRef.innerText = "More chickens, more boss health";
+      expRef.innerText = "Collect 10 coins to trigger the boss";
       gameMode = "hard";
       break;
     case "hard":
       ref.innerText = "Chicken Rush";
-      expRef.innerText = "Endless chickens, no boss";
+      expRef.innerText = "Endless chickens, beat a new highscore";
       gameMode = "chickenRush";
       break;
     case "chickenRush":
