@@ -5,52 +5,11 @@
 function checkFullscreenMode() {
   if (fullScreen && gameHasStarted) {
     showFullscreen();
-    setGameCanvasSizeAndButtons();
-  } else {
-    hideFullscreen();
-    setGameCanvasToDefaultSize();
-    // document.getElementById("canvas-wrapper").style.overflow = "auto";
-  }
-}
-
-/**
- * Enters fullscreen mode and resizes the canvas and buttons.
- */
-function showFullscreen() {
-  const ref = document.getElementById("canvas-wrapper");
-  if (
-    !navigator.userAgent.includes("iPhone") &&
-    fullScreen &&
-    !document.fullscreenElement &&
-    !document.webkitFullscreenElement &&
-    !document.mozFullScreenElement &&
-    !document.msFullscreenElement
-  ) {
-    if (ref.requestFullscreen) {
-      ref.requestFullscreen();
-    } else if (ref.mozRequestFullScreen) {
-      ref.mozRequestFullScreen();
-    } else if (ref.webkitRequestFullscreen) {
-      ref.webkitRequestFullscreen();
-    } else if (ref.msRequestFullscreen) {
-      ref.msRequestFullscreen();
-    }
-  }
-}
-
-/**
- * Calculates the canvas size and the buttons size depending on screenratio.
- */
-function setGameCanvasSizeAndButtons() {
-  canvas.style.backgroundImage = "none";
-  setTimeout(resizeDisplay, 200);
-  setTimeout(setMobileGameButtonSize, 200);
+    setTimeout(resizeDisplay, 200);
   if (fullScreen) {
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-  } else {
-    canvas.style.width = "720px";
-    canvas.style.height = "480px";
+    setTimeout(setMobileGameButtonSize, 200);
+  }
+  canvas.style.backgroundImage = "none";
   }
 }
 
@@ -58,41 +17,22 @@ function setGameCanvasSizeAndButtons() {
  * Sets the game canvas to the default size of 720 x 480 px.
  * Sets the default background.
  */
-function setGameCanvasToDefaultSize() {
-  if (window.innerWidth < 720 || window.innerHeight < 480) {
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
+function setGameCanvasToDefault() {
+  if ((window.innerWidth < 720 || window.innerHeight < 480) && !fullScreen) {
+    resizeDisplay();
+    setTimeout(setMobileGameButtonSize, 200);
   } else {
-    canvas.style.width = "720px";
-    canvas.style.height = "480px";
+    setGameCanvasToDefaultSize();
+    setMobileGameButtonDefault();
   }
-  // canvas.style.transform = "translate(0, 0)";
-  // canvas.style.left = "0";
-  // canvas.style.top = "0";
-  canvas.style.backgroundImage =
-    'url("img/9_intro_outro_screens/start/startscreen_2.png")';
 }
 
 /**
- * Exits fullscreen mode and restores the original canvas and button styles.
+ * Sets the game canvas to the default width and height.
  */
-function hideFullscreen() {
-  if (
-    document.fullscreenElement ||
-    document.webkitFullscreenElement ||
-    document.mozFullScreenElement ||
-    document.msFullscreenElement
-  ) {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-  }
+function setGameCanvasToDefaultSize() {
+  canvas.style.width = "720px";
+  canvas.style.height = "480px";
 }
 
 /**
@@ -125,7 +65,6 @@ function setMobileGameButtonSize() {
   const scale = Math.min(scaleX, scaleY);
   buttonWrapper.style.width = `${scale * 700}px`;
   buttons.forEach((button) => {
-    button.style.padding = `${scale * 10}px`;
     button.style.width = `${scale * 70}px`;
     button.style.height = `${scale * 70}px`;
   });
@@ -133,6 +72,71 @@ function setMobileGameButtonSize() {
     img.style.width = `${scale * 26}px`;
     img.style.height = `${scale * 26}px`;
   });
+}
+
+/**
+ * Sets the mobile button wrapper and the buttons to the default size.
+ */
+function setMobileGameButtonDefault() {
+  let buttonWrapper = document.getElementById("mobile-buttons-wrapper");
+  let buttons = document.querySelectorAll(".mobile-game-button");
+  let buttonImg = document.querySelectorAll(".mobile-game-button svg");
+  buttonWrapper.style.width = "700px";
+  buttons.forEach((button) => {
+    button.style.width = "80px";
+    button.style.height = "70px";
+  });
+  buttonImg.forEach((img) => {
+    img.style.width = "34px";
+    img.style.height = "34px";
+  });
+}
+
+/**
+ * Enters fullscreen mode and resizes the canvas and buttons.
+ */
+function showFullscreen() {
+  const ref = document.getElementById("canvas-wrapper");
+  if (
+    !navigator.userAgent.includes("iPhone") &&
+    fullScreen &&
+    !document.fullscreenElement &&
+    !document.webkitFullscreenElement &&
+    !document.mozFullScreenElement &&
+    !document.msFullscreenElement
+  ) {
+    if (ref.requestFullscreen) {
+      ref.requestFullscreen();
+    } else if (ref.mozRequestFullScreen) {
+      ref.mozRequestFullScreen();
+    } else if (ref.webkitRequestFullscreen) {
+      ref.webkitRequestFullscreen();
+    } else if (ref.msRequestFullscreen) {
+      ref.msRequestFullscreen();
+    }
+  }
+}
+
+/**
+ * Exits fullscreen mode and restores the original canvas and button styles.
+ */
+function hideFullscreen() {
+  if (
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement
+  ) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
 }
 
 /**
@@ -155,7 +159,7 @@ function checkScreensizeForFixFullscreen() {
  * In case that the screen is large enough for a game overlay, the fullscreen button can be toggled.
  * In case the screen is to small, an error message appears that only fullscreen is possible.
  */
-function toggleFullScreen() {
+function toggleFullScreenButton() {
   let buttonRef = document.getElementById("full-screen-button");
   if (window.innerWidth <= 720 || window.innerHeight <= 480) {
     showJustFullscreenInfo();
@@ -184,12 +188,12 @@ function showJustFullscreenInfo() {
  */
 document.addEventListener("fullscreenchange", () => {
   if (!document.fullscreenElement) {
-    setTimeout(setGameCanvasToDefaultSize, 200);
-    checkScreensizeForFixFullscreen();
-      setTimeout(() => {
-        setMobileGameButtonSize();
-            document.getElementById("mobile-buttons-wrapper").style.width = "100%";
-      }, 200);
+    fullScreen = false;
+     hideFullscreen();
+    setTimeout(setGameCanvasToDefault, 200);
+    setTimeout(setMobileGameButtonDefault, 200);
+    canvas.style.backgroundImage =
+      'url("img/9_intro_outro_screens/start/startscreen_2.png")';
   }
 });
 
@@ -198,12 +202,11 @@ document.addEventListener("fullscreenchange", () => {
  */
 document.addEventListener("mozfullscreenchange", () => {
   if (!document.mozFullScreenElement) {
-    setTimeout(setGameCanvasToDefaultSize, 200);
-    checkScreensizeForFixFullscreen();
-
-        setTimeout(() => {
-        setMobileGameButtonSize();
-            document.getElementById("mobile-buttons-wrapper").style.width = "100%";
-      }, 200);
+    fullScreen = false;
+     hideFullscreen();
+    setTimeout(setGameCanvasToDefault, 200);
+    setTimeout(setMobileGameButtonDefault, 200);
+    canvas.style.backgroundImage =
+      'url("img/9_intro_outro_screens/start/startscreen_2.png")';
   }
 });
