@@ -214,3 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
     showCursor();
   });
 });
+
+function setFullHeight() {
+  const height = window.innerHeight;
+  document.querySelector(".full-height").style.height = `${height}px`;
+}
+
+window.addEventListener("load", setFullHeight);
+window.addEventListener("resize", setFullHeight);

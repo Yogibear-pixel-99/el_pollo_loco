@@ -174,3 +174,4 @@ window.addEventListener("focus", () => {
     setTimeout(setMobileGameButtonSize, 100);
   }
 });
+
