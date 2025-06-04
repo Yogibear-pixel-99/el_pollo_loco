@@ -47,5 +47,4 @@ class BackgroundLayer extends MovableObject {
     this.xFactor = xFactor;
     this.x = x;
   }
-  
 }

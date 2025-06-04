@@ -10,18 +10,6 @@ class DrawableObject {
   floorHeight = 58;
 
   /**
-   * Interval ID for animation loop.
-   * @type {number}
-   */
-  animateInterval;
-
-  /**
-   * Interval ID for movement loop.
-   * @type {number}
-   */
-  moveInterval;
-
-  /**
    * Current image to be drawn.
    * @type {HTMLImageElement}
    */
@@ -73,6 +61,18 @@ class DrawableObject {
    * @type {boolean}
    */
   otherDirection = false;
+
+  /**
+   * Interval ID for animation loop.
+   * @type {number}
+   */
+  animateInterval;
+
+  /**
+   * Interval ID for movement loop.
+   * @type {number}
+   */
+  moveInterval;
 
   /**
    * Checks if the collision comes from above.

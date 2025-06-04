@@ -110,7 +110,7 @@ function initSoundSettings() {
 /**
  * Handles the appearance of the sound button in settings.
  */
-function setSoundButton(){
+function setSoundButton() {
   let soundOnRef = document.getElementById("sound-on");
   let soundOffRef = document.getElementById("sound-off");
   if (sfxMute === false) {
@@ -122,10 +122,10 @@ function setSoundButton(){
   }
 }
 
-function setMusicButton(){
+function setMusicButton() {
   let musicOnRef = document.getElementById("music-on");
   let musicOffRef = document.getElementById("music-off");
-    if (musicMute === false) {
+  if (musicMute === false) {
     musicOnRef.classList.add("selected");
     musicOffRef.classList.remove("selected");
   } else {
@@ -133,8 +133,6 @@ function setMusicButton(){
     musicOffRef.classList.add("selected");
   }
 }
-
-
 
 /**
  * Sets the music and sound effects volume from the UI sliders and stores the values.

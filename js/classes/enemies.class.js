@@ -11,18 +11,6 @@ class Enemies extends MovableObject {
   deadPic;
 
   /**
-   * Interval ID for movement logic.
-   * @type {number}
-   */
-  moveInterval;
-
-  /**
-   * Interval ID for walking animation.
-   * @type {number}
-   */
-  walkAnimationInterval;
-
-  /**
    * Indicates if the enemy was hit.
    * @type {boolean}
    */
@@ -69,6 +57,18 @@ class Enemies extends MovableObject {
    * Interval to check if the enemies run away from the char.
    */
   runAwayInterval;
+
+  /**
+   * Interval ID for movement logic.
+   * @type {number}
+   */
+  moveInterval;
+
+  /**
+   * Interval ID for walking animation.
+   * @type {number}
+   */
+  walkAnimationInterval;
 
   /**
    * Creates an instance of Enemies.
@@ -159,7 +159,7 @@ class Enemies extends MovableObject {
 
   /**
    * Sets the enemy to the default movement.
-   * 
+   *
    * @param {boolean} activeDirection - The other direction boolean before the run away move starts.
    */
   setEnemyToDefault(activeDirection) {

@@ -22,18 +22,12 @@ function startGameIntervals() {
  * - Clears any existing coins in the level.
  */
 function configChickenRushMode() {
-  audio.pauseMusic('menuMusic');
+  audio.pauseMusic("menuMusic");
   let level = initChickenRushLevel();
-  world = new World(
-    canvas,
-    keyboard,
-    pointConfig,
-    audio,
-    level
-  );
+  world = new World(canvas, keyboard, pointConfig, audio, level);
   world.level.endboss.x = 720 * 6;
-  audio.resetMusic('chickenRushMusic');
-  audio.playMusicLoop('chickenRushMusic');
+  audio.resetMusic("chickenRushMusic");
+  audio.playMusicLoop("chickenRushMusic");
   world.level.coins.splice(0, world.level.coins.length);
 }
 
@@ -48,15 +42,9 @@ function configChickenRushMode() {
  * - Starts looping normal mode music.
  */
 function configNormalMode() {
-  audio.pauseMusic('menuMusic');
+  audio.pauseMusic("menuMusic");
   let level = initNormalLevel();
-  world = new World(
-    canvas,
-    keyboard,
-    pointConfig,
-    audio,
-    level,
-  );
+  world = new World(canvas, keyboard, pointConfig, audio, level);
   world.level.endboss.energy = 50;
   world.level.endboss.maxEnergy = 50;
   world.character.energy = 100;
@@ -64,14 +52,18 @@ function configNormalMode() {
   chickenSpawnInterval = setInterval(() => {
     if (world.level.enemies.length <= 10 && !gamePaused) {
       world.level.enemies.push(
-        new Minichicken(world.character.x + canvasWidth * Math.ceil((Math.random() + 1))),
-        new Chicken(world.character.x + canvasWidth * Math.ceil((Math.random() + 1)))
+        new Minichicken(
+          world.character.x + canvasWidth * Math.ceil(Math.random() + 1)
+        ),
+        new Chicken(
+          world.character.x + canvasWidth * Math.ceil(Math.random() + 1)
+        )
       );
     }
   }, 10000);
 
-  audio.resetMusic('normalModeMusic');
-  audio.playMusicLoop('normalModeMusic');
+  audio.resetMusic("normalModeMusic");
+  audio.playMusicLoop("normalModeMusic");
 }
 
 /**
@@ -85,15 +77,9 @@ function configNormalMode() {
  * - Starts looping normal mode music.
  */
 function configHardMode() {
-  audio.pauseMusic('menuMusic');
+  audio.pauseMusic("menuMusic");
   let level = initHardLevel();
-  world = new World(
-    canvas,
-    keyboard,
-    pointConfig,
-    audio,
-    level
-  );
+  world = new World(canvas, keyboard, pointConfig, audio, level);
   world.level.endboss.energy = 100;
   world.level.endboss.maxEnergy = 100;
 
@@ -106,7 +92,6 @@ function configHardMode() {
     }
   }, 4000);
 
-  audio.resetMusic('normalModeMusic');
-  audio.playMusicLoop('normalModeMusic');
+  audio.resetMusic("normalModeMusic");
+  audio.playMusicLoop("normalModeMusic");
 }
-

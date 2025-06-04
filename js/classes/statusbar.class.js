@@ -3,15 +3,15 @@
  * Inherits from {@link DrawableObject}
  */
 class Statusbar extends DrawableObject {
-  /** 
+  /**
    * Width of the status bar.
-   * @type {number} 
+   * @type {number}
    */
   width = 200;
 
-  /** 
+  /**
    * Height of the status bar.
-   * @type {number} 
+   * @type {number}
    */
   height = 50;
 

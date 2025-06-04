@@ -30,7 +30,7 @@ async function deleteIfMoreThan100Scores() {
  */
 async function fetchHighscores() {
   try {
-    let response = await fetch(MAIN_URL + gameMode + '/.json');
+    let response = await fetch(MAIN_URL + gameMode + "/.json");
     if (!response.ok) {
       throw new Error();
     } else {
@@ -40,7 +40,7 @@ async function fetchHighscores() {
       }
     }
   } catch (error) {
-    console.log('Highscore fetch error: ' + error);
+    console.log("Highscore fetch error: " + error);
   }
 }
 
@@ -71,8 +71,8 @@ async function putHighscoreToApi() {
  * @returns {Promise<void>}
  */
 async function saveScore() {
-  let scoreRef = document.getElementById('player-score');
-  let playerNameRef = document.getElementById('player-name-input');
+  let scoreRef = document.getElementById("player-score");
+  let playerNameRef = document.getElementById("player-name-input");
   let payload = {
     name: playerNameRef.value,
     score: scoreRef.innerText,

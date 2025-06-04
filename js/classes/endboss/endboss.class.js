@@ -10,7 +10,6 @@ class Endboss extends Enemies {
    */
   height = 300;
 
-  
   /**
    * The width of the boss sprite in pixels.
    * @type {number}
@@ -22,18 +21,6 @@ class Endboss extends Enemies {
    * @type {number}
    */
   walkingSpeed = 1.3;
-
-  /**
-   * Score identifier when the boss is killed.
-   * @type {string}
-   */
-  scoreNameKilled = "endbossKilled";
-
-  /**
-   * Score identifier when the boss is hit by a bottle.
-   * @type {string}
-   */
-  scoreNameBottle = "endbossBottleHit";
 
   /**
    * Vertical position based on floor and sprite height.
@@ -84,6 +71,48 @@ class Endboss extends Enemies {
   attackAnimationNr = 0;
 
   /**
+   * Score identifier when the boss is killed.
+   * @type {string}
+   */
+  scoreNameKilled = "endbossKilled";
+
+  /**
+   * Score identifier when the boss is hit by a bottle.
+   * @type {string}
+   */
+  scoreNameBottle = "endbossBottleHit";
+
+  /**
+   * Indicates if the boss is currently walking.
+   * @type {boolean}
+   */
+  isWalking = false;
+
+  /**
+   * Indicates if the boss is still alive.
+   * @type {boolean}
+   */
+  lives = true;
+
+  /**
+   * True when the boss fight has been triggered.
+   * @type {boolean}
+   */
+  isTriggered = false;
+
+  /**
+   * Animation cycle duration for switching frames (ms).
+   * @type {number}
+   */
+  animationCycle = 170;
+
+  /**
+   * Interval cycle for boss movement logic (ms).
+   * @type {number}
+   */
+  moveCycle = 30;
+
+  /**
    * Interval ID for the boss animation loop.
    * @type {number}
    */
@@ -114,22 +143,10 @@ class Endboss extends Enemies {
   gravityInterval;
 
   /**
-   * Indicates if the boss is currently walking.
-   * @type {boolean}
+   * Names of all intervals for normal movement and animation.
+   * @type {string[]}
    */
-  isWalking = false;
-
-  /**
-   * Indicates if the boss is still alive.
-   * @type {boolean}
-   */
-  lives = true;
-
-  /**
-   * True when the boss fight has been triggered.
-   * @type {boolean}
-   */
-  isTriggered = false;
+  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
 
   /**
    * Offsets for the boss hitbox used in collision detection.
@@ -156,24 +173,6 @@ class Endboss extends Enemies {
       y: this.y + 45,
     };
   }
-
-  /**
-   * Names of all intervals for normal movement and animation.
-   * @type {string[]}
-   */
-  allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
-
-  /**
-   * Animation cycle duration for switching frames (ms).
-   * @type {number}
-   */
-  animationCycle = 170;
-
-  /**
-   * Interval cycle for boss movement logic (ms).
-   * @type {number}
-   */
-  moveCycle = 30;
 
   /**
    * Image frames for the boss's walking animation.
@@ -341,8 +340,6 @@ class Endboss extends Enemies {
   bossMoveRight() {
     this.x = this.x + 1;
   }
-
-
 
   /**
    * Reduces the health from the boss and saves the time to a variable at this time.

@@ -23,16 +23,57 @@ class Character extends MovableObject {
   height = 190;
 
   /**
+   * The character health.
+   * @type {number}
+   */
+
+  energy = 100;
+
+  /**
+   * The collected coins.
+   * @type {number}
+   */
+  coins = 0;
+
+  /**
+   * The collected bottles.
+   * @type {number}
+   */
+  bottles = 0;
+
+  /**
+   * If the character is idle, this variable counts up to check if character is long idle.
+   * @type {number}
+   */
+  idleCount = 0;
+
+  /**
+   * The current timestamp.
+   * @type {number}
+   */
+  timestamp;
+
+  /**
    * Character has already killed an enemie by jumping on it.
    * @type {boolean}
    */
   jumpKill = false;
 
   /**
-   * The character health.
-   * @type {number}
+   * A boolean to check if a bottle is already thrown.
    */
-  energy = 100;
+  bottleThrown = false;
+
+  /**
+   * The character idle variable.
+   * @type {boolean}
+   */
+  isIdle = false;
+
+  /**
+   * Sets true or false, if the character is jumping.
+   */
+  isJumping = false;
 
   /**
    * The animation interval.
@@ -53,40 +94,6 @@ class Character extends MovableObject {
   moveInterval;
 
   /**
-   * An interval config array from all character intervals.
-   * @type {string[]}
-   */
-  allIntervals = [
-    "animateInterval",
-    "soundInterval",
-    "moveInterval",
-    "gravityInterval",
-  ];
-
-  /**
-   * The character idle variable.
-   * @type {boolean}
-   */
-  isIdle = false;
-
-  /**
-   * If the character is idle, this variable counts up to check if character is long idle.
-   * @type {number}
-   */
-  idleCount = 0;
-
-  /**
-   * Sets true or false, if the character is jumping.
-   */
-  isJumping = false;
-
-  /**
-   * The current timestamp.
-   * @type {number}
-   */
-  timestamp;
-
-  /**
    * The offset from the character sprite for the collision detection.
    * @type {{top: number, right: number, bottom: number, left: number}}
    */
@@ -98,21 +105,15 @@ class Character extends MovableObject {
   };
 
   /**
-   * The collected coins.
-   * @type {number}
+   * An interval config array from all character intervals.
+   * @type {string[]}
    */
-  coins = 0;
-
-  /**
-   * The collected bottles.
-   * @type {number}
-   */
-  bottles = 0;
-
-  /**
-   * A boolean to check if a bottle is already thrown.
-   */
-  bottleThrown = false;
+  allIntervals = [
+    "animateInterval",
+    "soundInterval",
+    "moveInterval",
+    "gravityInterval",
+  ];
 
   /**
    * Image frames shown when the character is walking.

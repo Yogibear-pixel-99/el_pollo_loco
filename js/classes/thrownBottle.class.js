@@ -64,7 +64,7 @@ class Thrownbottle extends MovableObject {
     left: 20,
   };
 
-    /**
+  /**
    * Image frames for the bottle throw right animation.
    * @type {string[]}
    */

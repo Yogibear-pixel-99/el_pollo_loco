@@ -398,23 +398,4 @@ function showGameOverScreen() {
     : showSingleContainerById("canvas-lost-container");
 }
 
-
-// sort all the variables in the classes and group them
-
-// fix fullscreen bug, if tab is changed and back.
-
-// check fullscreen in all browsere --- SAFARI IS MISSING and IPHONE OS
-// check scrollbars in all browseres and container
-
-
-// documentation
-
-// Shorten all functions
-
-// MOBILE BUTTONS HEIGHT IN OVERLAY MODE- NOT FULLSCREEN
-
-// shorten functions and JS files
-
-// character neu docu jsdoc
-
-// still bottle problem at gamestart - is collected - xüpositon
+// overflow hidden for the canvas in game mode.

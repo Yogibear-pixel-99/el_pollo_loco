@@ -41,25 +41,35 @@ class Keyboard {
    * Updates internal key variables based on touch start/end events.
    */
   startKeyboardTouchEvents() {
-    document.getElementById("mobile-jump").addEventListener("touchstart", () => {
-      this.KEY_JUMP = true;
-    });
+    document
+      .getElementById("mobile-jump")
+      .addEventListener("touchstart", () => {
+        this.KEY_JUMP = true;
+      });
 
-    document.getElementById("mobile-throw").addEventListener("touchstart", () => {
-      this.KEY_SHOT = true;
-    });
+    document
+      .getElementById("mobile-throw")
+      .addEventListener("touchstart", () => {
+        this.KEY_SHOT = true;
+      });
 
-    document.getElementById("mobile-left").addEventListener("touchstart", () => {
-      this.KEY_LEFT = true;
-    });
+    document
+      .getElementById("mobile-left")
+      .addEventListener("touchstart", () => {
+        this.KEY_LEFT = true;
+      });
 
-    document.getElementById("mobile-right").addEventListener("touchstart", () => {
-      this.KEY_RIGHT = true;
-    });
+    document
+      .getElementById("mobile-right")
+      .addEventListener("touchstart", () => {
+        this.KEY_RIGHT = true;
+      });
 
-    document.getElementById("mobile-pause").addEventListener("touchstart", () => {
-      if (gameHasStarted) pauseGame();
-    });
+    document
+      .getElementById("mobile-pause")
+      .addEventListener("touchstart", () => {
+        if (gameHasStarted) pauseGame();
+      });
 
     document.getElementById("mobile-jump").addEventListener("touchend", () => {
       this.KEY_JUMP = false;
@@ -139,12 +149,16 @@ class Keyboard {
   /**
    * Prevents the default context menu on phones touch longpress.
    */
-  preventDefaultKeys(){
-    document.querySelectorAll('.mobile-game-button').forEach(button => {
-  button.addEventListener('contextmenu', (e) => e.preventDefault());
-  button.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-  }, { passive: false });
-});
+  preventDefaultKeys() {
+    document.querySelectorAll(".mobile-game-button").forEach((button) => {
+      button.addEventListener("contextmenu", (e) => e.preventDefault());
+      button.addEventListener(
+        "touchstart",
+        (e) => {
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+    });
   }
 }

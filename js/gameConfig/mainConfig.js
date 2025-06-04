@@ -185,54 +185,54 @@ function backToMainMenu() {
   audio.playSound("menuClick");
 }
 
-  /**
-   * Stops all game-related intervals and animation frames.
-   * Used for pausing or ending the game.
-   */
-  function stopAllGameIntervals() {
-    cancelAnimationFrame(world.drawInterval);
-    world.character.stopAllCharIntervals();
-    world.level.enemies.forEach((enemy) => {
-      enemy.stopAllEnemyIntervals();
-    });
-    world.level.endboss.stopAllBossIntervals();
-    clearInterval(world.level.endboss.moveDirectionInterval);
-    clearInterval(world.level.endboss.gravityInterval);
-    world.thrownBottles.forEach((bottle) => {
-      clearInterval(bottle.gravityInterval);
-    });
-    world.level.coins.forEach((coin) => {
-      clearInterval(coin.coinInterval);
-    });
-    clearInterval(world.collisionInterval);
-    clearInterval(world.worldInterval);
-    clearInterval(chickenSpawnInterval);
-    world.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
-  }
+/**
+ * Stops all game-related intervals and animation frames.
+ * Used for pausing or ending the game.
+ */
+function stopAllGameIntervals() {
+  cancelAnimationFrame(world.drawInterval);
+  world.character.stopAllCharIntervals();
+  world.level.enemies.forEach((enemy) => {
+    enemy.stopAllEnemyIntervals();
+  });
+  world.level.endboss.stopAllBossIntervals();
+  clearInterval(world.level.endboss.moveDirectionInterval);
+  clearInterval(world.level.endboss.gravityInterval);
+  world.thrownBottles.forEach((bottle) => {
+    clearInterval(bottle.gravityInterval);
+  });
+  world.level.coins.forEach((coin) => {
+    clearInterval(coin.coinInterval);
+  });
+  clearInterval(world.collisionInterval);
+  clearInterval(world.worldInterval);
+  clearInterval(chickenSpawnInterval);
+  world.level.skyObjects.forEach((cloud) => cloud.cancelAutoMove());
+}
 
-  /**
-   * Continues game intervals after a pause or resume.
-   */
-  function continueGameIntervals() {
-    world.draw();
-    world.character.startChar();
-    world.level.endboss.bossMoveDirection();
-    world.level.endboss.applyGravity();
-    world.runCollisions();
-    world.runWorldIntervals();
-    world.level.enemies.forEach((enemy) => {
-      enemy.startEnemy();
-    });
-    if (world.level.endboss.isTriggered) {
-      world.level.endboss.startBossIntervals();
-    }
-    world.level.skyObjects.forEach((cloud) => {
-      cloud.autoMoveLeft();
-    });
-    world.thrownBottles.forEach((bottle) => {
-      bottle.applyBottleGravity();
-    });
-    world.level.coins.forEach((coin) => {
-      coin.animate();
-    });
+/**
+ * Continues game intervals after a pause or resume.
+ */
+function continueGameIntervals() {
+  world.draw();
+  world.character.startChar();
+  world.level.endboss.bossMoveDirection();
+  world.level.endboss.applyGravity();
+  world.runCollisions();
+  world.runWorldIntervals();
+  world.level.enemies.forEach((enemy) => {
+    enemy.startEnemy();
+  });
+  if (world.level.endboss.isTriggered) {
+    world.level.endboss.startBossIntervals();
   }
+  world.level.skyObjects.forEach((cloud) => {
+    cloud.autoMoveLeft();
+  });
+  world.thrownBottles.forEach((bottle) => {
+    bottle.applyBottleGravity();
+  });
+  world.level.coins.forEach((coin) => {
+    coin.animate();
+  });
+}

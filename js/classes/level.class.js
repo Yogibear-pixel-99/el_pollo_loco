@@ -10,73 +10,71 @@ class Level {
    */
   coins;
 
-  /** 
+  /**
    * The coins that have been collected.
-   * @type {Coin[]} 
+   * @type {Coin[]}
    */
   collectedCoins = [];
 
-  /** 
+  /**
    * Throwable bottles.
-   * @type {ThrowableObject[]} 
+   * @type {ThrowableObject[]}
    */
   bottles;
 
-  /** 
+  /**
    * Health bottles available in the level.
-   * @type {Healbottle[]} 
+   * @type {Healbottle[]}
    */
   healBottles;
 
-  /** 
+  /**
    * Enemies in the level.
-   * @type {Enemies[]} 
+   * @type {Enemies[]}
    */
   enemies;
 
-  /** 
+  /**
    * Enemies that have been killed.
-   * @type {Enemies[]} 
+   * @type {Enemies[]}
    */
   deadEnemies = [];
 
-  /** 
+  /**
    * The endboss of the level.
-   * @type {Endboss} 
+   * @type {Endboss}
    */
   endboss;
 
-  /** 
+  /**
    * Sky objects like clouds.
-   * @type {Clouds[]} 
+   * @type {Clouds[]}
    */
   skyObjects;
 
-  /** 
+  /**
    * Background layers for the level.
-   * @type {BackgroundLayer[]} 
+   * @type {BackgroundLayer[]}
    */
   backgrounds;
 
-  /** 
+  /**
    * X coordinate where the level ends.
-   * @type {number} 
+   * @type {number}
    */
   level_end_x;
 
-  /** 
+  /**
    * Size of the level.
-   * @type {number} 
+   * @type {number}
    */
   level_size = 6;
 
-  /** 
+  /**
    * Object representing the beginning and end of the level.
-   * @type {Cactus[]} 
+   * @type {Cactus[]}
    */
   level_end_cactus;
-
-
 
   /**
    * Constructs a new level with the provided parameters.
@@ -99,7 +97,7 @@ class Level {
     clouds,
     backgrounds,
     level_end_x,
-    level_end_cactus,
+    level_end_cactus
   ) {
     this.coins = coins;
     this.bottles = bottles;
@@ -222,7 +220,12 @@ class Level {
       Math.random() * (canvasWidth * (lvlIndex + 1) - canvasWidth * lvlIndex) +
       canvasWidth * lvlIndex;
 
-    if ((x > this.level_end_x || (x > 100 && x < 300)) || (x < -100 || x > this.level_end_x)) {
+    if (
+      x > this.level_end_x ||
+      (x > 100 && x < 300) ||
+      x < -100 ||
+      x > this.level_end_x
+    ) {
       return this.getXForCoins(lvlIndex);
     } else {
       return x;
@@ -237,7 +240,7 @@ class Level {
     return Math.random() * (canvasHeight - 158 - 130) + 130;
   }
 
-    /**
+  /**
    * Spawns new chickens in chickenRush mode after enemy death.
    * @param {Enemy} enemy - The enemy that was killed.
    */
