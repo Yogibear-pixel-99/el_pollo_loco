@@ -29,11 +29,11 @@ function showFullscreen() {
     if (ref.requestFullscreen) {
       ref.requestFullscreen();
     } else if (ref.mozRequestFullScreen) {
-      ref.mozRequestFullScreen(); // Firefox
+      ref.mozRequestFullScreen();
     } else if (ref.webkitRequestFullscreen) {
-      ref.webkitRequestFullscreen(); // Safari, ältere Chrome-Versionen
+      ref.webkitRequestFullscreen();
     } else if (ref.msRequestFullscreen) {
-      ref.msRequestFullscreen(); // Internet Explorer, alte Edge-Versionen
+      ref.msRequestFullscreen();
     }
   }
 }
@@ -88,11 +88,11 @@ function hideFullscreen() {
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen(); // Firefox
+      document.mozCancelFullScreen();
     } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen(); // Safari, ältere Chrome-Versionen
+      document.webkitExitFullscreen();
     } else if (document.msExitFullscreen) {
-      document.msExitFullscreen(); // IE11, alte Edge-Versionen
+      document.msExitFullscreen();
     }
   }
 }
@@ -127,8 +127,8 @@ function setMobileGameButtonSize() {
   let buttonWrapper = document.getElementById("mobile-buttons-wrapper");
   let buttons = document.querySelectorAll(".mobile-game-button");
   let buttonImg = document.querySelectorAll(".mobile-game-button svg");
-  const scaleX = window.innerWidth / 720; // 1
-  const scaleY = window.innerHeight / 480; // 1
+  const scaleX = window.innerWidth / 720;
+  const scaleY = window.innerHeight / 480;
   const scale = Math.min(scaleX, scaleY);
   buttonWrapper.style.width = `${scale * 700}px`;
   buttons.forEach((button) => {

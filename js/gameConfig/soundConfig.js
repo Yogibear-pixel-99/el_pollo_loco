@@ -77,7 +77,6 @@ function checkArrayAndSetMuteAndVol(audio, mute, vol) {
  */
 function toggleSoundsOnOff() {
   sfxMute ? (sfxMute = false) : (sfxMute = true);
-  console.log(sfxMute);
   assignMuteAndVolume("sfx", sfxMute, sfxVolume);
   localStorage.setItem("sfxMute", sfxMute.toString());
   initSoundSettings();
