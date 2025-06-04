@@ -22,11 +22,11 @@ function attack(boss) {
  * @returns {void}
  */
 function jumpAttack(boss) {
-  if (boss.gamePaused) return;
   boss.attackAnimationNr = Math.ceil(Math.random() * 3) * 5 + 10;
   boss.attackCount = 0;
   boss.animationCount = 0;
   boss.jumpAttackInterval = setInterval(() => {
+    if (gamePaused) return;
     if (boss.isDead()) {
       clearJumpAttack(boss);
     }
@@ -125,7 +125,6 @@ function clearJumpAttack(boss) {
  * @returns {void}
  */
 function bossAttackMovement(boss) {
-  if (gamePaused) return;
   let count = 0;
   let interval;
   if (!boss.aboveGround()) {

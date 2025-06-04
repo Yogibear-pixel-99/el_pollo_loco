@@ -110,6 +110,7 @@ class Coin extends DrawableObject {
    */
   animate() {
     this.coinInterval = setInterval(() => {
+      if (gamePaused) return;
       if (!this.collected) {
         this.playAnimation(this.COIN_ANIMATION);
       } else {

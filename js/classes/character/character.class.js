@@ -234,6 +234,7 @@ class Character extends MovableObject {
    */
   playSounds() {
     this.soundInterval = setInterval(() => {
+      if (gamePaused) return;
       const right = world.keyboard.KEY_RIGHT;
       const left = world.keyboard.KEY_LEFT;
       const jump = world.keyboard.KEY_JUMP;
@@ -263,6 +264,7 @@ class Character extends MovableObject {
    */
   animate() {
     this.animateInterval = setInterval(() => {
+      if (gamePaused) return;
       if (!this.characterIdle()) {
         this.idleCount = 0;
         this.resetIdleAudio();

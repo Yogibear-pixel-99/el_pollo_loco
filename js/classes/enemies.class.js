@@ -90,6 +90,7 @@ class Enemies extends MovableObject {
    */
   animateWalk() {
     this.walkAnimationInterval = setInterval(() => {
+      if (gamePaused) return;
       this.playAnimation(this.WALKING_ANIMATION);
     }, this.animationCycle);
   }
@@ -116,6 +117,7 @@ class Enemies extends MovableObject {
    */
   moveEnemy() {
     this.moveInterval = setInterval(() => {
+      if (gamePaused) return;
       if (this.otherDirection) {
         this.moveRight();
       } else {
@@ -133,6 +135,7 @@ class Enemies extends MovableObject {
     let activeDirection = this.otherDirection;
     let count = 0;
     this.runAwayInterval = setInterval(() => {
+      if (gamePaused) return;
       if (count < 20) {
         this.playAnimation(this.WALKING_ANIMATION);
         this.runToLeftOrRight();

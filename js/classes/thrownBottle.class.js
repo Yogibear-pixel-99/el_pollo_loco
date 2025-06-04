@@ -127,6 +127,7 @@ class Thrownbottle extends MovableObject {
    */
   applyBottleGravity() {
     this.gravityInterval = setInterval(() => {
+      if (gamePaused) return;
       if (this.aboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
@@ -142,6 +143,7 @@ class Thrownbottle extends MovableObject {
   animate() {
     const direction = world.character.otherDirection;
     this.throwInAnimationInterval = setInterval(() => {
+      if (gamePaused) return;
       direction
         ? this.playAnimation(this.BOTTLE_THROW_ANIMATION_LEFT)
         : this.playAnimation(this.BOTTLE_THROW_ANIMATION_RIGHT);

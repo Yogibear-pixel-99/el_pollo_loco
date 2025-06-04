@@ -172,6 +172,7 @@ class World {
    */
   runWorldIntervals() {
     this.worldInterval = setInterval(() => {
+      if (gamePaused) return;
       moveBackground();
       checkIfGameIsOver();
       audio.checkCluckerSound();
@@ -184,6 +185,7 @@ class World {
    */
   runCollisions() {
     this.collisionInterval = setInterval(() => {
+      if (gamePaused) return;
       checkEnemyCollisions();
       checkCoinCollision();
       checkBottleCollision();
@@ -282,6 +284,7 @@ class World {
     let count = 1;
     audio.playRandomSound("bottleBreak");
     let interval = setInterval(() => {
+      if (gamePaused) return;
       if (count < bottle.BOTTLE_SPLASH_ANIMATION.length) {
         bottle.playAnimationOnce(bottle.BOTTLE_SPLASH_ANIMATION, count);
         count++;

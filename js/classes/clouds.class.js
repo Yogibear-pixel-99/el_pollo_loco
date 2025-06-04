@@ -52,6 +52,10 @@ class Clouds extends MovableObject {
    */
   autoMoveLeft() {
     this.cloudsAutoMove = requestAnimationFrame(() => {
+      if (gamePaused) {
+        this.autoMoveLeft();
+        return;
+      }
       this.x -= this.speedNumber;
       if (this.x < -340 - 719) {
         this.y = (Math.random() * canvasHeight) / 5;

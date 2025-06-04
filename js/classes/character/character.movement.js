@@ -4,6 +4,7 @@
  */
 function moveDetection(char) {
   char.moveInterval = setInterval(() => {
+    if (gamePaused) return;
     if (!char.isDead()) {
       if (char.world.keyboard.KEY_JUMP === true && !char.aboveGround()) {
         jump(char);

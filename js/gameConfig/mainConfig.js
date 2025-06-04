@@ -136,7 +136,6 @@ function styleResponsiveNameInput() {
  */
 function pauseGame() {
   showCursor();
-  stopAllGameIntervals();
   gamePaused = true;
   showSingleContainerById("canvas-pause-container");
   audio.pauseSound("cluckern");
@@ -146,9 +145,8 @@ function pauseGame() {
  * Resumes the game from pause state.
  */
 function resumeGame() {
-  hideCursor();
-  continueGameIntervals();
   gamePaused = false;
+  hideCursor();
   hideSingleContainerById("canvas-pause-container");
   audio.playSound("menuClick");
 }

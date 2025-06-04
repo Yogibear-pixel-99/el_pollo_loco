@@ -287,6 +287,7 @@ class Endboss extends Enemies {
    */
   animate() {
     this.animateInterval = setInterval(() => {
+      if (gamePaused) return;
       if (this.isDead()) {
         clearInterval(this.moveInterval);
         this.endBossDead();
@@ -318,6 +319,7 @@ class Endboss extends Enemies {
    */
   move() {
     this.moveInterval = setInterval(() => {
+      if (gamePaused) return;
       if (this.isDead()) return;
       if (this.otherDirection) {
         this.bossMoveRight();
@@ -367,6 +369,7 @@ class Endboss extends Enemies {
    */
   applyGravity() {
     this.gravityInterval = setInterval(() => {
+      if (gamePaused) return;
       if (this.aboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
@@ -390,6 +393,7 @@ class Endboss extends Enemies {
    */
   bossMoveDirection() {
     this.moveDirectionInterval = setInterval(() => {
+      if (gamePaused) return;
       if (this.x < world.character.x - 200) {
         this.otherDirection = true;
       }

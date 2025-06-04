@@ -177,10 +177,10 @@ function showJustFullscreenInfo() {
 /**
  * Sets the screen back to fullscreen mode, if the browser tab is changed back to the game.
  */
-// window.addEventListener("focus", () => {
-//   if (gameHasStarted && fullScreen && !document.fullscreenElement) {
-//     showFullscreen();
-//     setTimeout(resizeDisplay, 100);
-//     setTimeout(setMobileGameButtonSize, 100);
-//   }
-// });
+window.addEventListener("focus", () => {
+  if (gameHasStarted && fullScreen && !document.fullscreenElement) {
+    showFullscreen();
+    setTimeout(resizeDisplay, 100);
+    setTimeout(setMobileGameButtonSize, 100);
+  }
+});
