@@ -27,7 +27,7 @@
 
 .settings-close-button {
   position: absolute;
-  right: 20px;
+  right: 40px;
   top: 20px;
   margin: 0 0 0 auto;
   height: 34px;
@@ -123,20 +123,16 @@
 .impressum-wrapper,
 .story-text {
   border: 20px;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #722a0d #facc8d;
   height: 100%;
 }
 
 .story-text {
-  /* padding: 20px; */
-  /* position: absolute; */
-  /* inset: 0; */
   font-family: mansalva, sans-serif;
   font-size: 28px;
   background-color: var(--settings-bg);
-  /* border-radius: 20px; */
 }
 
 .opt-wrapper {
@@ -168,7 +164,7 @@
 
 .impressum-close,
 .story-close {
-  right: 26px;
+  right: 40px;
 }
 
 .settings-wrapper {
