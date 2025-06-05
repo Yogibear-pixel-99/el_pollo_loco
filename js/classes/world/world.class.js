@@ -3,36 +3,16 @@
  * Manages the game state, objects, collisions, rendering, and game logic.
  */
 class World {
-  /**
-   * The player character.
-   * @type {Character}
-   */
   character = new Character();
-
-  /**
-   * Health bar UI component.
-   * @type {Healthbar}
-   */
   healthbar = new Healthbar();
-
-  /**
-   * Coin bar UI component.
-   * @type {Coinbar}
-   */
   coinbar = new Coinbar();
-
-  /**
-   * Bottle bar UI component.
-   * @type {Bottlebar}
-   */
   bottlebar = new Bottlebar();
-
-  /**
-   * Boss health bar UI component.
-   * @type {Bosshealthbar}
-   */
   bossHealthbar = new Bosshealthbar();
-
+  thrownBottles = [];
+  playerscore = 0;
+  gameWon = false;
+  floorHeight;
+  score = 0;
   /**
    * Audio manager for game sounds.
    * @type {object}
@@ -40,34 +20,10 @@ class World {
   audio;
 
   /**
-   * Array of bottles that have been thrown.
-   * @type {Thrownbottle[]}
-   */
-  thrownBottles = [];
-
-  /**
-   * Player's total score.
-   * @type {number}
-   */
-  playerscore = 0;
-
-  /**
    * Points table for scoring different actions.
    * @type {object}
    */
   pointTable;
-
-  /**
-   * Flag indicating if the game has been won.
-   * @type {boolean}
-   */
-  gameWon = false;
-
-  /**
-   * Height of the floor in the game world.
-   * @type {number}
-   */
-  floorHeight;
 
   /**
    * Flag if a chicken enemy is near the player.
@@ -80,24 +36,6 @@ class World {
    * @type {Level}
    */
   level;
-
-  /**
-   * Current score displayed on the screen.
-   * @type {number}
-   */
-  score = 0;
-
-  /**
-   * Interval ID for collision checking loop.
-   * @type {number}
-   */
-  collisionInterval;
-
-  /**
-   * Interval ID for world logic loop.
-   * @type {number}
-   */
-  worldInterval;
 
   /**
    * Canvas HTML element for rendering.
@@ -123,13 +61,11 @@ class World {
    */
   camera_x = 0;
 
-  /**
-   * ID for the animation frame request.
-   * @type {number}
-   */
+  collisionInterval;
+  worldInterval;
   drawInterval;
 
-    /**
+  /**
    * A config array, to draw all objects from the level to the canvas.
    * @type {String[]}
    */
@@ -318,7 +254,7 @@ class World {
    * Removes collected coins from the collectedCoins array after delay.
    */
   deleteCollectedCoin() {
-      this.level.collectedCoins.splice(0, 1);
+    this.level.collectedCoins.splice(0, 1);
   }
 
   /**

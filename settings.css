@@ -34,13 +34,12 @@
   width: 50px;
   padding: 12px;
   border-radius: 50%;
+  background-color: var(--settings-bg);
 }
 
 .settings-close-button:hover {
   background-color: var(--score-bg);
 }
-
-
 
 .story-text p {
   margin: 16px;

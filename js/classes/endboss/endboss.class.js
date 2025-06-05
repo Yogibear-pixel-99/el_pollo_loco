@@ -4,50 +4,19 @@
  * Inherits from {@link Enemies}.
  */
 class Endboss extends Enemies {
-  /**
-   * The height of the boss sprite in pixels.
-   */
+
   height = 300;
-
-  /**
-   * The width of the boss sprite in pixels.
-   */
   width = 250;
-
-  /**
-   * The walking speed.
-   */
   walkingSpeed = 1.3;
-
-  /**
-   * Vertical position based on floor and sprite height.
-   */
   y = 480 - this.height - 58 + 15;
-
-  /**
-   * Horizontal position where the boss starts.
-   */
   x = 719 * 6;
-
-  /**
-   * Health of the boss.
-   */
   energy = 50;
-
-  /**
-   * Maximum health of the boss.
-   * @type {number}
-   */
   maxEnergy;
 
   /**
    * Gravity acceleration used in jumping and falling.
    */
   acceleration = 2.5;
-
-  /**
-   * Counter for dead animation cycles.
-   */
   deadAnimationCount = 0;
 
   /**
@@ -59,69 +28,19 @@ class Endboss extends Enemies {
    * Number for attack cycles
    */
   attackAnimationNr = 0;
-
-  /**
-   * Score identifier when the boss is killed.
-   */
   scoreNameKilled = "endbossKilled";
-
-  /**
-   * Score identifier when the boss is hit by a bottle.
-   */
   scoreNameBottle = "endbossBottleHit";
-
-  /**
-   * Indicates if the boss is currently walking.
-   */
   isWalking = false;
-
-  /**
-   * Indicates if the boss is still alive.
-   */
   lives = true;
-
-  /**
-   * True when the boss fight has been triggered.
-   */
   isTriggered = false;
-
-  /**
-   * Animation cycle duration for switching frames (ms).
-   */
-  animationCycle = 170;
-
-  /**
-   * Interval cycle for boss movement logic (ms).
-   */
-  moveCycle = 30;
-
-  /**
-   * Interval ID for the boss animation loop.
-   */
   animateInterval;
-
-  /**
-   * Interval ID for boss movement loop.
-   */
   moveInterval;
-
-  /**
-   * Interval ID for the jump attack loop.
-   */
   jumpAttackInterval;
-
-  /**
-   * Interval ID for checking movement direction.
-   */
   moveDirectionInterval;
-
-  /**
-   * Interval ID for gravity simulation.
-   */
   gravityInterval;
 
   /**
-   * Names of all intervals for normal movement and animation.
+   * Config array of all intervals for normal movement and animation.
    */
   allBossIntervals = ["moveInterval", "animateInterval", "jumpAttackInterval"];
 
@@ -149,9 +68,6 @@ class Endboss extends Enemies {
     };
   }
 
-  /**
-   * Image frames for the boss's walking animation.
-   */
   WALKING_ANIMATION = [
     "./img/4_enemie_boss_chicken/1_walk/G1.png",
     "./img/4_enemie_boss_chicken/1_walk/G2.png",
@@ -159,9 +75,6 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/1_walk/G4.png",
   ];
 
-  /**
-   * Image frames shown when the boss is alert.
-   */
   ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/2_alert/G5.png",
     "./img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -173,36 +86,24 @@ class Endboss extends Enemies {
     "./img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
-  /**
-   * Image frames shown when the boss gets hit by a bottle.
-   */
   BOSS_BOTTLE_HIT_ANIMATION = [
     "./img/4_enemie_boss_chicken/4_hurt/G21.png",
     "./img/4_enemie_boss_chicken/4_hurt/G22.png",
     "./img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
-  /**
-   * Image frames shown during the boss’s death.
-   */
   BOSS_DEAD_ANIMATION = [
     "./img/4_enemie_boss_chicken/5_dead/G24.png",
     "./img/4_enemie_boss_chicken/5_dead/G25.png",
     "./img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  /**
-   * Image frames shown just before the boss jumps.
-   */
   BOSS_ATTACK_ALERT_ANIMATION = [
     "./img/4_enemie_boss_chicken/3_attack/G13.png",
     "./img/4_enemie_boss_chicken/3_attack/G14.png",
     "./img/4_enemie_boss_chicken/3_attack/G15.png",
   ];
 
-  /**
-   * Image frames shown during the boss's jump attack.
-   */
   BOSS_ATTACK_JUMP_ANIMATION = [
     "./img/4_enemie_boss_chicken/3_attack/G16.png",
     "./img/4_enemie_boss_chicken/3_attack/G17.png",

@@ -4,80 +4,21 @@
  * Inherits from {@link Enemies}.
  */
 class Character extends MovableObject {
-  /**
-   * Horizontal position where the character starts.
-   */
+
   x = 200;
-
-  /**
-   * The width of the character sprite in pixels.
-   */
   width = 95;
-
-  /**
-   * The height of the boss sprite in pixels.
-   */
   height = 190;
-
-  /**
-   * The character health.
-   */
-
   energy = 100;
-
-  /**
-   * The collected coins.
-   */
   coins = 0;
-
-  /**
-   * The collected bottles.
-   */
   bottles = 0;
-
-  /**
-   * If the character is idle, this variable counts up to check if character is long idle.
-   */
   idleCount = 0;
-
-  /**
-   * The current timestamp.
-   */
   timestamp;
-
-  /**
-   * Character has already killed an enemie by jumping on it.
-   */
   jumpKill = false;
-
-  /**
-   * A boolean to check if a bottle is already thrown.
-   */
   bottleThrown = false;
-
-  /**
-   * The character idle variable.
-   */
   isIdle = false;
-
-  /**
-   * Sets true or false, if the character is jumping.
-   */
   isJumping = false;
-
-  /**
-   * The animation interval.
-   */
   animateInterval;
-
-  /**
-   * The sound interval.
-   */
   soundInterval;
-
-  /**
-   * The move interval.
-   */
   moveInterval;
 
   /**
@@ -100,9 +41,6 @@ class Character extends MovableObject {
     "gravityInterval",
   ];
 
-  /**
-   * Image frames shown when the character is walking.
-   */
   WALKING_ANIMATION = [
     "./img/2_character_pepe/2_walk/W-21.png",
     "./img/2_character_pepe/2_walk/W-22.png",
@@ -112,9 +50,6 @@ class Character extends MovableObject {
     "./img/2_character_pepe/2_walk/W-26.png",
   ];
 
-  /**
-   * Image frames shown when the character is jumping.
-   */
   JUMPING_ANIMATION = [
     "./img/2_character_pepe/3_jump/J-31.png",
     "./img/2_character_pepe/3_jump/J-32.png",
@@ -127,9 +62,6 @@ class Character extends MovableObject {
     "./img/2_character_pepe/3_jump/J-39.png",
   ];
 
-  /**
-   * Image frames shown when the character is idle.
-   */
   IDLE_ANIMATION = [
     "./img/2_character_pepe/1_idle/idle/I-1.png",
     "./img/2_character_pepe/1_idle/idle/I-2.png",
@@ -143,9 +75,6 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
-  /**
-   * Image frames shown when the character is long idle.
-   */
   IDLE_LONG_ANIMATION = [
     "./img/2_character_pepe/1_idle/long_idle/I-11.png",
     "./img/2_character_pepe/1_idle/long_idle/I-12.png",
@@ -159,9 +88,6 @@ class Character extends MovableObject {
     "./img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
-  /**
-   * Image frames shown when the character is dead.
-   */
   DEAD_ANIMATION = [
     "./img/2_character_pepe/5_dead/D-51.png",
     "./img/2_character_pepe/5_dead/D-52.png",
@@ -172,9 +98,7 @@ class Character extends MovableObject {
     "./img/2_character_pepe/5_dead/D-57.png",
   ];
 
-  /**
-   * Image frames shown when the character is hurt.
-   */
+
   HURT_ANIMATION = [
     "./img/2_character_pepe/4_hurt/H-41.png",
     "./img/2_character_pepe/4_hurt/H-42.png",

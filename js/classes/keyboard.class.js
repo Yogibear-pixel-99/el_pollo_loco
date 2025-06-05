@@ -38,45 +38,25 @@ class Keyboard {
    * Updates internal key variables based on touch start/end events.
    */
   startKeyboardTouchEvents() {
-    document.getElementById("mobile-jump").addEventListener("touchstart", () => {
-        this.KEY_JUMP = true;
-      });
+    const keyObject = {
+      "mobile-jump": "KEY_JUMP",
+      "mobile-throw": "KEY_SHOT",
+      "mobile-left": "KEY_LEFT",
+      "mobile-right": "KEY_RIGHT",
+    };
 
-    document
-      .getElementById("mobile-throw").addEventListener("touchstart", () => {
-        this.KEY_SHOT = true;
+    for (const [id, key] of Object.entries(keyObject)) {
+      document.getElementById(id).addEventListener("touchstart", () => {
+        this[key] = true;
       });
-
-    document
-      .getElementById("mobile-left").addEventListener("touchstart", () => {
-        this.KEY_LEFT = true;
+      document.getElementById(id).addEventListener("touchend", () => {
+        this[key] = false;
       });
+    }
 
-    document
-      .getElementById("mobile-right").addEventListener("touchstart", () => {
-        this.KEY_RIGHT = true;
-      });
-
-    document
-      .getElementById("mobile-pause").addEventListener("touchstart", () => {
+    document.getElementById("mobile-pause").addEventListener("touchstart", () => {
         if (gameHasStarted) pauseGame();
       });
-
-    document.getElementById("mobile-jump").addEventListener("touchend", () => {
-      this.KEY_JUMP = false;
-    });
-
-    document.getElementById("mobile-throw").addEventListener("touchend", () => {
-      this.KEY_SHOT = false;
-    });
-
-    document.getElementById("mobile-left").addEventListener("touchend", () => {
-      this.KEY_LEFT = false;
-    });
-
-    document.getElementById("mobile-right").addEventListener("touchend", () => {
-      this.KEY_RIGHT = false;
-    });
   }
 
   /**

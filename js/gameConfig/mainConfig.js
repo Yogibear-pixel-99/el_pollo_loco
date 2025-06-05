@@ -142,6 +142,7 @@ function pauseGame() {
   showSingleContainerById("canvas-pause-container");
   audio.pauseSound("cluckern");
   audio.pauseSound("pepeLongIdle");
+  audio.pauseSound("gameAmbience");
 }
 
 /**
@@ -152,6 +153,7 @@ function resumeGame() {
   hideCursor();
   hideSingleContainerById("canvas-pause-container");
   audio.playSound("menuClick");
+  audio.playSound("gameAmbience");
 }
 
 /**
@@ -168,11 +170,14 @@ function backToMainMenu() {
   world.character.resetIdleAudio();
   document.getElementById("right-content").style.zIndex = "150";
   activateMenu();
-  hideResponsiveGameCanvas();
+  setTimeout(hideResponsiveGameCanvas, 300);
   gameStartFalse();
-  checkFullscreenMode();
+  resetFullscreenElementsToDefault();
   audio.playSound("menuClick");
   audio.playMusicLoop("menuMusic");
+  if (gamePaused) {
+    gameOver();
+  }
 }
 
 /**

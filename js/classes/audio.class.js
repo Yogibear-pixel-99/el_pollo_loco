@@ -156,7 +156,6 @@ class Audiofiles {
     if (world.gameWon) {
       this.playSound("gameWon");
     } else {
-      console.trace();
       this.playSound("gameLost");
     }
   }

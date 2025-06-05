@@ -328,13 +328,13 @@ function toggleGameMode() {
  * stopping music and playing endgame sounds.
  */
 function gameOver() {
+  gameHasStarted = false;
   if (!gamePaused) {
     saveScore();
   }
   hideSingleContainerById("mobile-buttons-wrapper");
   stopAllGameIntervals();
   audio.stopGameMusic();
-  checkFullscreenMode();
   showCursor();
   if (gamePaused) {
     gamePaused = false;
