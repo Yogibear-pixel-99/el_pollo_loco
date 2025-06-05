@@ -30,7 +30,7 @@ async function deleteIfMoreThan100Scores() {
  */
 async function fetchHighscores() {
   try {
-    let response = await fetch(MAIN_URL + gameMode + "/.json");
+    let response = await fetch(MAIN_URLs + gameMode + "/.json");
     if (!response.ok) {
       throw new Error();
     } else {
@@ -40,7 +40,7 @@ async function fetchHighscores() {
       }
     }
   } catch (error) {
-    console.log("Highscore fetch error: " + error);
+    console.error(error);
   }
 }
 
@@ -62,7 +62,7 @@ async function putHighscoreToApi() {
       throw new Error();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -99,7 +99,7 @@ async function saveHighscoreToApi(payload) {
       throw new Error();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
