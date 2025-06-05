@@ -3,37 +3,16 @@
  * Extends {@link DrawableObject}.
  */
 class Coin extends DrawableObject {
-  /**
-   * Height of the coin sprite in pixels.
-   */
+
   height = 100;
-
-  /**
-   * Width of the coin sprite in pixels.
-   */
   width = 100;
-
-  /**
-   * Indicates if the coin has been collected.
-   */
   collected = false;
 
   /**
    * Name used for scoring or event handling when collected.
    */
   itemName = "collectCoin";
-
-  /**
-   * Interval ID for the coin animation loop.
-   * @type {number}
-   */
   coinInterval;
-
-  /**
-   * Fixed vertical position to reset or reference the coin's original y.
-   * @type {number}
-   */
-  fixed_y;
 
   /**
    * Offset values for collision detection.
@@ -45,9 +24,6 @@ class Coin extends DrawableObject {
     left: 35,
   };
 
-  /**
-   * Image frames for the rotating coin animation.
-   */
   COIN_ANIMATION = [
     "./img/8_coin/coin_1.png",
     "./img/8_coin/coin_1.png",
@@ -65,9 +41,6 @@ class Coin extends DrawableObject {
     "./img/8_coin/coin_3.png",
   ];
 
-  /**
-   * Image frames shown when the coin is collected.
-   */
   COLLECTED_COIN_ANIMATION = [
     "./img/8_coin/collected/coin_collect_2.png",
     "./img/8_coin/collected/coin_collect_3.png",
@@ -89,7 +62,6 @@ class Coin extends DrawableObject {
     super();
     this.x = x;
     this.y = y;
-    this.fixed_y = y;
     this.loadImage("./img/8_coin/collected/coin_collect_2.png");
     this.loadImagesArray(this.COIN_ANIMATION);
     this.loadImagesArray(this.COLLECTED_COIN_ANIMATION);

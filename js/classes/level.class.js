@@ -2,75 +2,18 @@
  * Represents a level in the game, including objects, enemies, backgrounds, and layout logic.
  */
 class Level {
-  /** 
-class Level {
-  /** 
-   * The coins in the level.
-   * @type {Coin[]} 
-   */
-  coins;
-
-  /**
-   * The coins that have been collected.
-   */
+  
+  coins = [];
   collectedCoins = [];
-
-  /**
-   * Throwable bottles.
-   * @type {ThrowableObject[]}
-   */
-  bottles;
-
-  /**
-   * Health bottles available in the level.
-   * @type {Healbottle[]}
-   */
-  healBottles;
-
-  /**
-   * Enemies in the level.
-   * @type {Enemies[]}
-   */
-  enemies;
-
-  /**
-   * Enemies that have been killed.
-   */
+  bottles = [];
+  healBottles = [];
+  enemies = [];
   deadEnemies = [];
-
-  /**
-   * The endboss of the level.
-   * @type {Endboss}
-   */
-  endboss;
-
-  /**
-   * Sky objects like clouds.
-   * @type {Clouds[]}
-   */
-  skyObjects;
-
-  /**
-   * Background layers for the level.
-   * @type {BackgroundLayer[]}
-   */
-  backgrounds;
-
-  /**
-   * X coordinate where the level ends.
-   * @type {number}
-   */
+  endboss = {};
+  skyObjects = [];
+  backgrounds = [];
   level_end_x;
-
-  /**
-   * Size of the level.
-   */
   level_size = 6;
-
-  /**
-   * Object representing the beginning and end of the level.
-   * @type {Cactus[]}
-   */
   level_end_cactus;
 
   /**

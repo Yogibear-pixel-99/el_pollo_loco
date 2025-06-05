@@ -3,19 +3,10 @@
  * Extends {@link Statusbar}.
  */
 class Coinbar extends Statusbar {
-  /**
-   * Horizontal position of the coin bar on screen.
-   */
-  x = 20;
 
-  /**
-   * Vertical position of the coin bar on screen.
-   */
+  x = 20;
   y = 90;
 
-  /**
-   * Image frames representing different coin collection levels.
-   */
   COIN_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/0.png",
     "./img/7_statusbars/1_statusbar/1_statusbar_coin/green/20.png",

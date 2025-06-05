@@ -4,20 +4,9 @@
  * Inherits from {@link MovableObject}.
  */
 class Enemies extends MovableObject {
-  /**
-   * Image path used when the enemy is killed.
-   * @type {string}
-   */
+
   deadPic;
-
-  /**
-   * Indicates if the enemy was hit.
-   */
   wasHittet = false;
-
-  /**
-   * Walking speed of the enemy.
-   */
   walkingSpeed = 1;
 
   /**
@@ -29,15 +18,10 @@ class Enemies extends MovableObject {
    * Vertical speed used in gravity and jump movement.
    */
   speedY = 0;
-
-  /**
-   * Indicates if the enemy is alive.
-   */
   lives = true;
 
   /**
    * Indicates direction of movement.
-   * True if facing left.
    */
   otherDirection = false;
 
@@ -46,20 +30,8 @@ class Enemies extends MovableObject {
    * @type {object}
    */
   character;
-
-  /**
-   * Interval to check if the enemies run away from the char.
-   */
   runAwayInterval;
-
-  /**
-   * Interval ID for movement logic.
-   */
   moveInterval;
-
-  /**
-   * Interval ID for walking animation.
-   */
   walkAnimationInterval;
 
   /**

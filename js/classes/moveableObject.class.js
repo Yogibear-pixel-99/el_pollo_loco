@@ -4,16 +4,6 @@
  * Inherits from {@link DrawableObject}
  */
 class MovableObject extends DrawableObject {
-  /**
-   * Speed of walking movement.
-   * @type {number}
-   */
-  walkingSpeed;
-
-  /**
-   * Movement cycle duration.
-   */
-  moveCycle = 1000 / 60;
 
   /**
    * Vertical speed.
@@ -29,16 +19,9 @@ class MovableObject extends DrawableObject {
    * Timestamp of last hit taken.
    */
   lastHit = 0;
-
-  /**
-   * Default walking speed.
-   */
   walkingSpeed = 2.8;
-
-  /**
-   * Interval ID for gravity.
-   */
   gravityInterval;
+ moveCycle = 1000 / 60;
 
   /**
    * Applies gravity to the object, moving it downward if above ground.

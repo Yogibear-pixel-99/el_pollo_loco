@@ -3,28 +3,16 @@
  * Handles image loading, animation, collision detection, and drawing.
  */
 class DrawableObject {
-  /**
-   * Distance from the bottom of the canvas representing the floor height.
-   */
-  floorHeight = 58;
 
-  /**
+  floorHeight = 58;
+  x;
+  y;
+
+ /**
    * Current image to be drawn.
    * @type {HTMLImageElement}
    */
   img;
-
-  /**
-   * Horizontal position on the canvas.
-   * @type {number}
-   */
-  x;
-
-  /**
-   * Vertical position on the canvas.
-   * @type {number}
-   */
-  y;
 
   /**
    * Counter for animation frame indexing.
@@ -57,15 +45,7 @@ class DrawableObject {
    */
   otherDirection = false;
 
-  /**
-   * Interval ID for animation loop.
-   * @type {number}
-   */
   animateInterval;
-
-  /**
-   * Interval ID for movement loop.
-   */
   moveInterval;
 
   /**

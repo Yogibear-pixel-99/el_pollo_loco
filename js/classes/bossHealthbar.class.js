@@ -4,15 +4,10 @@
  * Inherits from {@link Statusbar}.
  */
 class Bosshealthbar extends Statusbar {
-  /** Horizontal position
-   */
-  x = 490;
 
-  /** Vertical position
-   */
+  x = 490;
   y = 15;
 
-  /** Image frames shown in the ui depending on boss health. */
   HEALTH_BAR_IMAGES = [
     "./img/7_statusbars/2_statusbar_endboss/orange/orange0.png",
     "./img/7_statusbars/2_statusbar_endboss/orange/orange20.png",

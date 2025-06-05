@@ -4,19 +4,10 @@
  * Inherits from {@link Statusbar}.
  */
 class Healthbar extends Statusbar {
-  /**
-   * X position of the health bar on the canvas.
-   */
+
   x = 20;
-
-  /**
-   * Y position of the health bar on the canvas.
-   */
   y = 10;
-
-  /**
-   * Array of image paths representing different health states (0% to 100%).
-   */
+  
   HEALTH_BAR_IMAGES = [
     "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
     "./img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",

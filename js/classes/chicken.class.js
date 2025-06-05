@@ -4,34 +4,11 @@
  * Inherits from {@link Enemies}
  */
 class Chicken extends Enemies {
-  /**
-   * The height of the chicken sprite in pixels.
-   */
+
   height = 50;
-
-  /**
-   * The width of the chicken sprite in pixels.
-   */
   width = 50;
-
-  /**
-   * The walking speed, generated random between two numbers.
-   */
   walkingSpeed = Math.random() * (0.9 - 0.3) + 0.3;
-
-  /**
-   * The dead sprite.
-   */
   deadPic = "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
-
-  /**
-   * The jump kill score name for the points table.
-   */
-  scoreNameJump = "chickenJumpKill";
-
-  /**
-   * The bottle kill score name for the points table.
-   */
   scoreNameBottle = "chickenBottleHit";
 
   /**
@@ -44,9 +21,6 @@ class Chicken extends Enemies {
     left: 3,
   };
 
-  /**
-   * Image frames for the walking animation.
-   */
   WALKING_ANIMATION = [
     "./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
     "./img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",

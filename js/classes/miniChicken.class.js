@@ -4,34 +4,12 @@
  * including random speed, size adjustments for game modes, and scoring identifiers.
  */
 class Minichicken extends Enemies {
-    /**
-   * The height of the mini chicken sprite in pixels.
-   */
+  
   height = 35;
-
-  /**
-   * The width of the mini chicken sprite in pixels.
-   */
   width = 35;
-
-  /**
-   * The walking speed, generated random between two numbers.
-   */
   walkingSpeed = Math.random() * (0.5 - 0.1) + 0.1;
-
-  /**
-   * The dead sprite.
-   */
   deadPic = "./img/3_enemies_chicken/chicken_small/2_dead/dead.png";
-
-  /**
-   * The jump kill score name for the points table.
-   */
   scoreNameJump = "miniChickenJumpKill";
-
-  /**
-   * The bottle kill score name for the points table.
-   */
   scoreNameBottle = "miniChickenBottleHit";
 
   /**
@@ -44,8 +22,6 @@ class Minichicken extends Enemies {
     left: 2,
   };
 
-  /** The frames of the walking animation.
-   */
   WALKING_ANIMATION = [
     "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "./img/3_enemies_chicken/chicken_small/1_walk/2_w.png",

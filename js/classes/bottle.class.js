@@ -4,12 +4,8 @@
  * Inherits from {@link DrawableObject}.
  */
 class Bottle extends DrawableObject {
-  /** The height of the bottle img in pixels.
-   */
+  
   height = 55;
-
-  /** The width of the bottle img in pixels.
-   */
   width = 55;
 
   /** The score identifier name.

@@ -3,24 +3,10 @@
  * Manages movement, jumping, and throwing actions on both desktop and mobile.
  */
 class Keyboard {
-  /**
-   * Indicates whether the right movement key is pressed.
-   */
+
   KEY_RIGHT = false;
-
-  /**
-   * Indicates whether the left movement key is pressed.
-   */
   KEY_LEFT = false;
-
-  /**
-   * Indicates whether the jump key is pressed.
-   */
   KEY_JUMP = false;
-
-  /**
-   * Indicates whether the shot key is pressed.
-   */
   KEY_SHOT = false;
 
   /**

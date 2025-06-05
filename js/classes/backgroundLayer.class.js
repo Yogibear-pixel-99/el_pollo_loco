@@ -3,26 +3,13 @@
  * Inherits from {@link MovableObject}.
  */
 class BackgroundLayer extends MovableObject {
-  /**
-   * The vertical position of the background layer.
-   */
+
   y = 0;
-
-  /**
-   * The width of the background image.
-   * @type {number}
-   */
   width = canvasWidth;
-
-  /**
-   * The height of the background image.
-   * @type {number}
-   */
   height = canvasHeight;
 
   /**
    * The factor by which the background moves to create a parallax effect.
-   * A lower value means the background moves slower.
    * @type {number}
    */
   xFactor;

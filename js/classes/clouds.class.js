@@ -3,22 +3,8 @@
  * Extends {@link MovableObject}.
  */
 class Clouds extends MovableObject {
-  /**
-   * Height of the cloud sprite in pixels.
-   * @type {number}
-   */
   height = 200;
-
-  /**
-   * Width of the cloud sprite in pixels.
-   * @type {number}
-   */
   width = 350;
-
-  /**
-   * Speed at which the cloud moves.
-   * @type {number}
-   */
   speedNumber = 0;
 
   /**

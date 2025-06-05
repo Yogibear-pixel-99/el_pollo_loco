@@ -4,14 +4,8 @@
  * Inherits from {@link DrawableObject}.
  */
 class Healbottle extends DrawableObject {
-  /**
-   * Height of the heal bottle sprite in pixels.
-   */
-  height = 55;
 
-  /**
-   * Width of the heal bottle sprite in pixels.
-   */
+  height = 55;
   width = 55;
 
   /**
@@ -29,9 +23,6 @@ class Healbottle extends DrawableObject {
     left: 20,
   };
 
-  /**
-   * Image frames for the healing bottle.
-   */
   BOTTLE_IMAGES = [
     "./img/6_salsa_bottle/heal_bottle_2.png",
     "./img/6_salsa_bottle/heal_bottle_3.png",
