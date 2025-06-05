@@ -4,7 +4,7 @@
  * including random speed, size adjustments for game modes, and scoring identifiers.
  */
 class Minichicken extends Enemies {
-  
+
   height = 35;
   width = 35;
   walkingSpeed = Math.random() * (0.5 - 0.1) + 0.1;
@@ -22,6 +22,8 @@ class Minichicken extends Enemies {
     left: 2,
   };
 
+  /** The frames of the walking animation.
+   */
   WALKING_ANIMATION = [
     "./img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "./img/3_enemies_chicken/chicken_small/1_walk/2_w.png",

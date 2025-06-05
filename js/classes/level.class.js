@@ -2,16 +2,16 @@
  * Represents a level in the game, including objects, enemies, backgrounds, and layout logic.
  */
 class Level {
-  
-  coins = [];
+
+  coins;
   collectedCoins = [];
-  bottles = [];
-  healBottles = [];
-  enemies = [];
+  bottles;
+  healBottles;
+  enemies;
   deadEnemies = [];
-  endboss = {};
-  skyObjects = [];
-  backgrounds = [];
+  endboss;
+  skyObjects;
+  backgrounds;
   level_end_x;
   level_size = 6;
   level_end_cactus;

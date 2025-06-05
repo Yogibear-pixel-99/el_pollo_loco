@@ -4,11 +4,12 @@
  * Inherits from {@link Enemies}
  */
 class Chicken extends Enemies {
-
+  
   height = 50;
   width = 50;
   walkingSpeed = Math.random() * (0.9 - 0.3) + 0.3;
   deadPic = "./img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
+  scoreNameJump = "chickenJumpKill";
   scoreNameBottle = "chickenBottleHit";
 
   /**
