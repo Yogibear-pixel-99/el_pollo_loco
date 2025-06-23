@@ -24,13 +24,11 @@ let audio = new Audiofiles();
 
 /**
  * Current volume level for sound effects (0.0 to 1.0).
- * @type {number}
  */
 let sfxVolume = 7;
 
 /**
  * Current volume level for music (0.0 to 1.0).
- * @type {number}
  */
 let musicVolume = 4;
 
@@ -48,63 +46,53 @@ let musicMute;
 
 /**
  * Canvas height in pixels.
- * @constant {number}
  */
 let canvasHeight = 480;
 
 /**
  * Canvas width in pixels.
- * @constant {number}
  */
 let canvasWidth = 720;
 
 /**
  * Height of the floor in the game world.
- * @constant {number}
  */
 let floorHeight = 58;
 
 /**
  * Flag whether music should start playing on game start.
- * @type {boolean}
  */
 let playMusicOnStart = false;
 
 /**
  * Flag indicating if the game is in fullscreen mode.
- * @type {boolean}
  */
 let fullScreen = false;
 
 /**
  * Flag indicating if the game has started.
- * @type {boolean}
  */
 let gameHasStarted = false;
 
 /**
  * Flag indicating if the game is currently paused.
- * @type {boolean}
  */
 let gamePaused = false;
 
 /**
  * Current game mode string identifier.
  * Possible values: "normal", "chickenRush", "hard"
- * @type {string}
  */
 let gameMode = "normal";
 
 /**
  * Base URL for the Firebase real-time database (highscore).
- * @constant {string}
  */
 const MAIN_URL =
   "https://el-pollo-loco-79444-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Object holding highscore data fetched from the database.
- * @type {Object.<string, number>}
  */
 let highscores = {};
 
@@ -133,9 +121,9 @@ function init() {
  * Plays error animations and sounds if name input is invalid.
  */
 function startGame() {
-  gameHasStarted = true;
-  hideCursor();
   if (checkNameInput()) {
+    gameHasStarted = true;
+    hideCursor();
     deactivateMenu();
     showSingleContainerById("mobile-buttons-wrapper");
     checkScoreBoardAppearance();
@@ -143,10 +131,29 @@ function startGame() {
     showLoadingScreen();
     checkFullscreenMode();
     resetScore();
+    selectGameMode();
     setTimeout(() => hideSingleContainerById("canvas-option-container"), 3000);
     setTimeout(() => startGameIntervals(), 3000);
+  } else {
+    setPlayerNameError();
+  }
+}
 
-    switch (gameMode) {
+/**
+ * Displays the no player name input error message, adds an error animation and sound.
+ */
+function setPlayerNameError(){
+  playerNameError();
+    audio.playSoundClone("menuError");
+    addErrorAnimation("start-game-text", "shake-error");
+    addErrorAnimation("name-error-text", "shake-error");
+}
+
+/**
+ * Configure the selected game mode.
+ */
+function selectGameMode(){
+      switch (gameMode) {
       case "normal":
         configNormalMode();
         break;
@@ -157,14 +164,12 @@ function startGame() {
         configHardMode();
         break;
     }
-  } else {
-    playerNameError();
-    audio.playSoundClone("menuError");
-    addErrorAnimation("start-game-text", "shake-error");
-    addErrorAnimation("name-error-text", "shake-error");
-  }
 }
 
+
+/**
+ * Resets the player score to 0.
+ */
 function resetScore() {
   document.getElementById("player-score").innerText = "0";
 }
@@ -320,7 +325,6 @@ function toggleGameMode() {
       gameMode = "normal";
       break;
   }
-  getActiveHighscores();
 }
 
 /**

@@ -12,7 +12,6 @@ async function getActiveHighscores() {
 /**
  * Trims the highscore list to a maximum of 30 entries for the current game mode.
  * If trimming occurs, the updated scores are sent to the API.
- * @returns {Promise<void>}
  */
 async function deleteIfMoreThan100Scores() {
   let longer = false;
@@ -26,11 +25,10 @@ async function deleteIfMoreThan100Scores() {
 /**
  * Fetches highscore data from the Firebase backend based on the current game mode.
  * Stores the fetched scores in the global `highscores` object.
- * @returns {Promise<void>}
  */
 async function fetchHighscores() {
   try {
-    let response = await fetch(MAIN_URLs + gameMode + "/.json");
+    let response = await fetch(MAIN_URL + gameMode + "/.json");
     if (!response.ok) {
       throw new Error();
     } else {
@@ -47,7 +45,6 @@ async function fetchHighscores() {
 /**
  * Sends the current highscore list for the current game mode to the Firebase API via PUT.
  * Overwrites the existing highscore data for that mode.
- * @returns {Promise<void>}
  */
 async function putHighscoreToApi() {
   try {
@@ -65,10 +62,9 @@ async function putHighscoreToApi() {
     console.error(error);
   }
 }
-
+ 
 /**
  * Saves the current player score to the Firebase API and refreshes the highscore list.
- * @returns {Promise<void>}
  */
 async function saveScore() {
   let scoreRef = document.getElementById("player-score");
@@ -83,7 +79,7 @@ async function saveScore() {
 
 /**
  * Sends a new highscore entry to the Firebase API via POST.
- * @param {{name: string, score: number|string}} payload - Object containing player name and score.
+ * @param {Object} payload - Object containing player name and score.
  * @returns {Promise<void>}
  */
 async function saveHighscoreToApi(payload) {

@@ -121,6 +121,9 @@ function setSoundButton() {
   }
 }
 
+/**
+ * Handles the appearance of the music button in settings.
+ */
 function setMusicButton() {
   let musicOnRef = document.getElementById("music-on");
   let musicOffRef = document.getElementById("music-off");
@@ -148,7 +151,7 @@ function setVolume() {
 }
 
 /**
- * Sets the click sound effect to the game buttons menu.
+ * Sets the click sound effect to the assigned buttons in the main menu.
  */
 document.addEventListener("DOMContentLoaded", () => {
   document

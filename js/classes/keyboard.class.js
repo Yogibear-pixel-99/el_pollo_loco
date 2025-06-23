@@ -134,8 +134,10 @@ class Keyboard {
         event.key === "P" ||
         event.key === "Escape"
       ) {
+        if (gameHasStarted) {
         gamePaused ? resumeGame() : pauseGame();
       }
+    }
     });
   }
 }
