@@ -30,7 +30,7 @@ https://github.com/user-attachments/assets/314c8f42-3857-44a1-b997-a1ca3b4c1569
 | P/p            | Pause the game      |
 
 ## 🚀 Start the game
-https://www.puercherjoachim/elpolloloco/index.html
+https://www.puercherjoachim.com/elpolloloco
 
 ### Run localy
 1. Clone the project:
